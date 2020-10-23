@@ -1,6 +1,9 @@
 library(dplyr)
 library(stringr)
 library(DESeq2)
+suppressPackageStartupMessages(library(DESeq2))
+library(ggplot2)
+library(matrixStats)
 
 #assemble counts table and xp_design
 setwd("Z:/Papers/Arabidopsis_RNAseq/R")
@@ -34,7 +37,8 @@ xp_design_2E$batch3 <- as.factor(xp_design_2E$batch3)
 write.table(xp_design_2E, "xp_design_2E.csv", sep=",", row.names=TRUE)
 
 #make DESeq dataset
-suppressPackageStartupMessages(library(DESeq2))
+counts_E <- mutate_all(counts_E, function(x) as.numeric(as.character(x)))
+row.names(counts_E) <- genes
 counts_E <- data.matrix(counts_E, rownames.force=T)
 class(counts_E)
 
@@ -46,8 +50,6 @@ dds <- DESeqDataSetFromMatrix(countData = counts_E,
 dds$treatment <- relevel(dds$treatment, ref = "e")
 
 #normalise and transform data
-library(ggplot2)
-library(matrixStats)
 dds_norm <- estimateSizeFactors(dds)
 counts_normalised <- counts(dds_norm, normalized = TRUE)
 
@@ -58,29 +60,30 @@ counts_norm_vst <- assay(dds_norm_vst, normalized = TRUE)
 counts_vst <- assay(dds_vst, normalized = FALSE)
 
 #PCA using the plotPCA function variance of treatment, shows there is no batch effect and E02_1_1 and E02_1_2 are close together
-plotPCA(dds_vst, intgroup = c("treatment"))
+clr <- c("red","blue","darkyellow","lightgreen","darkgreen","gray","purple","lightblue","brown")
+plotPCA(dds_vst, intgroup = c("time"))
 z <- plotPCA(dds_vst, intgroup = c("time", "treatment"), returnData = TRUE)
 ggplot(data = z, aes(PC1, PC2, colour = treatment)) +
   geom_point(size=3) +
-  geom_text(aes(label=name), size=3, position = position_nudge(x=0.7)) +
+  geom_text(aes(label=name), size=3, position = position_nudge(x=2)) +
   scale_fill_manual(values = clr,
                     guide = 'none')
 z <- plotPCA(dds_vst, intgroup = c("batch3", "treatment"), returnData = TRUE)
 ggplot(data = z, aes(PC1, PC2, colour = batch3)) +
   geom_point(size=3) +
-  geom_text(aes(label=name), size=3, position = position_nudge(x=0.7)) +
+  geom_text(aes(label=name), size=3, position = position_nudge(x=2)) +
   scale_fill_manual(values = clr,
                     guide = 'none')
 z <- plotPCA(dds_vst, intgroup = c("batch2", "treatment"), returnData = TRUE)
 ggplot(data = z, aes(PC1, PC2, colour = batch2)) +
   geom_point(size=3) +
-  geom_text(aes(label=name), size=3, position = position_nudge(x=0.7)) +
+  geom_text(aes(label=name), size=3, position = position_nudge(x=2)) +
   scale_fill_manual(values = clr,
                     guide = 'none')
 z <- plotPCA(dds_vst, intgroup = c("batch1", "treatment"), returnData = TRUE)
 ggplot(data = z, aes(PC1, PC2, colour = batch1)) +
   geom_point(size=3) +
-  geom_text(aes(label=name), size=3, position = position_nudge(x=0.7)) +
+  geom_text(aes(label=name), size=3, position = position_nudge(x=2)) +
   scale_fill_manual(values = clr,
                     guide = 'none')
 
