@@ -18,30 +18,30 @@ library(clusterProfiler)
 library(org.At.tair.db)
 
 #do DEG analysis
-dds_2m <- DESeq(dds_2m)
-res_2m <- results(dds_2m)
-head(res_2m)
-res_2m$genes <- rownames(res_2m)
-res_2m_f <- as.data.frame(res_2m) %>% filter(padj < 0.05)
-dim(res_2m_f)
-hist(res_2m$padj, col="lightblue", main = "Adjusted p-value distribution")
-diff_2m <- res_2m_f %>% filter(padj < 0.05) %>% arrange(desc(log2FoldChange), desc(padj))
-write.table(diff_2m, file = "deg_2m_0.05.csv", sep=";", dec=".", row.names = TRUE)
+dds_2n <- DESeq(dds_2n)
+res_2n <- results(dds_2n)
+head(res_2n)
+res_2n$genes <- rownames(res_2n)
+res_2n_f <- as.data.frame(res_2n) %>% filter(padj < 0.05)
+dim(res_2n_f)
+hist(res_2n$padj, col="lightblue", main = "Adjusted p-value distribution")
+diff_2n <- res_2n_f %>% filter(padj < 0.05) %>% arrange(desc(log2FoldChange), desc(padj))
+write.table(diff_2n, file = "deg_2n_0.05.csv", sep=";", dec=".", row.names = TRUE)
 
 #make volcano plot
-resultsNames(dds_2m)
-res_2m_shr <- lfcShrink(dds = dds_2m,
-                        res = res_2m,
+resultsNames(dds_2n)
+res_2n_shr <- lfcShrink(dds = dds_2n,
+                        res = res_2n,
                         type = "apeglm",
-                        coef = "treatment_m_vs_e")
+                        coef = "treatment_n_vs_e")
 
-EnhancedVolcano(toptable = res_2m_shr, 
+EnhancedVolcano(toptable = res_2n_shr, 
                 x = "log2FoldChange",           
                 y = "padj",
                 pCutoff = 0.05,
                 FCcutoff = 1.0,
-                lab = rownames(res_2m_shr),
-                title = 'DEGs t=2 1.5uM solA treatment',
+                lab = rownames(res_2n_shr),
+                title = 'DEGs t=2 1.5nM solA treatment',
                 subtitle = 'LFC>1, padj <0.05')
 
 #add annotations to DEGs
@@ -66,20 +66,20 @@ all_arabidopsis_genes_annotated <- biomartr::biomart(genes = all_arabidopsis_gen
 all_arabidopsis_genes_annotated$entrezgene_id = as.character(
   all_arabidopsis_genes_annotated$entrezgene_id) 
 
-res_2m_f_annotated <- biomartr::biomart(genes = res_2m_f$genes,
+res_2n_f_annotated <- biomartr::biomart(genes = res_2n_f$genes,
                                         mart       = "plants_mart",                 
                                         dataset    = "athaliana_eg_gene",           
                                         attributes = attributes_to_retrieve,        
                                         filters =  "ensembl_gene_id" )
-colnames(diff_2m) <- c("baseMean","log2FoldChange","lfcSE","stat", "pvalue", "padj", "ensembl_gene_id")
-diff_2m_annotated <- left_join(res_2m_f_annotated, diff_2m, by = "ensembl_gene_id")
+colnames(diff_2n) <- c("baseMean","log2FoldChange","lfcSE","stat", "pvalue", "padj", "ensembl_gene_id")
+diff_2n_annotated <- left_join(res_2n_f_annotated, diff_2n, by = "ensembl_gene_id")
 
-write_delim(x = diff_2m_annotated,
-            file = "DEGs_2m_annotated.csv",
+write_delim(x = diff_2n_annotated,
+            file = "DEGs_2n_annotated.csv",
             delim = ';')
 
 #assign GO terms to DEGs
-ora_2m_MF <- enrichGO(gene = res_2m_f_annotated$entrezgene_id, 
+ora_2n_MF <- enrichGO(gene = res_2n_f_annotated$entrezgene_id, 
                        universe = all_arabidopsis_genes_annotated$entrezgene_id, 
                        OrgDb = org.At.tair.db,  # contains the TAIR/Ensembl id to GO correspondence for A. thaliana
                        keyType = "ENTREZID",
@@ -88,17 +88,17 @@ ora_2m_MF <- enrichGO(gene = res_2m_f_annotated$entrezgene_id,
                        qvalueCutoff = 0.05,
                        readable = TRUE, 
                        pool = FALSE)
-ora_2m_CC@result[1:5,1:8]
-write_delim(x = as.data.frame(ora_2m_MF@result), 
-            file = "go_results_2m_mf.tsv", 
+ora_2n_MF@result[1:5,1:8]
+write_delim(x = as.data.frame(ora_2n_MF@result), 
+            file = "go_results_2n_MF.tsv", 
             delim = "\t")
-dotplot(ora_2m_CC)
+dotplot(ora_2n_MF)
 
 #KEGG
 search_kegg_organism('ath', by = 'kegg_code')
 search_kegg_organism('Arabidopsis thaliana', by = 'scientific_name')
 
-ora_kegg <- enrichKEGG(gene = res_2m_f_annotated$entrezgene_id,
+ora_kegg <- enrichKEGG(gene = res_2n_f_annotated$entrezgene_id,
                        universe = all_arabidopsis_genes_annotated$entrezgene_id,
                        organism = "ath",
                        keyType = "ncbi-geneid",
