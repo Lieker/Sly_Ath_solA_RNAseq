@@ -23,6 +23,7 @@ mypca <- function(x, center = TRUE, scale = TRUE){
   colnames(explained_var) <- "exp_var"
   explained_var = mutate(explained_var, PC = 1:nrow(explained_var))
   
-  # return result
+  # return results
+  
   return (list("scores" = scores, "loadings" = loadings, "explained_var" = explained_var))
 }

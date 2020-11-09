@@ -1,37 +1,48 @@
-create_pca_plot <- function(counts = scaled_counts, 
-                            design = xp_design, 
-                            time = NULL, 
-                            pc_x_axis = 1,
-                            pc_y_axis = 2,
-                            center = TRUE, 
-                            scale = TRUE) {
-  
-  source("scripts/pca_function.R")
-  
-  # no time filter. PCA on the whole set
-  if (is.null(time)){
-    pca_res <- mypca(counts, center = center, scale = scale)
+source("scripts/produce_scaled_counts_matrix.R")
+source("scripts/filter_counts_based_on_time.R")
+source("scripts/produce_score_df.R")
+source("scripts/extract_variance.R")
 
-    # Select components of interest
-    scores = pca_res$scores[,c(pc_x_axis,pc_y_axis)]
-    explained_variance = pca_res$explained_variance[c(pc_x_axis,pc_y_axis),]
+plot_pca <- function(count_csv_file = "raw_counts.csv",
+                     xp_design_csv_file = "xp_design.csv",
+                     pc_x_axis = "PC1", 
+                     pc_y_axis = "PC2",
+                     timepoint = 2,
+                     pca_colour = "rna_isolation_batch") {
   
-    # add experimental design info (samples to factors)
-    head(scores)
-    
-    # plot PCA
-    # plot the scores of the selected 2 components
-    
-    
-    p <- ggplot(scores) + 
-      geom_point(aes(x = paste0("PC",pc_x_axis), 
-                     y = paste0("PC",pc_y_axis), 
-                     shape = time)) + 
-      xlab(paste0('PC1(',explained_variance[1],'%)')) + 
-      ylab(paste0('PC2(',explained_variance[2],'%)')) + 
-      ggtitle('PCA score plot')
-    p
-    
-  }
+  # scale raw counts the DESeq2 way
+  scaled_counts = produce_scaled_counts_matrix(count_csv_file = count_csv_file,
+                                               xp_design_csv_file = xp_design_csv_file)
+  
+  # based on a timepoint, filter the corresponding scaled_counts matrix
+  filtered_counts <- filter_counts_based_on_time(counts = scaled_counts, 
+                                                 xp_design_csv_file = xp_design_csv_file, 
+                                                 time = timepoint) 
+  
+  # compute PCA and return scores as a dataframe with additional XP info
+  # also returns explained variance per component 
+  score_df <- produce_score_df(counts = filtered_counts, 
+                               xp_design_csv_file = "xp_design.csv")
+  
+  
+  explained_variance_per_component <- extract_explained_variance_per_component(counts = filtered_counts) 
+  
+  # PCA plot
+  variance_pc_x <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_x_axis))]
+  variance_pc_y <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_y_axis))]
+  
+  
+  pca_plot <- ggplot(data = score_df) +
+    geom_point(aes_string(x = pc_x_axis, 
+                          y = pc_y_axis, 
+                          col = pca_colour), 
+               size = 3) +
+    xlab(paste0(pc_x_axis," ", variance_pc_x, "%")) +
+    ylab(paste0(pc_y_axis," ", variance_pc_y, "%"))
+
+  return(pca_plot)
 }
-  
+
+
+plot_pca(timepoint = 2)
+
