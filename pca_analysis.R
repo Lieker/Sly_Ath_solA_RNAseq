@@ -5,4 +5,4 @@ plot_pca(count_csv_file = "raw_counts.csv",
          timepoint = 2, 
          pc_x_axis = "PC1", 
          pc_y_axis = "PC2", 
-         pca_colour = "rna_isolation_batch")
+         pca_colour = "sequencing_batch")
