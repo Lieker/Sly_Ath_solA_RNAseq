@@ -14,7 +14,8 @@ produce_scaled_counts_matrix <- function(count_csv_file = "raw_counts.csv",
   
   xp_design <- read.csv(file = xp_design_csv_file, 
                         header = TRUE, 
-                        stringsAsFactors = FALSE)
+                        stringsAsFactors = FALSE, 
+                        check.names = FALSE)
   
 
   dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ 1)
