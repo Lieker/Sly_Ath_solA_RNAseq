@@ -22,7 +22,7 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
     scores_filtered <- scores[,c(first_pc, second_pc)]
     
     # add xp_design extra info for future plot
-    xp_design = read.csv(file = xp_design_csv_file, header = TRUE, check.names = FALSE, fileEncoding = "UTF-8") 
+    xp_design = read.csv(file = xp_design_csv_file, header = TRUE, check.names = FALSE) 
     
     scores_with_xp_design_info <- scores_filtered %>% 
       as.data.frame() %>% 
