@@ -7,7 +7,6 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
   
   source("scripts/produce_scaled_counts_matrix.R")
   source("scripts/filter_counts_based_on_time.R")
-  
   source("scripts/extract_variance.R")
   
   produce_score_df <- function(counts = filtered_counts, 
