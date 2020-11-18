@@ -16,3 +16,4 @@ do_permanova <- function(xp_design_csv_file = "xp_design.csv",
 }
 
 p <- do_permanova()
+p
