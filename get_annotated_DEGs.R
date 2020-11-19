@@ -4,7 +4,7 @@ library("biomaRt")
 library(clusterProfiler)
 library(org.At.tair.db)
 
-source("scripts/DEG_function.R")
+source("scripts/get_filtered_list_of_DEGs.R")
 source("scripts/get_all_annotations.R")
 
 get_annotated_DEGs <- function(counts_csv_file = "raw_counts.csv",
