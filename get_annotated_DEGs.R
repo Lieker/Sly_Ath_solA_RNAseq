@@ -44,5 +44,3 @@ get_annotated_DEGs <- function(counts_csv_file = "raw_counts.csv",
   
   return(res_annotated)
 }
-
-get_annotated_DEGs()

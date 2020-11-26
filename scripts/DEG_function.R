@@ -1,4 +1,6 @@
 library(DESeq2)
+library(dplyr)
+source("scripts/get_xp_design.R")
 
 get_list_of_DEGs <- function(counts_csv_file = "raw_counts.csv",
                              xp_design_csv_file = "xp_design.csv",
@@ -14,16 +16,16 @@ get_list_of_DEGs <- function(counts_csv_file = "raw_counts.csv",
   counts <- as.data.frame(t(counts)) %>% rownames_to_column("sample")
   
   xp_design <- get_xp_design(xp_design_csv_file) %>% 
-    filter(time == timepoint) %>% 
-    filter(treatment == ref_treatment | treatment == treatment2)
+    dplyr::filter(time == timepoint) %>% 
+    dplyr::filter(treatment == ref_treatment | treatment == treatment2)
   
-  counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+  counts <- counts %>% dplyr::filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
 
   dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
   dds <- DESeq(dds)
   res <- as.data.frame(results(dds)) %>% 
-    filter(padj < padj_threshold) %>% 
-    filter(log2FoldChange > log2FC_threshold | -log2FoldChange > log2FC_threshold)
+    dplyr::filter(padj < padj_threshold) %>% 
+    dplyr::filter(log2FoldChange > log2FC_threshold | -log2FoldChange > log2FC_threshold)
   
   return(res)
 }
