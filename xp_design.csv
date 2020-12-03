@@ -1,4 +1,4 @@
-﻿sample,treatment,time,rna_isolation_batch,purification_procedure,sequencing_batch
+sample,treatment,time,rna_isolation_batch,purification_procedure,sequencing_batch
 E02_1,ethanol,2,i,b,A
 E02_2,ethanol,2,b,a,A
 E02_3,ethanol,2,b,a,A

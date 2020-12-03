@@ -20,8 +20,10 @@ get_list_of_DEGs <- function(counts_csv_file = "raw_counts.csv",
     dplyr::filter(treatment == ref_treatment | treatment == treatment2)
   
   counts <- counts %>% dplyr::filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
-
-  dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
+  dds <- DESeqDataSetFromMatrix(countData = counts, 
+                                colData = xp_design, 
+                                design = ~ rna_isolation_batch + purification_procedure + treatment)
+  dds$treatment <- relevel(dds$treatment, ref = ref_treatment)
   dds <- DESeq(dds)
   res <- as.data.frame(results(dds)) %>% 
     dplyr::filter(padj < padj_threshold) %>% 

@@ -1,7 +1,7 @@
 library(dplyr)
 library(stringr)
 
-setwd("Z:/Papers/Arabidopsis_RNAseq/R")
+setwd("Z:/Experiments/Arabidopsis_RNAseq/R")
 
 
 #-----------------------------------------------------------------------------------------------------
