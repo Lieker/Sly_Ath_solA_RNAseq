@@ -21,10 +21,12 @@ plotMD(fit)
 DEGs_scheible <- topTable(fit, n = 12000)
 DEGs_scheible <- DEGs_scheible %>% dplyr::filter(adj.P.Val < 0.05)
 DEGs_scheible <- DEGs_scheible %>% rownames_to_column("Affy_identifier")
+all_arabidopsis_genes_annotated <- get_Athaliana_annotations(attr = c("affy_ath1_121501", "entrezgene_id"))
+names(all_arabidopsis_genes_annotated)[2] <- "Affy_identifier"
 combined <- left_join(DEGs_scheible, all_arabidopsis_genes_annotated, by = "Affy_identifier")
-combined <- combined[,-c(1,3,4,5,7,9)]
-names(combined) <- c("logFC_scheible2004", "Padj_scheible2004", "genes")
-degs <- left_join(allDEGs, combined, by = "genes")
+combined <- combined[,-c(3,4,5,7,9)]
+names(combined) <- c("Affy_identifier", "logFC_scheible2004", "Padj_scheible2004", "genes")
+degs <- left_join(alldegs, combined, by = "genes")
 
 #allDEGs is the 'clean' DEG list of my experiment
 #degs is the fusion between scheible and my DEG list

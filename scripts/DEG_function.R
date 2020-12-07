@@ -22,7 +22,7 @@ get_list_of_DEGs <- function(counts_csv_file = "raw_counts.csv",
   counts <- counts %>% dplyr::filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
   dds <- DESeqDataSetFromMatrix(countData = counts, 
                                 colData = xp_design, 
-                                design = ~ rna_isolation_batch + purification_procedure + treatment)
+                                design = ~ rna_isolation_batch + treatment)
   dds$treatment <- relevel(dds$treatment, ref = ref_treatment)
   dds <- DESeq(dds)
   res <- as.data.frame(results(dds)) %>% 

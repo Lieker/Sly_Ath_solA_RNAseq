@@ -6,6 +6,7 @@ library(org.At.tair.db)
 
 source("scripts/get_filtered_list_of_DEGs.R")
 source("scripts/get_all_annotations.R")
+source("scripts/DEG_function.R")
 
 get_annotated_DEGs <- function(counts_csv_file = "raw_counts.csv",
                                xp_design_csv_file = "xp_design.csv",
