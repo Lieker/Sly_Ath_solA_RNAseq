@@ -1,9 +1,11 @@
 library(DESeq2)
 library(dplyr)
+library(tidyr)
+library(tidyverse)
 source("scripts/get_xp_design.R")
 
-get_list_of_DEGs <- function(counts_csv_file = "raw_counts.csv",
-                             xp_design_csv_file = "xp_design.csv",
+get_list_of_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
+                             xp_design_csv_file = "inputs/xp_design.csv",
                              timepoint = 2,
                              ref_treatment = "ethanol",
                              treatment2 = "millimolar_solanoeclepinA",
@@ -31,3 +33,5 @@ get_list_of_DEGs <- function(counts_csv_file = "raw_counts.csv",
   
   return(res)
 }
+
+
