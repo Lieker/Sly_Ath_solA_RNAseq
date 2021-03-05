@@ -1,3 +1,4 @@
+setwd("C:/Users/levla/github/Ath_RNAseq/Ath1")
 source("scripts/volcanoplot.R")
 source("scripts/plsda.R")
 source("scripts/permanova.R")

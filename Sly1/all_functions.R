@@ -1,9 +1,10 @@
-source("scripts/volcanoplot.R")
-source("scripts/plsda.R")
-source("scripts/permanova.R")
-source("scripts/create_pca_plot.R")
-source("scripts/GO_annotation_list.R")
-source("scripts/get_annotated_DEGs.R")
+setwd("C:/Users/levla/github/Ath_RNAseq/Sly1")
+source("Sly1/scripts/volcanoplot.R")
+source("Sly1/scripts/plsda.R")
+source("Sly1/scripts/permanova.R")
+source("Sly1/scripts/create_pca_plot.R")
+source("Sly1/scripts/GO_annotation_list.R")
+source("Sly1/scripts/get_annotated_DEGs.R")
 
 make_volcanoplot(counts_csv_file = "inputs/raw_counts.csv",
                  xp_design_csv_file = "inputs/xp_design.csv",

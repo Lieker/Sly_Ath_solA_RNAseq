@@ -1,13 +1,13 @@
 library(dplyr)
 library(stringr)
 
-setwd("C:/Users/levla/github/Ath_RNAseq/inputs")
+setwd("C:/Users/levla/github/Ath_RNAseq/Sly1/inputs")
 
 
 #-----------------------------------------------------------------------------------------------------
 
 #make dds dataset for complete dataset (all samples included)
-counts_raw <- read.delim("counts_Sly.txt", header = F, stringsAsFactors = F)
+counts_raw <- read.delim("inputs/counts_Sly.txt", header = F, stringsAsFactors = F)
 counts <- counts_raw[-c(1),]
 headers <- counts[1,]
 counts <- counts[-c(1),]
@@ -35,5 +35,6 @@ all(colnames(counts) %in% xp_design$sample)
 all(colnames(counts) == xp_design$sample)
 xp_design$treatment <- as.factor(xp_design$treatment)
 xp_design$organ <- as.factor(xp_design$organ)
-write.table(xp_design, "xp_design.csv", sep=",", row.names=TRUE)
-write.table(counts, "raw_counts.csv", sep=",", row.names=TRUE)
+write.csv(xp_design, "inputs/xp_design.csv", row.names=FALSE)
+counts <- counts %>% rownames_to_column("Geneid")
+write.csv(counts, "inputs/raw_counts.csv", row.names=FALSE)

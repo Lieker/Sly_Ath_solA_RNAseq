@@ -1,11 +1,15 @@
 suppressPackageStartupMessages(library(tidyverse))
 
-filter_counts_based_on_time <- function(counts = scaled_counts, 
+
+filter_counts_based_on_organ <- function(counts = scaled_counts, 
                                         xp_design_csv_file = "inputs/xp_design.csv", 
-                                        timepoint = 2) {
+                                        o = "root") {
   # read and filter xp design info for selected time
-  xp_design = read.csv(file = xp_design_csv_file, header = TRUE, check.names = FALSE, fileEncoding = "UTF-8-BOM") %>% 
-    dplyr::filter(time == timepoint)
+  xp_design = read.csv(file = xp_design_csv_file,
+                       header = TRUE,
+                       check.names = FALSE,
+                       fileEncoding = "UTF-8-BOM") %>% 
+    dplyr::filter(organ == o)
   
   # filter counts based on xp_design info
   # place sample in row names for downstream compatibility with mypca() function

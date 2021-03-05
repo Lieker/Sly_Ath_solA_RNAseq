@@ -1,5 +1,5 @@
-plot_pca <- function(count_csv_file = "raw_counts.csv",
-                     xp_design_csv_file = "xp_design.csv",
+plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
+                     xp_design_csv_file = "inputs/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      timepoint = 2,
@@ -10,7 +10,7 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
   source("scripts/extract_variance.R")
   
   produce_score_df <- function(counts = filtered_counts, 
-                               xp_design_csv_file = "xp_design.csv") {
+                               xp_design_csv_file) {
     
     pca_results <- mypca(x = counts, center = TRUE, scale = TRUE)
     scores <- pca_results$score
@@ -47,7 +47,7 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
   # compute PCA and return scores as a dataframe with additional XP info
   # also returns explained variance per component 
    score_df <- produce_score_df(counts = filtered_counts, 
-                               xp_design_csv_file = "xp_design.csv")
+                               xp_design_csv_file = "inputs/xp_design.csv")
   
   
   explained_variance_per_component <- extract_explained_variance_per_component(counts = filtered_counts) 
@@ -68,6 +68,4 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
   return(pca_plot)
 }
 
-
-plot_pca(timepoint = 2)
 

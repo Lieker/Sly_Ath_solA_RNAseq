@@ -5,8 +5,8 @@ suppressPackageStartupMessages(library(tidyverse))
 # samples in rows
 # genes in columns
 # row names = samples
-produce_scaled_counts_matrix <- function(count_csv_file = "raw_counts.csv", 
-                                         xp_design_csv_file = "xp_design.csv") {
+produce_scaled_counts_matrix <- function(count_csv_file = "inputs/raw_counts.csv", 
+                                         xp_design_csv_file = "inputs/xp_design.csv") {
   counts <- read.csv(file = count_csv_file, 
                      header = TRUE, 
                      stringsAsFactors = FALSE) %>% 
