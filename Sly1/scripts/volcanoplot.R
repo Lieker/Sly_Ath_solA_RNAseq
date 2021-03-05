@@ -6,26 +6,26 @@ source("scripts/coefficient_for_volcanoplot.R")
 
 make_volcanoplot <- function(counts_csv_file = "inputs/raw_counts.csv",
                              xp_design_csv_file = "inputs/xp_design.csv",
-                             timepoint = 2,
-                             ref_treatment = "ethanol",
-                             treatment2 = "millimolar_solanoeclepinA",
+                             plantpart = "root",
+                             ref_treatment = "no_solA",
+                             treatment2 = "yes_solA",
                              log2FC_threshold = 0,
                              FCcutoff_volcano = 0,
                              padj_threshold = 0
 ) {
   dds <- get_DESeq_dds(counts_csv_file,
                        xp_design_csv_file,
-                       timepoint,
+                       plantpart,
                        ref_treatment,
                        treatment2)
   res <- get_unfiltered_res_dds(counts_csv_file,
                                 xp_design_csv_file,
-                                timepoint,
+                                plantpart,
                                 ref_treatment,
                                 treatment2)
   coef <- coefficient(counts_csv_file,
                       xp_design_csv_file,
-                      timepoint,
+                      plantpart,
                       ref_treatment,
                       treatment2)
   
@@ -42,6 +42,3 @@ make_volcanoplot <- function(counts_csv_file = "inputs/raw_counts.csv",
   return(v)
 }
 
-
-v <- make_volcanoplot()
-v
