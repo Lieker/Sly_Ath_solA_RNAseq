@@ -6,7 +6,7 @@ source("scripts/get_xp_design.R")
 # samples in rows
 # genes in columns
 # row names = samples
-produce_vst_norm_counts_matrix <- function(counts_csv_file = "raw_counts.csv") {
+produce_vst_norm_counts_matrix <- function(counts_csv_file = "inputs/raw_counts.csv") {
   counts <- read.csv(file = counts_csv_file, 
                      header = TRUE, 
                      stringsAsFactors = FALSE) %>% 

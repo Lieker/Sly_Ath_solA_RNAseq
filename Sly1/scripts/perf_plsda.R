@@ -1,16 +1,16 @@
 library(mixOmics)
-source("scripts/filter_counts_vst_based_on_time.R")
+source("scripts/filter_counts_vst_based_on_organ.R")
 source("scripts/get_xp_design.R")
 
-do_plsda_perf <- function(xp_design_csv_file = "xp_design.csv",
-                     counts_csv_file = "raw_counts.csv",
-                     timepoint = 2,
+do_plsda_perf <- function(xp_design_csv_file = "inputs/xp_design.csv",
+                     counts_csv_file = "inputs/raw_counts.csv",
+                     plantpart = "root",
                      n = 999) 
   {
   
-  xp_design_f <- xp_design[xp_design$time == timepoint,]
+  xp_design_f <- xp_design[xp_design$organ == plantpart,]
   
-  filtered_counts_vst_t <- filter_counts_vst_based_on_time(counts_csv_file, timepoint)
+  filtered_counts_vst_t <- filter_counts_vst_based_on_organ(counts_csv_file, plantpart)
   
   p <- plsda(filtered_counts_vst_t, xp_design_f$treatment, ncomp = 5)
   
