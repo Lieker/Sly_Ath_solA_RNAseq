@@ -1,5 +1,5 @@
 library(DESeq2)
-source("scripts/get_DESeq_dds")
+source("scripts/get_DESeq_dds.R")
 
 get_unfiltered_res_dds <- function(counts_csv_file = "inputs/raw_counts.csv",
                                    xp_design_csv_file = "inputs/xp_design.csv",
@@ -14,4 +14,3 @@ get_unfiltered_res_dds <- function(counts_csv_file = "inputs/raw_counts.csv",
   res <- results(dds)
   return(res)
 }
-r<-get_unfiltered_res_dds()

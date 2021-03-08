@@ -2,7 +2,7 @@ library(biomartr)
 library(tidyverse)
 library("biomaRt")
 library(clusterProfiler)
-library(org.At.tair.db)
+
 
 source("scripts/get_filtered_list_of_DEGs.R")
 source("scripts/get_all_annotations.R")
@@ -10,12 +10,12 @@ source("scripts/DEG_function.R")
 
 get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                                xp_design_csv_file = "inputs/xp_design.csv",
-                               timepoint = 2,
-                               ref_treatment = "ethanol",
-                               treatment2 = "millimolar_solanoeclepinA",
+                               plantpart = "root",
+                               ref_treatment = "no_solA",
+                               treatment2 = "yes_solA",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
-                               organism = "Arabidopsis thaliana",
+                               organism = "Solanum lycopersicum",
                                attr = c("tair_symbol", 
                                         "uniprotswissprot",
                                         "entrezgene_id",
@@ -26,7 +26,7 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
   
   res <- get_list_of_DEGs(counts_csv_file, 
                         xp_design_csv_file, 
-                        timepoint, 
+                        plantpart, 
                         ref_treatment, 
                         treatment2, 
                         log2FC_threshold, 
@@ -34,7 +34,7 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
   
   subset_annotated <- biomartr::biomart(genes = res$genes,
                                    mart       = "plants_mart",                 
-                                   dataset    = "athaliana_eg_gene",           
+                                   dataset    = "slycopersicum_eg_gene",           
                                    attributes = attr,        
                                    filters =  "ensembl_gene_id" )
   names(subset_annotated)[names(subset_annotated) == 'ensembl_gene_id'] <- 'genes'
