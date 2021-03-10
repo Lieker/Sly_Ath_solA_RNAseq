@@ -21,4 +21,3 @@ get_list_of_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
   
   return(res_filtered)
 }
-r <- get_list_of_DEGs()

@@ -20,7 +20,9 @@ get_DESeq_dds <- function(counts_csv_file = "input/raw_counts.csv",
   
   counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
   
-  dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
+  dds <- DESeqDataSetFromMatrix(countData = counts,
+                                colData = xp_design,
+                                design = ~ treatment)
   dds <- DESeq(dds)
   return(dds)
 }

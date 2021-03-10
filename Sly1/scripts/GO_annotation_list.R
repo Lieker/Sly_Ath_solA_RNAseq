@@ -1,30 +1,27 @@
 library(clusterProfiler)
 library(org.At.tair.db)
 source("get_annotated_DEGs.R")
-source("scripts/get_Athaliana_annotations")
+source("scripts/get_Slycopersicum_annotations")
 
 GO_annotation_list <- function(counts_csv_file = "inputs/raw_counts.csv",
                                xp_design_csv_file = "inputs/xp_design.csv",
-                               timepoint = 2,
-                               ref_treatment = "ethanol",
-                               treatment2 = "millimolar_solanoeclepinA",
+                               plantpart = "root",
+                               ref_treatment = "no_solA",
+                               treatment2 = "yes_solA",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
-                               organism = "Arabidopsis thaliana",
-                               attr = c("tair_symbol", 
-                                        "uniprotswissprot",
+                               organism = "Solanum lycopersicum",
+                               attr = c("description",
                                         "entrezgene_id",
-                                        "description",
-                                        "external_gene_name",
-                                        "external_gene_source"),
-                               name = "annotated_DEGslist.csv",
+                                        "external_gene_name"),
+                               name = "outputs/annotated_DEGslist.csv",
                                ont = "BP", #can be either BP, CC or MF
                                namego = "outputs/GOannotationslist.csv"
                                ) {
-  all_Ath_genes_annotated <- get_Athaliana_annotations(organism, attr, counts_csv_file)
+  all_Sly_genes_annotated <- get_Slycopersicum_annotations(organism, attr, counts_csv_file)
   res_annotated <- get_annotated_DEGs(counts_csv_file, 
                                       xp_design_csv_file, 
-                                      timepoint, 
+                                      plantpart, 
                                       ref_treatment, 
                                       treatment2, 
                                       log2FC_threshold, 

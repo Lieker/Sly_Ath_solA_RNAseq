@@ -2,11 +2,11 @@ library(biomartr)
 library(tidyverse)
 library("biomaRt")
 library(clusterProfiler)
+library(biomartr)
 
 
 source("scripts/get_filtered_list_of_DEGs.R")
-source("scripts/get_all_annotations.R")
-source("scripts/DEG_function.R")
+source("scripts/get_Slycopersicum_annotations.R")
 
 get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                                xp_design_csv_file = "inputs/xp_design.csv",
@@ -16,12 +16,10 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
                                organism = "Solanum lycopersicum",
-                               attr = c("tair_symbol", 
-                                        "uniprotswissprot",
-                                        "entrezgene_id",
-                                        "description",
-                                        "external_gene_name",
-                                        "external_gene_source"),
+                               attr = c("description",
+                                        "athaliana_eg_homolog_ensembl_gene",
+                                        "athaliana_eg_homolog_associated_gene_name",
+                                        "external_gene_name"),
                                name = "outputs/annotated_DEGslist.csv") {
   
   res <- get_list_of_DEGs(counts_csv_file, 

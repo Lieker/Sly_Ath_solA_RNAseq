@@ -1,0 +1,320 @@
+---
+title: "Annotation_MYC1"
+author: "Pietro Zocca"
+date: "2/9/2021"
+output:
+  html_notebook: 
+    toc: yes
+    fig_height: 12
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  pdf_document:
+    df_print: kable
+    toc: yes
+    toc_depth: 3
+    number_sections: yes
+---
+# Introduction
+Annotation and GO of DEG genes in MYC1 mutants
+
+## Setup
+
+```{r include=FALSE}
+#########
+# Library
+#########
+if ("checkpoint" %in% installed.packages()){
+  library("checkpoint") # https://cran.r-project.org/web/packages/checkpoint/index.html
+} else {
+  install.packages("checkpoint")
+  suppressPackageStartupMessages(library("checkpoint"))
+  suppressPackageStartupMessages(checkpoint("2021-02-06"))  # all packages in your project will be taken from that date.
+}
+if ("Biostrings" %in% installed.packages()){
+  library("Biostrings") 
+} else {
+  BiocManager::install("Biostrings")
+  library("Biostrings")
+}
+if ("biomaRt" %in% installed.packages()){
+  library("biomaRt") 
+} else {
+  BiocManager::install("biomaRt")
+  library("biomaRt")
+}
+if ("biomartr" %in% installed.packages()){
+  library("biomartr")
+} else {
+  install.packages("biomartr", dependencies = TRUE)
+  library("biomartr")
+}
+library(readr)
+library(tidyr)
+library(dplyr)
+library(stringr)
+```
+
+## Querying ENSEMBL database 
+
+```{r}
+biomartr::organismBM(organism = "Solanum lycopersicum")
+```
+
+## Check attributes in database of interest
+
+```{r}
+# check what is there to be retrieved
+solyc_attributes = biomartr::organismAttributes("Solanum lycopersicum") %>%
+filter(dataset == "slycopersicum_eg_gene")
+solyc_attributes
+```
+On ENSEBL database there is still the version SL3.0 ITAG3.0, while the mapping of the reads have been processed with the SL4.0 and ITAG4.0.
+
+# First option: use ITAG3.0
+
+## Rename ITAG4.0 gene IDs back to the ITAG3 version.
+```{r}
+#import the selected DEG file and add ID column with stable ensembl IDs
+deg1 <- read.csv("DEG_OE1_leaf",                                    ## ## ## remember to change name! ## ## ##
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = FALSE)
+deg1$genes <- gsub('\\s+', '', deg1$genes)
+df <- sub("\\.\\d+\\.\\d+$", ".3", deg1$genes)
+IDs <- data.frame(df, check.names = FALSE)
+deg1$ID <- IDs$df
+```
+
+## List and retrive attributes
+
+```{r}
+# retrieve useful attributes - do not work when Solyc number do not correspond between annotation and ENSEMBL
+attributes_to_retrive = c("description","go_id","name_1006", "uniparc", "kegg_enzyme")
+result_BM <- biomartr::biomart( genes = deg1$ID, mart = "plants_mart", dataset = "slycopersicum_eg_gene", attributes = attributes_to_retrive, filters = "ensembl_gene_id")
+write.csv(result_BM, file = '04.ENSEMBL annotation ITAG3.0/ensembl_OE1_leaf.csv') ## ## ## remember to change name! ## ## ##
+```
+
+# Second option: manual annotation of DEG using the ITAG4.0 annotation file and the GO and TF list from Solgenomics FTP
+
+```{r}
+#import the annotation file and name columns
+annotations <- read.delim("Supplemental_Data_RNA-seq/ITAG4.1_annotations.tsv",
+                            header = FALSE,
+                            sep = "\t",
+                            stringsAsFactors = FALSE)
+colnames(annotations) <- c("genes", "description")
+#import the GO file and name columns
+GOterms <- read.delim("Supplemental_Data_RNA-seq/ITAG4.1_goterms.txt",
+                            header = FALSE,
+                            sep = "\t",
+                            stringsAsFactors = FALSE)
+colnames(GOterms) <- c("genes", "terms")
+#import the TF list and rename columns, removing duplicated
+TFlist <- read.delim("Supplemental_Data_RNA-seq/ITAG4.1_TF_TR.txt",
+                            header = TRUE,
+                            sep = "\t",
+                            stringsAsFactors = FALSE)
+colnames(TFlist) <- c("genes", "class", "family", "x")
+TFlist$x <- NULL
+#import the selected DEG file and add ID column with stable ensembl IDs
+deg2 <- read.csv("DEG_OE1_leaf",                                    ## ## ## remember to change name! ## ## ##
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = FALSE)
+deg2$genes <- gsub('\\s+', '', deg2$genes)
+df <- sub("\\.\\d+\\.\\d+$", ".3", deg2$genes)
+IDs <- data.frame(df, check.names = FALSE)
+deg2$ensembl_gene_id <- IDs$df
+#keep only the lines that correspond to my DEG and merge the column with description on the left
+A <- left_join(deg2, annotations, by = "genes")
+B <- left_join(A, GOterms, by = "genes")
+C <- left_join(B, TFlist, by = "genes")
+write.csv(C, file = '03.manual annotation ITAG4.0/GO_annot_DEG_OE1_leaf.csv') ## ## ## remember to change name! ## ## ##
+```
+
+# Merging two options
+```{r}
+# ensembl annotation first
+itag3 <-read.csv("04.ENSEMBL annotation ITAG3.0/ensembl_OE1_leaf.csv", ## ## ## remember to change name! ## ## ##
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = FALSE)
+# I need to merge repeated lines due to multiple GO terms, try to use dplyr
+merged_itag3 <- itag3 %>% group_by(ensembl_gene_id) %>%
+                mutate(go_id = paste(go_id, collapse = "," )) %>%
+                distinct(ensembl_gene_id, .keep_all = TRUE) %>%
+                rename(annotation = description)
+# then manual itag4.0 annotation
+itag4 <-read.csv("03.manual annotation ITAG4.0/GO_annot_DEG_OE1_leaf.csv", ## ## ## remember to change name! ## ## ##
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = FALSE)
+#I use the itag3.0 IDs to left_join the two annotation tables in one
+merged_annot <- left_join(itag4, merged_itag3 %>% 
+                dplyr::select(annotation,go_id, uniparc, kegg_enzyme), by = "ensembl_gene_id") %>% # select only columns of interest
+                unite("annotation", c(description, annotation), sep = ", ", remove = TRUE, na.rm = TRUE) %>% # unite annotations from the description and annotation columns
+                unite("GO", c(go_id, terms), sep = ",", remove = TRUE, na.rm = TRUE) # unite GO IDs from the go_id and terms columns
+library("stringr")
+merged_annot$GO <- sapply(merged_annot$GO, function(x) paste(unique(unlist(str_split(x,","))), collapse = ",")) # remove duplicates GO
+#create csv file
+write_csv(x = merged_annot, file = "05.final combined annotation/OE1_leaf.csv") ## ## ## remember to change name! ## ## ##
+```
+
+##### further analyses ##### not cocluded #####
+
+# Enrichment analysis - still working on it
+
+```{r}
+#building the universe with ITAG3.0 IDs
+df <- read.table("Supplemental_Data_RNA-seq/raw_counts.parsed.tsv", header = TRUE, sep = "",stringsAsFactors = FALSE) %>%
+mutate(Geneid = gsub(pattern = "mRNA:", replacement = "", x = Geneid))
+all_tomato_genes <-df$Geneid <- sub("\\.\\d+\\.\\d+$", ".3", df$Geneid)
+#attributes of interest
+attributes_to_retrive2 = c("uniprotswissprot", "entrezgene_id", "kegg_enzyme")
+all_tomato_genes_annotated <- biomartr::biomart(genes = all_tomato_genes,
+                                                mart = "plants_mart",
+                                                dataset = "slycopersicum_eg_gene",
+                                                attributes = attributes_to_retrive2, 
+                                                filters = "ensembl_gene_id")
+#for compatibility with enrichGO universe genes in the universe need to be characters and not integers (Entrez gene id)
+all_tomato_genes_annotated$entrezgene_id = as.character(all_tomato_genes_annotated$entrezgene_id) 
+```
+
+```{r}
+# retrieving NCBI Entrez gene id for our genes called differential
+deg <- read.csv("DEG_KO_trichomes",
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = FALSE)
+deg$genes <- gsub('\\s+', '', deg$genes)
+df2 <- sub("\\.\\d+\\.\\d+$", ".3", deg$genes)
+newdeg <- data.frame(df2, check.names = FALSE)
+deg$ID <- newdeg$df2
+biomaRt::biomartCacheClear()
+diff_tomato_genes_annotated <- biomartr::biomart(genes = deg$ID,
+                                                 mart = "plants_mart",
+                                                 dataset = "slycopersicum_eg_gene",
+                                                 attributes = attributes_to_retrive2,
+                                                 filters =  "ensembl_gene_id" ) 
+```
+
+#ORA GO - not working, there is no OrgDb for tomato
+
+```{r}
+# performing the ORA for Gene Ontology Biological Process class
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("clusterProfiler")
+library(clusterProfiler)
+ora_analysis_bp <- enrichGO(gene = diff_tomato_genes_annotated$entrezgene_id, 
+                            OrgDb = 
+                            universe = all_tomato_genes_annotated$entrezgene_id,  # contains the TAIR/Ensembl id to GO correspondence for A. thaliana
+                            keyType = "ENTREZID",
+                            ont = "BP",              # either "BP", "CC" or "MF",
+                            pAdjustMethod = "BH",
+                            qvalueCutoff = 0.05,
+                            readable = TRUE, 
+                            pool = FALSE)
+```
+
+#ORA kegg -
+
+```{r}
+ora_analysis_kegg <- enrichKEGG(gene = diff_tomato_genes_annotated$entrezgene_id,
+                                universe = all_tomato_genes_annotated$entrezgene_id,
+                                organism = "sly",
+                                keyType = "ncbi-geneid",
+                                minGSSize = 10,
+                                maxGSSize = 500,
+                                pAdjustMethod = "BH",
+                                qvalueCutoff = 0.1,
+                                use_internal_data = FALSE) # force to query latest KEGG db
+                          
+
+# create a simple dotplot graph
+dotplot(ora_analysis_kegg, 
+    color = "qvalue", 
+    showCategory = 10, 
+    size = "Count")
+```
+#ORA Mkegg
+
+```{r}
+ora_analysis_mkegg <- enrichMKEGG(gene = diff_tomato_genes_annotated$entrezgene_id,
+                                universe = all_tomato_genes_annotated$entrezgene_id,
+                                organism = "sly",
+                                keyType = "ncbi-geneid",
+                                minGSSize = 1,
+                                maxGSSize = 500,
+                                pAdjustMethod = "none",
+                                qvalueCutoff = 0)
+                          
+
+# create a simple dotplot graph
+dotplot(ora_analysis_mkegg, 
+    color = "qvalue", 
+    showCategory = 10, 
+    size = "Count")
+```
+
+#iPath3 - table preparation (iPath3 is not working, java application error)
+
+```{r}
+diff_tomato_genes_annotated %>% 
+  filter(uniprotswissprot != "") %>%                                       # to remove genes with no matching Uniprot entries
+  unique() %>% 
+  mutate(id_for_ipath = paste("UNIPROT",uniprotswissprot,sep = ":")) %>%   # to create an ID that iPath can use
+  dplyr::select(id_for_ipath) %>%                                          # we keep only the relevant ID for further copy-pasting 
+  write.table(., 
+    file = "diff_genes_swissprot.tsv", 
+    row.names = FALSE, 
+    quote = FALSE)
+
+```
+
+TopGO - trial 1 (not concluded)
+```{r}
+BiocManager::install("topGO")
+BiocManager::install("KEGGREST")
+BiocManager::install("org.At.tair.db")
+library(topGO)
+library(KEGGREST)
+library(org.At.tair.db)
+```
+
+
+```{r}
+deg <- read.csv("DEG_KO_trichomes",
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = FALSE)
+deg$genes <- gsub('\\s+', '', deg$genes)
+df2 <- sub("\\.\\d+\\.\\d+$", ".3", deg$genes)
+newdeg <- data.frame(df2, check.names = FALSE)
+deg$ID <- newdeg$df2
+biomaRt::biomartCacheClear()
+#list of my GOI GO_IDs
+diff_tomato_genes_go <- biomartr::biomart(genes = deg$ID,
+                                                 mart = "plants_mart",
+                                                 dataset = "slycopersicum_eg_gene",
+                                                 attributes = "go_id",
+                                                 filters =  "ensembl_gene_id" )
+colnames(diff_tomato_genes_go) [1] <- "ID"
+library(dplyr)
+deg <- left_join(deg, diff_tomato_genes_go, by = "ID")
+degsubset <- deg %>% select("genes", "go_id")
+#universe
+all_tomato_genes_go <- biomartr::biomart(genes = all_tomato_genes,
+                                                mart = "plants_mart",
+                                                dataset = "slycopersicum_eg_gene",
+                                                attributes = "go_id", 
+                                                filters = "ensembl_gene_id")
+#for compatibility with enrichGO universe genes in the universe need to be characters and not integers (Entrez gene id)
+x <- as.vector(all_tomato_genes_go$go_id) 
+#object
+myGOdata <- new("topGOdata", description="My project", ontology="BP", allGenes= x,  geneSel=degsubset, nodeSize=10)
+
+```
+
