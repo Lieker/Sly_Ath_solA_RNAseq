@@ -2,27 +2,18 @@ library(biomartr)
 library(tidyverse)
 library("biomaRt")
 library(org.At.tair.db)
+library(stringr)
 
-get_Slycopersicum_annotations <- function(organism = "Solanum lycopersicum",
-                                      attr = c("description",
-                                               "athaliana_eg_homolog_ensembl_gene",
-                                               "athaliana_eg_homolog_associated_gene_name",
-                                               "external_gene_name"),
-                                      counts_csv_file = "raw_counts.csv"
-) {biomartr::organismBM(organism = organism)
+get_Slycopersicum_annotations <- function(
+) {
+  descriptions <- read.csv("inputs/ITAG4.1_descriptions.csv", stringsAsFactors = FALSE)
+  descriptions$gene <- substr(descriptions$gene, 1, 16)
   
-  attributes = biomartr::organismAttributes(organism) %>% 
-  filter(dataset == "slycopersicum_eg_gene")
+  go_terms <- read.csv("inputs/ITAG4.1_goterms.csv", stringsAsFactors = FALSE)
+  go_terms$gene <- substr(descriptions$gene, 1, 16)
   
-  all_slyc_genes <- read.csv(counts_csv_file, header = TRUE, stringsAsFactors = FALSE)
-  all_slyc_genes <- all_slyc_genes$Geneid
-  all_slyc_genes_annotated <- biomartr::biomart(genes = all_slyc_genes,
-                                                       mart       = "plants_mart",                 
-                                                       dataset    = "slycopersicum_eg_gene",           
-                                                       attributes = attr,        
-                                                       filters =  "ensembl_gene_id" )  
-  all_slyc_genes_annotated$entrezgene_id = as.character(all_slyc_genes_annotated$entrezgene_id) 
-  return(all_slyc_genes_annotated)
+  annotations <- left_join(descriptions, go_terms, by = "gene")
+  return(annotations)
 }
   
 

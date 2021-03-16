@@ -15,11 +15,6 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                                treatment2 = "yes_solA",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
-                               organism = "Solanum lycopersicum",
-                               attr = c("description",
-                                        "athaliana_eg_homolog_ensembl_gene",
-                                        "athaliana_eg_homolog_associated_gene_name",
-                                        "external_gene_name"),
                                name = "outputs/annotated_DEGslist.csv") {
   
   res <- get_list_of_DEGs(counts_csv_file, 
@@ -28,15 +23,10 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                         ref_treatment, 
                         treatment2, 
                         log2FC_threshold, 
-                        padj_threshold) %>% rownames_to_column("genes")
+                        padj_threshold) %>% rownames_to_column("gene")
   
-  subset_annotated <- biomartr::biomart(genes = res$genes,
-                                   mart       = "plants_mart",                 
-                                   dataset    = "slycopersicum_eg_gene",           
-                                   attributes = attr,        
-                                   filters =  "ensembl_gene_id" )
-  names(subset_annotated)[names(subset_annotated) == 'ensembl_gene_id'] <- 'genes'
-  res_annotated <- left_join(res, subset_annotated, by = "genes")
+  annotations <- get_Slycopersicum_annotations()
+  res_annotated <- left_join(res, annotations, by = "gene")
   write_delim(x = res_annotated,
               file = name,
               delim = ";")
