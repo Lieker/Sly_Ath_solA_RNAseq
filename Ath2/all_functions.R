@@ -5,6 +5,8 @@ source("scripts/create_pca_plot.R")
 source("scripts/GO_annotation_list.R")
 source("scripts/get_annotated_DEGs.R")
 
+setwd("C:/Users/levla/github/Ath_RNAseq/Ath2")
+
 make_volcanoplot(counts_csv_file = "inputs/raw_counts.csv",
                  xp_design_csv_file = "inputs/xp_design.csv",
                  timepoint = 2,

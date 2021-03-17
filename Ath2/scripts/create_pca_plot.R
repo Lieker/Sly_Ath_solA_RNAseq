@@ -1,16 +1,17 @@
-plot_pca <- function(count_csv_file = "raw_counts.csv",
-                     xp_design_csv_file = "xp_design.csv",
+plot_pca <- function(count_csv_file = "inputs/counts.csv",
+                     xp_design_csv_file = "inputs/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
-                     timepoint = 2,
-                     pca_colour = "rna_isolation_batch") {
+                     tr = c("a","b","c","d","e","f","g"),
+                     pca_colour = "solA") {
   
+  source("scripts/filter_counts_based_on_treatment.R")
   source("scripts/produce_scaled_counts_matrix.R")
-  source("scripts/filter_counts_based_on_time.R")
   source("scripts/extract_variance.R")
   
   produce_score_df <- function(counts = filtered_counts, 
-                               xp_design_csv_file = "xp_design.csv") {
+                               xp_design_csv_file) {
+    
     
     pca_results <- mypca(x = counts, center = TRUE, scale = TRUE)
     scores <- pca_results$score
@@ -40,14 +41,14 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
                                                xp_design_csv_file = xp_design_csv_file)
   
   # based on a timepoint, filter the corresponding scaled_counts matrix
-  filtered_counts <- filter_counts_based_on_time(counts = scaled_counts, 
-                                                 xp_design_csv_file = xp_design_csv_file, 
-                                                 time = timepoint) 
+  filtered_counts <- filter_counts_based_on_treatment(counts = scaled_counts, 
+                                                      xp_design_csv_file = xp_design_csv_file, 
+                                                      trtm = tr) 
   
   # compute PCA and return scores as a dataframe with additional XP info
   # also returns explained variance per component 
    score_df <- produce_score_df(counts = filtered_counts, 
-                               xp_design_csv_file = "xp_design.csv")
+                                xp_design_csv_file = xp_design_csv_file)
   
   
   explained_variance_per_component <- extract_explained_variance_per_component(counts = filtered_counts) 
@@ -67,7 +68,3 @@ plot_pca <- function(count_csv_file = "raw_counts.csv",
 
   return(pca_plot)
 }
-
-
-plot_pca(timepoint = 2)
-

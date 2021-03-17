@@ -5,14 +5,14 @@ library(clusterProfiler)
 library(org.At.tair.db)
 
 source("scripts/get_filtered_list_of_DEGs.R")
-source("scripts/get_all_annotations.R")
+source("scripts/get_Athaliana_annotations.R")
 source("scripts/DEG_function.R")
 
-get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
+get_annotated_DEGs <- function(counts_csv_file = "inputs/counts.csv",
                                xp_design_csv_file = "inputs/xp_design.csv",
-                               timepoint = 2,
-                               ref_treatment = "ethanol",
-                               treatment2 = "millimolar_solanoeclepinA",
+                               trtm = c("a","b"),
+                               ref_treatment = "a",
+                               treatment2 = "b",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
                                organism = "Arabidopsis thaliana",
@@ -26,17 +26,17 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
   
   res <- get_list_of_DEGs(counts_csv_file, 
                         xp_design_csv_file, 
-                        timepoint, 
+                        trtm, 
                         ref_treatment, 
                         treatment2, 
                         log2FC_threshold, 
                         padj_threshold) %>% rownames_to_column("genes")
   
   subset_annotated <- biomartr::biomart(genes = res$genes,
-                                   mart       = "plants_mart",                 
-                                   dataset    = "athaliana_eg_gene",           
-                                   attributes = attr,        
-                                   filters =  "ensembl_gene_id" )
+                                        mart = "plants_mart",                 
+                                        dataset = "athaliana_eg_gene",           
+                                        attributes = attr,        
+                                        filters =  "ensembl_gene_id" )
   names(subset_annotated)[names(subset_annotated) == 'ensembl_gene_id'] <- 'genes'
   res_annotated <- left_join(res, subset_annotated, by = "genes")
   write_delim(x = res_annotated,

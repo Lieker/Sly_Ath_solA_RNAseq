@@ -3,11 +3,11 @@ library(org.At.tair.db)
 source("get_annotated_DEGs.R")
 source("scripts/get_Athaliana_annotations")
 
-GO_annotation_list <- function(counts_csv_file = "inputs/raw_counts.csv",
+GO_annotation_list <- function(counts_csv_file = "inputs/counts.csv",
                                xp_design_csv_file = "inputs/xp_design.csv",
-                               timepoint = 2,
-                               ref_treatment = "ethanol",
-                               treatment2 = "millimolar_solanoeclepinA",
+                               trtm = c("a","b"),
+                               ref_treatment = "a",
+                               treatment2 = "b",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
                                organism = "Arabidopsis thaliana",
@@ -24,7 +24,7 @@ GO_annotation_list <- function(counts_csv_file = "inputs/raw_counts.csv",
   all_Ath_genes_annotated <- get_Athaliana_annotations(organism, attr, counts_csv_file)
   res_annotated <- get_annotated_DEGs(counts_csv_file, 
                                       xp_design_csv_file, 
-                                      timepoint, 
+                                      trtm, 
                                       ref_treatment, 
                                       treatment2, 
                                       log2FC_threshold, 
@@ -43,8 +43,8 @@ GO_annotation_list <- function(counts_csv_file = "inputs/raw_counts.csv",
                  pool = FALSE)
   
   write_delim(x = as.data.frame(go@result), 
-            file = namego, 
-            delim = ";")
+              file = namego, 
+              delim = ";")
   d <- dotplot(go)
   return(d)
 }

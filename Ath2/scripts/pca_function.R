@@ -1,4 +1,4 @@
-mypca <- function(x, center = TRUE, scale = TRUE){  
+mypca <- function(x, center = F, scale = F){  
   
   # remove columns containing only 0 values
   # not informative + cause svd() error
