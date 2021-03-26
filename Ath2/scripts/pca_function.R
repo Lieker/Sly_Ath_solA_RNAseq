@@ -2,7 +2,7 @@ mypca <- function(x, center = T, scale = T){
   
   # remove columns containing only 0 values
   # not informative + cause svd() error
-  x_without_zero_columns <- x[,colSums(x != 0) != 0] 
+  x_without_zero_columns <- x[vapply(x, function(z) length(unique(z)) > 1, logical(1L))]
   
   # perform SVD
   SVD <- svd(scale(x_without_zero_columns, center = center, scale = scale))
