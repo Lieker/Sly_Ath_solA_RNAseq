@@ -1,5 +1,5 @@
 library(mixOmics)
-source("scripts/filter_counts_vst_based_on_organ.R")
+source("scripts/filter_counts_based_on_compartment.R")
 source("scripts/get_xp_design.R")
 
 do_plsda_perf <- function(xp_design_csv_file = "inputs/xp_design.csv",
@@ -10,7 +10,7 @@ do_plsda_perf <- function(xp_design_csv_file = "inputs/xp_design.csv",
   
   xp_design_f <- xp_design[xp_design$organ == plantpart,]
   
-  filtered_counts_vst_t <- filter_counts_vst_based_on_organ(counts_csv_file, plantpart)
+  filtered_counts_vst_t <- filter_counts_based_on_compartment(counts_csv_file, comprtmt = plantpart)
   
   p <- plsda(filtered_counts_vst_t, xp_design_f$treatment, ncomp = 5)
   

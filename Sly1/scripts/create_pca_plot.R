@@ -6,7 +6,7 @@ plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
                      pca_colour = "treatment") {
   
   source("scripts/produce_scaled_counts_matrix.R")
-  source("scripts/filter_counts_based_on_organ.R")
+  source("scripts/filter_counts_based_on_compartment.R")
   source("scripts/extract_variance.R")
   
   produce_score_df <- function(counts = filtered_counts, 
@@ -39,10 +39,10 @@ plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
   scaled_counts = produce_scaled_counts_matrix(count_csv_file = count_csv_file,
                                                xp_design_csv_file = xp_design_csv_file)
   
-  # based on an organ, filter the corresponding scaled_counts matrix
-  filtered_counts <- filter_counts_based_on_organ(counts = scaled_counts, 
-                                                 xp_design_csv_file = xp_design_csv_file, 
-                                                 o = plantpart)
+  # based on an compartment, filter the corresponding scaled_counts matrix
+  filtered_counts <- filter_counts_based_on_compartment(counts = scaled_counts, 
+                                                        xp_design_csv_file = xp_design_csv_file, 
+                                                        comprtmt = plantpart)
  
   
   # compute PCA and return scores as a dataframe with additional XP info
