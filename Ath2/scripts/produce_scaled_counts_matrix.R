@@ -18,14 +18,18 @@ produce_scaled_counts_matrix <- function(count_csv_file = "inputs/counts.csv",
                         check.names = FALSE, fileEncoding = "UTF-8-BOM")
   xp_design$treatment <- as.factor(xp_design$treatment)
   
-
-  dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
+  dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ 1)
   dds <- estimateSizeFactors(dds)
-  scaled_counts = counts(dds, normalized = TRUE)
+  dds = estimateDispersions(object = dds, 
+                            fitType = "parametric", 
+                            quiet = TRUE)
+  vsd = varianceStabilizingTransformation(object = dds, 
+                                          blind = TRUE,           # do not take the design formula into account. 
+                                                                  # best practice for sample-level QC
+                                          fitType = "parametric") # extract the matrix of variance stabilised counts
+  variance_stabilised_counts <- assay(vsd)
+  t_variance_stabilised_counts <- t(variance_stabilised_counts)
+  t_variance_stabilised_counts <- as.data.frame(t_variance_stabilised_counts)
   
-  scaled_counts = t(scaled_counts) # to have sample in rows
-  scaled_counts = as.data.frame(scaled_counts) %>% 
-    rownames_to_column("sample")
-  
-  return(scaled_counts)
+  return(t_variance_stabilised_counts)
 }

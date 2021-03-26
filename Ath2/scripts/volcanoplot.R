@@ -38,6 +38,6 @@ make_volcanoplot <- function(counts_csv_file = "inputs/counts.csv",
                        y = "padj",
                        pCutoff = padj_threshold,
                        FCcutoff = FCcutoff_volcano,
-                       lab = rownames(shrunk) )
+                       lab = rownames(shrunk))
   return(v)
 }
