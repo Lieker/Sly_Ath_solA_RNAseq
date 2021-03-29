@@ -1,0 +1,2 @@
+gene;baseMean;log2FoldChange;lfcSE;stat;pvalue;padj;tair_symbol;uniprotswissprot;entrezgene_id;description;external_gene_name;external_gene_source
+AT5G53900;169.40307532632454;0.7432392365374232;0.2037259858077943;3.6482299181933215;2.6405328776323743e-4;0.049028179937026045;NA;NA;835472;"Gb [Source:UniProtKB/TrEMBL;Acc:Q9FN36]";NA;NA
