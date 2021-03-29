@@ -33,17 +33,10 @@ compare_wald_vs_LRT <- function(counts_csv_file = "inputs/counts.csv",
     pull(gene)
   
   diff <- sig_res_wald[!(sig_res_wald$gene %in% sig_res_LRT$gene),]
-<<<<<<< HEAD
+
   overlap <- sig_res_wald[sig_res_wald$gene %in% sig_res_LRT$gene,]
   
   print(paste0("LRT gives ", nrow(sig_res_LRT), " DEGs, while Wald test gives ", nrow(sig_res_wald), " DEGs."))
   
   return(overlap)
-=======
-  
-  print(paste0("LRT gives ", nrow(sig_res_LRT), " DEGs, while Wald test gives ", nrow(sig_res_wald), " DEGs."))
-  
-  return(diff)
->>>>>>> 607b218894ec322033499f9291fc5c9e8c900ee3
-  
 }
