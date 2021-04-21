@@ -11,7 +11,9 @@ make_volcanoplot <- function(counts_csv_file = "inputs/counts.csv",
                              treatment2 = "b",
                              log2FC_threshold = 0,
                              FCcutoff_volcano = 0,
-                             padj_threshold = 0
+                             padj_threshold = 0,
+                             xsize = 2,
+                             ttl = ""
 ) {
   dds <- get_DESeq_dds(counts_csv_file,
                        xp_design_csv_file,
@@ -36,8 +38,11 @@ make_volcanoplot <- function(counts_csv_file = "inputs/counts.csv",
   v <- EnhancedVolcano(toptable = shrunk,
                        x = "log2FoldChange",
                        y = "padj",
+                       title = ttl,
+                       subtitle = "",
                        pCutoff = padj_threshold,
                        FCcutoff = FCcutoff_volcano,
-                       lab = rownames(shrunk))
+                       lab = rownames(shrunk),
+                       xlim = c(-(xsize), xsize))
   return(v)
 }

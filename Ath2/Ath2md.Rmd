@@ -1,0 +1,266 @@
+---
+title: "Ath2"
+output: html_document
+date: "April 20th 2021"
+author: "Lieke Vlaar"
+---
+
+# Introduction
+In this file the complete analysis workflow of count data of the Arabidopsis RNAseq experiment is shown.
+
+## Goal
+
+The goal of this experiment is to unravel the effect of solanoeclepin A on the plant. Solanoeclepin A is applied on Arabidopsis seedlings under various nutritional conditions. The set up of this experiment is summarized in this figure:
+
+```{r figurename, echo=FALSE, out.width = '90%'}
+knitr::include_graphics("image.png")
+```
+
+## Setup
+
+Packages necessary:
+
+* Checkpoint
+* DESeq2
+* dplyr
+* tidyr
+* tidyverse
+* Biostrings
+* biomaRt
+* biomartr
+* clusterProfiler
+* org.At.tair.db
+* tibble
+* mixOmics
+* vegan
+* apeglm
+* EnhancedVolcano
+* patchwork
+
+```{r include=FALSE}
+#########
+# Library
+#########
+if ("checkpoint" %in% installed.packages()){
+  library("checkpoint") # https://cran.r-project.org/web/packages/checkpoint/index.html
+} else {
+  install.packages("checkpoint")
+  suppressPackageStartupMessages(library("checkpoint"))
+  suppressPackageStartupMessages(checkpoint("2021-04-20"))  # all packages in your project will be taken from that date.
+}
+if ("DESeq2" %in% installed.packages()){
+  library("DESeq2")
+} else {
+  BiocManager::install("DESeq2")
+  library("DESeq2")
+}
+if ("dplyr" %in% installed.packages()){
+  library("dplyr")
+} else {
+  install.packages("dplyr")
+  library("dplyr")
+}
+if ("tidyr" %in% installed.packages()){
+  library("tidyr")
+} else {
+  install.packages("tidyr")
+  library("tidyr")
+}
+if ("tidyverse" %in% installed.packages()){
+  library("tidyverse")
+} else {
+  install.packages("tidyverse")
+  library("tidyverse")
+}
+if ("Biostrings" %in% installed.packages()){
+  library("Biostrings") 
+} else {
+  BiocManager::install("Biostrings")
+  library("Biostrings")
+}
+if ("biomaRt" %in% installed.packages()){
+  library("biomaRt") 
+} else {
+  BiocManager::install("biomaRt")
+  library("biomaRt")
+}
+if ("biomartr" %in% installed.packages()){
+  library("biomartr")
+} else {
+  install.packages("biomartr", dependencies = TRUE)
+  library("biomartr")
+}
+if ("clusterProfiler" %in% installed.packages()){
+  library("clusterProfiler") 
+} else {
+  BiocManager::install("clusterProfiler")
+  library("clusterProfiler")
+}
+if ("org.At.tair.db" %in% installed.packages()){
+  library("org.At.tair.db") 
+} else {
+  BiocManager::install("org.At.tair.db")
+  library("org.At.tair.db")
+}
+if ("tibble" %in% installed.packages()){
+  library("tibble") 
+} else {
+  install.packages("tibble")
+  library("tibble")
+}
+if ("mixOmics" %in% installed.packages()){
+  library("mixOmics") 
+} else {
+  BiocManager::install("mixOmics")
+  library("mixOmics")
+}
+if ("vegan" %in% installed.packages()){
+  library("vegan") 
+} else {
+  install.packages("vegan")
+  library("vegan")
+}
+if ("apeglm" %in% installed.packages()){
+  library("apeglm") 
+} else {
+  BiocManager::install("apeglm")
+  library("apeglm")
+}
+if ("EnhancedVolcano" %in% installed.packages()){
+  library("EnhancedVolcano") 
+} else {
+  BiocManager::install("EnhancedVolcano")
+  library("EnhancedVolcano")
+}
+if ("patchwork" %in% installed.packages()){
+  library("patchwork") 
+} else {
+  BiocManager::install("patchwork")
+  library("patchwork")
+}
+```
+
+# PCA analysis
+
+Load the function:
+```{r}
+source("~/github/Ath_RNAseq/Ath2/scripts/create_pca_plot.R")
+```
+
+Set the correct wd
+```{r}
+setwd("~/github/Ath_RNAseq/Ath2")
+```
+
+Run the function with default settings, which is
+```{r, eval = FALSE}
+plot_pca <- function(count_csv_file = "inputs/counts.csv",
+                     xp_design_csv_file = "inputs/xp_design.csv",
+                     pc_x_axis = "PC1", 
+                     pc_y_axis = "PC2",
+                     trm = c("a","b","c","d","e","f","g"),
+                     pca_colour = "solA")
+```
+```{r}
+plot_pca()
+```
+
+In order to make an overview of what determines the clustering, make the same plot with different colour guides and group them together with patchwork package
+```{r}
+p1 <- plot_pca(pca_colour = "treatment")
+p2 <- plot_pca()
+p3 <- plot_pca(pca_colour = "N")
+p4 <- plot_pca(pca_colour = "P")
+
+(p1 | p2) / (p3 | p4)
+```
+
+This figure is saved as PCAplot_PC1PC2_allsamples.jpeg
+
+There is no good separation based on treatment or solA supply. Therefore, check also PC3 and PC4
+```{r}
+p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment")
+p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4")
+p3 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "N")
+p4 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "P")
+
+(p1 | p2) / (p3 | p4)
+```
+
+This figure is saved as PCAplot_PC3PC4_allsamples.jpeg
+
+Check the screeplot of all the treatments.
+
+```{r}
+source("~/github/Ath_RNAseq/Ath2/scripts/scree_plot.R")
+plot_scree()
+```
+
+Check the histograms of count variability per sample before and after filtering:
+
+```{r}
+source("~/github/Ath_RNAseq/Ath2/scripts/produce_scaled_counts_matrix.R")
+scaled_counts <- produce_scaled_counts_matrix()
+
+source("~/github/Ath_RNAseq/Ath2/scripts/filter_counts_based_on_treatment.R")
+f <- filter_counts_based_on_treatment()
+ft <- f %>% t() %>% as.data.frame() %>% gather ()
+ggplot(ft, aes(value)) + 
+  geom_histogram(bins = 10) + 
+  facet_wrap(~key, scales = 'free_x') +
+  scale_y_log10()
+
+f_no_0 <- f[vapply(f, 
+                   function(z) length(unique(z)) > 1,
+                   logical(1L))] %>% data.matrix(., rownames.force = T)
+
+median_all_genes <- median(f_no_0)
+median_per_gene <- apply(f_no_0, 2, median)
+f_no_0_t <- f_no_0 %>% t() %>% as.data.frame()
+f_f <- f_no_0_t %>% filter(median_per_gene > median_all_genes) %>% t() %>% as.data.frame()
+
+f_ft <- f_f %>% t() %>% as.data.frame() %>% gather()
+head(f_ft)
+ggplot(f_ft, aes(value)) + 
+  geom_histogram(bins = 10) + 
+  facet_wrap(~key, scales = 'free_x') +
+  scale_y_log10() 
+
+```
+
+These two histograms are saved as histogram_counts_beforefilter.jpeg and histogram_counts_afterfilter.jpeg.
+
+However, this experiment is based on pair-wise comparisons. We have different nutritional conditions (no starvation, only P starvation, N+P starvation) and within these conditions we compare the effect of adding solA. There could be an effect of solA in one condition, but not in the others. Therefore, it makes sense to look whether samples within conditions cluster based on solA treatment.
+```{r}
+p1 <- plot_pca(trm = c("a","b")) + ggtitle("No starvation")
+p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", trm = c("c","d")) + ggtitle("Only P starvation")
+p3 <- plot_pca(trm = c("e","f")) + ggtitle("N+P starvation")
+
+p1 + p2 + p3 + plot_layout(ncol = 2)
+```
+
+This plot was saved as PCAplots_showing_clustering_solA.jpeg
+
+Check scree plot of all nutritional conditions.
+```{r}
+p1 <- plot_scree(trm = c("a","b")) + ggtitle("No starvation")
+p2 <- plot_scree(trm = c("c","d")) + ggtitle("Only P starvation")
+p3 <- plot_scree(trm = c("e","f")) + ggtitle("N+P starvation")
+
+p1 + p2 + p3 + plot_layout(ncol = 2)
+```
+
+
+# DEG analysis
+
+## Wald test
+
+Taking into account all samples, regardless of nutritional condition, check the amount of DEGs comparing solA yes vs no.
+
+```{r}
+source("~/github/Ath_RNAseq/Ath2/scripts/volcanoplot.R")
+make_volcanoplot(log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "No starvation, solA treatment")
+```
+
+
+## Likelihood Ratio Test (LRT)
