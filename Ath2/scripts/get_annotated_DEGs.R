@@ -4,12 +4,12 @@ library("biomaRt")
 library(clusterProfiler)
 library(org.At.tair.db)
 
-source("scripts/compare_Wald_vs_LRT.R")
-source("scripts/get_filtered_list_of_DEGs.R")
-source("scripts/get_Athaliana_annotations.R")
+source("Ath2/scripts/compare_Wald_vs_LRT.R")
+source("Ath2/scripts/get_filtered_list_of_DEGs.R")
+source("Ath2/scripts/get_Athaliana_annotations.R")
 
-get_annotated_DEGs <- function(counts_csv_file = "inputs/counts.csv",
-                               xp_design_csv_file = "inputs/xp_design.csv",
+get_annotated_DEGs <- function(counts_csv_file = "Ath2/inputs/counts.csv",
+                               xp_design_csv_file = "Ath2/inputs/xp_design.csv",
                                trtm = c("a","b"),
                                ref_treatment = "a",
                                treatment2 = "b",
@@ -23,8 +23,8 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/counts.csv",
                                         "description",
                                         "external_gene_name",
                                         "external_gene_source"),
-                               name = "outputs/annotated_DEGslist.csv",
-                               method2 = "DEG" #this parameter chooses if DEGs will be analysed or a comparison with LRT will be made
+                               name = "Ath2/outputs/annotated_DEGslist.csv",
+                               method2 = "DEG" #this parameter chooses if DEGs acc. to Wald will be analysed or a comparison with LRT will be made
                                ) {
   if (method2 == "DEG") {
     res <- get_list_of_DEGs(counts_csv_file, 
@@ -38,7 +38,7 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/counts.csv",
   } else if (method2 == "LRTcompare") {
     res <- compare_wald_vs_LRT(trtm = trtm, ref_treatment = ref_treatment, treatment2 = treatment2)
   } else { 
-    print("no valid method") }
+    print("no valid method2; choose DEG or LRTcompare") }
   
   
   subset_annotated <- biomartr::biomart(genes = res$gene,

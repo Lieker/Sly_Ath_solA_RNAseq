@@ -10,7 +10,7 @@ get_Athaliana_annotations <- function(organism = "Arabidopsis thaliana",
                                       "description",
                                       "external_gene_name",
                                       "external_gene_source"),
-                                      counts_csv_file = "inputs/counts.csv"
+                                      counts_csv_file = "Ath2/inputs/counts.csv"
 ) {biomartr::organismBM(organism = organism)
   
   arabido_attributes = biomartr::organismAttributes(organism) %>% 

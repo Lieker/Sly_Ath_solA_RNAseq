@@ -335,3 +335,29 @@ ggplot(data = x,
             color="white", 
             size=3.5)
 ```
+
+# Annotation of DEGs
+
+Start with annotating the list of DEGs of each subset.
+```{r}
+source("Ath2/scripts/get_annotated_DEGs.R")
+```
+
+The .csv file will be written to Ath2/outputs/annotated_DEGslist.csv
+```{r message=FALSE, warning=FALSE}
+x <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA")
+head(x)
+```
+
+Then, let's see if there are any GO terms enriched for these genes. The .csv file with all GO terms will be written to Ath2/outputs/GOannotationslist.csv
+```{r}
+source("Ath2/scripts/GO_annotation_list.R")
+```
+```{r message=FALSE, warning=FALSE}
+GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "bar")
+```
+
+It is also possible to see the relationships between GO terms that are enriched:
+```{r message=FALSE, warning=FALSE}
+GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "go")
+```
