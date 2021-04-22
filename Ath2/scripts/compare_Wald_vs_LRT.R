@@ -1,19 +1,24 @@
-compare_wald_vs_LRT <- function(counts_csv_file = "inputs/counts.csv",
-                                xp_design_csv_file = "inputs/xp_design.csv",
+compare_wald_vs_LRT <- function(counts_csv_file = "Ath2/inputs/counts.csv",
+                                xp_design_csv_file = "Ath2/inputs/xp_design.csv",
                                 trtm = c("a","b"),
                                 ref_treatment = "a",
                                 treatment2 = "b",
+                                method = "treatment", #this parameter chooses which formula design will be chosen: ~treatment or ~solA
                                 padj_cutoff = 0.05
 )
 {
-  source("scripts/get_DESeq_dds.R")
+  source("Ath2/scripts/get_DESeq_dds.R")
   dds <- get_DESeq_dds(counts_csv_file = counts_csv_file,
                        xp_design_csv_file = xp_design_csv_file,
                        trtm = trtm,
                        ref_treatment = ref_treatment,
-                       treatment2 = treatment2)
-  
-  dds_lrt <- DESeq(dds, test="LRT", reduced = ~1)
+                       treatment2 = treatment2,
+                       method = method)
+  if(method == "treatment"){
+    dds_lrt <- DESeq(dds, test="LRT", reduced = ~1)
+  } else if(method == "solA"){
+    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P)
+  }
   res_LRT <- results(dds_lrt)
   sig_res_LRT <- res_LRT %>%
     data.frame() %>%

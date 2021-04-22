@@ -1,16 +1,25 @@
 library(DESeq2)
-source("scripts/get_DESeq_dds.R")
+source("Ath2/scripts/get_DESeq_dds.R")
 
-coefficient <- function(counts_csv_file = "inputs/counts.csv",
-                        xp_design_csv_file = "inputs/xp_design.csv",
+coefficient <- function(counts_csv_file = "Ath2/inputs/counts.csv",
+                        xp_design_csv_file = "Ath2/inputs/xp_design.csv",
                         trtm = c("a","b"),
                         ref_treatment = "a",
-                        treatment2 = "b") {
+                        treatment2 = "b",
+                        method = "treatment" #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+                        ) {
   dds <- get_DESeq_dds(counts_csv_file,
                        xp_design_csv_file,
                        trtm,
                        ref_treatment,
-                       treatment2)
-  r <- resultsNames(dds)[2]
+                       treatment2,
+                       method)
+  if(method == "treatment"){
+    r <- resultsNames(dds)[2]
+  } else if(method == "solA") {
+    r <- resultsNames(dds)[4]
+    dds$condition <- relevel(dds$solA, ref = "no")
+  }
+  
   return(r)
 }

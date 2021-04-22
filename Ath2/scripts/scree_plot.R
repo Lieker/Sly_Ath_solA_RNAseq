@@ -1,10 +1,10 @@
-plot_scree <- function(count_csv_file = "inputs/counts.csv",
-                       xp_design_csv_file = "inputs/xp_design.csv",
+plot_scree <- function(count_csv_file = "Ath2/inputs/counts.csv",
+                       xp_design_csv_file = "Ath2/inputs/xp_design.csv",
                        trm = c("a","b","c","d","e","f","g")
 )
   {
-  source("scripts/filter_counts_based_on_treatment.R")
-  source("scripts/pca_function.R")
+  source("Ath2/scripts/filter_counts_based_on_treatment.R")
+  source("Ath2/scripts/pca_function.R")
   scaled_counts = produce_scaled_counts_matrix(count_csv_file = count_csv_file,
                                                xp_design_csv_file = xp_design_csv_file)
     

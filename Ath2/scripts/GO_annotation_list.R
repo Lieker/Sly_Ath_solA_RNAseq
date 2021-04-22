@@ -8,6 +8,7 @@ GO_annotation_list <- function(counts_csv_file = "inputs/counts.csv",
                                trtm = c("a","b"),
                                ref_treatment = "a",
                                treatment2 = "b",
+                               method = "treatment", #this parameter chooses which formula design will be chosen: ~treatment or ~solA
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
                                organism = "Arabidopsis thaliana",
@@ -18,6 +19,7 @@ GO_annotation_list <- function(counts_csv_file = "inputs/counts.csv",
                                         "external_gene_name",
                                         "external_gene_source"),
                                name = "annotated_DEGslist.csv",
+                               method2 = "DEG", #this parameter chooses if DEGs will be analysed or a comparison with LRT will be made
                                ont = "BP", #can be either BP, CC or MF
                                namego = "outputs/GOannotationslist.csv"
                                ) {
@@ -26,12 +28,14 @@ GO_annotation_list <- function(counts_csv_file = "inputs/counts.csv",
                                       xp_design_csv_file, 
                                       trtm, 
                                       ref_treatment, 
-                                      treatment2, 
+                                      treatment2,
+                                      method,
                                       log2FC_threshold, 
                                       padj_threshold, 
                                       organism, 
                                       attr, 
-                                      name)
+                                      name,
+                                      method2)
   go <- enrichGO(gene = res_annotated$entrezgene_id, 
                  universe = all_Ath_genes_annotated$entrezgene_id, 
                  OrgDb = org.At.tair.db,  # contains the TAIR/Ensembl id to GO correspondence for A. thaliana

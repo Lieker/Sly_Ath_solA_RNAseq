@@ -2,7 +2,7 @@ suppressPackageStartupMessages(library(tidyverse))
 
 
 filter_counts_based_on_treatment <- function(counts = scaled_counts, 
-                                        xp_design_csv_file = "inputs/xp_design.csv", 
+                                        xp_design_csv_file = "Ath2/inputs/xp_design.csv", 
                                         tr = c("a","b","c","d","e","f","g")) {
   # read and filter xp design info for selected time
   xp_design = read.csv(file = xp_design_csv_file,

@@ -1,13 +1,15 @@
 library(DESeq2)
 library(tidyr)
 library(tibble)
-source("scripts/get_xp_design.R")
+source("Ath2/scripts/get_xp_design.R")
 
-get_DESeq_dds <- function(counts_csv_file = "inputs/counts.csv",
-                          xp_design_csv_file = "inputs/xp_design.csv",
+get_DESeq_dds <- function(counts_csv_file = "Ath2/inputs/counts.csv",
+                          xp_design_csv_file = "Ath2/inputs/xp_design.csv",
                           trtm = c("a","b"),
                           ref_treatment = "a",
-                          treatment2 = "b") {
+                          treatment2 = "b",
+                          method = "treatment" #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+                          ) {
   counts <- read.csv(file = counts_csv_file, 
                      header = TRUE, 
                      stringsAsFactors = FALSE) %>%
@@ -15,12 +17,17 @@ get_DESeq_dds <- function(counts_csv_file = "inputs/counts.csv",
   counts <- as.data.frame(t(counts)) %>% rownames_to_column("sample")
   
   xp_design <- get_xp_design(xp_design_csv_file)
-  xp_design <- xp_design[which(xp_design$treatment %in% trtm),] %>% 
-    filter(treatment == ref_treatment | treatment == treatment2)
   
-  counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
-  
-  dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
+  if(method == "treatment"){
+    xp_design <- xp_design[which(xp_design$treatment %in% trtm),] %>% 
+      filter(treatment == ref_treatment | treatment == treatment2)
+    counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
+  } else if (method == "solA"){
+    counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + solA)
+  }
+
   dds <- DESeq(dds)
   return(dds)
 }
