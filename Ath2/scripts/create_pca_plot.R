@@ -47,7 +47,7 @@ plot_pca <- function(count_csv_file = "Ath2/inputs/counts.csv",
   # compute PCA and return scores as a dataframe with additional XP info
   # also returns explained variance per component 
    score_df <- produce_score_df(counts = filtered_counts, 
-                               xp_design_csv_file = "Ath2/inputs/xp_design.csv")
+                               xp_design_csv_file = xp_design_csv_file)
   
   
   explained_variance_per_component <- extract_explained_variance_per_component(counts = filtered_counts) 

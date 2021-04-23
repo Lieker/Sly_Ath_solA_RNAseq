@@ -1,0 +1,173 @@
+---
+title: "Ath12"
+author: "Lieke Vlaar"
+date: "23/04/2021"
+output: html_document
+---
+
+```{r include = FALSE}
+if ("knitr" %in% installed.packages()){
+  library("knitr")
+} else {
+  install.packages("knitr")
+  library("knitr")
+}
+```
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+```{r setup, include=FALSE}
+```{r include=FALSE}
+#########
+# Library
+#########
+if ("checkpoint" %in% installed.packages()){
+  library("checkpoint") # https://cran.r-project.org/web/packages/checkpoint/index.html
+} else {
+  install.packages("checkpoint")
+  suppressPackageStartupMessages(library("checkpoint"))
+  suppressPackageStartupMessages(checkpoint("2021-04-20"))  # all packages in your project will be taken from that date.
+}
+if ("DESeq2" %in% installed.packages()){
+  library("DESeq2")
+} else {
+  BiocManager::install("DESeq2")
+  library("DESeq2")
+}
+if ("dplyr" %in% installed.packages()){
+  library("dplyr")
+} else {
+  install.packages("dplyr")
+  library("dplyr")
+}
+if ("tidyr" %in% installed.packages()){
+  library("tidyr")
+} else {
+  install.packages("tidyr")
+  library("tidyr")
+}
+if ("tidyverse" %in% installed.packages()){
+  library("tidyverse")
+} else {
+  install.packages("tidyverse")
+  library("tidyverse")
+}
+if ("Biostrings" %in% installed.packages()){
+  library("Biostrings") 
+} else {
+  BiocManager::install("Biostrings")
+  library("Biostrings")
+}
+if ("biomaRt" %in% installed.packages()){
+  library("biomaRt") 
+} else {
+  BiocManager::install("biomaRt")
+  library("biomaRt")
+}
+if ("biomartr" %in% installed.packages()){
+  library("biomartr")
+} else {
+  install.packages("biomartr", dependencies = TRUE)
+  library("biomartr")
+}
+if ("clusterProfiler" %in% installed.packages()){
+  library("clusterProfiler") 
+} else {
+  BiocManager::install("clusterProfiler")
+  library("clusterProfiler")
+}
+if ("org.At.tair.db" %in% installed.packages()){
+  library("org.At.tair.db") 
+} else {
+  BiocManager::install("org.At.tair.db")
+  library("org.At.tair.db")
+}
+if ("tibble" %in% installed.packages()){
+  library("tibble") 
+} else {
+  install.packages("tibble")
+  library("tibble")
+}
+if ("mixOmics" %in% installed.packages()){
+  library("mixOmics") 
+} else {
+  BiocManager::install("mixOmics")
+  library("mixOmics")
+}
+if ("vegan" %in% installed.packages()){
+  library("vegan") 
+} else {
+  install.packages("vegan")
+  library("vegan")
+}
+if ("apeglm" %in% installed.packages()){
+  library("apeglm") 
+} else {
+  BiocManager::install("apeglm")
+  library("apeglm")
+}
+if ("EnhancedVolcano" %in% installed.packages()){
+  library("EnhancedVolcano") 
+} else {
+  BiocManager::install("EnhancedVolcano")
+  library("EnhancedVolcano")
+}
+if ("patchwork" %in% installed.packages()){
+  library("patchwork") 
+} else {
+  BiocManager::install("patchwork")
+  library("patchwork")
+}
+if ("reshape" %in% installed.packages()){
+  library("reshape") 
+} else {
+  install.packages("reshape")
+  library("reshape")
+}
+if ("DEGreport" %in% installed.packages()){
+  library("DEGreport") 
+} else {
+  BiocManager::install("DEGreport")
+  library("DEGreport")
+}
+```
+
+#Ath1 and Ath2
+
+In this workflow I will analyse two identical experiments, executed at different moments in time. Both of them involved Arabidopsis seedlings that were treated either with solanoeclepin A or ethanol carrier, and harvested for RNA extraction 2 hours later. Age, growth conditions, genotype, concentration of solA was the same.
+The goal of this analysis is to identify genes that are activated by treatment with solanoeclepin A.
+
+Let's start with PCA analysis.
+```{r}
+source("Ath2/scripts/create_pca_plot.R")
+p1 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+               trm = c("solAno", "solAyes"),
+               pca_colour = "treatment")
+p2 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+               trm = c("solAno", "solAyes"),
+               pca_colour = "experiment") 
+p1 / p2
+```
+
+Clearly, the biggest influence is caused by the batch effect of these experiments.
+Check if any solA effect is visible in PC3 and PC4:
+```{r}
+p1 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+               trm = c("solAno", "solAyes"),
+               pca_colour = "treatment",
+               pc_x_axis = "PC3", 
+               pc_y_axis = "PC4")
+p2 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+               trm = c("solAno", "solAyes"),
+               pca_colour = "experiment",
+               pc_x_axis = "PC3", 
+               pc_y_axis = "PC4") 
+p1 / p2
+```
+
+The answer is no.
