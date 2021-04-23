@@ -26,7 +26,13 @@ get_DESeq_dds <- function(counts_csv_file = "Ath2/inputs/counts.csv",
   } else if (method == "solA"){
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
     dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + solA)
-  }
+  } else if (method == "N:solA+solA"){
+    counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + N:solA + solA)
+  } else if (method == "N:solA"){
+    counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + N:solA)
+  } else{print("no valid method selected")}
 
   dds <- DESeq(dds)
   return(dds)

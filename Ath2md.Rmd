@@ -155,6 +155,12 @@ if ("reshape" %in% installed.packages()){
   install.packages("reshape")
   library("reshape")
 }
+if ("DEGreport" %in% installed.packages()){
+  library("DEGreport") 
+} else {
+  BiocManager::install("DEGreport")
+  library("DEGreport")
+}
 ```
 
 # PCA analysis
@@ -278,6 +284,20 @@ make_volcanoplot(trtm = c("a","b","c","d","e","f","g"), log2FC_threshold = 0, FC
 ```
 
 There are a few significant genes present.
+We can try to include not only the solA factor in the model, but also the interaction with N, since this factor has a big influence on all samples.
+Therefore, we set method to N:solA. The design formula now becomes ~N + P + N:solA + solA.
+The resulting volcanoplot is shown here:
+```{r, warning = FALSE, message = FALSE}
+make_volcanoplot(trtm = c("a","b","c","d","e","f","g"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "All treatments, solA treatment (taking into acc N:solA), Wald", method = "N:solA+solA", xsize = 2)
+```
+
+It seems that there are barely any DEGs that are caused by solA alone, if we take into account the interaction between solA and N. So, let's find out which DEGs come up if we only look at factor N:solA.
+We can completely and only focus on the N:solA interaction (making the design formula ~N + P + N:solA):
+```{r, warning = FALSE, message = FALSE}
+make_volcanoplot(trtm = c("a","b","c","d","e","f","g"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "All treatments, N:solA treatment, Wald", method = "N:solA", xsize = 2)
+```
+
+Now there are actually some DEGs.
 
 Also do this analysis for the within nutritional condition comparison. In this case, the design formula is set to ~ treatment (N and P are not relevant anymore - will even give an error - because you compare samples that have the same N and P)
 ```{r, warning = FALSE, message = FALSE}
@@ -298,6 +318,13 @@ The output table of this function gives all the genes that overlap between the W
 ```{r, warning = FALSE, message = FALSE}
 compare_wald_vs_LRT(trtm = c("a","b","c","d","e","f","g"), method = "solA")
 ```
+
+Let's see if the other model we used for the Wald test are also verified by LRT: the model ~N+P+N:solA. How many DEGs are caused by the interaction between N and solA? (reduced model ~N+P)
+```{r, warning = FALSE, message = FALSE}
+compare_wald_vs_LRT(trtm = c("a","b","c","d","e","f","g"), method = "N:solA")
+```
+
+LRT gives many more DEGs and nearly all of the Wald test are in this list. So this model gives us a reliable set of DEGs.
 
 Let's do the same for the pairwise comparisons within the nutritional conditions. The formulae for the LRT are ~1 (null model) and ~treatment (full model), because we select method = "treatment". This same full model is used for the Wald test.
 ```{r, warning = FALSE, message = FALSE}
@@ -336,6 +363,25 @@ ggplot(data = x,
             size=3.5)
 ```
 
+## Finding groups of co-expressed (clustering) genes across samples
+
+We use DEGpatterns package to find clustering genes across samples. We use the complete Ath2 dataset for this to find genes that express according to a certain pattern over the sample groups.
+First, we have to extract the list of DEGs, filtered for Padj<0.05. Then we take our vst_transformed counts, only from the significantly DEGs.
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+#DOES NOT WORK
+x <- get_list_of_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/produce_scaled_counts_matrix.R")
+y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+xp_design <- xp_design %>% column_to_rownames("sample")
+clusters <- degPatterns(DEG_counts, metadata = xp_design, time = "solA")
+clusters$plot
+```
+
+
 # Annotation of DEGs
 
 Start with annotating the list of DEGs of each subset.
@@ -361,3 +407,28 @@ It is also possible to see the relationships between GO terms that are enriched:
 ```{r message=FALSE, warning=FALSE}
 GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "go")
 ```
+
+Let's also do the annotation and GO term annotation of the DEGs we found when using other models and subsets of samples.
+First, the DEGs we find when using the N:solA term instead of solA term.
+```{r message = FALSE, warning = FALSE}
+x <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "N:solA")
+GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", plottype = "bar")
+GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", plottype = "go")
+```
+
+Then, do the same for all the comparisons within nutritional conditions:
+```{r message = FALSE, warning = FALSE}
+#for the non starvation samples
+x <- get_annotated_DEGs(trtm = c("a","b"), method = "treatment")
+GO_annotation_list(trtm = c("a","b"), method = "treatment", plottype = "bar")
+GO_annotation_list(trtm = c("a","b"), method = "treatment", plottype = "go")
+
+#for the only P starvation samples
+x <- get_annotated_DEGs(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", method = "treatment")
+GO_annotation_list(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", method = "treatment", plottype = "bar")
+GO_annotation_list(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", method = "treatment", plottype = "go")
+
+#for the N+P starvation samples
+x <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment")
+GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "bar")
+GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "go")

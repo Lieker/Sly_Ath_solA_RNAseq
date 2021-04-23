@@ -19,7 +19,14 @@ coefficient <- function(counts_csv_file = "Ath2/inputs/counts.csv",
   } else if(method == "solA") {
     r <- resultsNames(dds)[4]
     dds$condition <- relevel(dds$solA, ref = "no")
+  } else if(method == "N:solA+solA") {
+    r <- resultsNames(dds)[5]
+    dds$condition <- relevel(dds$solA, ref = "no")
+  } else if(method == "N:solA"){
+    r <- resultsNames(dds)[5]
+    dds$condition <- relevel(dds$solA, ref = "no")
   }
+    
   
   return(r)
 }

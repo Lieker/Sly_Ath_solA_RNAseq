@@ -16,9 +16,12 @@ compare_wald_vs_LRT <- function(counts_csv_file = "Ath2/inputs/counts.csv",
                        method = method)
   if(method == "treatment"){
     dds_lrt <- DESeq(dds, test="LRT", reduced = ~1)
-  } else if(method == "solA"){
+  } else if(method == "solA" | method == "N:solA"){
     dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P)
+  } else if(method == "N:solA+solA") {
+    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P + N:solA)
   }
+  
   res_LRT <- results(dds_lrt)
   sig_res_LRT <- res_LRT %>%
     data.frame() %>%
