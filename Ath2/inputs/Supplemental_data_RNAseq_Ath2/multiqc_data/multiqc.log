@@ -1,0 +1,392 @@
+[2021-03-10 16:25:41,770] multiqc                                            [DEBUG  ]  No MultiQC config found: /home/mgallan1/miniconda3/envs/rnaseq/lib/python3.7/site-packages/multiqc_config.yaml
+[2021-03-10 16:25:41,770] multiqc                                            [DEBUG  ]  No MultiQC config found: /home/mgallan1/.multiqc_config.yaml
+[2021-03-10 16:25:41,770] multiqc                                            [DEBUG  ]  No MultiQC config found: multiqc_config.yaml
+[2021-03-10 16:25:41,770] multiqc                                            [DEBUG  ]  Command used: /home/mgallan1/miniconda3/envs/rnaseq/bin/multiqc --force --outdir results/ temp/fastp/
+[2021-03-10 16:25:41,875] multiqc                                            [WARNING]  MultiQC Version v1.10 now available!
+[2021-03-10 16:25:41,875] multiqc                                            [INFO   ]  This is MultiQC v1.9
+[2021-03-10 16:25:41,875] multiqc                                            [DEBUG  ]  Command     : /home/mgallan1/miniconda3/envs/rnaseq/bin/multiqc --force --outdir results/ temp/fastp/
+[2021-03-10 16:25:41,875] multiqc                                            [DEBUG  ]  Working dir : /zfs/omics/personal/mgallan1/workspace/snakemake_rnaseq
+[2021-03-10 16:25:41,875] multiqc                                            [INFO   ]  Template    : default
+[2021-03-10 16:25:41,875] multiqc                                            [DEBUG  ]  Running Python 3.7.9 (default, Aug 31 2020, 12:42:55)  [GCC 7.3.0]
+[2021-03-10 16:25:41,875] multiqc                                            [INFO   ]  Searching   : /zfs/omics/personal/mgallan1/workspace/snakemake_rnaseq/temp/fastp
+[2021-03-10 16:25:41,875] multiqc                                            [DEBUG  ]  Analysing modules: custom_content, conpair, peddy, somalier, methylQA, mosdepth, phantompeakqualtools, qualimap, preseq, quast, qorts, rna_seqc, rockhopper, rsem, rseqc, busco, goleft_indexcov, disambiguate, supernova, deeptools, sargasso, verifybamid, mirtrace, happy, mirtop, homer, macs2, theta2, snpeff, gatk, htseq, bcftools, featureCounts, fgbio, dragen, dedup, damageprofiler, biobambam2, mtnucratio, picard, prokka, samblaster, samtools, sexdeterrmine, bamtools, jellyfish, vcftools, longranger, stacks, varscan2, bbmap, bismark, biscuit, hicexplorer, hicup, hicpro, salmon, kallisto, slamdunk, star, hisat2, tophat, bowtie2, bowtie1, snpsplit, kat, leehom, adapterRemoval, clipandmerge, cutadapt, flexbar, kaiju, kraken, malt, trimmomatic, sickle, skewer, sortmerna, biobloomtools, fastq_screen, afterqc, fastp, fastqc, pycoqc, minionqc, multivcfanalyzer, clusterflow, bcl2fastq, interop, ivar, flash, seqyclean
+[2021-03-10 16:25:41,876] multiqc                                            [DEBUG  ]  Using temporary directory for creating report: /tmp/tmpt_oiqvv6
+[2021-03-10 16:25:41,969] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S34_fastp.html
+[2021-03-10 16:25:41,969] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S47_fastp.html
+[2021-03-10 16:25:41,969] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S22_fastp.html
+[2021-03-10 16:25:41,969] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S51_fastp.html
+[2021-03-10 16:25:41,969] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S29_fastp.html
+[2021-03-10 16:25:41,969] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S38_fastp.html
+[2021-03-10 16:25:41,971] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S25_fastp.html
+[2021-03-10 16:25:41,971] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S40_fastp.html
+[2021-03-10 16:25:41,971] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S33_fastp.html
+[2021-03-10 16:25:41,972] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S53_fastp.html
+[2021-03-10 16:25:41,972] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S36_fastp.html
+[2021-03-10 16:25:41,972] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S45_fastp.html
+[2021-03-10 16:25:41,973] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S49_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S42_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S31_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S54_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S27_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S48_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S43_fastp.html
+[2021-03-10 16:25:41,974] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S30_fastp.html
+[2021-03-10 16:25:41,975] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S55_fastp.html
+[2021-03-10 16:25:41,975] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S26_fastp.html
+[2021-03-10 16:25:41,976] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S21_fastp.html
+[2021-03-10 16:25:41,976] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S52_fastp.html
+[2021-03-10 16:25:41,976] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S37_fastp.html
+[2021-03-10 16:25:41,976] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S44_fastp.html
+[2021-03-10 16:25:41,978] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S39_fastp.html
+[2021-03-10 16:25:41,978] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S24_fastp.html
+[2021-03-10 16:25:41,978] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S41_fastp.html
+[2021-03-10 16:25:41,978] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S32_fastp.html
+[2021-03-10 16:25:41,979] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S35_fastp.html
+[2021-03-10 16:25:41,979] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S46_fastp.html
+[2021-03-10 16:25:41,979] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S23_fastp.html
+[2021-03-10 16:25:41,979] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S50_fastp.html
+[2021-03-10 16:25:41,980] multiqc                                            [DEBUG  ]  Ignoring file as matched an ignore pattern: S28_fastp.html
+[2021-03-10 16:25:42,173] multiqc.plots.bargraph                             [DEBUG  ]  Using matplotlib version 3.3.3
+[2021-03-10 16:25:42,173] multiqc.plots.linegraph                            [DEBUG  ]  Using matplotlib version 3.3.3
+[2021-03-10 16:25:42,174] multiqc                                            [DEBUG  ]  No samples found: custom_content
+[2021-03-10 16:25:42,177] multiqc                                            [DEBUG  ]  No samples found: conpair
+[2021-03-10 16:25:42,179] multiqc                                            [DEBUG  ]  No samples found: peddy
+[2021-03-10 16:25:42,182] multiqc                                            [DEBUG  ]  No samples found: somalier
+[2021-03-10 16:25:42,185] multiqc                                            [DEBUG  ]  No samples found: methylQA
+[2021-03-10 16:25:42,188] multiqc                                            [DEBUG  ]  No samples found: mosdepth
+[2021-03-10 16:25:42,190] multiqc                                            [DEBUG  ]  No samples found: phantompeakqualtools
+[2021-03-10 16:25:42,193] multiqc                                            [DEBUG  ]  No samples found: qualimap
+[2021-03-10 16:25:42,195] multiqc                                            [DEBUG  ]  No samples found: preseq
+[2021-03-10 16:25:42,198] multiqc                                            [DEBUG  ]  No samples found: quast
+[2021-03-10 16:25:42,201] multiqc                                            [DEBUG  ]  No samples found: qorts
+[2021-03-10 16:25:42,203] multiqc                                            [DEBUG  ]  No samples found: rna_seqc
+[2021-03-10 16:25:42,206] multiqc                                            [DEBUG  ]  No samples found: rockhopper
+[2021-03-10 16:25:42,208] multiqc                                            [DEBUG  ]  No samples found: rsem
+[2021-03-10 16:25:42,212] multiqc                                            [DEBUG  ]  No samples found: rseqc
+[2021-03-10 16:25:42,215] multiqc                                            [DEBUG  ]  No samples found: busco
+[2021-03-10 16:25:42,218] multiqc                                            [DEBUG  ]  No samples found: goleft_indexcov
+[2021-03-10 16:25:42,220] multiqc                                            [DEBUG  ]  No samples found: disambiguate
+[2021-03-10 16:25:42,223] multiqc                                            [DEBUG  ]  No samples found: supernova
+[2021-03-10 16:25:42,227] multiqc                                            [DEBUG  ]  No samples found: deeptools
+[2021-03-10 16:25:42,229] multiqc                                            [DEBUG  ]  No samples found: sargasso
+[2021-03-10 16:25:42,232] multiqc                                            [DEBUG  ]  No samples found: verifybamid
+[2021-03-10 16:25:42,235] multiqc                                            [DEBUG  ]  No samples found: mirtrace
+[2021-03-10 16:25:42,237] multiqc                                            [DEBUG  ]  No samples found: happy
+[2021-03-10 16:25:42,240] multiqc                                            [DEBUG  ]  No samples found: mirtop
+[2021-03-10 16:25:42,243] multiqc                                            [DEBUG  ]  No samples found: homer
+[2021-03-10 16:25:42,245] multiqc                                            [DEBUG  ]  No samples found: macs2
+[2021-03-10 16:25:42,248] multiqc                                            [DEBUG  ]  No samples found: theta2
+[2021-03-10 16:25:42,251] multiqc                                            [DEBUG  ]  No samples found: snpeff
+[2021-03-10 16:25:42,254] multiqc                                            [DEBUG  ]  No samples found: gatk
+[2021-03-10 16:25:42,256] multiqc                                            [DEBUG  ]  No samples found: htseq
+[2021-03-10 16:25:42,259] multiqc                                            [DEBUG  ]  No samples found: bcftools
+[2021-03-10 16:25:42,261] multiqc                                            [DEBUG  ]  No samples found: featureCounts
+[2021-03-10 16:25:42,264] multiqc                                            [DEBUG  ]  No samples found: fgbio
+[2021-03-10 16:25:42,269] multiqc                                            [DEBUG  ]  No samples found: dragen
+[2021-03-10 16:25:42,271] multiqc                                            [DEBUG  ]  No samples found: dedup
+[2021-03-10 16:25:42,274] multiqc                                            [DEBUG  ]  No samples found: damageprofiler
+[2021-03-10 16:25:42,280] multiqc                                            [DEBUG  ]  No samples found: biobambam2
+[2021-03-10 16:25:42,282] multiqc                                            [DEBUG  ]  No samples found: mtnucratio
+[2021-03-10 16:25:42,284] multiqc                                            [DEBUG  ]  No samples found: picard
+[2021-03-10 16:25:42,287] multiqc                                            [DEBUG  ]  No samples found: prokka
+[2021-03-10 16:25:42,290] multiqc                                            [DEBUG  ]  No samples found: samblaster
+[2021-03-10 16:25:42,293] multiqc                                            [DEBUG  ]  No samples found: samtools
+[2021-03-10 16:25:42,295] multiqc                                            [DEBUG  ]  No samples found: sexdeterrmine
+[2021-03-10 16:25:42,298] multiqc                                            [DEBUG  ]  No samples found: bamtools
+[2021-03-10 16:25:42,301] multiqc                                            [DEBUG  ]  No samples found: jellyfish
+[2021-03-10 16:25:42,304] multiqc                                            [DEBUG  ]  No samples found: vcftools
+[2021-03-10 16:25:42,306] multiqc                                            [DEBUG  ]  No samples found: longranger
+[2021-03-10 16:25:42,309] multiqc                                            [DEBUG  ]  No samples found: stacks
+[2021-03-10 16:25:42,312] multiqc                                            [DEBUG  ]  No samples found: varscan2
+[2021-03-10 16:25:42,316] multiqc                                            [DEBUG  ]  No samples found: bbmap
+[2021-03-10 16:25:42,318] multiqc                                            [DEBUG  ]  No samples found: bismark
+[2021-03-10 16:25:42,321] multiqc                                            [DEBUG  ]  No samples found: biscuit
+[2021-03-10 16:25:42,324] multiqc                                            [DEBUG  ]  No samples found: hicexplorer
+[2021-03-10 16:25:42,326] multiqc                                            [DEBUG  ]  No samples found: hicup
+[2021-03-10 16:25:42,329] multiqc                                            [DEBUG  ]  No samples found: hicpro
+[2021-03-10 16:25:42,332] multiqc                                            [DEBUG  ]  No samples found: salmon
+[2021-03-10 16:25:42,335] multiqc                                            [DEBUG  ]  No samples found: kallisto
+[2021-03-10 16:25:42,338] multiqc                                            [DEBUG  ]  No samples found: slamdunk
+[2021-03-10 16:25:42,340] multiqc                                            [DEBUG  ]  No samples found: star
+[2021-03-10 16:25:42,343] multiqc                                            [DEBUG  ]  No samples found: hisat2
+[2021-03-10 16:25:42,345] multiqc                                            [DEBUG  ]  No samples found: tophat
+[2021-03-10 16:25:42,348] multiqc                                            [DEBUG  ]  No samples found: bowtie2
+[2021-03-10 16:25:42,351] multiqc                                            [DEBUG  ]  No samples found: bowtie1
+[2021-03-10 16:25:42,353] multiqc                                            [DEBUG  ]  No samples found: snpsplit
+[2021-03-10 16:25:42,356] multiqc                                            [DEBUG  ]  No samples found: kat
+[2021-03-10 16:25:42,359] multiqc                                            [DEBUG  ]  No samples found: leehom
+[2021-03-10 16:25:42,361] multiqc                                            [DEBUG  ]  No samples found: adapterRemoval
+[2021-03-10 16:25:42,364] multiqc                                            [DEBUG  ]  No samples found: clipandmerge
+[2021-03-10 16:25:42,367] multiqc                                            [DEBUG  ]  No samples found: cutadapt
+[2021-03-10 16:25:42,369] multiqc                                            [DEBUG  ]  No samples found: flexbar
+[2021-03-10 16:25:42,372] multiqc                                            [DEBUG  ]  No samples found: kaiju
+[2021-03-10 16:25:42,374] multiqc                                            [DEBUG  ]  No samples found: kraken
+[2021-03-10 16:25:42,377] multiqc                                            [DEBUG  ]  No samples found: malt
+[2021-03-10 16:25:42,380] multiqc                                            [DEBUG  ]  No samples found: trimmomatic
+[2021-03-10 16:25:42,382] multiqc                                            [DEBUG  ]  No samples found: sickle
+[2021-03-10 16:25:42,385] multiqc                                            [DEBUG  ]  No samples found: skewer
+[2021-03-10 16:25:42,388] multiqc                                            [DEBUG  ]  No samples found: sortmerna
+[2021-03-10 16:25:42,390] multiqc                                            [DEBUG  ]  No samples found: biobloomtools
+[2021-03-10 16:25:42,393] multiqc                                            [DEBUG  ]  No samples found: fastq_screen
+[2021-03-10 16:25:42,396] multiqc                                            [DEBUG  ]  No samples found: afterqc
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S32_fastp.json'
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S32_fastp.json
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S32_fastp.json
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S32_fastp.json
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S32_fastp.json
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S32_fastp.json
+[2021-03-10 16:25:42,401] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S32_fastp.json
+[2021-03-10 16:25:42,402] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S41_fastp.json'
+[2021-03-10 16:25:42,403] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S41_fastp.json
+[2021-03-10 16:25:42,403] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S41_fastp.json
+[2021-03-10 16:25:42,403] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S41_fastp.json
+[2021-03-10 16:25:42,403] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S41_fastp.json
+[2021-03-10 16:25:42,403] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S41_fastp.json
+[2021-03-10 16:25:42,403] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S41_fastp.json
+[2021-03-10 16:25:42,404] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S24_fastp.json'
+[2021-03-10 16:25:42,404] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S24_fastp.json
+[2021-03-10 16:25:42,404] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S24_fastp.json
+[2021-03-10 16:25:42,404] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S24_fastp.json
+[2021-03-10 16:25:42,405] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S24_fastp.json
+[2021-03-10 16:25:42,405] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S24_fastp.json
+[2021-03-10 16:25:42,405] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S24_fastp.json
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S39_fastp.json'
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S39_fastp.json
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S39_fastp.json
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S39_fastp.json
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S39_fastp.json
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S39_fastp.json
+[2021-03-10 16:25:42,406] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S39_fastp.json
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S28_fastp.json'
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S28_fastp.json
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S28_fastp.json
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S28_fastp.json
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S28_fastp.json
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S28_fastp.json
+[2021-03-10 16:25:42,408] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S28_fastp.json
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S50_fastp.json'
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S50_fastp.json
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S50_fastp.json
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S50_fastp.json
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S50_fastp.json
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S50_fastp.json
+[2021-03-10 16:25:42,410] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S50_fastp.json
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S23_fastp.json'
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S23_fastp.json
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S23_fastp.json
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S23_fastp.json
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S23_fastp.json
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S23_fastp.json
+[2021-03-10 16:25:42,412] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S23_fastp.json
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S46_fastp.json'
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S46_fastp.json
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S46_fastp.json
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S46_fastp.json
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S46_fastp.json
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S46_fastp.json
+[2021-03-10 16:25:42,414] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S46_fastp.json
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S35_fastp.json'
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S35_fastp.json
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S35_fastp.json
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S35_fastp.json
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S35_fastp.json
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S35_fastp.json
+[2021-03-10 16:25:42,416] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S35_fastp.json
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S26_fastp.json'
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S26_fastp.json
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S26_fastp.json
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S26_fastp.json
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S26_fastp.json
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S26_fastp.json
+[2021-03-10 16:25:42,418] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S26_fastp.json
+[2021-03-10 16:25:42,420] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S55_fastp.json'
+[2021-03-10 16:25:42,420] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S55_fastp.json
+[2021-03-10 16:25:42,420] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S55_fastp.json
+[2021-03-10 16:25:42,420] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S55_fastp.json
+[2021-03-10 16:25:42,420] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S55_fastp.json
+[2021-03-10 16:25:42,421] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S55_fastp.json
+[2021-03-10 16:25:42,421] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S55_fastp.json
+[2021-03-10 16:25:42,422] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S30_fastp.json'
+[2021-03-10 16:25:42,422] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S30_fastp.json
+[2021-03-10 16:25:42,423] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S30_fastp.json
+[2021-03-10 16:25:42,423] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S30_fastp.json
+[2021-03-10 16:25:42,423] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S30_fastp.json
+[2021-03-10 16:25:42,423] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S30_fastp.json
+[2021-03-10 16:25:42,423] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S30_fastp.json
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S43_fastp.json'
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S43_fastp.json
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S43_fastp.json
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S43_fastp.json
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S43_fastp.json
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S43_fastp.json
+[2021-03-10 16:25:42,425] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S43_fastp.json
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S48_fastp.json'
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S48_fastp.json
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S48_fastp.json
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S48_fastp.json
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S48_fastp.json
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S48_fastp.json
+[2021-03-10 16:25:42,427] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S48_fastp.json
+[2021-03-10 16:25:42,429] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S44_fastp.json'
+[2021-03-10 16:25:42,429] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S44_fastp.json
+[2021-03-10 16:25:42,429] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S44_fastp.json
+[2021-03-10 16:25:42,429] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S44_fastp.json
+[2021-03-10 16:25:42,429] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S44_fastp.json
+[2021-03-10 16:25:42,430] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S44_fastp.json
+[2021-03-10 16:25:42,430] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S44_fastp.json
+[2021-03-10 16:25:42,431] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S37_fastp.json'
+[2021-03-10 16:25:42,431] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S37_fastp.json
+[2021-03-10 16:25:42,431] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S37_fastp.json
+[2021-03-10 16:25:42,431] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S37_fastp.json
+[2021-03-10 16:25:42,431] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S37_fastp.json
+[2021-03-10 16:25:42,432] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S37_fastp.json
+[2021-03-10 16:25:42,432] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S37_fastp.json
+[2021-03-10 16:25:42,433] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S52_fastp.json'
+[2021-03-10 16:25:42,434] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S52_fastp.json
+[2021-03-10 16:25:42,434] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S52_fastp.json
+[2021-03-10 16:25:42,434] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S52_fastp.json
+[2021-03-10 16:25:42,434] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S52_fastp.json
+[2021-03-10 16:25:42,434] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S52_fastp.json
+[2021-03-10 16:25:42,434] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S52_fastp.json
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S21_fastp.json'
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S21_fastp.json
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S21_fastp.json
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S21_fastp.json
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S21_fastp.json
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S21_fastp.json
+[2021-03-10 16:25:42,436] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S21_fastp.json
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S45_fastp.json'
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S45_fastp.json
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S45_fastp.json
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S45_fastp.json
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S45_fastp.json
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S45_fastp.json
+[2021-03-10 16:25:42,438] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S45_fastp.json
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S36_fastp.json'
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S36_fastp.json
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S36_fastp.json
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S36_fastp.json
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S36_fastp.json
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S36_fastp.json
+[2021-03-10 16:25:42,440] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S36_fastp.json
+[2021-03-10 16:25:42,442] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S53_fastp.json'
+[2021-03-10 16:25:42,442] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S53_fastp.json
+[2021-03-10 16:25:42,442] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S53_fastp.json
+[2021-03-10 16:25:42,442] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S53_fastp.json
+[2021-03-10 16:25:42,442] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S53_fastp.json
+[2021-03-10 16:25:42,442] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S53_fastp.json
+[2021-03-10 16:25:42,443] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S53_fastp.json
+[2021-03-10 16:25:42,444] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S27_fastp.json'
+[2021-03-10 16:25:42,444] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S27_fastp.json
+[2021-03-10 16:25:42,444] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S27_fastp.json
+[2021-03-10 16:25:42,444] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S27_fastp.json
+[2021-03-10 16:25:42,444] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S27_fastp.json
+[2021-03-10 16:25:42,445] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S27_fastp.json
+[2021-03-10 16:25:42,445] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S27_fastp.json
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S54_fastp.json'
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S54_fastp.json
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S54_fastp.json
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S54_fastp.json
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S54_fastp.json
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S54_fastp.json
+[2021-03-10 16:25:42,446] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S54_fastp.json
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S31_fastp.json'
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S31_fastp.json
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S31_fastp.json
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S31_fastp.json
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S31_fastp.json
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S31_fastp.json
+[2021-03-10 16:25:42,448] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S31_fastp.json
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S42_fastp.json'
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S42_fastp.json
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S42_fastp.json
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S42_fastp.json
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S42_fastp.json
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S42_fastp.json
+[2021-03-10 16:25:42,450] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S42_fastp.json
+[2021-03-10 16:25:42,451] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S49_fastp.json'
+[2021-03-10 16:25:42,451] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S49_fastp.json
+[2021-03-10 16:25:42,451] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S49_fastp.json
+[2021-03-10 16:25:42,452] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S49_fastp.json
+[2021-03-10 16:25:42,452] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S49_fastp.json
+[2021-03-10 16:25:42,452] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S49_fastp.json
+[2021-03-10 16:25:42,452] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S49_fastp.json
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S29_fastp.json'
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S29_fastp.json
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S29_fastp.json
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S29_fastp.json
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S29_fastp.json
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S29_fastp.json
+[2021-03-10 16:25:42,453] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S29_fastp.json
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S51_fastp.json'
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S51_fastp.json
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S51_fastp.json
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S51_fastp.json
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S51_fastp.json
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S51_fastp.json
+[2021-03-10 16:25:42,455] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S51_fastp.json
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S22_fastp.json'
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S22_fastp.json
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S22_fastp.json
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S22_fastp.json
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S22_fastp.json
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S22_fastp.json
+[2021-03-10 16:25:42,457] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S22_fastp.json
+[2021-03-10 16:25:42,458] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S47_fastp.json'
+[2021-03-10 16:25:42,459] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S47_fastp.json
+[2021-03-10 16:25:42,459] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S47_fastp.json
+[2021-03-10 16:25:42,459] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S47_fastp.json
+[2021-03-10 16:25:42,459] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S47_fastp.json
+[2021-03-10 16:25:42,459] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S47_fastp.json
+[2021-03-10 16:25:42,459] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S47_fastp.json
+[2021-03-10 16:25:42,460] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S34_fastp.json'
+[2021-03-10 16:25:42,460] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S34_fastp.json
+[2021-03-10 16:25:42,460] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S34_fastp.json
+[2021-03-10 16:25:42,460] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S34_fastp.json
+[2021-03-10 16:25:42,460] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S34_fastp.json
+[2021-03-10 16:25:42,460] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S34_fastp.json
+[2021-03-10 16:25:42,461] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S34_fastp.json
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S33_fastp.json'
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S33_fastp.json
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S33_fastp.json
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S33_fastp.json
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S33_fastp.json
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S33_fastp.json
+[2021-03-10 16:25:42,462] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S33_fastp.json
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S40_fastp.json'
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S40_fastp.json
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S40_fastp.json
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S40_fastp.json
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S40_fastp.json
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S40_fastp.json
+[2021-03-10 16:25:42,464] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S40_fastp.json
+[2021-03-10 16:25:42,465] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S25_fastp.json'
+[2021-03-10 16:25:42,465] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S25_fastp.json
+[2021-03-10 16:25:42,465] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S25_fastp.json
+[2021-03-10 16:25:42,466] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S25_fastp.json
+[2021-03-10 16:25:42,466] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S25_fastp.json
+[2021-03-10 16:25:42,466] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S25_fastp.json
+[2021-03-10 16:25:42,466] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S25_fastp.json
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  fastp JSON did not have a 'adapter_cutting' key, skipping: 'S38_fastp.json'
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  Could not calculate 'pct_adapter': S38_fastp.json
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  No insert size plot data: S38_fastp.json
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_before_filtering not found: S38_fastp.json
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_before_filtering not found: S38_fastp.json
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  Read quality read2_after_filtering not found: S38_fastp.json
+[2021-03-10 16:25:42,467] multiqc.modules.fastp.fastp                        [DEBUG  ]  Content curve data read2_after_filtering not found: S38_fastp.json
+[2021-03-10 16:25:42,468] multiqc.modules.fastp.fastp                        [INFO   ]  Found 35 reports
+[2021-03-10 16:25:42,495] multiqc                                            [DEBUG  ]  No samples found: fastqc
+[2021-03-10 16:25:42,499] multiqc                                            [DEBUG  ]  No samples found: pycoqc
+[2021-03-10 16:25:42,502] multiqc                                            [DEBUG  ]  No samples found: minionqc
+[2021-03-10 16:25:42,504] multiqc                                            [DEBUG  ]  No samples found: multivcfanalyzer
+[2021-03-10 16:25:42,507] multiqc                                            [DEBUG  ]  No samples found: clusterflow
+[2021-03-10 16:25:42,510] multiqc                                            [DEBUG  ]  No samples found: bcl2fastq
+[2021-03-10 16:25:42,512] multiqc                                            [DEBUG  ]  No samples found: interop
+[2021-03-10 16:25:42,515] multiqc                                            [DEBUG  ]  No samples found: ivar
+[2021-03-10 16:25:42,517] multiqc                                            [DEBUG  ]  No samples found: flash
+[2021-03-10 16:25:42,520] multiqc                                            [DEBUG  ]  No samples found: seqyclean
+[2021-03-10 16:25:42,553] multiqc                                            [INFO   ]  Compressing plot data
+[2021-03-10 16:25:43,156] multiqc                                            [INFO   ]  Report      : results/multiqc_report.html
+[2021-03-10 16:25:43,156] multiqc                                            [INFO   ]  Data        : results/multiqc_data
+[2021-03-10 16:25:43,156] multiqc                                            [DEBUG  ]  Moving data file from '/tmp/tmpt_oiqvv6/multiqc_data' to 'results/multiqc_data'
+[2021-03-10 16:25:43,271] multiqc                                            [INFO   ]  MultiQC complete

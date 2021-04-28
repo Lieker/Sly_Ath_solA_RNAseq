@@ -1,0 +1,39 @@
+---
+# directories
+result_dir:  results/ # should be kept
+working_dir: temp/    # can be removed (temporary files)
+
+# samples to condition
+units: config/samples.tsv
+
+# refs 
+refs:
+  genome:  "config/refs/arabidopsis/GCA_000001735.2_TAIR10.1_genomic.fna" 
+  gtf:     "config/refs/arabidopsis/Araport11_GTF_genes_transposons.Mar92021.gtf"
+
+# read quality trimming
+fastp:
+  qualified_quality_phred: 30 # Phred+33 score (> 15 for Proton Ion, > 30 or more for Illumina) 
+
+
+######
+# STAR
+######
+
+# genome index step
+star_index:
+  sjdbOverhang: 100                     # as recommended in STAR manual https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf
+  limitGenomeGenerateRAM: 100000000000  # maximum available RAM (bytes) default is 31000000000 bytes = 31Gb
+  genomeSAindexNbases: 13               # 13 is optimal for tomato genome (around 1Gb)
+                          
+# alignment step
+star:
+  samtype:                'BAM SortedByCoordinate' # type of output
+  mismatches:             '4'                      # alignment will be output only if it has less mismatches than this number
+  unmapped:               'None'                   # 'None' or 'Fastx' (to output fastq files of unmapped reads)
+  multimappers:           '10'                     # N number of loci the read is allowed to map to
+  matchminoverlengthread: '0.66'                   # alignment will be output if percentage of read length is higher than this value (66% of 2x100bp = 132 nucleotides) 
+  intronmax:              '25000'                  # max intron in tomato genome is 22,729
+  matesgap:               '20000'                  # max length between mates 
+  samattributes:          'NH HI AS nM MD'         # SAM attributes (by default only NH HI AS nM). See STAR manual
+
