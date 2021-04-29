@@ -2,8 +2,8 @@ library(mixOmics)
 source("scripts/filter_counts_vst_based_on_treatment.R")
 source("scripts/get_xp_design.R")
 
-do_plsda_perf <- function(xp_design_csv_file = "inputs/xp_design.csv",
-                     counts_csv_file = "inputs/counts.csv",
+do_plsda_perf <- function(xp_design_csv_file = "input/xp_design.csv",
+                     counts_csv_file = "input/counts.csv",
                      trtm = c("a","b","c","d","e","f","g"),
                      n = 999) 
   {

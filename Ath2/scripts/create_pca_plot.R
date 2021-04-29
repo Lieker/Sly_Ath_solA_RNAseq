@@ -1,5 +1,5 @@
-plot_pca <- function(count_csv_file = "Ath2/inputs/counts.csv",
-                     xp_design_csv_file = "Ath2/inputs/xp_design.csv",
+plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
+                     xp_design_csv_file = "Ath2/input/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      trm = c("a","b","c","d","e","f","g"),

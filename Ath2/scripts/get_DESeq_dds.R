@@ -3,8 +3,8 @@ library(tidyr)
 library(tibble)
 source("Ath2/scripts/get_xp_design.R")
 
-get_DESeq_dds <- function(counts_csv_file = "Ath2/inputs/counts.csv",
-                          xp_design_csv_file = "Ath2/inputs/xp_design.csv",
+get_DESeq_dds <- function(counts_csv_file = "Ath2/input/counts.csv",
+                          xp_design_csv_file = "Ath2/input/xp_design.csv",
                           trtm = c("a","b"),
                           ref_treatment = "a",
                           treatment2 = "b",

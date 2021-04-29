@@ -3,8 +3,8 @@ library(org.At.tair.db)
 source("Ath2/scripts/get_annotated_DEGs.R")
 source("Ath2/scripts/get_Athaliana_annotations.R")
 
-GO_annotation_list <- function(counts_csv_file = "Ath2/inputs/counts.csv",
-                               xp_design_csv_file = "Ath2/inputs/xp_design.csv",
+GO_annotation_list <- function(counts_csv_file = "Ath2/input/counts.csv",
+                               xp_design_csv_file = "Ath2/input/xp_design.csv",
                                trtm = c("a","b"),
                                ref_treatment = "a",
                                treatment2 = "b",
@@ -21,7 +21,7 @@ GO_annotation_list <- function(counts_csv_file = "Ath2/inputs/counts.csv",
                                name = "Ath2/outputs/annotated_DEGslist.csv",
                                method2 = "DEG", #this parameter chooses if DEGs will be analysed or a comparison with LRT will be made
                                ont = "BP", #can be either BP, CC or MF
-                               namego = "Ath2/outputs/GOannotationslist.csv",
+                               namego = "Ath2/output/GOannotationslist.csv",
                                plottype,
                                n = 30
                                ) {
@@ -38,7 +38,9 @@ GO_annotation_list <- function(counts_csv_file = "Ath2/inputs/counts.csv",
                                       attr, 
                                       name,
                                       method2)
-  go <- enrichGO(gene = res_annotated$entrezgene_id, 
+  entrezgene_ids <- unique(res_annotated$entrezgene_id)
+  entrezgene_ids <- na.omit(entrezgene_ids)
+  go <- enrichGO(gene = entrezgene_ids, 
                  universe = all_Ath_genes_annotated$entrezgene_id, 
                  OrgDb = org.At.tair.db,  # contains the TAIR/Ensembl id to GO correspondence for A. thaliana
                  keyType = "ENTREZID",

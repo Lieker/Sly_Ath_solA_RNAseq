@@ -2,7 +2,7 @@ library(tidyr)
 library(dplyr)
 library(tidyverse)
 
-filter_raw_counts <- function(counts_csv_file = 'inputs/counts.csv', 
+filter_raw_counts <- function(counts_csv_file = 'input/counts.csv', 
                               trtm = c("a","b","c","d","e","f","g")) {
   # read and filter xp design info for selected time
   xp_design <- get_xp_design()

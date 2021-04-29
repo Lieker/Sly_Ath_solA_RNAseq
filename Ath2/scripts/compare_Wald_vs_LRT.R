@@ -1,5 +1,5 @@
-compare_wald_vs_LRT <- function(counts_csv_file = "Ath2/inputs/counts.csv",
-                                xp_design_csv_file = "Ath2/inputs/xp_design.csv",
+compare_wald_vs_LRT <- function(counts_csv_file = "Ath2/input/counts.csv",
+                                xp_design_csv_file = "Ath2/input/xp_design.csv",
                                 trtm = c("a","b"),
                                 ref_treatment = "a",
                                 treatment2 = "b",

@@ -4,8 +4,8 @@ library(tidyr)
 library(tidyverse)
 source("scripts/get_xp_design.R")
 
-get_list_of_DEGs <- function(counts_csv_file = "inputs/counts.csv",
-                             xp_design_csv_file = "inputs/xp_design.csv",
+get_list_of_DEGs <- function(counts_csv_file = "input/counts.csv",
+                             xp_design_csv_file = "input/xp_design.csv",
                              trtm = c("a","b"),
                              ref_treatment = "a",
                              treatment2 = "b",

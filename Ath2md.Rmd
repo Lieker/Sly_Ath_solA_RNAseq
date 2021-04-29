@@ -155,11 +155,11 @@ if ("reshape" %in% installed.packages()){
   install.packages("reshape")
   library("reshape")
 }
-if ("DEGreport" %in% installed.packages()){
-  library("DEGreport") 
+if ("pheatmap" %in% installed.packages()){
+  library("pheatmap") 
 } else {
-  BiocManager::install("DEGreport")
-  library("DEGreport")
+  BiocManager::install("pheatmap")
+  library("pheatmap")
 }
 ```
 
@@ -172,8 +172,8 @@ source("Ath2/scripts/create_pca_plot.R")
 
 Run the function with default settings, which is
 ```{r, eval = FALSE}
-plot_pca <- function(count_csv_file = "Ath2/inputs/counts.csv",
-                     xp_design_csv_file = "~Ath2/inputs/xp_design.csv",
+plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
+                     xp_design_csv_file = "~Ath2/input/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      trm = c("a","b","c","d","e","f","g"),
@@ -194,7 +194,7 @@ p4 <- plot_pca(pca_colour = "P")
 (p1 | p2) / (p3 | p4)
 ```
 
-This figure is saved as PCAplot_PC1PC2_allsamples.jpeg
+From this figure, it is clear that the most variation is explained by the N condition. This figure is saved as PCAplot_PC1PC2_allsamples.jpeg.
 
 There is no good separation based on treatment or solA supply. Therefore, check also PC3 and PC4
 ```{r}
@@ -251,7 +251,7 @@ These two histograms are saved as histogram_counts_beforefilter.jpeg and histogr
 
 However, this experiment is based on pair-wise comparisons. We have different nutritional conditions (no starvation, only P starvation, N+P starvation) and within these conditions we compare the effect of adding solA. There could be an effect of solA in one condition, but not in the others. Therefore, it makes sense to look whether samples within conditions cluster based on solA treatment.
 ```{r}
-p1 <- plot_pca(trm = c("a","b")) + ggtitle("No starvation")
+p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", trm = c("a","b")) + ggtitle("No starvation")
 p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", trm = c("c","d")) + ggtitle("Only P starvation")
 p3 <- plot_pca(trm = c("e","f")) + ggtitle("N+P starvation")
 
@@ -259,7 +259,7 @@ p1 + p2 + p3 + plot_layout(ncol = 2)
 ```
 
 This plot was saved as PCAplots_showing_clustering_solA.jpeg
-In these plots, the clustering based on solA treatment is better.
+In these plots, the clustering based on solA treatment is better. Especially for N+P starvation, where the clustering is visible on the axis of PC2.
 
 Check scree plot of all nutritional conditions.
 ```{r}
@@ -275,7 +275,7 @@ p1 + p2 + p3 + plot_layout(ncol = 2)
 
 ## Wald test
 
-Taking into account all samples, regardless of nutritional condition, check the amount of DEGs comparing solA yes vs no. The design of the DESeq formula is set to ~ N + P + solA
+Taking into account all samples, regardless of nutritional condition, check the amount of DEGs comparing solA yes vs no. The design of the DESeq formula is set to ~ N + P + solA.
 ```{r}
 source("Ath2/scripts/volcanoplot.R")
 ```
@@ -291,25 +291,156 @@ The resulting volcanoplot is shown here:
 make_volcanoplot(trtm = c("a","b","c","d","e","f","g"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "All treatments, solA treatment (taking into acc N:solA), Wald", method = "N:solA+solA", xsize = 2)
 ```
 
-It seems that there are barely any DEGs that are caused by solA alone, if we take into account the interaction between solA and N. So, let's find out which DEGs come up if we only look at factor N:solA.
+It seems that there are no DEGs that are caused by solA alone. So, let's find out which DEGs come up if we only look at factor N:solA.
 We can completely and only focus on the N:solA interaction (making the design formula ~N + P + N:solA):
 ```{r, warning = FALSE, message = FALSE}
 make_volcanoplot(trtm = c("a","b","c","d","e","f","g"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "All treatments, N:solA treatment, Wald", method = "N:solA", xsize = 2)
 ```
 
-Now there are actually some DEGs.
+Now there are a few DEGs.
 
-Also do this analysis for the within nutritional condition comparison. In this case, the design formula is set to ~ treatment (N and P are not relevant anymore - will even give an error - because you compare samples that have the same N and P)
+But it probably makes more sense to do the comparison yes/no solA within nutritional conditions.
+
+So, do this analysis for the within nutritional condition comparison. In this case, the design formula is set to ~ treatment (N and P are not relevant anymore - will even give an error - because you compare samples that have the same N and P).
 ```{r, warning = FALSE, message = FALSE}
-make_volcanoplot(log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "No starvation, solA treatment")
-make_volcanoplot(trtm = c("c", "d"), ref_treatment = "d", treatment2 = "c", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "P starvation, +N, solA treatment")
-make_volcanoplot(trtm = c("e", "f"), ref_treatment = "f", treatment2 = "e", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "N+P starvation, solA treatment")
+p1 <- make_volcanoplot(log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "No starvation, solA treatment")
+p2 <- make_volcanoplot(trtm = c("c", "d"), ref_treatment = "d", treatment2 = "c", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "P starvation, +N, solA treatment")
+p3 <- make_volcanoplot(trtm = c("e", "f"), ref_treatment = "f", treatment2 = "e", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, xsize = 1.5, ttl = "N+P starvation, solA treatment")
+p1  
+p2
+p3
 ```
 
+There are most DEGs under N+P starvation, followed by No starvation, and then only P starvation.
+
+## Heatmaps
+
+Another way of visualising clustering is with a heatmap.
+First, we have to extract the list of DEGs, filtered for Padj<0.05. Then we take those vst_transformed counts and plot the heatmap with pheatmap. 
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+source("Ath2/scripts/get_filtered_list_of_DEGs.R")
+x <- get_list_of_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/produce_scaled_counts_matrix.R")
+y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+xp_design <- xp_design %>% column_to_rownames("sample")
+p1 <- pheatmap(DEG_counts, 
+         gaps_col = c(5,10,15,20,25,30),
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row")
+p2 <- pheatmap(DEG_counts, 
+         gaps_col = c(5,10,15,20,25,30),
+         cluster_rows = TRUE,                      
+         cluster_cols = TRUE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row")
+```
+In p1, samples are clustered according to sample group (treatment). The treatments with solA are showing an overlapping pattern versus the treatments without solA.
+In p2, samples are clustered according to similarity in gene expression. In this heatmap it is clear that samples from group f (S46, 47, 48, 49, 50), wich is N+P starvation + solA, cluster far away from the rest, including the same nutritional conditions without solA (S41 - S45). Hence, solA treatment mostly affects N+P starved plants.
+
+We can try the same but then with only the genes that are DE according to the model ~N+P+N:solA.
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+x <- get_list_of_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+
+y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+xp_design <- xp_design %>% column_to_rownames("sample")
+p <- pheatmap(DEG_counts, 
+         gaps_col = c(5,10,15,20,25,30),
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA)
+p
+```
+We see roughly the same pattern as in the previous heatmap (p1), but with less genes (since there were less DEGs with this model).
+
+We can also draw the heatmaps for within nutritional conditions.
+First for the 'No starvation' condition.
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+x <- get_list_of_DEGs(trtm = c("a","b"), ref_treatment = "b", treatment2 = "a", method = "treatment", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/filter_counts_based_on_treatment.R")
+y <- filter_counts_based_on_treatment(tr = c("a","b")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+p <- pheatmap(DEG_counts, 
+         gaps_col = 5,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA)
+p
+```
+
+Then for the 'Only P starvation' condition:
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+x <- get_list_of_DEGs(trtm = c("c","d"), ref_treatment = "d", treatment2 = "c", method = "treatment", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/filter_counts_based_on_treatment.R")
+y <- filter_counts_based_on_treatment(tr = c("c","d")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+p <- pheatmap(DEG_counts, 
+         gaps_col = 5,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA)
+p
+```
+
+And lastly, for the "N+P starvation" treatment:
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+
+x <- get_list_of_DEGs(trtm = c("e","f"), ref_treatment = "f", treatment2 = "e", method = "treatment", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/filter_counts_based_on_treatment.R")
+y <- filter_counts_based_on_treatment(tr = c("e","f")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+p <- pheatmap(DEG_counts, 
+         gaps_col = 5,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA)
+p
+```
+
+From these heatmaps it is inferred that the treatment with solA leads mostly to down regulation of genes, in all nutritional conditions.
 
 ## Likelihood Ratio Test (LRT)
 
-Let's compare the DEGs from the Wald test with the LRT (Likelihood Ratio Test) for verification.To start with, let's take into account all samples and see if LRT detects any DEGs based on solA treatment.
+Let's compare the DEGs from the Wald test with the LRT (Likelihood Ratio Test) for verification. To start with, let's take into account all samples and see if LRT detects any DEGs based on solA treatment.
 ```{r}
 source("Ath2/scripts/compare_Wald_vs_LRT.R")
 ```
@@ -319,12 +450,21 @@ The output table of this function gives all the genes that overlap between the W
 compare_wald_vs_LRT(trtm = c("a","b","c","d","e","f","g"), method = "solA")
 ```
 
-Let's see if the other model we used for the Wald test are also verified by LRT: the model ~N+P+N:solA. How many DEGs are caused by the interaction between N and solA? (reduced model ~N+P)
+Both methods result in around the same number of DEGs and most genes are overlapping, which is a good indication for this model.
+Let's see if the other models we used for the Wald test are also verified by LRT. 
+The model ~N+P+N:solA+solA (reduced model ~N+P+N:solA):
+```{r, eval = FALSE}
+compare_wald_vs_LRT(trtm = c("a","b","c","d","e","f","g"), method = "N:solA+solA")
+```
+
+This model cannot be evaluated by LRT because it has less than one degree of freedom.
+
+The model ~N+P+N:solA. How many DEGs are caused by the interaction between N and solA? (reduced model ~N+P)
 ```{r, warning = FALSE, message = FALSE}
 compare_wald_vs_LRT(trtm = c("a","b","c","d","e","f","g"), method = "N:solA")
 ```
 
-LRT gives many more DEGs and nearly all of the Wald test are in this list. So this model gives us a reliable set of DEGs.
+LRT gives many more DEGs but all of the Wald test are in this list. So this model gives us a reliable set of DEGs.
 
 Let's do the same for the pairwise comparisons within the nutritional conditions. The formulae for the LRT are ~1 (null model) and ~treatment (full model), because we select method = "treatment". This same full model is used for the Wald test.
 ```{r, warning = FALSE, message = FALSE}
@@ -336,13 +476,14 @@ compare_wald_vs_LRT(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", me
 compare_wald_vs_LRT(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment")
 ```
 
-Let's visualise these results in a bar plot:
+For the 'No starvation' treatment, there is no difference at all between LRT and Wald test. For the "only P starvation" treatment, there is only a small difference. For the "N+P starvation" treatment, the total DEGs is highest and 30 more DEGs are found with the Wald test, and overlap is high.
+Let's visualize these results in a bar plot:
 
 ```{r}
-samples <- c("all samples","no starvation","only P starvation","N+P starvation")
-Wald <- c(630,77,45,395)
-LRT <- c(612,76,46,355)
-overlap <- c(604,76,45,355)
+samples <- c("all samples, ~N+P+solA","all samples, ~N+P+N:solA" ,"no starvation","only P starvation","N+P starvation")
+Wald <- c(866,139,107,56,462)
+LRT <- c(844,791,107,50,432)
+overlap <- c(841,139,107,50,432)
 x <- data.frame(samples, Wald, LRT, overlap)
 x <- melt(x)
 ggplot(data = x,
@@ -365,21 +506,9 @@ ggplot(data = x,
 
 ## Finding groups of co-expressed (clustering) genes across samples
 
-We use DEGpatterns package to find clustering genes across samples. We use the complete Ath2 dataset for this to find genes that express according to a certain pattern over the sample groups.
-First, we have to extract the list of DEGs, filtered for Padj<0.05. Then we take our vst_transformed counts, only from the significantly DEGs.
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-#DOES NOT WORK
-x <- get_list_of_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA", log2FC_threshold = 0)
-x <- x %>% rownames_to_column("genes")
-source("Ath2/scripts/produce_scaled_counts_matrix.R")
-y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
-DEG_counts <- left_join(x, y, by="genes") 
-DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
-DEG_counts <- DEG_counts %>% column_to_rownames("genes")
-xp_design <- xp_design %>% column_to_rownames("sample")
-clusters <- degPatterns(DEG_counts, metadata = xp_design, time = "solA")
-clusters$plot
-```
+
+
+
 
 
 # Annotation of DEGs
@@ -400,7 +529,8 @@ Then, let's see if there are any GO terms enriched for these genes. The .csv fil
 source("Ath2/scripts/GO_annotation_list.R")
 ```
 ```{r message=FALSE, warning=FALSE}
-GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "bar")
+g <-GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "bar")
+g
 ```
 
 It is also possible to see the relationships between GO terms that are enriched:
@@ -432,3 +562,4 @@ GO_annotation_list(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", met
 x <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment")
 GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "bar")
 GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "go")
+```
