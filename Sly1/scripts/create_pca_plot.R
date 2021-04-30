@@ -1,13 +1,13 @@
-plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
-                     xp_design_csv_file = "inputs/xp_design.csv",
+plot_pca <- function(count_csv_file = "Sly1/input/counts.csv",
+                     xp_design_csv_file = "Sly1/input/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      plantpart = "root",
                      pca_colour = "treatment") {
   
-  source("scripts/produce_scaled_counts_matrix.R")
-  source("scripts/filter_counts_based_on_compartment.R")
-  source("scripts/extract_variance.R")
+  source("Sly1/scripts/produce_scaled_counts_matrix.R")
+  source("Sly1/scripts/filter_counts_based_on_compartment.R")
+  source("Sly1/scripts/extract_variance.R")
   
   produce_score_df <- function(counts = filtered_counts, 
                                xp_design_csv_file) {
@@ -48,7 +48,7 @@ plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
   # compute PCA and return scores as a dataframe with additional XP info
   # also returns explained variance per component 
    score_df <- produce_score_df(counts = filtered_counts, 
-                               xp_design_csv_file = "inputs/xp_design.csv")
+                               xp_design_csv_file = "Sly1/input/xp_design.csv")
   
   
   explained_variance_per_component <- extract_explained_variance_per_component(counts = filtered_counts) 

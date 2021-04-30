@@ -1,27 +1,26 @@
-library(mixOmics)
-source("scripts/filter_counts_based_on_compartment.R")
-source("scripts/get_xp_design.R")
-source("scripts/perf_plsda.R")
+source("Sly1/scripts/filter_counts_based_on_compartment.R")
+source("Sly1/scripts/get_xp_design.R")
+source("Sly1/scripts/perf_plsda.R")
 
-do_plsda <- function(xp_design_csv_file = "inputs/xp_design.csv",
-                     counts_csv_file = "inputs/raw_counts.csv",
+do_plsda <- function(xp_design_csv_file = "Sly1/input/xp_design.csv",
+                     counts_csv_file = "Sly1/input/raw_counts.csv",
                      plantpart = "root",
-                     nr = 999) {
+                     nc, #evaluate the performance of this pls-da to determine the nc
+                     ttl = "") {
   xp_design <- get_xp_design()
   
-  xp_design_f <- xp_design[xp_design$organ == plantpart,]
+  xp_design_f <- xp_design[xp_design$compartment %in% plantpart,]
   
-  filtered_counts_vst_t <- filter_counts_based_on_compartment(counts_csv_file, comprtmt = plantpart) %>% data.matrix()
+  filtered_counts_vst_t <- filter_counts_based_on_compartment(comprtmt = plantpart) %>% data.matrix()
   
-  nc <- do_plsda_perf(xp_design_csv_file, counts_csv_file, plantpart, n = nr)
-  
-  q <- plsda(filtered_counts_vst_t, xp_design_f$organ, ncomp = nc)
+  q <- plsda(filtered_counts_vst_t, xp_design_f$treatment, ncomp = nc)
   
   r <- plotIndiv(q,
                  comp = 1:2,
                  group = xp_design_f$treatment,
                  ind.names = FALSE,
                  legend = TRUE,
-                 ellipse = TRUE)
+                 ellipse = TRUE,
+                 title = ttl)
   return(r)
 }

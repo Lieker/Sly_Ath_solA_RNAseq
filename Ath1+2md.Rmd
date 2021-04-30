@@ -141,12 +141,12 @@ The goal of this analysis is to identify genes that are activated by treatment w
 Let's start with PCA analysis.
 ```{r}
 source("Ath2/scripts/create_pca_plot.R")
-p1 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
-               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+p1 <- plot_pca(count_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
                trm = c("solAno", "solAyes"),
                pca_colour = "treatment")
-p2 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
-               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+p2 <- plot_pca(count_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
                trm = c("solAno", "solAyes"),
                pca_colour = "experiment") 
 p1 / p2
@@ -155,14 +155,14 @@ p1 / p2
 Clearly, the biggest influence is caused by the batch effect of these experiments.
 Check if any solA effect is visible in PC3 and PC4:
 ```{r}
-p1 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
-               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+p1 <- plot_pca(count_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
                trm = c("solAno", "solAyes"),
                pca_colour = "treatment",
                pc_x_axis = "PC3", 
                pc_y_axis = "PC4")
-p2 <- plot_pca(count_csv_file = "Ath2/inputs/counts_Ath12.csv",
-               xp_design_csv_file = "Ath2/inputs/xp_design_Ath12.csv",
+p2 <- plot_pca(count_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
                trm = c("solAno", "solAyes"),
                pca_colour = "experiment",
                pc_x_axis = "PC3", 
@@ -171,3 +171,50 @@ p1 / p2
 ```
 
 The answer is no.
+
+```{r}
+p1 <- plot_pca(count_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
+               trm = c("solAno", "solAyes"),
+               pca_colour = "treatment",
+               pc_x_axis = "PC5", 
+               pc_y_axis = "PC6")
+p2 <- plot_pca(count_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
+               trm = c("solAno", "solAyes"),
+               pca_colour = "experiment",
+               pc_x_axis = "PC5", 
+               pc_y_axis = "PC6") 
+p1 / p2
+```
+
+
+Still, we can account for experiment number in the design formula. Let's see if we get any overlapping DEGs.
+
+```{r}
+source("Ath2/scripts/volcanoplot.R")
+make_volcanoplot(counts_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
+               trtm = c("solAno", "solAyes"),
+               ref_treatment = "solAno",
+               treatment2 = "solAyes",
+               method = "Ath12",
+               FCcutoff_volcano = 1,
+               xsize = 5,
+               ttl = "DEGs from Ath1 and Ath2ab combined",
+               padj_threshold = 0.05)
+
+```
+
+There are a few significantly upregulated genes.
+Let's see what they are.
+
+```{r}
+source("Ath2/scripts/get_annotated_DEGs.R")
+w <- get_annotated_DEGs(counts_csv_file = "Ath2/input/counts_Ath12.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_Ath12.csv",
+               trtm = c("solAno", "solAyes"),
+               ref_treatment = "solAno",
+               treatment2 = "solAyes",
+               method = "Ath12")
+```

@@ -1,16 +1,16 @@
-plot_scree <- function(count_csv_file = "inputs/counts.csv",
-                       xp_design_csv_file = "inputs/xp_design.csv",
-                       trm = c("a","b","c","d","e","f","g")
+plot_scree <- function(count_csv_file = "Sly1/input/counts.csv",
+                       xp_design_csv_file = "Sly1/input/xp_design.csv",
+                       comp = "root"
 )
   {
-  source("scripts/filter_counts_based_on_treatment.R")
-  source("scripts/pca_function.R")
+  source("Sly1/scripts/filter_counts_based_on_compartment.R")
+  source("Sly1/scripts/pca_function.R")
   scaled_counts = produce_scaled_counts_matrix(count_csv_file = count_csv_file,
                                                xp_design_csv_file = xp_design_csv_file)
     
-  filtered_counts <- filter_counts_based_on_treatment(counts = scaled_counts, 
+  filtered_counts <- filter_counts_based_on_compartment(counts = scaled_counts, 
                                                       xp_design_csv_file = xp_design_csv_file, 
-                                                      tr = trm)
+                                                      comprtmt = comp)
   pca_results <- mypca(x = filtered_counts)
   
   s <- ggplot(pca_results$explained_var, 

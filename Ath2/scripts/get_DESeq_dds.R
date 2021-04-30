@@ -32,6 +32,9 @@ get_DESeq_dds <- function(counts_csv_file = "Ath2/input/counts.csv",
   } else if (method == "N:solA"){
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
     dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + N:solA)
+  } else if (method == "Ath12"){
+    counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ experiment + treatment)
   } else{print("no valid method selected")}
 
   dds <- DESeq(dds)

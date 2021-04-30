@@ -1,4 +1,4 @@
-get_xp_design <- function(xp_design_csv_file = "inputs/xp_design.csv") {
+get_xp_design <- function(xp_design_csv_file = "Sly1/input/xp_design.csv") {
   xp_design <<- read.csv(file = xp_design_csv_file, 
                         header = TRUE, 
                         stringsAsFactors = FALSE, 

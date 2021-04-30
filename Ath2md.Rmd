@@ -317,7 +317,7 @@ There are most DEGs under N+P starvation, followed by No starvation, and then on
 
 Another way of visualising clustering is with a heatmap.
 First, we have to extract the list of DEGs, filtered for Padj<0.05. Then we take those vst_transformed counts and plot the heatmap with pheatmap. 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 source("Ath2/scripts/get_filtered_list_of_DEGs.R")
 x <- get_list_of_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")
@@ -333,20 +333,23 @@ p1 <- pheatmap(DEG_counts,
          cluster_cols = FALSE, 
          show_rownames = FALSE, 
          show_colnames = TRUE,
-         scale = "row")
-p2 <- pheatmap(DEG_counts, 
-         gaps_col = c(5,10,15,20,25,30),
+         scale = "row",
+         main = "All samples; unclustered")
+p2 <- pheatmap(DEG_counts,
          cluster_rows = TRUE,                      
          cluster_cols = TRUE, 
          show_rownames = FALSE, 
          show_colnames = TRUE,
-         scale = "row")
+         scale = "row",
+         main = "All samples; clustered")
+p1
+p2
 ```
-In p1, samples are clustered according to sample group (treatment). The treatments with solA are showing an overlapping pattern versus the treatments without solA.
-In p2, samples are clustered according to similarity in gene expression. In this heatmap it is clear that samples from group f (S46, 47, 48, 49, 50), wich is N+P starvation + solA, cluster far away from the rest, including the same nutritional conditions without solA (S41 - S45). Hence, solA treatment mostly affects N+P starved plants.
+In the unclustered heatmap, samples are clustered according to sample group (treatment). The treatments with solA are showing an overlapping pattern versus the treatments without solA.
+In the clustered heatmap, samples are clustered according to similarity in gene expression. In this heatmap it is clear that samples from group f (S46, 47, 48, 49, 50), which is N+P starvation + solA, cluster far away from the rest, including the same nutritional conditions without solA (S41 - S45). Hence, solA treatment mostly affects N+P starved plants.
 
 We can try the same but then with only the genes that are DE according to the model ~N+P+N:solA.
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 x <- get_list_of_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")
@@ -356,7 +359,8 @@ DEG_counts <- left_join(x, y, by="genes")
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
-p <- pheatmap(DEG_counts, 
+
+pheatmap(DEG_counts, 
          gaps_col = c(5,10,15,20,25,30),
          cluster_rows = TRUE,                      
          cluster_cols = FALSE, 
@@ -364,13 +368,13 @@ p <- pheatmap(DEG_counts,
          show_colnames = TRUE,
          scale = "row",
          border_color = NA)
-p
+
 ```
 We see roughly the same pattern as in the previous heatmap (p1), but with less genes (since there were less DEGs with this model).
 
 We can also draw the heatmaps for within nutritional conditions.
 First for the 'No starvation' condition.
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 x <- get_list_of_DEGs(trtm = c("a","b"), ref_treatment = "b", treatment2 = "a", method = "treatment", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")
@@ -392,7 +396,7 @@ p
 ```
 
 Then for the 'Only P starvation' condition:
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 x <- get_list_of_DEGs(trtm = c("c","d"), ref_treatment = "d", treatment2 = "c", method = "treatment", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")
@@ -415,7 +419,7 @@ p
 
 And lastly, for the "N+P starvation" treatment:
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE}
 
 x <- get_list_of_DEGs(trtm = c("e","f"), ref_treatment = "f", treatment2 = "e", method = "treatment", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")

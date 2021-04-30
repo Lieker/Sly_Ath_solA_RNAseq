@@ -20,7 +20,8 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                                         "athaliana_eg_homolog_ensembl_gene",
                                         "athaliana_eg_homolog_associated_gene_name",
                                         "external_gene_name",
-                                        "athaliana_eg_homolog_perc_id")
+                                        "athaliana_eg_homolog_perc_id"),
+                               method
                                ) {
   res <- get_list_of_DEGs(counts_csv_file, 
                          xp_design_csv_file, 
@@ -28,7 +29,8 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                          ref_treatment, 
                          treatment2, 
                          log2FC_threshold, 
-                         padj_threshold) %>% rownames_to_column("gene")
+                         padj_threshold,
+                         method) %>% rownames_to_column("gene")
    
   annotations <- get_Slycopersicum_annotations(attr = attr)
   res_annotated <- left_join(res, annotations, by = "gene")

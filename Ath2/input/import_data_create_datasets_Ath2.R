@@ -7,22 +7,14 @@ setwd("C:/Users/levla/github/Ath_RNAseq/Ath2")
 #-----------------------------------------------------------------------------------------------------
 
 #make dds dataset for complete dataset (all samples included)
-counts_raw <- read.delim("inputs/counts_Ath2.txt", header = F, stringsAsFactors = F)
-counts <- counts_raw[-c(1),]
-headers <- counts[1,]
-counts <- counts[-c(1),]
-genes <- counts[,1]
-counts <- counts[,-1]
-genes <- str_replace(genes, "gene:","")
-row.names(counts) <- genes
-headers <- str_replace(headers, "_Aligned.sortedByCoord.out.bam","")
-headers <- str_replace(headers, "mapped/","")
-headers <- headers[7:41]
-headers <- str_replace(headers, "_R1_001_qc", "")
-counts_raw_clean <- counts
-counts <- counts[,-c(1,2,3,4,5)]
-names(counts) <- headers
-
+counts_raw2 <- read.delim("Ath2/input/counts.txt", header = F, stringsAsFactors = F) %>% t() %>% as.data.frame() 
+row.names(counts_raw2) <- NULL
+counts_raw2 <- counts_raw2 %>% column_to_rownames("V1")
+counts_raw2 <- counts_raw2 %>% t() %>% as.data.frame()
+row.names(counts_raw2) <- NULL
+Geneid <- counts_raw2$Geneid
+names(counts_raw2)[names(counts_raw2) == "Geneid"] <- "Transcriptid"
+genes <- substr(genes, start = 1, stop = 9)
 
 #compile the xp_design table
 treatment <- rep(c("a","b","c","d","e","f","g"), c(5,5,5,5,5,5,5))

@@ -1,36 +1,36 @@
-sample	treatment	solA	N	P
-S21	a	no	yes	yes
-S22	a	no	yes	yes
-S23	a	no	yes	yes
-S24	a	no	yes	yes
-S25	a	no	yes	yes
-S26	b	yes	yes	yes
-S27	b	yes	yes	yes
-S28	b	yes	yes	yes
-S29	b	yes	yes	yes
-S30	b	yes	yes	yes
-S31	c	no	yes	no
-S32	c	no	yes	no
-S33	c	no	yes	no
-S34	c	no	yes	no
-S35	c	no	yes	no
-S36	d	yes	yes	no
-S37	d	yes	yes	no
-S38	d	yes	yes	no
-S39	d	yes	yes	no
-S40	d	yes	yes	no
-S41	e	no	no	no
-S42	e	no	no	no
-S43	e	no	no	no
-S44	e	no	no	no
-S45	e	no	no	no
-S46	f	yes	no	no
-S47	f	yes	no	no
-S48	f	yes	no	no
-S49	f	yes	no	no
-S50	f	yes	no	no
-S51	g	no	no	yes
-S52	g	no	no	yes
-S53	g	no	no	yes
-S54	g	no	no	yes
-S55	g	no	no	yes
+sample	treatment
+S21	nsol_yN_yP
+S22	nsol_yN_yP
+S23	nsol_yN_yP
+S24	nsol_yN_yP
+S25	nsol_yN_yP
+S26	ysolA_yN_yP
+S27	ysolA_yN_yP
+S28	ysolA_yN_yP
+S29	ysolA_yN_yP
+S30	ysolA_yN_yP
+S31	nsolA_yN_nP
+S32	nsolA_yN_nP
+S33	nsolA_yN_nP
+S34	nsolA_yN_nP
+S35	nsolA_yN_nP
+S36	ysolA_yN_nP
+S37	ysolA_yN_nP
+S38	ysolA_yN_nP
+S39	ysolA_yN_nP
+S40	ysolA_yN_nP
+S41	nsolA_nN_nP
+S42	nsolA_nN_nP
+S43	nsolA_nN_nP
+S44	nsolA_nN_nP
+S45	nsolA_nN_nP
+S46	ysolA_nN_nP
+S47	ysolA_nN_nP
+S48	ysolA_nN_nP
+S49	ysolA_nN_nP
+S50	ysolA_nN_nP
+S51	nsolA_nN_yP
+S52	nsolA_nN_yP
+S53	nsolA_nN_yP
+S54	nsolA_nN_yP
+S55	nsolA_nN_yP
