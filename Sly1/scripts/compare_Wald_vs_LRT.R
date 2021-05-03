@@ -7,19 +7,17 @@ compare_wald_vs_LRT <- function(counts_csv_file = "Sly1/input/counts.csv",
                                 padj_cutoff = 0.05
 )
 {
-  source("Ath2/scripts/get_DESeq_dds.R")
+  source("Sly1/scripts/get_DESeq_dds.R")
   dds <- get_DESeq_dds(counts_csv_file = counts_csv_file,
                        xp_design_csv_file = xp_design_csv_file,
-                       trtm = trtm,
+                       plantpart = compartment,
                        ref_treatment = ref_treatment,
                        treatment2 = treatment2,
                        method = method)
   if(method == "treatment"){
     dds_lrt <- DESeq(dds, test="LRT", reduced = ~1)
-  } else if(method == "solA" | method == "N:solA"){
-    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P)
-  } else if(method == "N:solA+solA") {
-    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P + N:solA)
+  } else if(method == "compartment+treatment"){
+    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ compartment)
   }
   
   res_LRT <- results(dds_lrt)

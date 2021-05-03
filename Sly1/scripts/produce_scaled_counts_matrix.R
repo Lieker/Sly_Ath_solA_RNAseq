@@ -9,7 +9,8 @@ produce_scaled_counts_matrix <- function(count_csv_file = "Sly1/input/counts.csv
                                          xp_design_csv_file = "Sly1/input/xp_design.csv") {
   counts <- read.csv(file = count_csv_file, 
                      header = TRUE, 
-                     stringsAsFactors = FALSE) %>% column_to_rownames("Geneid")
+                     stringsAsFactors = FALSE,
+                     fileEncoding = "UTF-8-BOM") %>% column_to_rownames("Geneid")
   
   xp_design <- read.csv(file = xp_design_csv_file, 
                         header = TRUE, 

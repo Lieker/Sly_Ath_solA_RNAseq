@@ -1,21 +1,14 @@
-library(biomartr)
-library(tidyverse)
-library("biomaRt")
-library(clusterProfiler)
-library(biomartr)
+source("Sly1/scripts/get_filtered_list_of_DEGs.R")
+source("Sly1/scripts/get_Slycopersicum_annotations.R")
 
-
-source("scripts/get_filtered_list_of_DEGs.R")
-source("scripts/get_Slycopersicum_annotations.R")
-
-get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
-                               xp_design_csv_file = "inputs/xp_design.csv",
+get_annotated_DEGs <- function(counts_csv_file = "Sly1/input/counts.csv",
+                               xp_design_csv_file = "Sly1/input/xp_design.csv",
                                plantpart = "root",
                                ref_treatment = "no_solA",
                                treatment2 = "yes_solA",
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
-                               name = "outputs/annotated_DEGslist.csv",
+                               name = "Sly1/output/annotated_DEGslist.csv",
                                attr = c("description",
                                         "athaliana_eg_homolog_ensembl_gene",
                                         "athaliana_eg_homolog_associated_gene_name",
@@ -30,8 +23,11 @@ get_annotated_DEGs <- function(counts_csv_file = "inputs/raw_counts.csv",
                          treatment2, 
                          log2FC_threshold, 
                          padj_threshold,
-                         method) %>% rownames_to_column("gene")
-   
+                         method) %>% rownames_to_column("original_genename")
+  genes <- res$original_genename
+  genes <- substr(genes, start = 6, stop = 21)
+  res$gene <- genes
+     
   annotations <- get_Slycopersicum_annotations(attr = attr)
   res_annotated <- left_join(res, annotations, by = "gene")
   write_delim(x = res_annotated,

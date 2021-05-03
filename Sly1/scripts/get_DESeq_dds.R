@@ -12,8 +12,8 @@ get_DESeq_dds <- function(counts_csv_file = "Sly1/input/counts.csv",
   {
   counts <- read.csv(file = counts_csv_file, 
                      header = TRUE, 
-                     stringsAsFactors = FALSE) %>%
-    column_to_rownames("Geneid")
+                     stringsAsFactors = FALSE,
+                     fileEncoding = "UTF-8-BOM") %>% column_to_rownames("Geneid")
   counts <- as.data.frame(t(counts)) %>% rownames_to_column("sample")
   
   xp_design <- get_xp_design(xp_design_csv_file) %>%

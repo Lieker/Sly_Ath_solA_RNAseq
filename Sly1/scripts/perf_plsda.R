@@ -6,7 +6,7 @@ do_plsda_perf <- function(xp_design_csv_file = "Sly1/input/xp_design.csv",
                      plantpart = "root",
                      n = 9) 
   {
-  
+  xp_design <- get_xp_design(xp_design_csv_file)
   xp_design_f <- xp_design[xp_design$compartment %in% plantpart,]
   
   filtered_counts_vst_t <- filter_counts_based_on_compartment(comprtmt = plantpart) %>% data.matrix()
