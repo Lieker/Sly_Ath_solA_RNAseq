@@ -327,7 +327,7 @@ DEG_counts <- left_join(x, y, by="genes")
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
-p1 <- pheatmap(DEG_counts, 
+pheatmap(DEG_counts, 
          gaps_col = c(5,10,15,20,25,30),
          cluster_rows = TRUE,                      
          cluster_cols = FALSE, 
@@ -335,15 +335,13 @@ p1 <- pheatmap(DEG_counts,
          show_colnames = TRUE,
          scale = "row",
          main = "All samples; unclustered")
-p2 <- pheatmap(DEG_counts,
+pheatmap(DEG_counts,
          cluster_rows = TRUE,                      
          cluster_cols = TRUE, 
          show_rownames = FALSE, 
          show_colnames = TRUE,
          scale = "row",
          main = "All samples; clustered")
-p1
-p2
 ```
 In the unclustered heatmap, samples are clustered according to sample group (treatment). The treatments with solA are showing an overlapping pattern versus the treatments without solA.
 In the clustered heatmap, samples are clustered according to similarity in gene expression. In this heatmap it is clear that samples from group f (S46, 47, 48, 49, 50), which is N+P starvation + solA, cluster far away from the rest, including the same nutritional conditions without solA (S41 - S45). Hence, solA treatment mostly affects N+P starved plants.
