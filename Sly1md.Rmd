@@ -236,7 +236,7 @@ do_plsda(plantpart = "root", nc = 4, ttl = "Root samples PLS-DA")
 
 ```
 
-#DEG analysis
+# DEG analysis
 
 ## Wald test
 
@@ -336,5 +336,8 @@ To infer the function of solA on tomato, we have to infer the function of the DE
 Since looking at the complete dataset hardly gives us DEGs, we only look at yes/no solA within the compartments.
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/get_annotated_DEGs.R")
-gg <- get_annotated_DEGs(plantpart = "root", method = "treatment")
+get_annotated_DEGs(plantpart = "root", method = "treatment", name = "Sly1/output/annotated_DEGs_root.csv")
+get_annotated_DEGs(plantpart = "shoot", method = "treatment", name = "Sly1/output/annotated_DEGs_shoot.csv")
 ```
+
+Using AgriGO (bioinfo.cau.edu.cn/agriGO/analysis.php), no enriched GO terms are detected for any of the sets of DEGs, neither when taking the DEGs from root and shoot separately nor when combining them.
