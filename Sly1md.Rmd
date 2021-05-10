@@ -198,6 +198,9 @@ p2 <- plot_pca(plantpart = c("root"), pc_x_axis = "PC5", pc_y_axis = "PC6", pca_
 p1 + p2
 ```
 
+```{r}
+plot_pca(plantpart = c("root"), pc_x_axis = "PC1", pc_y_axis = "PC5", pca_colour = "treatment") + ggtitle("root")
+```
 In root, there seems to be solA separation in PC5, in shoot, clustering based on solA treatment is difficult to observe. But since the treatment is applied on the roots, this might not be so surprising.
 
 Check the screeplots for separate compartment PCA:
@@ -268,6 +271,20 @@ xs <- get_list_of_DEGs(plantpart = "shoot", method = "treatment", log2FC_thresho
 xs <- xs %>% rownames_to_column("genes")
 xr <- get_list_of_DEGs(plantpart = "root", method = "treatment", log2FC_threshold = 0)
 xr <- xr %>% rownames_to_column("genes")
+```
+So in the shoot there are 43 DEGs and in the root 22 DEGs.
+
+```{r message=FALSE, warning=FALSE}
+xrr <- xr %>% rownames_to_column("transcripts") 
+xrr <- xrr$transcripts
+xss <- xs %>% rownames_to_column("transcripts")
+xss <- xss$transcripts
+length(xss[xss %in% xss])
+```
+
+None of the DEGs of root and shoot overlap; they are all different.
+
+```{r message=FALSE, warning=FALSE}
 x <- rbind(xs, xr)
 source("Sly1/scripts/produce_scaled_counts_matrix.R")
 y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
@@ -336,8 +353,15 @@ To infer the function of solA on tomato, we have to infer the function of the DE
 Since looking at the complete dataset hardly gives us DEGs, we only look at yes/no solA within the compartments.
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/get_annotated_DEGs.R")
-get_annotated_DEGs(plantpart = "root", method = "treatment", name = "Sly1/output/annotated_DEGs_root.csv")
-get_annotated_DEGs(plantpart = "shoot", method = "treatment", name = "Sly1/output/annotated_DEGs_shoot.csv")
+DEGroot <- get_annotated_DEGs(plantpart = "root", method = "treatment", name = "Sly1/output/annotated_DEGs_root.csv")
+DEGshoot <- get_annotated_DEGs(plantpart = "shoot", method = "treatment", name = "Sly1/output/annotated_DEGs_shoot.csv")
+DEGroot$compartment <- rep("root", count(DEGroot))
+DEGshoot$compartment <- rep("shoot", count(DEGshoot))
+DEGSly <- rbind(DEGroot, DEGshoot)
+DEGSly$original_genename <- substr(DEGSly$original_genename, start = 6, stop = 23)
+uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
+DEGSly <- aggregate(DEGSly, by = list(DEGSly$original_genename, DEGSly$compartment), FUN = uniquepaste)
+write_delim(DEGSly, "Sly1/output/allDEGs.csv", delim = ";")
 ```
 
 Using AgriGO (bioinfo.cau.edu.cn/agriGO/analysis.php), no enriched GO terms are detected for any of the sets of DEGs, neither when taking the DEGs from root and shoot separately nor when combining them.

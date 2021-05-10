@@ -527,7 +527,7 @@ head(x)
 ```
 
 Then, let's see if there are any GO terms enriched for these genes. The .csv file with all GO terms will be written to Ath2/outputs/GOannotationslist.csv
-```{r}
+```{r message = FALSE, warning = FALSE}
 source("Ath2/scripts/GO_annotation_list.R")
 ```
 ```{r message=FALSE, warning=FALSE}
@@ -551,7 +551,13 @@ GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", plo
 Then, do the same for all the comparisons within nutritional conditions:
 ```{r message = FALSE, warning = FALSE}
 #for the non starvation samples
-x <- get_annotated_DEGs(trtm = c("a","b"), method = "treatment")
+x <- get_annotated_DEGs(trtm = c("a","b"), method = "treatment", attr = c("tair_symbol", 
+                                        "uniprotswissprot",
+                                        "entrezgene_id",
+                                        "description",
+                                        "external_gene_name",
+                                        "external_gene_source",
+                                        "go_id"))
 GO_annotation_list(trtm = c("a","b"), method = "treatment", plottype = "bar")
 GO_annotation_list(trtm = c("a","b"), method = "treatment", plottype = "go")
 
@@ -565,3 +571,4 @@ x <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f"
 GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "bar")
 GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "go")
 ```
+Why are these GO annotations different than from AgriGo??
