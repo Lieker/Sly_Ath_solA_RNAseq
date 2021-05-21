@@ -2,8 +2,8 @@ library(vegan)
 source("scripts/filter_counts_vst_based_on_time.R")
 source("scripts/get_xp_design.R")
 
-do_permanova <- function(xp_design_csv_file = "inputs/xp_design.csv",
-                         counts_csv_file = "inputs/raw_counts.csv",
+do_permanova <- function(xp_design_csv_file = "input/xp_design.csv",
+                         counts_csv_file = "input/raw_counts.csv",
                          timepoint = 2) {
   
   xp_design <- get_xp_design()

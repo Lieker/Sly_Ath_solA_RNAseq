@@ -1,0 +1,273 @@
+---
+title: "Ath1md"
+author: "Lieke Vlaar"
+date: "21/05/2021"
+output: html_document
+---
+
+# Introduction
+In this file the complete analysis workflow of count data of the pre-test Arabidopsis RNAseq experiment is shown.
+
+## Goal
+
+The goal of this experiment is to unravel the effect of solanoeclepin A on the plant. Solanoeclepin A is applied on Arabidopsis seedlings under various nutritional conditions. The set up of this experiment is summarized in this figure:
+```{r}
+xp_design <- read.csv("Ath1/input/xp_design.csv")
+xp_design
+```
+
+## Setup
+
+Packages necessary:
+
+* Checkpoint
+* DESeq2
+* dplyr
+* tidyr
+* tidyverse
+* Biostrings
+* biomaRt
+* biomartr
+* clusterProfiler
+* org.At.tair.db
+* tibble
+* mixOmics
+* vegan
+* apeglm
+* EnhancedVolcano
+* patchwork
+
+```{r include=FALSE}
+#########
+# Library
+#########
+if ("checkpoint" %in% installed.packages()){
+  library("checkpoint") # https://cran.r-project.org/web/packages/checkpoint/index.html
+} else {
+  install.packages("checkpoint")
+  suppressPackageStartupMessages(library("checkpoint"))
+  suppressPackageStartupMessages(checkpoint("2021-04-20"))  # all packages in your project will be taken from that date.
+}
+if ("DESeq2" %in% installed.packages()){
+  library("DESeq2")
+} else {
+  BiocManager::install("DESeq2")
+  library("DESeq2")
+}
+if ("dplyr" %in% installed.packages()){
+  library("dplyr")
+} else {
+  install.packages("dplyr")
+  library("dplyr")
+}
+if ("tidyr" %in% installed.packages()){
+  library("tidyr")
+} else {
+  install.packages("tidyr")
+  library("tidyr")
+}
+if ("tidyverse" %in% installed.packages()){
+  library("tidyverse")
+} else {
+  install.packages("tidyverse")
+  library("tidyverse")
+}
+if ("Biostrings" %in% installed.packages()){
+  library("Biostrings") 
+} else {
+  BiocManager::install("Biostrings")
+  library("Biostrings")
+}
+if ("biomaRt" %in% installed.packages()){
+  library("biomaRt") 
+} else {
+  BiocManager::install("biomaRt")
+  library("biomaRt")
+}
+if ("biomartr" %in% installed.packages()){
+  library("biomartr")
+} else {
+  install.packages("biomartr", dependencies = TRUE)
+  library("biomartr")
+}
+if ("clusterProfiler" %in% installed.packages()){
+  library("clusterProfiler") 
+} else {
+  BiocManager::install("clusterProfiler")
+  library("clusterProfiler")
+}
+if ("org.At.tair.db" %in% installed.packages()){
+  library("org.At.tair.db") 
+} else {
+  BiocManager::install("org.At.tair.db")
+  library("org.At.tair.db")
+}
+if ("tibble" %in% installed.packages()){
+  library("tibble") 
+} else {
+  install.packages("tibble")
+  library("tibble")
+}
+if ("mixOmics" %in% installed.packages()){
+  library("mixOmics") 
+} else {
+  BiocManager::install("mixOmics")
+  library("mixOmics")
+}
+if ("vegan" %in% installed.packages()){
+  library("vegan") 
+} else {
+  install.packages("vegan")
+  library("vegan")
+}
+if ("apeglm" %in% installed.packages()){
+  library("apeglm") 
+} else {
+  BiocManager::install("apeglm")
+  library("apeglm")
+}
+if ("EnhancedVolcano" %in% installed.packages()){
+  library("EnhancedVolcano") 
+} else {
+  BiocManager::install("EnhancedVolcano")
+  library("EnhancedVolcano")
+}
+if ("patchwork" %in% installed.packages()){
+  library("patchwork") 
+} else {
+  BiocManager::install("patchwork")
+  library("patchwork")
+}
+if ("reshape" %in% installed.packages()){
+  library("reshape") 
+} else {
+  install.packages("reshape")
+  library("reshape")
+}
+if ("pheatmap" %in% installed.packages()){
+  library("pheatmap") 
+} else {
+  BiocManager::install("pheatmap")
+  library("pheatmap")
+}
+```
+
+# PCA analysis
+
+Load the function:
+```{r}
+source("Ath1/scripts/create_pca_plot.R")
+```
+
+Run the function with default settings, which is
+```{r, eval = FALSE}
+plot_pca <- function(count_csv_file = "Ath1/input/counts.csv",
+                     xp_design_csv_file = "Ath1/input/xp_design.csv",
+                     pc_x_axis = "PC1", 
+                     pc_y_axis = "PC2",
+                     timepoint = c("2","6","24"),
+                     pca_colour = "treatment")
+```
+
+```{r}
+plot_pca()
+```
+
+In order to make an overview of what determines the clustering, make the same plot with different colour guides and group them together with patchwork package
+```{r}
+p1 <- plot_pca(pca_colour = "treatment")
+p2 <- plot_pca(pca_colour = "time")
+p3 <- plot_pca(pca_colour = "sequencing_batch")
+p4 <- plot_pca(pca_colour = "rna_isolation_batch")
+p5 <- plot_pca(pca_colour = "purification_procedure")
+
+p1 + p2 + p3 + p4 + p5 +plot_layout(ncol = 2)
+```
+
+From these plots, it is clear that PC2 is explaining the time, but PC1 shows unexplained variation and also the solA treatment is not visible.
+Let's explore more components to see if we can see the solA treatment in the plots.
+```{r}
+p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment")
+p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "time")
+p3 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "sequencing_batch")
+p4 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "rna_isolation_batch")
+p5 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "purification_procedure")
+
+p1 + p2 + p3 + p4 + p5 +plot_layout(ncol = 2)
+```
+
+```{r}
+p1 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "treatment")
+p2 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "time")
+p3 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "sequencing_batch")
+p4 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "rna_isolation_batch")
+p5 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "purification_procedure")
+
+p1 + p2 + p3 + p4 + p5 +plot_layout(ncol = 2)
+```
+
+Check the screeplot of all the treatments.
+
+```{r}
+source("Ath1/scripts/scree_plot.R")
+plot_scree()
+```
+
+```{r}
+source("Ath1/scripts/produce_scaled_counts_matrix.R")
+scaled_counts <- produce_scaled_counts_matrix()
+
+source("Ath1/scripts/filter_counts_based_on_timepoint.R")
+f <- filter_counts_based_on_timepoint()
+ft <- f %>% t() %>% as.data.frame() %>% gather ()
+ggplot(ft, aes(value)) + 
+  geom_histogram(bins = 10) + 
+  facet_wrap(~key, scales = 'free_x') +
+  scale_y_log10()
+
+f_no_0 <- f[vapply(f, 
+                   function(z) length(unique(z)) > 1,
+                   logical(1L))] %>% data.matrix(., rownames.force = T)
+
+median_all_genes <- median(f_no_0)
+median_per_gene <- apply(f_no_0, 2, median)
+f_no_0_t <- f_no_0 %>% t() %>% as.data.frame()
+f_f <- f_no_0_t %>% filter(median_per_gene > median_all_genes) %>% t() %>% as.data.frame()
+
+f_ft <- f_f %>% t() %>% as.data.frame() %>% gather()
+head(f_ft)
+ggplot(f_ft, aes(value)) + 
+  geom_histogram(bins = 10) + 
+  facet_wrap(~key, scales = 'free_x') +
+  scale_y_log10() 
+
+```
+
+However, this experiment is based on pair-wise comparisons. We have different timepoints (2, 6 and 24) and within these conditions we compare the effect of adding solA. There could be an effect of solA in one condition, but not in the others. Therefore, it makes sense to look whether samples within conditions cluster based on solA treatment.
+```{r}
+p1 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", timepoint = "2") + ggtitle("t=2h")
+p2 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", timepoint = "6") + ggtitle("t=6h")
+p3 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", timepoint = "24") + ggtitle("t=24h")
+
+p1 + p2 + p3 + plot_layout(ncol = 2)
+```
+
+Not much of solanoeclepin A effect. Let's check the other components.
+```{r}
+p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", timepoint = "2") + ggtitle("t=2h")
+p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", timepoint = "6") + ggtitle("t=6h")
+p3 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", timepoint = "24") + ggtitle("t=24h")
+
+p1 + p2 + p3 + plot_layout(ncol = 2)
+
+p1 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", timepoint = "2") + ggtitle("t=2h")
+p2 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", timepoint = "6") + ggtitle("t=6h")
+p3 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", timepoint = "24") + ggtitle("t=24h")
+
+p1 + p2 + p3 + plot_layout(ncol = 2)
+```
+
+It seems that at t=2h, there clustering of ethanol on the one hand and the two solanoeclepin treatments on the other hand, in PC3/4.
+
+
+

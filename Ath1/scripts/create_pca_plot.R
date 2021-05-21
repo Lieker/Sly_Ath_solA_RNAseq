@@ -1,13 +1,13 @@
-plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
-                     xp_design_csv_file = "inputs/xp_design.csv",
+plot_pca <- function(count_csv_file = "Ath1/input/counts.csv",
+                     xp_design_csv_file = "Ath1/input/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
-                     timepoint = 2,
-                     pca_colour = "rna_isolation_batch") {
+                     timepoint = c("2","6","24"),
+                     pca_colour = "treatment") {
   
-  source("scripts/produce_scaled_counts_matrix.R")
-  source("scripts/filter_counts_based_on_time.R")
-  source("scripts/extract_variance.R")
+  source("Ath1/scripts/produce_scaled_counts_matrix.R")
+  source("Ath1/scripts/filter_counts_based_on_timepoint.R")
+  source("Ath1/scripts/extract_variance.R")
   
   produce_score_df <- function(counts = filtered_counts, 
                                xp_design_csv_file) {
@@ -23,6 +23,7 @@ plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
     
     # add xp_design extra info for future plot
     xp_design = read.csv(file = xp_design_csv_file, header = TRUE, check.names = FALSE, fileEncoding = "UTF-8-BOM") 
+    xp_design$time <- as.character(xp_design$time)
     
     scores_with_xp_design_info <- scores_filtered %>% 
       as.data.frame() %>% 
@@ -40,14 +41,14 @@ plot_pca <- function(count_csv_file = "inputs/raw_counts.csv",
                                                xp_design_csv_file = xp_design_csv_file)
   
   # based on a timepoint, filter the corresponding scaled_counts matrix
-  filtered_counts <- filter_counts_based_on_time(counts = scaled_counts, 
-                                                 xp_design_csv_file = xp_design_csv_file, 
-                                                 time = timepoint) 
+  filtered_counts <- filter_counts_based_on_timepoint(counts = scaled_counts, 
+                                                      xp_design_csv_file = xp_design_csv_file, 
+                                                      timepoint = timepoint) 
   
   # compute PCA and return scores as a dataframe with additional XP info
   # also returns explained variance per component 
    score_df <- produce_score_df(counts = filtered_counts, 
-                               xp_design_csv_file = "inputs/xp_design.csv")
+                               xp_design_csv_file = xp_design_csv_file)
   
   
   explained_variance_per_component <- extract_explained_variance_per_component(counts = filtered_counts) 

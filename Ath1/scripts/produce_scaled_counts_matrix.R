@@ -5,25 +5,33 @@ suppressPackageStartupMessages(library(tidyverse))
 # samples in rows
 # genes in columns
 # row names = samples
-produce_scaled_counts_matrix <- function(count_csv_file = "inputs/raw_counts.csv", 
-                                         xp_design_csv_file = "inputs/xp_design.csv") {
+produce_scaled_counts_matrix <- function(count_csv_file = "Ath1/input/counts.csv", 
+                                         xp_design_csv_file = "Ath1/input/xp_design.csv") {
   counts <- read.csv(file = count_csv_file, 
                      header = TRUE, 
-                     stringsAsFactors = FALSE) %>% 
-    column_to_rownames("Geneid")
+                     stringsAsFactors = FALSE) %>% column_to_rownames("Geneid")
   
   xp_design <- read.csv(file = xp_design_csv_file, 
                         header = TRUE, 
                         stringsAsFactors = FALSE, 
                         check.names = FALSE, fileEncoding = "UTF-8-BOM")
+  xp_design$time <- as.character(xp_design$time)
   
 
   dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ 1)
   dds <- estimateSizeFactors(dds)
-  scaled_counts = counts(dds, normalized = TRUE)
+  dds = estimateDispersions(object = dds, 
+                            fitType = "parametric", 
+                            quiet = TRUE)
+  vsd = varianceStabilizingTransformation(object = dds, 
+                                          blind = TRUE,           # do not take the design formula into account. 
+                                          fitType = "parametric") # best practice for sample-level QC
+                                          
   
-  scaled_counts = t(scaled_counts) # to have sample in rows
-  scaled_counts = as.data.frame(scaled_counts) %>% 
+  variance_stabilised_counts <- assay(vsd)
+  
+  variance_stabilised_counts = t(variance_stabilised_counts) # to have sample in rows
+  scaled_counts = as.data.frame(variance_stabilised_counts) %>% 
     rownames_to_column("sample")
   
   return(scaled_counts)
