@@ -1,0 +1,195 @@
+STAR version=2.7.6a
+STAR compilation time,server,dir=Sat Sep 19 11:48:47 EDT 2020 vega:/home/dobin/data/STAR/STARcode/STAR.master/source
+##### Command Line:
+STAR --genomeDir /scratch/mgallan1/temp/genome/ --readFilesIn /scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz --readFilesCommand zcat --outFilterMultimapNmax 10 --outFilterMismatchNmax 2 --alignMatesGapMax 20000 --alignIntronMax 25000 --outFilterMatchNminOverLread 0.66 --alignEndsType EndToEnd --runThreadN 10 --outReadsUnmapped None --outFileNamePrefix results/star/S04_ --outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI AS nM MD
+##### Initial USER parameters from Command Line:
+outFileNamePrefix                 results/star/S04_
+###### All USER parameters from Command Line:
+genomeDir                     /scratch/mgallan1/temp/genome/     ~RE-DEFINED
+readFilesIn                   /scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz        ~RE-DEFINED
+readFilesCommand              zcat        ~RE-DEFINED
+outFilterMultimapNmax         10     ~RE-DEFINED
+outFilterMismatchNmax         2     ~RE-DEFINED
+alignMatesGapMax              20000     ~RE-DEFINED
+alignIntronMax                25000     ~RE-DEFINED
+outFilterMatchNminOverLread   0.66     ~RE-DEFINED
+alignEndsType                 EndToEnd     ~RE-DEFINED
+runThreadN                    10     ~RE-DEFINED
+outReadsUnmapped              None     ~RE-DEFINED
+outFileNamePrefix             results/star/S04_     ~RE-DEFINED
+outSAMtype                    BAM   SortedByCoordinate        ~RE-DEFINED
+outSAMattributes              NH   HI   AS   nM   MD        ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runThreadN                        10
+genomeDir                         /scratch/mgallan1/temp/genome/
+readFilesIn                       /scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz   
+readFilesCommand                  zcat   
+outFileNamePrefix                 results/star/S04_
+outReadsUnmapped                  None
+outSAMtype                        BAM   SortedByCoordinate   
+outSAMattributes                  NH   HI   AS   nM   MD   
+outFilterMultimapNmax             10
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             2
+alignIntronMax                    25000
+alignMatesGapMax                  20000
+alignEndsType                     EndToEnd
+
+-------------------------------
+##### Final effective command line:
+STAR   --runThreadN 10   --genomeDir /scratch/mgallan1/temp/genome/   --readFilesIn /scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz      --readFilesCommand zcat      --outFileNamePrefix results/star/S04_   --outReadsUnmapped None   --outSAMtype BAM   SortedByCoordinate      --outSAMattributes NH   HI   AS   nM   MD      --outFilterMultimapNmax 10   --outFilterMatchNminOverLread 0.66   --outFilterMismatchNmax 2   --alignIntronMax 25000   --alignMatesGapMax 20000   --alignEndsType EndToEnd
+----------------------------------------
+
+Number of fastq files for each mate = 1
+
+   Input read files for mate 1 :
+-rw-r--r--. 1 mgallan1 Domain Users 868507568 May 27 16:44 /scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz
+
+   readsCommandsFile:
+exec > "results/star/S04__STARtmp/tmp.fifo.read1"
+echo FILE 0
+zcat      "/scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz"
+
+WARNING: --limitBAMsortRAM=0, will use genome size as RAM limit for BAM sorting
+Finished loading and checking parameters
+Reading genome generation parameters:
+### STAR   --runMode genomeGenerate   --runThreadN 10   --genomeDir /scratch/mgallan1/temp/genome/   --genomeFastaFiles config/refs/S_lycopersicum_chromosomes.4.00.fa      --genomeSAindexNbases 13   --limitGenomeGenerateRAM 100000000000   --sjdbGTFfile config/refs/ITAG4.0_gene_models.gtf   --sjdbOverhang 100
+### GstrandBit=32
+versionGenome                 2.7.4a     ~RE-DEFINED
+genomeType                    Full     ~RE-DEFINED
+genomeFastaFiles              config/refs/S_lycopersicum_chromosomes.4.00.fa        ~RE-DEFINED
+genomeSAindexNbases           13     ~RE-DEFINED
+genomeChrBinNbits             18     ~RE-DEFINED
+genomeSAsparseD               1     ~RE-DEFINED
+genomeTransformType           None     ~RE-DEFINED
+genomeTransformVCF            -     ~RE-DEFINED
+sjdbOverhang                  100     ~RE-DEFINED
+sjdbFileChrStartEnd           -        ~RE-DEFINED
+sjdbGTFfile                   config/refs/ITAG4.0_gene_models.gtf     ~RE-DEFINED
+sjdbGTFchrPrefix              -     ~RE-DEFINED
+sjdbGTFfeatureExon            exon     ~RE-DEFINED
+sjdbGTFtagExonParentTranscripttranscript_id     ~RE-DEFINED
+sjdbGTFtagExonParentGene      gene_id     ~RE-DEFINED
+sjdbInsertSave                Basic     ~RE-DEFINED
+genomeFileSizes               809684325   6665664509        ~RE-DEFINED
+Genome version is compatible with current STAR
+Number of real (reference) chromosomes= 13
+1	SL4.0ch00	9643250	0
+2	SL4.0ch01	90863682	9699328
+3	SL4.0ch02	53473368	100663296
+4	SL4.0ch03	65298490	154140672
+5	SL4.0ch04	64459972	219676672
+6	SL4.0ch05	65269487	284164096
+7	SL4.0ch06	47258699	349437952
+8	SL4.0ch07	67883646	396886016
+9	SL4.0ch08	63995357	464781312
+10	SL4.0ch09	68513564	529006592
+11	SL4.0ch10	64792705	597688320
+12	SL4.0ch11	54379777	662700032
+13	SL4.0ch12	66688036	717225984
+--sjdbOverhang = 100 taken from the generated genome
+Started loading the genome: Thu May 27 16:56:19 2021
+
+Genome: size given as a parameter = 809684325
+SA: size given as a parameter = 6665664509
+SAindex: size given as a parameter = 1
+Read from SAindex: pGe.gSAindexNbases=13  nSAi=89478484
+nGenome=809684325;  nSAbyte=6665664509
+GstrandBit=32   SA number of indices=1615918668
+Shared memory is not used for genomes. Allocated a private copy of the genome.
+Genome file size: 809684325 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 809684325 bytes
+SA file size: 6665664509 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 6665664509 bytes
+Loading SAindex ... done: 391468491 bytes
+Finished loading the genome: Thu May 27 16:56:21 2021
+
+Processing splice junctions database sjdbN=127421,   pGe.sjdbOverhang=100 
+To accommodate alignIntronMax=25000 redefined winBinNbits=14
+To accommodate alignIntronMax=25000 and alignMatesGapMax=20000, redefined winFlankNbins=2 and winAnchorDistNbins=4
+Created thread # 1
+Created thread # 2
+Starting to map file # 0
+mate 1:   /scratch/mgallan1/temp/trimmed/S04_R1_trimmed.fq.gz
+Created thread # 3
+Created thread # 4
+Created thread # 5
+Created thread # 6
+Created thread # 7
+Created thread # 8
+Created thread # 9
+BAM sorting: 264223 mapped reads
+BAM sorting bins genomic start loci:
+1	0	1438555
+2	0	1544686
+3	0	2065224
+4	0	2511766
+5	0	3794446
+6	0	4894970
+7	0	6886202
+8	0	6935516
+9	0	7347642
+10	0	8019856
+11	1	2969771
+12	1	73350637
+13	1	80570606
+14	1	83375633
+15	1	87569059
+16	2	21600033
+17	2	40129499
+18	2	45970578
+19	2	52754829
+20	3	19944726
+21	3	56008841
+22	3	63191628
+23	4	4746725
+24	4	56727668
+25	4	63015325
+26	5	4353212
+27	5	61577376
+28	6	394714
+29	6	22797375
+30	6	39077098
+31	6	43895441
+32	7	1028987
+33	7	55826487
+34	7	65099035
+35	7	67473264
+36	8	51845175
+37	8	60671667
+38	9	499769
+39	9	4885181
+40	9	32799703
+41	9	65539678
+42	10	2813726
+43	10	58218117
+44	10	63238743
+45	11	3319923
+46	11	48228114
+47	12	1116413
+48	12	59334136
+Thread #8 end of input stream, nextChar=-1
+Completed: thread #7
+Completed: thread #1
+Completed: thread #0
+Joined thread # 1
+Completed: thread #2
+Joined thread # 2
+Completed: thread #6
+Completed: thread #9
+Completed: thread #3
+Joined thread # 3
+Completed: thread #8
+Completed: thread #4
+Joined thread # 4
+Completed: thread #5
+Joined thread # 5
+Joined thread # 6
+Joined thread # 7
+Joined thread # 8
+Joined thread # 9
+May 27 16:57:39 ..... started sorting BAM
+Max memory needed for sorting = 67012479
+ALL DONE!
