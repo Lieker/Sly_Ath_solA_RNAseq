@@ -1,0 +1,41 @@
+Read1 before filtering:
+total reads: 18508927
+total bases: 1850892700
+Q20 bases: 1821374198(98.4052%)
+Q30 bases: 1759924590(95.0852%)
+
+Read1 after filtering:
+total reads: 18246906
+total bases: 1824298180
+Q20 bases: 1797747978(98.5446%)
+Q30 bases: 1740983997(95.4331%)
+
+Read2 before filtering:
+total reads: 18508927
+total bases: 1850892700
+Q20 bases: 1814961846(98.0587%)
+Q30 bases: 1742834563(94.1618%)
+
+Read2 aftering filtering:
+total reads: 18246906
+total bases: 1824298180
+Q20 bases: 1791900641(98.2241%)
+Q30 bases: 1725425384(94.5802%)
+
+Filtering result:
+reads passed filter: 36493812
+reads failed due to low quality: 524042
+reads failed due to too many N: 0
+reads failed due to too short: 0
+reads with adapter trimmed: 92270
+bases trimmed due to adapters: 800406
+
+Duplication rate: 24.8656%
+
+Insert size peak (evaluated by paired-end reads): 169
+
+JSON report: /scratch/mgallan1/temp/fastp/E06_4_fastp.json
+HTML report: /scratch/mgallan1/temp/fastp/E06_4_fastp.html
+
+fastp --thread 10 --html /scratch/mgallan1/temp/fastp/E06_4_fastp.html --json /scratch/mgallan1/temp/fastp/E06_4_fastp.json --qualified_quality_phred 30 --in1 /scratch/mgallan1/Ath1/E06_4_1.fq.gz --in2 /scratch/mgallan1/Ath1/E06_4_2.fq.gz --out1 /scratch/mgallan1/temp/trimmed/E06_4_R1_trimmed.fq.gz --out2 /scratch/mgallan1/temp/trimmed/E06_4_R2_trimmed.fq.gz 
+fastp v0.19.5, time used: 182 seconds
