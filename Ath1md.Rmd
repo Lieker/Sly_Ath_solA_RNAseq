@@ -152,6 +152,33 @@ if ("pheatmap" %in% installed.packages()){
 }
 ```
 
+# Mapping results
+
+Calculate the average unique mapping %:
+
+```{r}
+ms <- read.csv("Ath1/input/mapping_summary.csv")
+ms <- ms[, -1] %>% column_to_rownames("attribute")
+ms[5,3]
+```
+
+```{r include = FALSE}
+unique <- ms[9,]
+unique <- as.list(unique)
+unique <- gsub("%", "", unique)
+unique <- unique[-1]
+unique <- as.numeric(unique)
+uniquepercent <- mean(unique)
+```
+```{r}
+uniquepercent
+```
+
+The average unique mapping % is 89.91%.
+
+
+
+
 # PCA analysis
 
 Load the function:
