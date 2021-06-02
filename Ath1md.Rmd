@@ -337,7 +337,14 @@ make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "
 
 Then for time point = 24h:
 ```{r}
-make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
+make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 24h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 24h, uM solA, Wald test")
 ```
 
+
+## Heatmap
+
+```{r}
+
+
+```
