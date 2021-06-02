@@ -161,6 +161,33 @@ if ("GenomicFeatures" %in% installed.packages()){
 }
 ```
 
+# Mapping results
+
+Calculate the average unique mapping %:
+
+```{r}
+ms <- read.csv("Sly1/input/mapping_summary.csv")
+ms <- ms[, -1] %>% column_to_rownames("attribute")
+ms[1:10,1:3]
+```
+
+```{r include = FALSE}
+unique <- ms[9,]
+unique <- as.list(unique)
+unique <- gsub("%", "", unique)
+unique <- as.numeric(unique)
+uniquepercent <- mean(unique)
+```
+```{r}
+uniquepercent
+```
+
+The average unique mapping % is 45.51%. This is low, but explained by the type of library prep method that was used (Moll et al, 2014).
+
+
+
+
+
 # PCA analysis
 
 Plot PCA to see if samples with the same treatments cluster together.
