@@ -296,5 +296,33 @@ p1 + p2 + p3 + plot_layout(ncol = 2)
 
 It seems that at t=2h, there clustering of ethanol on the one hand and the two solanoeclepin treatments on the other hand, in PC3/4.
 
+# DEG analysis
 
+## Wald test
 
+Use design formula ~ time + treatment
+```{r message=FALSE, warning=FALSE}
+source("Ath1/scripts/volcanoplot.R")
+```
+```{r, warning = FALSE, message = FALSE}
+make_volcanoplot(log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "Micromolar solA, all timepoints, Wald", method = "time+treatment")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "Nanomolar solA, all timepoints, Wald", method = "time+treatment")
+```
+
+So there are a number of differentially expressed genes in all timepoints, resulting from solanoeclepin treatment (even in nM!).
+Let's see which of these overlap:
+
+``` {r message = FALSE, warning = FALSE}
+source("Ath1/scripts/get_filtered_list_of_DEGs.R")
+```
+```{r}
+umolar <- get_list_of_DEGs() %>% rownames_to_column("Gene")
+nmolar <- get_list_of_DEGs(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA") %>% rownames_to_column("Gene")
+overlap <- inner_join(umolar, nmolar, by = "Gene")
+
+```
+
+We can also check if there are DEGs specifically for a timepoint.
+
+```{r}
+make_volcanoplot()

@@ -1,12 +1,12 @@
 library(DESeq2)
-source("Ath2/scripts/get_DESeq_dds.R")
+source("Ath1/scripts/get_DESeq_dds.R")
 
-coefficient <- function(counts_csv_file = "Ath2/input/counts.csv",
-                        xp_design_csv_file = "Ath2/input/xp_design.csv",
-                        trtm = c("a","b"),
-                        ref_treatment = "a",
-                        treatment2 = "b",
-                        method = "treatment" #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+coefficient <- function(counts_csv_file = "Ath1/input/counts.csv",
+                        xp_design_csv_file = "Ath1/input/xp_design.csv",
+                        trtm = c("ethanol","millimolar_solanoeclepinA"),
+                        ref_treatment = "ethanol",
+                        treatment2 = "millimolar_solanoeclepinA",
+                        method = "time+treatment" #this parameter chooses which formula design will be chosen: ~treatment or ~solA
                         ) {
   dds <- get_DESeq_dds(counts_csv_file,
                        xp_design_csv_file,
@@ -14,20 +14,10 @@ coefficient <- function(counts_csv_file = "Ath2/input/counts.csv",
                        ref_treatment,
                        treatment2,
                        method)
-  if(method == "treatment"){
-    r <- resultsNames(dds)[2]
-  } else if(method == "solA") {
+  if(method == "time+treatment"){
     r <- resultsNames(dds)[4]
-    dds$condition <- relevel(dds$solA, ref = "no")
-  } else if(method == "N:solA+solA") {
-    r <- resultsNames(dds)[5]
-    dds$condition <- relevel(dds$solA, ref = "no")
-  } else if(method == "N:solA"){
-    r <- resultsNames(dds)[5]
-    dds$condition <- relevel(dds$solA, ref = "no")
-  } else if(method == "Ath12"){
-    r <- resultsNames(dds)[3]
-  }
+    dds$condition <- relevel(dds$treatment, ref = "ethanol")
+  } 
   
   return(r)
 }
