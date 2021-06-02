@@ -323,6 +323,21 @@ overlap <- inner_join(umolar, nmolar, by = "Gene")
 ```
 
 We can also check if there are DEGs specifically for a timepoint.
-
+First time point = 2h:
 ```{r}
-make_volcanoplot()
+make_volcanoplot(tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 2h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 2h, uM solA, Wald test")
+```
+
+Then for time point = 6h:
+```{r}
+make_volcanoplot(tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
+```
+
+Then for time point = 24h:
+```{r}
+make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
+```
+

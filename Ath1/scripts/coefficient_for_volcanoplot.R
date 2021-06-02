@@ -6,18 +6,22 @@ coefficient <- function(counts_csv_file = "Ath1/input/counts.csv",
                         trtm = c("ethanol","millimolar_solanoeclepinA"),
                         ref_treatment = "ethanol",
                         treatment2 = "millimolar_solanoeclepinA",
-                        method = "time+treatment" #this parameter chooses which formula design will be chosen: ~treatment or ~solA
-                        ) {
+                        method = "time+treatment", #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+                        tp = c(2,6,24)) {
   dds <- get_DESeq_dds(counts_csv_file,
                        xp_design_csv_file,
                        trtm,
                        ref_treatment,
                        treatment2,
-                       method)
+                       method,
+                       tp)
   if(method == "time+treatment"){
-    r <- resultsNames(dds)[4]
+    r <- resultsNames(dds)[11]
     dds$condition <- relevel(dds$treatment, ref = "ethanol")
-  } 
+  } else if(method == "treatment"){
+    r <- resultsNames(dds)[9]
+    dds$condition <- relevel(dds$treatment, ref = "ethanol")
+  }
   
   return(r)
 }

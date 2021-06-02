@@ -8,7 +8,8 @@ get_DESeq_dds <- function(counts_csv_file = "Ath1/input/counts.csv",
                           trtm = c("ethanol","millimolar_solanoeclepinA"),
                           ref_treatment = "ethanol",
                           treatment2 = "millimolar_solanoeclepinA",
-                          method = "time+treatment" #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+                          method = "time+treatment",
+                          tp = c(2, 6, 24)
                           ) {
   counts <- read.csv(file = counts_csv_file, 
                      header = TRUE, 
@@ -22,8 +23,14 @@ get_DESeq_dds <- function(counts_csv_file = "Ath1/input/counts.csv",
     xp_design <- xp_design[which(xp_design$treatment %in% trtm),] %>% 
       filter(treatment == ref_treatment | treatment == treatment2)
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
-    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ time + treatment)
-  } 
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ rna_isolation_batch + time + treatment)
+  } else if(method == "treatment"){
+    xp_design <- xp_design[which(xp_design$treatment %in% trtm),] %>%
+      filter(treatment == ref_treatment | treatment == treatment2)
+    xp_design <- xp_design[which(xp_design$time %in% tp),]
+    counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ rna_isolation_batch + treatment)
+  }
   
   dds <- DESeq(dds)
   return(dds)
