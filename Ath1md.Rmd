@@ -421,19 +421,33 @@ ggplot(data = x,
 Let's see if the DEGs from 2 and 24h are overlapping, or if these are different genes.
 
 ```{r message=FALSE, warning=FALSE}
-n2 <- n2 %>% rownames_to_column("gene")
-n24 <- n24 %>% rownames_to_column("gene")
 inner_join(n2, n24, by = "gene")
 ```
 
-Only 54 genes overlap between these timepoints. This means that a nanomolar solanoeclepin A treatment induces mostly timepoint-specific transcriptional changes.
+Only 13 genes overlap between these timepoints. This means that a nanomolar solanoeclepin A treatment induces mostly timepoint-specific transcriptional changes.
+
+# Heatmaps
+
+
+
 
 # Annotation of DEGs
 
-Start with annotating the list of DEGs of each subset.
-```{r}
+Start with annotating the list of DEGs of each subset. The results will be saved in the Ath1/output/ folder in the format 'annotated_DEGs_[conc_of_treatment]_[timepoint].csv'.
+```{r message = FALSE, warning = FALSE}
 source("Ath1/scripts/get_annotated_DEGs.R")
 DEGs_uM <- get_annotated_DEGs(name = "Ath1/output/annotated_DEGs_uM_alltp.csv")
+DEGs_nM <- get_annotated_DEGs(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", name = "Ath1/output/annotated_DEGs_nM_alltp.csv")
+DEGs_uM2 <- get_annotated_DEGs(tp = 2, method = "treatment", name = "Ath1/output/annotated_DEGs_uM_tp2.csv")
+DEGs_nM2 <- get_annotated_DEGs(tp = 2, trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", method = "treatment", name = "Ath1/output/annotated_DEGs_nM_tp2.csv")
+DEGs_nM6 <- get_annotated_DEGs(tp = 6, trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", method = "treatment", name = "Ath1/output/annotated_DEGs_nM_tp6.csv")
+DEGs_uM24 <- get_annotated_DEGs(tp = 24, method = "treatment", name = "Ath1/output/annotated_DEGs_uM_tp24.csv")
+DEGs_nM24 <- get_annotated_DEGs(tp = 24, trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", method = "treatment", name = "Ath1/output/annotated_DEGs_nM_tp24.csv")
 ```
+
+## GO annotation with AgriGO
+
+The 'genes' column from the files that were created in the Annotation of DEGs section, were run in AgriGO (http://bioinfo.cau.edu.cn/agriGO/analysis.php), with the following settings: SEA, Arabidopsis thaliana, TAIR9, default settings.
+The results were saved as Ath1/output/GOann-agriGO_[conc_of_treatment]_[tp].csv.
 
 

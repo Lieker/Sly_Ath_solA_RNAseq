@@ -10,11 +10,11 @@ source("Ath1/scripts/get_Athaliana_annotations.R")
 
 get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
                                xp_design_csv_file = "Ath1/input/xp_design.csv",
-                               trtm = c("ethanol", "millimolar_solanoeclepinA"),
+                               trtm = c("ethanol","millimolar_solanoeclepinA"),
                                ref_treatment = "ethanol",
                                treatment2 = "millimolar_solanoeclepinA",
                                method = "time+treatment",
-                               tp = c(2,6,24),
+                               tp = c(2, 6, 24), 
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
                                organism = "Arabidopsis thaliana",
@@ -28,13 +28,14 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
                                method2 = "DEG" #this parameter chooses if DEGs acc. to Wald will be analysed or a comparison with LRT will be made
                                ) {
   if (method2 == "DEG") {
-    res <- get_list_of_DEGs(counts_csv_file, 
-                            xp_design_csv_file, 
-                            trtm, 
-                            ref_treatment, 
+    res <- get_list_of_DEGs(counts_csv_file,
+                            xp_design_csv_file,
+                            trtm,
+                            ref_treatment,
                             treatment2,
                             method,
-                            log2FC_threshold, 
+                            tp, 
+                            log2FC_threshold,
                             padj_threshold) %>% rownames_to_column("gene")
   } else if (method2 == "LRTcompare") {
     res <- compare_wald_vs_LRT(trtm = trtm, ref_treatment = ref_treatment, treatment2 = treatment2)
@@ -42,10 +43,8 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
     print("no valid method2; choose DEG or LRTcompare") }
   
   genes <- res$gene
-  names(res)[names(res) == "gene"] <- "transcript"
   genes <- substr(genes, start = 1, stop = 9)
   res$gene <- genes
-
   subset_annotated <- biomartr::biomart(genes = res$gene,
                                         mart = "plants_mart",                 
                                         dataset = "athaliana_eg_gene",           
@@ -54,6 +53,9 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
   names(subset_annotated)[names(subset_annotated) == 'ensembl_gene_id'] <- 'gene'
   
   res_annotated <- left_join(res, subset_annotated, by = "gene")
+  uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
+  res_annotated <- aggregate(res_annotated, by = list(res_annotated$gene), FUN = uniquepaste)
+  write_delim(res_annotated, name, delim = ";")
   
   return(res_annotated)
 }
