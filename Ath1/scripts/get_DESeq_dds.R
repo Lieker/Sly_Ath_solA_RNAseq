@@ -23,13 +23,13 @@ get_DESeq_dds <- function(counts_csv_file = "Ath1/input/counts.csv",
     xp_design <- xp_design[which(xp_design$treatment %in% trtm),] %>% 
       filter(treatment == ref_treatment | treatment == treatment2)
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
-    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ rna_isolation_batch + time + treatment)
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ time + treatment)
   } else if(method == "treatment"){
     xp_design <- xp_design[which(xp_design$treatment %in% trtm),] %>%
       filter(treatment == ref_treatment | treatment == treatment2)
     xp_design <- xp_design[which(xp_design$time %in% tp),]
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
-    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ rna_isolation_batch + treatment)
+    dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
   }
   
   dds <- DESeq(dds)

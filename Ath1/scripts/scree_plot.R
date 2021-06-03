@@ -1,6 +1,8 @@
+source("Ath1/scripts/produce_scaled_counts_matrix.R")
+
 plot_scree <- function(count_csv_file = "Ath1/input/counts.csv",
                        xp_design_csv_file = "Ath1/input/xp_design.csv",
-                       timepoint = c("2","6","24")
+                       tp = c(2,6,24)
 )
   {
   source("Ath1/scripts/filter_counts_based_on_timepoint.R")
@@ -10,7 +12,7 @@ plot_scree <- function(count_csv_file = "Ath1/input/counts.csv",
     
   filtered_counts <- filter_counts_based_on_timepoint(counts = scaled_counts, 
                                                       xp_design_csv_file = xp_design_csv_file, 
-                                                      timepoint = timepoint)
+                                                      tp = tp)
   pca_results <- mypca(x = filtered_counts)
   
   s <- ggplot(pca_results$explained_var, 

@@ -1,35 +1,34 @@
-compare_wald_vs_LRT <- function(counts_csv_file = "Ath2/input/counts.csv",
-                                xp_design_csv_file = "Ath2/input/xp_design.csv",
-                                trtm = c("a","b"),
-                                ref_treatment = "a",
-                                treatment2 = "b",
-                                method = "treatment", #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+compare_wald_vs_LRT <- function(counts_csv_file = "Ath1/input/counts.csv",
+                                xp_design_csv_file = "Ath1/input/xp_design.csv",
+                                trtm = c("ethanol","millimolar_solanoeclepinA"),
+                                tp = c(2,6,24),
+                                ref_treatment = "ethanol",
+                                treatment2 = "millimolar_solanoeclepinA",
+                                method = "time+treatment",
                                 padj_cutoff = 0.05
 )
 {
-  source("Ath2/scripts/get_DESeq_dds.R")
+  source("Ath1/scripts/get_DESeq_dds.R")
   dds <- get_DESeq_dds(counts_csv_file = counts_csv_file,
                        xp_design_csv_file = xp_design_csv_file,
                        trtm = trtm,
                        ref_treatment = ref_treatment,
                        treatment2 = treatment2,
-                       method = method)
-  if(method == "treatment"){
-    dds_lrt <- DESeq(dds, test="LRT", reduced = ~1)
-  } else if(method == "solA" | method == "N:solA"){
-    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P)
-  } else if(method == "N:solA+solA") {
-    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ N + P + N:solA)
+                       method = method,
+                       tp = tp)
+  
+  if(method == "time+treatment"){
+    dds_lrt <- DESeq(dds, test="LRT", reduced = ~time)
+  } else if(method == "treatment"){
+    dds_lrt <- DESeq(dds, test="LRT", reduced = ~ 1)
   }
   
   res_LRT <- results(dds_lrt)
+ 
   sig_res_LRT <- res_LRT %>%
-    data.frame() %>%
-    rownames_to_column(var="gene") %>% 
-    as_tibble() %>% 
-    filter(padj < padj_cutoff)
-  sigLRT_genes <- sig_res_LRT %>% 
-    pull(gene)
+    data.frame() 
+  sig_res_LRT <- sig_res_LRT[complete.cases(sig_res_LRT[, 6]),] %>% dplyr::filter(padj < padj_cutoff) %>% rownames_to_column("gene")
+  sigLRT_genes <- sig_res_LRT %>% pull(gene)
   
   res_wald <- results(dds)
   sig_res_wald <- res_wald %>%

@@ -233,6 +233,8 @@ p5 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "purification_
 p1 + p2 + p3 + p4 + p5 +plot_layout(ncol = 2)
 ```
 
+Even up to PC6, there is no clear treatment effect. Also batches do not influence the PC1 - PC6. Only time shows a clear effect. This means that there are factors influencing the data that we do not know of.
+
 Check the screeplot of all the treatments.
 
 ```{r}
@@ -270,31 +272,31 @@ ggplot(f_ft, aes(value)) +
 
 ```
 
-However, this experiment is based on pair-wise comparisons. We have different timepoints (2, 6 and 24) and within these conditions we compare the effect of adding solA. There could be an effect of solA in one condition, but not in the others. Therefore, it makes sense to look whether samples within conditions cluster based on solA treatment.
+However, this experiment is based on time point specific comparisons. We have different timepoints (2, 6 and 24) and within these conditions we compare the effect of adding solA. There could be an effect of solA in one condition, but not in the others. Therefore, it makes sense to look whether samples within conditions cluster based on solA treatment.
 ```{r}
-p1 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", timepoint = "2") + ggtitle("t=2h")
-p2 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", timepoint = "6") + ggtitle("t=6h")
-p3 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", timepoint = "24") + ggtitle("t=24h")
+p1 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", tp = 2) + ggtitle("t=2h")
+p2 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", tp = 6) + ggtitle("t=6h")
+p3 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", tp = 24) + ggtitle("t=24h")
 
 p1 + p2 + p3 + plot_layout(ncol = 2)
 ```
 
 Not much of solanoeclepin A effect. Let's check the other components.
 ```{r}
-p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", timepoint = "2") + ggtitle("t=2h")
-p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", timepoint = "6") + ggtitle("t=6h")
-p3 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", timepoint = "24") + ggtitle("t=24h")
+p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", tp = 2) + ggtitle("t=2h")
+p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", tp = 6) + ggtitle("t=6h")
+p3 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", tp = 24) + ggtitle("t=24h")
 
 p1 + p2 + p3 + plot_layout(ncol = 2)
 
-p1 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", timepoint = "2") + ggtitle("t=2h")
-p2 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", timepoint = "6") + ggtitle("t=6h")
-p3 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", timepoint = "24") + ggtitle("t=24h")
+p1 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", tp = 2) + ggtitle("t=2h")
+p2 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", tp = 6) + ggtitle("t=6h")
+p3 <- plot_pca(pc_x_axis = "PC5", pc_y_axis = "PC6", tp = 24) + ggtitle("t=24h")
 
 p1 + p2 + p3 + plot_layout(ncol = 2)
 ```
 
-It seems that at t=2h, there clustering of ethanol on the one hand and the two solanoeclepin treatments on the other hand, in PC3/4.
+Up to PC6, there is no clear solanoeclepin A effect. Other unknown factors are influencing our data more.
 
 # DEG analysis
 
@@ -305,46 +307,133 @@ Use design formula ~ time + treatment
 source("Ath1/scripts/volcanoplot.R")
 ```
 ```{r, warning = FALSE, message = FALSE}
-make_volcanoplot(log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "Micromolar solA, all timepoints, Wald", method = "time+treatment")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "Nanomolar solA, all timepoints, Wald", method = "time+treatment")
+make_volcanoplot(log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "Micromolar solA, all timepoints, Wald", method = "time+treatment")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "Nanomolar solA, all timepoints, Wald", method = "time+treatment")
 ```
 
-So there are a number of differentially expressed genes in all timepoints, resulting from solanoeclepin treatment (even in nM!).
-Let's see which of these overlap:
+So especially in the nM treatment, there are some DEGs, taking all timepoints into account. For the micromolar treatment, there is only 1.
+Let's see if it overlaps:
 
 ``` {r message = FALSE, warning = FALSE}
 source("Ath1/scripts/get_filtered_list_of_DEGs.R")
 ```
-```{r}
+```{r message = FALSE, warning = FALSE}
 umolar <- get_list_of_DEGs() %>% rownames_to_column("Gene")
 nmolar <- get_list_of_DEGs(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA") %>% rownames_to_column("Gene")
-overlap <- inner_join(umolar, nmolar, by = "Gene")
-
+inner_join(umolar, nmolar, by = "Gene")
 ```
+
+Indeed, that gene, AT5G56550.1, overlaps with the nanomolar treatment.
 
 We can also check if there are DEGs specifically for a timepoint.
 First time point = 2h:
-```{r}
-make_volcanoplot(tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 2h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 2h, uM solA, Wald test")
+```{r message = FALSE, warning = FALSE}
+make_volcanoplot(tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 2h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 2h, nM solA, Wald test")
 ```
 
 Then for time point = 6h:
-```{r}
-make_volcanoplot(tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
+```{r message = FALSE, warning = FALSE}
+make_volcanoplot(tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 6h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 6h, nM solA, Wald test")
 ```
 
 Then for time point = 24h:
-```{r}
-make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 24h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 24h, uM solA, Wald test")
+```{r message = FALSE, warning = FALSE}
+make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 24h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 24h, nM solA, Wald test")
 ```
 
 
-## Heatmap
+## LRT
 
-```{r}
+Compare Wald test with LRT test, which checks the null-model with the full model. This is a particularly suitable method for experiments with multiple time points.
+First for the uM solA treatment:
+```{r message=FALSE, warning=FALSE}
+source("Ath1/scripts/compare_Wald_vs_LRT.R")
+u <- compare_wald_vs_LRT()
+length(row.names(u))
+u
+```
+
+Then for the nM solA treatment:
+```{r message=FALSE, warning=FALSE}
+n <- compare_wald_vs_LRT(trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+                    treatment2 = "nanomolar_solanoeclepinA")
+length(row.names(n))
+n
+```
+
+Do the same for the separate time points to see if there are any confirmed DEGs:
+t=2h
+```{r message = FALSE, warning=FALSE}
+u2 <- compare_wald_vs_LRT(tp = 2, method = "treatment")
+n2 <- compare_wald_vs_LRT(tp = 2, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+                    treatment2 = "nanomolar_solanoeclepinA")
+length(row.names(u2))
+length(row.names(n2))
+```
+
+Then for t=6h
+```{r message=FALSE, warning=FALSE}
+u6 <- compare_wald_vs_LRT(tp = 6, method = "treatment")
+n6 <- compare_wald_vs_LRT(tp = 6, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+                    treatment2 = "nanomolar_solanoeclepinA")
+length(row.names(u6))
+length(row.names(n6))
+```
+
+And for t = 24h:
+```{r message=FALSE, warning = FALSE}
+u24 <- compare_wald_vs_LRT(tp = 24, method = "treatment")
+n24 <- compare_wald_vs_LRT(tp = 24, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+                    treatment2 = "nanomolar_solanoeclepinA")
+length(row.names(u24))
+length(row.names(n24))
+```
+
+From these results, it seems that solanoeclepin A treatment is mostly affecting gene expression at 2h and 24h, and at nanomolar concentrations. Let's visualise this in a barplot:
+```{r message = FALSE, warning = FALSE}
+samples <- c("all samples, uM solA", "all samples, nM solA","t=2h, uM solA" ,"t=2h, nM solA","t=6h, uM solA","t=6h, nM solA", "t=24h, uM solA", "t=24h, nM solA")
+overlap <- c(length(row.names(u)), length(row.names(n)), length(row.names(u2)), length(row.names(n2)), length(row.names(u6)), length(row.names(n6)), length(row.names(u24)), length(row.names(n24)))
+x <- data.frame(samples, overlap)
+x <- melt(x)
+ggplot(data = x,
+       aes(x = samples, y = value, fill = variable)) +
+  geom_bar(position = "dodge",
+           stat = "identity") +
+  ggtitle("DEGs by solA treatment, different sample subgroups") +
+  xlab("") +
+  ylab("# DEGs") + 
+  theme_minimal() +
+  scale_fill_manual(values = c("goldenrod3","sienna3","dodgerblue3")) +
+  coord_flip() +
+  geom_text(aes(label=value), 
+            position = position_dodge(width = 0.9), 
+            vjust = 0.3, 
+            hjust = 1.2,
+            color="white", 
+            size=3.5)
 
 
 ```
+
+Let's see if the DEGs from 2 and 24h are overlapping, or if these are different genes.
+
+```{r message=FALSE, warning=FALSE}
+n2 <- n2 %>% rownames_to_column("gene")
+n24 <- n24 %>% rownames_to_column("gene")
+inner_join(n2, n24, by = "gene")
+```
+
+Only 54 genes overlap between these timepoints. This means that a nanomolar solanoeclepin A treatment induces mostly timepoint-specific transcriptional changes.
+
+# Annotation of DEGs
+
+Start with annotating the list of DEGs of each subset.
+```{r}
+source("Ath1/scripts/get_annotated_DEGs.R")
+DEGs_uM <- get_annotated_DEGs(name = "Ath1/output/annotated_DEGs_uM_alltp.csv")
+```
+
+
