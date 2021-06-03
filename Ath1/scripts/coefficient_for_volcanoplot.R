@@ -16,10 +16,10 @@ coefficient <- function(counts_csv_file = "Ath1/input/counts.csv",
                        method,
                        tp)
   if(method == "time+treatment"){
-    r <- resultsNames(dds)[11]
+    r <- resultsNames(dds)[4]
     dds$condition <- relevel(dds$treatment, ref = "ethanol")
   } else if(method == "treatment"){
-    r <- resultsNames(dds)[9]
+    r <- resultsNames(dds)[2]
     dds$condition <- relevel(dds$treatment, ref = "ethanol")
   }
   

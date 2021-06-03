@@ -15,7 +15,7 @@ produce_scaled_counts_matrix <- function(count_csv_file = "Ath1/input/counts.csv
                         header = TRUE, 
                         stringsAsFactors = FALSE, 
                         check.names = FALSE, fileEncoding = "UTF-8-BOM")
-  xp_design$time <- as.character(xp_design$time)
+  xp_design$time <- as.factor(xp_design$time)
   
 
   dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ 1)
