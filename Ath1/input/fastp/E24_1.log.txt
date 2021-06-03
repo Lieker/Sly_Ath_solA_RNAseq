@@ -38,4 +38,4 @@ JSON report: /scratch/mgallan1/temp/fastp/E24_1_fastp.json
 HTML report: /scratch/mgallan1/temp/fastp/E24_1_fastp.html
 
 fastp --thread 10 --html /scratch/mgallan1/temp/fastp/E24_1_fastp.html --json /scratch/mgallan1/temp/fastp/E24_1_fastp.json --qualified_quality_phred 30 --in1 /scratch/mgallan1/Ath1/E24_1_1.fq.gz --in2 /scratch/mgallan1/Ath1/E24_1_2.fq.gz --out1 /scratch/mgallan1/temp/trimmed/E24_1_R1_trimmed.fq.gz --out2 /scratch/mgallan1/temp/trimmed/E24_1_R2_trimmed.fq.gz 
-fastp v0.19.5, time used: 142 seconds
+fastp v0.19.5, time used: 171 seconds

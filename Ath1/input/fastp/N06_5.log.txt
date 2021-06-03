@@ -38,4 +38,4 @@ JSON report: /scratch/mgallan1/temp/fastp/N06_5_fastp.json
 HTML report: /scratch/mgallan1/temp/fastp/N06_5_fastp.html
 
 fastp --thread 10 --html /scratch/mgallan1/temp/fastp/N06_5_fastp.html --json /scratch/mgallan1/temp/fastp/N06_5_fastp.json --qualified_quality_phred 30 --in1 /scratch/mgallan1/Ath1/N06_5_1.fq.gz --in2 /scratch/mgallan1/Ath1/N06_5_2.fq.gz --out1 /scratch/mgallan1/temp/trimmed/N06_5_R1_trimmed.fq.gz --out2 /scratch/mgallan1/temp/trimmed/N06_5_R2_trimmed.fq.gz 
-fastp v0.19.5, time used: 141 seconds
+fastp v0.19.5, time used: 250 seconds

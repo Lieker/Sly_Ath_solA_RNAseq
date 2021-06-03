@@ -45,7 +45,7 @@ STAR   --runThreadN 10   --genomeDir /scratch/mgallan1/temp/genome/   --readFile
 Number of fastq files for each mate = 1
 
    Input read files for mate 1 :
--rw-r--r--. 1 mgallan1 Domain Users 1459652174 May 31 14:28 /scratch/mgallan1/temp/trimmed/E02_1_R1_trimmed.fq.gz
+-rw-r--r--. 1 mgallan1 Domain Users 1350386615 Jun  2 10:47 /scratch/mgallan1/temp/trimmed/E02_1_R1_trimmed.fq.gz
 
    readsCommandsFile:
 exec > "/scratch/mgallan1/results/star/E02_1__STARtmp/tmp.fifo.read1"
@@ -54,7 +54,7 @@ zcat      "/scratch/mgallan1/temp/trimmed/E02_1_R1_trimmed.fq.gz"
 
 
    Input read files for mate 2 :
--rw-r--r--. 1 mgallan1 Domain Users 1461490724 May 31 14:28 /scratch/mgallan1/temp/trimmed/E02_1_R2_trimmed.fq.gz
+-rw-r--r--. 1 mgallan1 Domain Users 1341587890 Jun  2 10:47 /scratch/mgallan1/temp/trimmed/E02_1_R2_trimmed.fq.gz
 
    readsCommandsFile:
 exec > "/scratch/mgallan1/results/star/E02_1__STARtmp/tmp.fifo.read2"
@@ -93,7 +93,7 @@ Number of real (reference) chromosomes= 7
 6	BK010421.1	367808	119799808
 7	AP000423.1	154478	120324096
 --sjdbOverhang = 100 taken from the generated genome
-Started loading the genome: Mon May 31 15:01:05 2021
+Started loading the genome: Wed Jun  2 16:40:21 2021
 
 Genome: size given as a parameter = 144313285
 SA: size given as a parameter = 1180503946
@@ -107,7 +107,7 @@ Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 144313285 byte
 SA file size: 1180503946 bytes; state: good=1 eof=0 fail=0 bad=0
 Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 1180503946 bytes
 Loading SAindex ... done: 391468491 bytes
-Finished loading the genome: Mon May 31 15:01:06 2021
+Finished loading the genome: Wed Jun  2 16:40:54 2021
 
 Processing splice junctions database sjdbN=118045,   pGe.sjdbOverhang=100 
 To accommodate alignIntronMax=25000 redefined winBinNbits=13
@@ -116,77 +116,77 @@ Created thread # 1
 Created thread # 2
 Created thread # 3
 Created thread # 4
+Starting to map file # 0
+mate 1:   /scratch/mgallan1/temp/trimmed/E02_1_R1_trimmed.fq.gz
+mate 2:   /scratch/mgallan1/temp/trimmed/E02_1_R2_trimmed.fq.gz
 Created thread # 5
 Created thread # 6
 Created thread # 7
 Created thread # 8
 Created thread # 9
-Starting to map file # 0
-mate 1:   /scratch/mgallan1/temp/trimmed/E02_1_R1_trimmed.fq.gz
-mate 2:   /scratch/mgallan1/temp/trimmed/E02_1_R2_trimmed.fq.gz
-Thread #5 end of input stream, nextChar=-1
-BAM sorting: 2486 mapped reads
+BAM sorting: 239633 mapped reads
 BAM sorting bins genomic start loci:
-1	0	10472383
-2	0	10472443
-3	0	10472460
-4	0	10472501
-5	0	10472580
-6	0	10472668
-7	0	10472828
-8	0	10473062
-9	0	10475005
-10	0	10475084
-11	0	10475110
-12	0	10475143
-13	0	10475154
-14	0	10475168
-15	0	10475240
-16	0	10475318
-17	0	10475360
-18	0	10475389
-19	0	10475567
-20	0	10475689
-21	0	10478116
-22	0	10478228
-23	0	10478279
-24	0	10478402
-25	0	10478466
-26	0	10478505
-27	0	10478554
-28	0	10478598
-29	0	10478626
-30	0	10478693
-31	0	10478704
-32	0	10478716
-33	0	10478725
-34	0	10478748
-35	0	10478752
-36	0	10478766
-37	0	10478774
-38	0	10478785
-39	0	10478823
-40	0	10478831
-41	0	21806368
-42	1	14522677
-43	1	14522994
-44	1	14525149
-45	1	14525379
-46	2	1920419
-47	3	6397377
-48	4	6679454
-Completed: thread #1
-Completed: thread #2
-Completed: thread #4
-Completed: thread #9
-Completed: thread #3
+1	0	2048991
+2	0	3136492
+3	0	5211953
+4	0	7176893
+5	0	9747759
+6	0	10478462
+7	0	11363730
+8	0	17989288
+9	0	20803254
+10	0	23234832
+11	0	25048550
+12	0	26564658
+13	0	28657562
+14	1	4588
+15	1	1823460
+16	1	7837381
+17	1	10929766
+18	1	13884451
+19	1	15320851
+20	1	16910674
+21	1	19018817
+22	2	967082
+23	2	2782181
+24	2	4592405
+25	2	6043296
+26	2	8919934
+27	2	14198920
+28	2	17493693
+29	2	19884272
+30	2	21659847
+31	3	37531
+32	3	2719833
+33	3	8056118
+34	3	11173834
+35	3	13310031
+36	3	15470168
+37	3	17443329
+38	4	210186
+39	4	2565141
+40	4	4489685
+41	4	6680606
+42	4	9307729
+43	4	15377670
+44	4	15607093
+45	4	19272583
+46	4	22039260
+47	4	24289816
+48	4	26412638
+Thread #0 end of input stream, nextChar=-1
 Completed: thread #0
+Completed: thread #8
+Completed: thread #7
+Completed: thread #1
 Joined thread # 1
+Completed: thread #9
+Completed: thread #2
 Joined thread # 2
+Completed: thread #4
+Completed: thread #3
 Joined thread # 3
 Joined thread # 4
-Completed: thread #7
-Completed: thread #8
 Completed: thread #5
 Joined thread # 5
 Completed: thread #6
@@ -194,6 +194,6 @@ Joined thread # 6
 Joined thread # 7
 Joined thread # 8
 Joined thread # 9
-May 31 15:02:40 ..... started sorting BAM
-Max memory needed for sorting = 250787
+Jun 02 16:42:55 ..... started sorting BAM
+Max memory needed for sorting = 191208876
 ALL DONE!

@@ -45,7 +45,7 @@ STAR   --runThreadN 10   --genomeDir /scratch/mgallan1/temp/genome/   --readFile
 Number of fastq files for each mate = 1
 
    Input read files for mate 1 :
--rw-r--r--. 1 mgallan1 Domain Users 1457489258 May 31 14:32 /scratch/mgallan1/temp/trimmed/E24_4_R1_trimmed.fq.gz
+-rw-r--r--. 1 mgallan1 Domain Users 1457487322 Jun  2 10:31 /scratch/mgallan1/temp/trimmed/E24_4_R1_trimmed.fq.gz
 
    readsCommandsFile:
 exec > "/scratch/mgallan1/results/star/E24_4__STARtmp/tmp.fifo.read1"
@@ -54,7 +54,7 @@ zcat      "/scratch/mgallan1/temp/trimmed/E24_4_R1_trimmed.fq.gz"
 
 
    Input read files for mate 2 :
--rw-r--r--. 1 mgallan1 Domain Users 1456804223 May 31 14:32 /scratch/mgallan1/temp/trimmed/E24_4_R2_trimmed.fq.gz
+-rw-r--r--. 1 mgallan1 Domain Users 1456805906 Jun  2 10:31 /scratch/mgallan1/temp/trimmed/E24_4_R2_trimmed.fq.gz
 
    readsCommandsFile:
 exec > "/scratch/mgallan1/results/star/E24_4__STARtmp/tmp.fifo.read2"
@@ -93,7 +93,7 @@ Number of real (reference) chromosomes= 7
 6	BK010421.1	367808	119799808
 7	AP000423.1	154478	120324096
 --sjdbOverhang = 100 taken from the generated genome
-Started loading the genome: Mon May 31 15:05:10 2021
+Started loading the genome: Wed Jun  2 16:45:44 2021
 
 Genome: size given as a parameter = 144313285
 SA: size given as a parameter = 1180503946
@@ -107,7 +107,7 @@ Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 144313285 byte
 SA file size: 1180503946 bytes; state: good=1 eof=0 fail=0 bad=0
 Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 1180503946 bytes
 Loading SAindex ... done: 391468491 bytes
-Finished loading the genome: Mon May 31 15:05:11 2021
+Finished loading the genome: Wed Jun  2 16:45:44 2021
 
 Processing splice junctions database sjdbN=118045,   pGe.sjdbOverhang=100 
 To accommodate alignIntronMax=25000 redefined winBinNbits=13
@@ -124,76 +124,76 @@ Created thread # 6
 Created thread # 7
 Created thread # 8
 Created thread # 9
-BAM sorting: 239565 mapped reads
+BAM sorting: 239560 mapped reads
 BAM sorting bins genomic start loci:
-1	0	2049131
-2	0	3189561
-3	0	5446755
-4	0	7453523
-5	0	9741774
-6	0	10478654
-7	0	12150736
+1	0	2049134
+2	0	3176739
+3	0	5446744
+4	0	7453479
+5	0	9741035
+6	0	10478647
+7	0	12110535
 8	0	18986267
-9	0	21465561
-10	0	24128624
-11	0	25236068
-12	0	27775198
-13	0	29925008
-14	1	385994
+9	0	21503909
+10	0	24134318
+11	0	25236664
+12	0	27786968
+13	0	29925534
+14	1	397170
 15	1	5539391
-16	1	9265643
+16	1	9265717
 17	1	12673625
-18	1	14523275
-19	1	16410201
-20	1	18075032
+18	1	14523268
+19	1	16408682
+20	1	18074069
 21	2	183704
-22	2	1854174
-23	2	3534697
-24	2	5308777
-25	2	7437710
-26	2	10256483
-27	2	14202939
-28	2	18195421
-29	2	20339745
-30	2	22269748
-31	3	460936
-32	3	6278237
-33	3	8571857
-34	3	11646573
-35	3	13554961
-36	3	15670826
-37	3	17632885
-38	4	228478
-39	4	2362926
-40	4	4395157
-41	4	6511316
-42	4	9075343
-43	4	15377631
-44	4	16720864
-45	4	19665008
-46	4	22234277
-47	4	24349787
-48	4	26555006
-Thread #7 end of input stream, nextChar=-1
-Completed: thread #9
-Completed: thread #6
-Completed: thread #1
+22	2	1874581
+23	2	3576032
+24	2	5332296
+25	2	7442850
+26	2	10256533
+27	2	14202973
+28	2	18208831
+29	2	20339763
+30	2	22286860
+31	3	477189
+32	3	6294068
+33	3	8565911
+34	3	11646510
+35	3	13548132
+36	3	15669686
+37	3	17626411
+38	4	228271
+39	4	2321869
+40	4	4388392
+41	4	6495095
+42	4	9073720
+43	4	15377617
+44	4	16676872
+45	4	19633064
+46	4	22217234
+47	4	24308899
+48	4	26550148
+Thread #0 end of input stream, nextChar=-1
 Completed: thread #2
+Completed: thread #8
+Completed: thread #1
+Completed: thread #4
+Completed: thread #9
 Completed: thread #3
+Completed: thread #6
+Completed: thread #5
 Completed: thread #0
 Joined thread # 1
 Joined thread # 2
 Joined thread # 3
-Completed: thread #4
 Joined thread # 4
-Completed: thread #7
-Completed: thread #5
 Joined thread # 5
 Joined thread # 6
+Completed: thread #7
 Joined thread # 7
-Completed: thread #8
 Joined thread # 8
 Joined thread # 9
-May 31 15:07:11 ..... started sorting BAM
-Max memory needed for sorting = 213748012
+Jun 02 16:47:50 ..... started sorting BAM
+Max memory needed for sorting = 214468069
 ALL DONE!
