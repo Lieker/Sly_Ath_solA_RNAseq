@@ -4,16 +4,17 @@ library("biomaRt")
 library(clusterProfiler)
 library(org.At.tair.db)
 
-source("Ath2/scripts/compare_Wald_vs_LRT.R")
-source("Ath2/scripts/get_filtered_list_of_DEGs.R")
-source("Ath2/scripts/get_Athaliana_annotations.R")
+source("Ath1/scripts/compare_Wald_vs_LRT.R")
+source("Ath1/scripts/get_filtered_list_of_DEGs.R")
+source("Ath1/scripts/get_Athaliana_annotations.R")
 
-get_annotated_DEGs <- function(counts_csv_file = "Ath2/input/counts.csv",
-                               xp_design_csv_file = "Ath2/input/xp_design.csv",
-                               trtm = c("a","b"),
-                               ref_treatment = "a",
-                               treatment2 = "b",
-                               method = "treatment", #this parameter chooses which formula design will be chosen: ~treatment or ~solA
+get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
+                               xp_design_csv_file = "Ath1/input/xp_design.csv",
+                               trtm = c("ethanol", "millimolar_solanoeclepinA"),
+                               ref_treatment = "ethanol",
+                               treatment2 = "millimolar_solanoeclepinA",
+                               method = "time+treatment",
+                               tp = c(2,6,24),
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
                                organism = "Arabidopsis thaliana",
@@ -23,7 +24,7 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath2/input/counts.csv",
                                         "description",
                                         "external_gene_name",
                                         "external_gene_source"),
-                               name = "Ath2/output/annotated_DEGslist.csv",
+                               name = "Ath1/output/annotated_DEGslist.csv",
                                method2 = "DEG" #this parameter chooses if DEGs acc. to Wald will be analysed or a comparison with LRT will be made
                                ) {
   if (method2 == "DEG") {

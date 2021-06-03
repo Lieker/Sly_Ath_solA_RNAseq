@@ -5,7 +5,7 @@ compare_wald_vs_LRT <- function(counts_csv_file = "Ath1/input/counts.csv",
                                 ref_treatment = "ethanol",
                                 treatment2 = "millimolar_solanoeclepinA",
                                 method = "time+treatment",
-                                padj_cutoff = 0
+                                padj_cutoff = 0.05
 )
 {
   source("Ath1/scripts/get_DESeq_dds.R")
@@ -16,6 +16,7 @@ compare_wald_vs_LRT <- function(counts_csv_file = "Ath1/input/counts.csv",
                        treatment2 = treatment2,
                        method = method,
                        tp = tp)
+  
   if(method == "time+treatment"){
     dds_lrt <- DESeq(dds, test="LRT", reduced = ~time)
   } else if(method == "treatment"){
@@ -23,14 +24,11 @@ compare_wald_vs_LRT <- function(counts_csv_file = "Ath1/input/counts.csv",
   }
   
   res_LRT <- results(dds_lrt)
+ 
   sig_res_LRT <- res_LRT %>%
-    data.frame() %>%
-    rownames_to_column(var="gene") %>% 
-    as_tibble() %>% 
-    filter(padj < padj_cutoff)
-  return(sig_res_LRT)
-  sigLRT_genes <- sig_res_LRT %>% 
-    pull(gene)
+    data.frame() 
+  sig_res_LRT <- sig_res_LRT[complete.cases(sig_res_LRT[, 6]),] %>% dplyr::filter(padj < padj_cutoff) %>% rownames_to_column("gene")
+  sigLRT_genes <- sig_res_LRT %>% pull(gene)
   
   res_wald <- results(dds)
   sig_res_wald <- res_wald %>%

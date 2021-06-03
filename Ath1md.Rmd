@@ -329,19 +329,19 @@ We can also check if there are DEGs specifically for a timepoint.
 First time point = 2h:
 ```{r message = FALSE, warning = FALSE}
 make_volcanoplot(tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 2h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 2h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 2, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 2h, nM solA, Wald test")
 ```
 
 Then for time point = 6h:
-```{r}
-make_volcanoplot(tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 6h, nM solA, Wald test")
+```{r message = FALSE, warning = FALSE}
+make_volcanoplot(tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 6h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 6, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 6h, nM solA, Wald test")
 ```
 
 Then for time point = 24h:
-```{r}
-make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 24h, uM solA, Wald test")
-make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "DEGs at t = 24h, nM solA, Wald test")
+```{r message = FALSE, warning = FALSE}
+make_volcanoplot(tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 24h, uM solA, Wald test")
+make_volcanoplot(trtm = c("ethanol", "nanomolar_solanoeclepinA"), treatment2 = "nanomolar_solanoeclepinA", tp = 24, method = "treatment", FCcutoff_volcano = 1, padj_threshold = 0.01, ttl = "DEGs at t = 24h, nM solA, Wald test")
 ```
 
 
@@ -351,38 +351,89 @@ Compare Wald test with LRT test, which checks the null-model with the full model
 First for the uM solA treatment:
 ```{r message=FALSE, warning=FALSE}
 source("Ath1/scripts/compare_Wald_vs_LRT.R")
-compare_wald_vs_LRT()
+u <- compare_wald_vs_LRT()
+length(row.names(u))
+u
 ```
 
 Then for the nM solA treatment:
 ```{r message=FALSE, warning=FALSE}
-compare_wald_vs_LRT(trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+n <- compare_wald_vs_LRT(trtm = c("ethanol", "nanomolar_solanoeclepinA"),
                     treatment2 = "nanomolar_solanoeclepinA")
-
-
+length(row.names(n))
+n
 ```
 
 Do the same for the separate time points to see if there are any confirmed DEGs:
 t=2h
-```{r message=FALSE, warning=FALSE}
-compare_wald_vs_LRT(tp = 2, method = "treatment")
-compare_wald_vs_LRT(tp = 2, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+```{r message = FALSE, warning=FALSE}
+u2 <- compare_wald_vs_LRT(tp = 2, method = "treatment")
+n2 <- compare_wald_vs_LRT(tp = 2, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
                     treatment2 = "nanomolar_solanoeclepinA")
-
-
+length(row.names(u2))
+length(row.names(n2))
 ```
 
 Then for t=6h
 ```{r message=FALSE, warning=FALSE}
-compare_wald_vs_LRT(tp = 6, method = "treatment")
-compare_wald_vs_LRT(tp = 6, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+u6 <- compare_wald_vs_LRT(tp = 6, method = "treatment")
+n6 <- compare_wald_vs_LRT(tp = 6, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
                     treatment2 = "nanomolar_solanoeclepinA")
+length(row.names(u6))
+length(row.names(n6))
 ```
 
 And for t = 24h:
-```{r message=FALSE, warning=FALSE}
-compare_wald_vs_LRT(tp = 24, method = "treatment")
-compare_wald_vs_LRT(tp = 24, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
+```{r message=FALSE, warning = FALSE}
+u24 <- compare_wald_vs_LRT(tp = 24, method = "treatment")
+n24 <- compare_wald_vs_LRT(tp = 24, method = "treatment", trtm = c("ethanol", "nanomolar_solanoeclepinA"),
                     treatment2 = "nanomolar_solanoeclepinA")
+length(row.names(u24))
+length(row.names(n24))
 ```
+
+From these results, it seems that solanoeclepin A treatment is mostly affecting gene expression at 2h and 24h, and at nanomolar concentrations. Let's visualise this in a barplot:
+```{r message = FALSE, warning = FALSE}
+samples <- c("all samples, uM solA", "all samples, nM solA","t=2h, uM solA" ,"t=2h, nM solA","t=6h, uM solA","t=6h, nM solA", "t=24h, uM solA", "t=24h, nM solA")
+overlap <- c(length(row.names(u)), length(row.names(n)), length(row.names(u2)), length(row.names(n2)), length(row.names(u6)), length(row.names(n6)), length(row.names(u24)), length(row.names(n24)))
+x <- data.frame(samples, overlap)
+x <- melt(x)
+ggplot(data = x,
+       aes(x = samples, y = value, fill = variable)) +
+  geom_bar(position = "dodge",
+           stat = "identity") +
+  ggtitle("DEGs by solA treatment, different sample subgroups") +
+  xlab("") +
+  ylab("# DEGs") + 
+  theme_minimal() +
+  scale_fill_manual(values = c("goldenrod3","sienna3","dodgerblue3")) +
+  coord_flip() +
+  geom_text(aes(label=value), 
+            position = position_dodge(width = 0.9), 
+            vjust = 0.3, 
+            hjust = 1.2,
+            color="white", 
+            size=3.5)
+
+
+```
+
+Let's see if the DEGs from 2 and 24h are overlapping, or if these are different genes.
+
+```{r message=FALSE, warning=FALSE}
+n2 <- n2 %>% rownames_to_column("gene")
+n24 <- n24 %>% rownames_to_column("gene")
+inner_join(n2, n24, by = "gene")
+```
+
+Only 54 genes overlap between these timepoints. This means that a nanomolar solanoeclepin A treatment induces mostly timepoint-specific transcriptional changes.
+
+# Annotation of DEGs
+
+Start with annotating the list of DEGs of each subset.
+```{r}
+source("Ath1/scripts/get_annotated_DEGs.R")
+DEGs_uM <- get_annotated_DEGs(name = "Ath1/output/annotated_DEGs_uM_alltp.csv")
+```
+
 
