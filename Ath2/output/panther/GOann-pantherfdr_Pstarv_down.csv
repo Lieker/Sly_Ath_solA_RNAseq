@@ -1,0 +1,42 @@
+GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (20),expected,over/under,foldenrich,rawPvalue,FDR
+cellular response to hypoxia (GO:0071456),234,9,0.17,+,52.81,4.39E-14,2.62E-10
+cellular response to decreased oxygen levels (GO:0036294),236,9,0.17,+,52.36,4.73E-14,1.41E-10
+cellular response to oxygen levels (GO:0071453),237,9,0.17,+,52.14,4.91E-14,9.75E-11
+response to chitin (GO:0010200),138,5,0.1,+,49.75,5.18E-08,0.000022
+response to hypoxia (GO:0001666),260,9,0.19,+,47.53,1.1E-13,1.64E-10
+response to decreased oxygen levels (GO:0036293),264,9,0.19,+,46.81,1.26E-13,1.5E-10
+response to oxygen levels (GO:0070482),266,9,0.19,+,46.46,1.35E-13,1.34E-10
+response to organonitrogen compound (GO:0010243),250,6,0.18,+,32.95,2.14E-08,0.0000106
+response to nitrogen compound (GO:1901698),309,6,0.23,+,26.66,7.32E-08,0.0000291
+response to heat (GO:0009408),234,4,0.17,+,23.47,0.0000238,0.00383
+protein folding (GO:0006457),182,3,0.13,+,22.63,0.000314,0.0457
+response to salt stress (GO:0009651),450,6,0.33,+,18.31,0.000000643,0.000147
+response to osmotic stress (GO:0006970),532,6,0.39,+,15.49,0.00000168,0.000303
+response to temperature stimulus (GO:0009266),630,7,0.46,+,15.26,0.000000207,0.0000617
+cellular response to stress (GO:0033554),1129,12,0.82,+,14.59,2.29E-12,1.95E-09
+cellular response to chemical stimulus (GO:0070887),1092,11,0.8,+,13.83,4.99E-11,2.97E-08
+response to cold (GO:0009409),417,4,0.3,+,13.17,0.000217,0.0322
+response to abiotic stimulus (GO:0009628),2150,14,1.57,+,8.94,8.34E-12,5.51E-09
+response to oxygen-containing compound (GO:1901700),1536,9,1.12,+,8.05,0.000000523,0.00013
+response to organic substance (GO:0010033),1724,10,1.26,+,7.96,0.0000001,0.0000373
+response to chemical (GO:0042221),2712,15,1.98,+,7.59,8.21E-12,6.11E-09
+response to stress (GO:0006950),3136,15,2.28,+,6.57,6.65E-11,0.000000036
+cellular response to stimulus (GO:0051716),2514,12,1.83,+,6.55,2.21E-08,0.0000101
+regulation of nucleobase-containing compound metabolic process (GO:0019219),2343,11,1.71,+,6.45,0.000000144,0.0000505
+regulation of cellular macromolecule biosynthetic process (GO:2000112),2373,11,1.73,+,6.36,0.000000164,0.0000543
+regulation of macromolecule biosynthetic process (GO:0010556),2386,11,1.74,+,6.33,0.000000174,0.0000544
+"regulation of transcription, DNA-templated (GO:0006355)",2174,10,1.58,+,6.32,0.000000865,0.000184
+regulation of nucleic acid-templated transcription (GO:1903506),2174,10,1.58,+,6.32,0.000000865,0.000178
+regulation of RNA biosynthetic process (GO:2001141),2176,10,1.58,+,6.31,0.000000873,0.000173
+regulation of cellular biosynthetic process (GO:0031326),2487,11,1.81,+,6.07,0.000000265,0.0000716
+regulation of RNA metabolic process (GO:0051252),2283,10,1.66,+,6.01,0.00000136,0.00026
+regulation of biosynthetic process (GO:0009889),2524,11,1.84,+,5.98,0.000000308,0.0000796
+regulation of nitrogen compound metabolic process (GO:0051171),2713,11,1.98,+,5.57,0.000000639,0.000152
+regulation of primary metabolic process (GO:0080090),2796,11,2.04,+,5.4,0.000000865,0.000191
+regulation of gene expression (GO:0010468),2612,10,1.9,+,5.26,0.00000462,0.000764
+regulation of cellular metabolic process (GO:0031323),2950,11,2.15,+,5.12,0.00000148,0.000276
+regulation of macromolecule metabolic process (GO:0060255),2990,11,2.18,+,5.05,0.00000169,0.000297
+regulation of metabolic process (GO:0019222),3261,11,2.37,+,4.63,0.00000401,0.000683
+response to stimulus (GO:0050896),5591,15,4.07,+,3.68,0.000000234,0.0000663
+regulation of cellular process (GO:0050794),4693,11,3.42,+,3.22,0.000134,0.021
+biological regulation (GO:0065007),5895,12,4.29,+,2.8,0.00021,0.032

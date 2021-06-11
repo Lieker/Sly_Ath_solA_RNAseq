@@ -18,7 +18,7 @@ knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 ```
 
 ```{r setup, include=FALSE}
-```{r include=FALSE}
+```{r include = FALSE}
 #########
 # Library
 #########
@@ -137,6 +137,22 @@ if ("DEGreport" %in% installed.packages()){
 
 In this workflow I will analyse two identical experiments, executed at different moments in time. Both of them involved Arabidopsis seedlings that were treated either with solanoeclepin A or ethanol carrier, and harvested for RNA extraction 2 hours later. Age, growth conditions, genotype, concentration of solA was the same.
 The goal of this analysis is to identify genes that are activated by treatment with solanoeclepin A.
+Let's combine the two datasets in one counts file.
+```{r message = FALSE, warning = FALSE}
+Ath1 <- read.csv(file = "Ath1/input/counts.csv",
+                 header = TRUE,
+                 stringsAsFactors = FALSE,
+                 fileEncoding = "UTF-8-BOM")
+Ath1 <- Ath1[,c(1:7,18:22)]
+Ath2 <- read.csv(file = "Ath2/input/counts.csv",
+                 header = TRUE,
+                 stringsAsFactors = FALSE,
+                 fileEncoding = "UTF-8-BOM")
+Ath2 <- Ath2[,c(1:11)]
+sum(Ath1$Geneid == Ath2$Geneid) #All Geneid's are the same, so it is safe to join these dataframe with left_join()
+Ath12 <- left_join(Ath1, Ath2, by = "Geneid")
+write_csv(Ath12, "Ath2/input/counts_Ath12.csv")
+```
 
 Let's start with PCA analysis.
 ```{r}

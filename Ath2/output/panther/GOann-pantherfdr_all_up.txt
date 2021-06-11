@@ -1,0 +1,94 @@
+GO biological process complete	Arabidopsis thaliana - REFLIST (27462)	upload_1 (198)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+negative regulation of anion channel activity by blue light (GO:0010362)	2	2	.01	+	 > 100	3.03E-04	2.61E-02
+regulation of anion channel activity by blue light (GO:0010361)	2	2	.01	+	 > 100	3.03E-04	2.58E-02
+negative regulation of ion transmembrane transport (GO:0034766)	3	2	.02	+	92.46	5.03E-04	3.99E-02
+negative regulation of transmembrane transport (GO:0034763)	3	2	.02	+	92.46	5.03E-04	3.94E-02
+negative regulation of ion transmembrane transporter activity (GO:0032413)	3	2	.02	+	92.46	5.03E-04	3.89E-02
+negative regulation of transporter activity (GO:0032410)	3	2	.02	+	92.46	5.03E-04	3.84E-02
+negative regulation of anion transmembrane transport (GO:1903960)	3	2	.02	+	92.46	5.03E-04	3.79E-02
+negative regulation of anion channel activity (GO:0010360)	3	2	.02	+	92.46	5.03E-04	3.74E-02
+negative regulation of anion transport (GO:1903792)	3	2	.02	+	92.46	5.03E-04	3.69E-02
+ammonium ion metabolic process (GO:0097164)	4	2	.03	+	69.35	7.50E-04	4.80E-02
+vitamin E metabolic process (GO:0042360)	9	3	.06	+	46.23	7.58E-05	9.21E-03
+vitamin E biosynthetic process (GO:0010189)	9	3	.06	+	46.23	7.58E-05	9.02E-03
+fat-soluble vitamin metabolic process (GO:0006775)	10	3	.07	+	41.61	9.80E-05	1.10E-02
+fat-soluble vitamin biosynthetic process (GO:0042362)	10	3	.07	+	41.61	9.80E-05	1.08E-02
+reductive pentose-phosphate cycle (GO:0019253)	14	4	.10	+	39.63	7.21E-06	1.72E-03
+photosynthesis, dark reaction (GO:0019685)	15	4	.11	+	36.99	9.08E-06	2.08E-03
+carbon fixation (GO:0015977)	16	4	.12	+	34.67	1.13E-05	2.40E-03
+regulation of stomatal complex development (GO:2000038)	15	3	.11	+	27.74	2.72E-04	2.38E-02
+photosystem II assembly (GO:0010207)	26	4	.19	+	21.34	6.03E-05	8.35E-03
+intracellular receptor signaling pathway (GO:0030522)	21	3	.15	+	19.81	6.54E-04	4.43E-02
+blue light signaling pathway (GO:0009785)	21	3	.15	+	19.81	6.54E-04	4.38E-02
+establishment of plastid localization (GO:0051667)	30	4	.22	+	18.49	9.98E-05	1.08E-02
+chloroplast relocation (GO:0009902)	30	4	.22	+	18.49	9.98E-05	1.06E-02
+plastid localization (GO:0051644)	31	4	.22	+	17.90	1.12E-04	1.15E-02
+chloroplast localization (GO:0019750)	31	4	.22	+	17.90	1.12E-04	1.13E-02
+chlorophyll biosynthetic process (GO:0015995)	41	5	.30	+	16.91	1.93E-05	3.71E-03
+glucose metabolic process (GO:0006006)	42	5	.30	+	16.51	2.15E-05	3.76E-03
+chlorophyll metabolic process (GO:0015994)	60	7	.43	+	16.18	5.24E-07	2.08E-04
+cellular response to water deprivation (GO:0042631)	38	4	.27	+	14.60	2.30E-04	2.08E-02
+porphyrin-containing compound biosynthetic process (GO:0006779)	48	5	.35	+	14.45	3.88E-05	6.24E-03
+cellular response to water stimulus (GO:0071462)	39	4	.28	+	14.23	2.53E-04	2.25E-02
+tetrapyrrole biosynthetic process (GO:0033014)	52	5	.37	+	13.34	5.53E-05	7.84E-03
+porphyrin-containing compound metabolic process (GO:0006778)	73	7	.53	+	13.30	1.77E-06	5.54E-04
+tetrapyrrole metabolic process (GO:0033013)	75	7	.54	+	12.95	2.09E-06	5.66E-04
+photosynthesis (GO:0015979)	188	16	1.36	+	11.80	1.87E-12	3.71E-09
+vitamin biosynthetic process (GO:0009110)	59	5	.43	+	11.75	9.67E-05	1.11E-02
+vitamin metabolic process (GO:0006766)	72	6	.52	+	11.56	2.09E-05	3.88E-03
+glycosyl compound biosynthetic process (GO:1901659)	48	4	.35	+	11.56	5.27E-04	3.83E-02
+response to high light intensity (GO:0009644)	60	5	.43	+	11.56	1.04E-04	1.09E-02
+photosynthesis, light reaction (GO:0019684)	127	10	.92	+	10.92	5.87E-08	3.49E-05
+circadian rhythm (GO:0007623)	115	7	.83	+	8.44	2.90E-05	4.93E-03
+rhythmic process (GO:0048511)	115	7	.83	+	8.44	2.90E-05	4.79E-03
+hexose metabolic process (GO:0019318)	87	5	.63	+	7.97	5.31E-04	3.81E-02
+monosaccharide metabolic process (GO:0005996)	123	7	.89	+	7.89	4.35E-05	6.82E-03
+response to blue light (GO:0009637)	89	5	.64	+	7.79	5.86E-04	4.10E-02
+establishment of organelle localization (GO:0051656)	92	5	.66	+	7.54	6.76E-04	4.47E-02
+cellular response to environmental stimulus (GO:0104004)	189	10	1.36	+	7.34	1.86E-06	5.54E-04
+cellular response to abiotic stimulus (GO:0071214)	189	10	1.36	+	7.34	1.86E-06	5.27E-04
+pigment metabolic process (GO:0042440)	137	6	.99	+	6.07	5.91E-04	4.09E-02
+sulfur compound biosynthetic process (GO:0044272)	141	6	1.02	+	5.90	6.83E-04	4.47E-02
+response to cadmium ion (GO:0046686)	313	13	2.26	+	5.76	7.31E-07	2.72E-04
+generation of precursor metabolites and energy (GO:0006091)	374	14	2.70	+	5.19	8.95E-07	3.14E-04
+response to light stimulus (GO:0009416)	714	26	5.15	+	5.05	2.54E-11	3.78E-08
+response to radiation (GO:0009314)	738	26	5.32	+	4.89	5.10E-11	6.07E-08
+carbohydrate catabolic process (GO:0016052)	233	8	1.68	+	4.76	3.63E-04	3.00E-02
+response to cold (GO:0009409)	417	14	3.01	+	4.66	3.06E-06	7.91E-04
+chloroplast organization (GO:0009658)	240	8	1.73	+	4.62	4.39E-04	3.58E-02
+defense response to bacterium (GO:0042742)	423	14	3.05	+	4.59	3.58E-06	8.89E-04
+plastid organization (GO:0009657)	313	10	2.26	+	4.43	1.20E-04	1.15E-02
+response to temperature stimulus (GO:0009266)	630	20	4.54	+	4.40	5.23E-08	3.46E-05
+response to bacterium (GO:0009617)	518	16	3.73	+	4.28	1.69E-06	5.60E-04
+response to metal ion (GO:0010038)	432	13	3.11	+	4.17	2.13E-05	3.84E-03
+carbohydrate biosynthetic process (GO:0016051)	307	9	2.21	+	4.07	4.82E-04	3.88E-02
+response to abiotic stimulus (GO:0009628)	2150	59	15.50	+	3.81	1.92E-19	5.72E-16
+response to inorganic substance (GO:0010035)	931	23	6.71	+	3.43	4.00E-07	1.70E-04
+small molecule biosynthetic process (GO:0044283)	617	15	4.45	+	3.37	5.48E-05	7.95E-03
+immune system process (GO:0002376)	836	18	6.03	+	2.99	4.63E-05	7.06E-03
+defense response to other organism (GO:0098542)	818	17	5.90	+	2.88	1.15E-04	1.14E-02
+immune response (GO:0006955)	824	17	5.94	+	2.86	1.25E-04	1.18E-02
+response to external stimulus (GO:0009605)	1528	31	11.02	+	2.81	2.40E-07	1.10E-04
+carboxylic acid metabolic process (GO:0019752)	845	17	6.09	+	2.79	1.68E-04	1.56E-02
+oxoacid metabolic process (GO:0043436)	947	19	6.83	+	2.78	7.12E-05	9.02E-03
+defense response (GO:0006952)	961	19	6.93	+	2.74	8.60E-05	1.00E-02
+organic acid metabolic process (GO:0006082)	986	19	7.11	+	2.67	1.19E-04	1.16E-02
+carbohydrate metabolic process (GO:0005975)	939	18	6.77	+	2.66	1.93E-04	1.76E-02
+response to external biotic stimulus (GO:0043207)	1105	21	7.97	+	2.64	6.26E-05	8.47E-03
+response to other organism (GO:0051707)	1105	21	7.97	+	2.64	6.26E-05	8.28E-03
+response to biotic stimulus (GO:0009607)	1107	21	7.98	+	2.63	6.42E-05	8.31E-03
+biological process involved in interspecies interaction between organisms (GO:0044419)	1117	21	8.05	+	2.61	7.27E-05	9.02E-03
+small molecule metabolic process (GO:0044281)	1491	27	10.75	+	2.51	1.22E-05	2.50E-03
+response to stimulus (GO:0050896)	5591	100	40.31	+	2.48	6.89E-21	4.10E-17
+response to stress (GO:0006950)	3136	53	22.61	+	2.34	3.45E-09	2.93E-06
+response to chemical (GO:0042221)	2712	45	19.55	+	2.30	1.24E-07	6.14E-05
+organic substance catabolic process (GO:1901575)	1338	22	9.65	+	2.28	3.60E-04	3.02E-02
+catabolic process (GO:0009056)	1466	23	10.57	+	2.18	6.47E-04	4.43E-02
+organic substance biosynthetic process (GO:1901576)	2671	40	19.26	+	2.08	1.00E-05	2.21E-03
+biosynthetic process (GO:0009058)	2807	41	20.24	+	2.03	1.59E-05	3.16E-03
+cellular biosynthetic process (GO:0044249)	2580	34	18.60	+	1.83	5.69E-04	4.04E-02
+cellular metabolic process (GO:0044237)	7604	93	54.82	+	1.70	9.67E-09	7.20E-06
+metabolic process (GO:0008152)	8384	97	60.45	+	1.60	6.66E-08	3.60E-05
+organonitrogen compound metabolic process (GO:1901564)	4569	52	32.94	+	1.58	7.40E-04	4.79E-02
+cellular process (GO:0009987)	11936	129	86.06	+	1.50	1.35E-09	1.34E-06
+organic substance metabolic process (GO:0071704)	7800	83	56.24	+	1.48	5.05E-05	7.51E-03

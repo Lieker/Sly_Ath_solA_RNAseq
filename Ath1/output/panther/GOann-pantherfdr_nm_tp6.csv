@@ -1,0 +1,10 @@
+GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (19),expected,over/under,fold Enrichment,raw P-value,FDR
+cellular response to hypoxia (GO:0071456),234,4,0.16,+,24.71,0.0000192,0.0571
+cellular response to decreased oxygen levels (GO:0036294),236,4,0.16,+,24.5,0.0000198,0.0394
+cellular response to oxygen levels (GO:0071453),237,4,0.16,+,24.39,0.0000202,0.03
+response to hypoxia (GO:0001666),260,4,0.18,+,22.24,0.0000288,0.0343
+response to decreased oxygen levels (GO:0036293),264,4,0.18,+,21.9,0.0000305,0.0303
+response to oxygen levels (GO:0070482),266,4,0.18,+,21.73,0.0000314,0.0267
+cellular response to chemical stimulus (GO:0070887),1092,6,0.76,+,7.94,0.0000696,0.046
+response to abiotic stimulus (GO:0009628),2150,8,1.49,+,5.38,0.000049,0.0365
+response to stress (GO:0006950),3136,10,2.17,+,4.61,0.0000132,0.0786

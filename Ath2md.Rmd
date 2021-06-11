@@ -370,6 +370,39 @@ pheatmap(DEG_counts,
          scale = "row",
          main = "All samples; clustered")
 ```
+
+We add the sample information to the heatmap:
+```{r}
+P <- rep(c("yes","no","yes"), c(10,20,5)) 
+N <- rep(c("yes","no"), c(20,15))
+solA <- rep(c("no","yes","no","yes","no","yes","no"), c(5,5,5,5,5,5,5))
+samples <- names(DEG_counts)
+sip <- data.frame(samples, solA, N, P) %>% column_to_rownames("samples")
+#remove group g
+DEG_counts <- DEG_counts[, c(1:30)]
+sip <- sip[c(1:30),]
+
+clrs <- list(
+  P = c(no = "deepskyblue", yes ="dodgerblue4"),
+  N = c(no = "brown1", yes = "red4"),
+  solA = c(no = "mediumspringgreen", yes ="seagreen4")
+)
+
+pheatmap(DEG_counts,
+         gaps_col = c(10,20),
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = FALSE,
+         scale = "row",
+         annotation_col = sip,
+         annotation_colors = clrs,
+         legend = FALSE,
+         treeheight_row = 0,
+         cutree_rows = 2)
+
+```
+
 In the unclustered heatmap, samples are clustered according to sample group (treatment). The treatments with solA are showing an overlapping pattern versus the treatments without solA.
 In the clustered heatmap, samples are clustered according to similarity in gene expression. In this heatmap it is clear that samples from group f (S46, 47, 48, 49, 50), which is N+P starvation + solA, cluster far away from the rest, including the same nutritional conditions without solA (S41 - S45). Hence, solA treatment mostly affects N+P starved plants.
 
@@ -386,7 +419,7 @@ DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
 
 pheatmap(DEG_counts, 
-         gaps_col = c(5,10,15,20,25,30),
+         gaps_col = c(5),
          cluster_rows = TRUE,                      
          cluster_cols = FALSE, 
          show_rownames = FALSE, 
@@ -533,13 +566,64 @@ ggplot(data = x,
             size=3.5)
 ```
 
-## Finding groups of co-expressed (clustering) genes across samples
+For the paper, We will focus on the ~N+P+solA design formula and the Wald test.
 
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/get_annotated_DEGs")
+all <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f"), 
+                          method = "solA")
+replete <- get_annotated_DEGs()
+Pstarv <- get_annotated_DEGs(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d")
+NPstarv <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f")
+sample <- c("all conditions", "replete conditions","P starvation conditions","N and P starvation conditions")
+n <- c(nrow(all), nrow(replete), nrow(Pstarv), nrow(NPstarv))
+d <- data.frame(sample, n)
+ggplot(data = d,
+       aes(x = sample, y = n)) +
+  geom_bar(stat = "identity") +
+  ggtitle("DEGs by solA treatment") +
+  xlab("") +
+  ylab("# DEGs") + 
+  theme_minimal() +
+  coord_flip() +
+  geom_text(aes(label=n), 
+            position = position_dodge(width = 0.9), 
+            vjust = 0.3, 
+            hjust = 1.2,
+            color="white", 
+            size=3.5)
 
+```
 
+It is more clear, also to see overlap, to make a Venn diagram out of this information.
+```{r message = FALSE, warning = FALSE}
+fonts <- list(
+  sans = "Helvetica",
+  mono = "Consolas",
+  serif = "Cambria"
+)
 
+library(VennDiagram)
+x <- list(all$Group.1, replete$Group.1, Pstarv$Group.1, NPstarv$Group.1)
+x1 <- list(replete$Group.1, Pstarv$Group.1, NPstarv$Group.1)
+v <- venn.diagram(x1,
+             category.names = c(paste0("Replete conditions (", nrow(replete), ")"),
+                                paste0("P starvation conditions (", nrow(Pstarv), ")"), 
+                                paste0("N and P starvation conditions (", nrow(NPstarv), ")")),
+             filename = "Ath2/output/Ath2_venn.png",
+             output = TRUE,
+             col=c("#440154ff", '#21908dff', '#fde725ff'),
+             fill = c(alpha("#440154ff",0.3), alpha('#21908dff',0.3), alpha('#fde725ff',0.3)),
+             cex = 6,
+             cat.cex = 2,
+             resolution = 300,
+          cat.pos = c(-10, 10, 152),
+          cat.dist = c(0.055, 0.055, 0.055),
+          cat.fontfamily = "sans",
+          rotation = 1,
+          cat.default.pos = "outer")
 
-
+```
 # Annotation of DEGs
 
 Start with annotating the list of DEGs of each subset.
@@ -547,55 +631,35 @@ Start with annotating the list of DEGs of each subset.
 source("Ath2/scripts/get_annotated_DEGs.R")
 ```
 
-The .csv file will be written to Ath2/outputs/annotated_DEGslist.csv
+The .csv file will be written to Ath2/outputs/annotated_DEGslist_all.csv
 ```{r message=FALSE, warning=FALSE}
-x <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA")
-head(x)
+all <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "solA", name = "Ath2/output/annotated_DEGslist_all.csv")
 ```
 
-Then, let's see if there are any GO terms enriched for these genes. The .csv file with all GO terms will be written to Ath2/outputs/GOannotationslist.csv
+Do the same for all the intra nutritional condition comparisons:
+
 ```{r message = FALSE, warning = FALSE}
-source("Ath2/scripts/GO_annotation_list.R")
-```
-```{r message=FALSE, warning=FALSE}
-g <-GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "bar")
-g
+replete <- get_annotated_DEGs(name = "Ath2/output/annotated_DEGslist_ab.csv")
+Pstarv <- get_annotated_DEGs(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", name = "Ath2/output/annotated_DEGslist_cd.csv")
+NPstarv <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", name = "Ath2/output/annotated_DEGslist_ef.csv")
 ```
 
-It is also possible to see the relationships between GO terms that are enriched:
-```{r message=FALSE, warning=FALSE}
-GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "solA", plottype = "go")
-```
 
-Let's also do the annotation and GO term annotation of the DEGs we found when using other models and subsets of samples.
-First, the DEGs we find when using the N:solA term instead of solA term.
+
+## GO enrichment analysis
+
+
 ```{r message = FALSE, warning = FALSE}
-x <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f","g"), method = "N:solA")
-GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", plottype = "bar")
-GO_annotation_list(trtm = c("a","b","c","d","e","f","g"), method = "N:solA", plottype = "go")
-```
+source("Ath2/scripts/dotplot.R")
+plot_dot()
 
-Then, do the same for all the comparisons within nutritional conditions:
+```
 ```{r message = FALSE, warning = FALSE}
-#for the non starvation samples
-x <- get_annotated_DEGs(trtm = c("a","b"), method = "treatment", attr = c("tair_symbol", 
-                                        "uniprotswissprot",
-                                        "entrezgene_id",
-                                        "description",
-                                        "external_gene_name",
-                                        "external_gene_source",
-                                        "go_id"))
-GO_annotation_list(trtm = c("a","b"), method = "treatment", plottype = "bar")
-GO_annotation_list(trtm = c("a","b"), method = "treatment", plottype = "go")
+source("Ath2/scripts/summ_dotplot.R")
+sumplotdot(updown = "up", sign = 0.001)
 
-#for the only P starvation samples
-x <- get_annotated_DEGs(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", method = "treatment")
-GO_annotation_list(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", method = "treatment", plottype = "bar")
-GO_annotation_list(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d", method = "treatment", plottype = "go")
-
-#for the N+P starvation samples
-x <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment")
-GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "bar")
-GO_annotation_list(trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment", plottype = "go")
 ```
-Why are these GO annotations different than from AgriGo??
+
+
+
+

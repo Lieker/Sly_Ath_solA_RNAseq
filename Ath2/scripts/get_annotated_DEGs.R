@@ -53,6 +53,9 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath2/input/counts.csv",
   names(subset_annotated)[names(subset_annotated) == 'ensembl_gene_id'] <- 'gene'
   
   res_annotated <- left_join(res, subset_annotated, by = "gene")
+  uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
+  res_annotated <- aggregate(res_annotated, by = list(res_annotated$gene), FUN = uniquepaste)
+  write_delim(res_annotated, path = name, delim = ",", col_names = TRUE)
   
   return(res_annotated)
 }

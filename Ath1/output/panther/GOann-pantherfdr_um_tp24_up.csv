@@ -1,0 +1,36 @@
+GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (21),expected,over/under,fold Enrichment,raw P-value,FDR
+defense response to insect (GO:0002213),24,3,0.02,+, > 100,0.00000111,0.000331
+regulation of phenylpropanoid metabolic process (GO:2000762),27,2,0.02,+,96.87,0.000223,0.0379
+response to chitin (GO:0010200),138,5,0.11,+,47.38,6.76E-08,0.0000288
+phloem or xylem histogenesis (GO:0010087),129,4,0.1,+,40.55,0.00000294,0.000796
+cellular response to hypoxia (GO:0071456),234,6,0.18,+,33.53,2.03E-08,0.0000172
+cellular response to decreased oxygen levels (GO:0036294),236,6,0.18,+,33.25,2.13E-08,0.0000158
+cellular response to oxygen levels (GO:0071453),237,6,0.18,+,33.11,2.18E-08,0.0000144
+response to hypoxia (GO:0001666),260,6,0.2,+,30.18,3.73E-08,0.0000222
+response to decreased oxygen levels (GO:0036293),264,6,0.2,+,29.72,4.08E-08,0.0000221
+response to oxygen levels (GO:0070482),266,6,0.2,+,29.50,4.26E-08,0.0000211
+response to light intensity (GO:0009642),139,3,0.11,+,28.22,0.000168,0.0312
+response to wounding (GO:0009611),238,5,0.18,+,27.47,0.00000094,0.000295
+response to organonitrogen compound (GO:0010243),250,5,0.19,+,26.15,0.00000119,0.000338
+cell division (GO:0051301),209,4,0.16,+,25.03,0.0000189,0.00417
+response to nitrogen compound (GO:1901698),309,5,0.24,+,21.16,0.0000033,0.000855
+defense response to bacterium (GO:0042742),423,5,0.32,+,15.46,0.0000148,0.00339
+response to oxidative stress (GO:0006979),456,5,0.35,+,14.34,0.0000212,0.0045
+response to external biotic stimulus (GO:0043207),1105,11,0.84,+,13.02,1.14E-10,0.000000681
+response to other organism (GO:0051707),1105,11,0.84,+,13.02,1.14E-10,0.000000341
+response to biotic stimulus (GO:0009607),1107,11,0.85,+,12.99,1.17E-10,0.000000231
+biological process involved in interspecies interaction between organisms (GO:0044419),1117,11,0.85,+,12.88,1.28E-10,0.000000191
+defense response to other organism (GO:0098542),818,8,0.63,+,12.79,9.26E-08,0.0000367
+immune response (GO:0006955),824,8,0.63,+,12.70,9.78E-08,0.0000364
+response to bacterium (GO:0009617),518,5,0.4,+,12.62,0.0000387,0.00795
+immune system process (GO:0002376),836,8,0.64,+,12.51,0.000000109,0.0000382
+defense response (GO:0006952),961,8,0.73,+,10.89,0.000000314,0.000104
+response to external stimulus (GO:0009605),1528,11,1.17,+,9.41,3.43E-09,0.00000341
+cellular response to chemical stimulus (GO:0070887),1092,7,0.84,+,8.38,0.0000114,0.00271
+cellular response to stress (GO:0033554),1129,6,0.86,+,6.95,0.000156,0.0299
+response to stress (GO:0006950),3136,15,2.4,+,6.26,2.08E-10,0.000000248
+response to organic substance (GO:0010033),1724,7,1.32,+,5.31,0.000206,0.0361
+response to abiotic stimulus (GO:0009628),2150,8,1.64,+,4.87,0.000114,0.0227
+response to chemical (GO:0042221),2712,10,2.07,+,4.82,0.0000113,0.0028
+regulation of cellular metabolic process (GO:0031323),2950,9,2.26,+,3.99,0.000168,0.0304
+response to stimulus (GO:0050896),5591,16,4.28,+,3.74,6.23E-08,0.0000286

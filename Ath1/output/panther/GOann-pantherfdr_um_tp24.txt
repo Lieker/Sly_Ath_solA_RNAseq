@@ -1,0 +1,43 @@
+GO biological process complete	Arabidopsis thaliana - REFLIST (27462)	upload_1 (23)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+defense response to insect (GO:0002213)	24	3	.02	+	 > 100	1.48E-06	4.63E-04
+regulation of phenylpropanoid metabolic process (GO:2000762)	27	2	.02	+	88.44	2.68E-04	4.20E-02
+response to chitin (GO:0010200)	138	5	.12	+	43.26	1.11E-07	5.08E-05
+phloem or xylem histogenesis (GO:0010087)	129	4	.11	+	37.02	4.32E-06	1.17E-03
+cellular response to hypoxia (GO:0071456)	234	6	.20	+	30.62	3.71E-08	3.16E-05
+cellular response to decreased oxygen levels (GO:0036294)	236	6	.20	+	30.36	3.90E-08	2.90E-05
+cellular response to oxygen levels (GO:0071453)	237	6	.20	+	30.23	4.00E-08	2.64E-05
+response to hypoxia (GO:0001666)	260	6	.22	+	27.55	6.83E-08	4.07E-05
+response to decreased oxygen levels (GO:0036293)	264	6	.22	+	27.14	7.46E-08	4.04E-05
+response to oxygen levels (GO:0070482)	266	6	.22	+	26.93	7.79E-08	3.87E-05
+response to light intensity (GO:0009642)	139	3	.12	+	25.77	2.22E-04	3.88E-02
+response to wounding (GO:0009611)	238	5	.20	+	25.08	1.53E-06	4.56E-04
+response to organonitrogen compound (GO:0010243)	250	5	.21	+	23.88	1.94E-06	5.50E-04
+cell division (GO:0051301)	209	4	.18	+	22.85	2.77E-05	6.33E-03
+response to nitrogen compound (GO:1901698)	309	5	.26	+	19.32	5.36E-06	1.39E-03
+defense response to bacterium (GO:0042742)	423	5	.35	+	14.11	2.39E-05	5.69E-03
+negative regulation of cellular macromolecule biosynthetic process (GO:2000113)	363	4	.30	+	13.16	2.27E-04	3.85E-02
+response to oxidative stress (GO:0006979)	456	5	.38	+	13.09	3.41E-05	7.24E-03
+negative regulation of macromolecule biosynthetic process (GO:0010558)	365	4	.31	+	13.08	2.31E-04	3.82E-02
+negative regulation of cellular biosynthetic process (GO:0031327)	386	4	.32	+	12.37	2.85E-04	4.25E-02
+negative regulation of biosynthetic process (GO:0009890)	392	4	.33	+	12.18	3.03E-04	4.39E-02
+response to external biotic stimulus (GO:0043207)	1105	11	.93	+	11.89	4.07E-10	2.42E-06
+response to other organism (GO:0051707)	1105	11	.93	+	11.89	4.07E-10	1.21E-06
+response to biotic stimulus (GO:0009607)	1107	11	.93	+	11.86	4.14E-10	8.22E-07
+biological process involved in interspecies interaction between organisms (GO:0044419)	1117	11	.94	+	11.76	4.55E-10	6.78E-07
+defense response to other organism (GO:0098542)	818	8	.69	+	11.68	2.11E-07	8.99E-05
+immune response (GO:0006955)	824	8	.69	+	11.59	2.23E-07	8.86E-05
+response to bacterium (GO:0009617)	518	5	.43	+	11.53	6.20E-05	1.27E-02
+immune system process (GO:0002376)	836	8	.70	+	11.43	2.49E-07	9.27E-05
+defense response (GO:0006952)	961	8	.80	+	9.94	7.10E-07	2.35E-04
+response to external stimulus (GO:0009605)	1528	11	1.28	+	8.60	1.19E-08	1.18E-05
+negative regulation of cellular process (GO:0048523)	751	5	.63	+	7.95	3.46E-04	4.91E-02
+cellular response to chemical stimulus (GO:0070887)	1092	7	.91	+	7.65	2.24E-05	5.55E-03
+cellular response to stress (GO:0033554)	1129	6	.95	+	6.35	2.70E-04	4.12E-02
+response to stress (GO:0006950)	3136	15	2.63	+	5.71	1.50E-09	1.78E-06
+response to abiotic stimulus (GO:0009628)	2150	8	1.80	+	4.44	2.39E-04	3.85E-02
+response to chemical (GO:0042221)	2712	10	2.27	+	4.40	3.03E-05	6.69E-03
+regulation of cellular biosynthetic process (GO:0031326)	2487	9	2.08	+	4.32	1.04E-04	2.00E-02
+regulation of biosynthetic process (GO:0009889)	2524	9	2.11	+	4.26	1.16E-04	2.17E-02
+regulation of cellular metabolic process (GO:0031323)	2950	10	2.47	+	4.05	6.28E-05	1.25E-02
+regulation of metabolic process (GO:0019222)	3261	10	2.73	+	3.66	1.47E-04	2.66E-02
+response to stimulus (GO:0050896)	5591	16	4.68	+	3.42	4.91E-07	1.72E-04

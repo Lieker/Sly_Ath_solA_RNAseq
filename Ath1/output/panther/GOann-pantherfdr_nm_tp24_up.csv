@@ -1,0 +1,68 @@
+GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (149),expected,over/under,fold Enrichment,raw P-value,FDR
+defense response to insect (GO:0002213),24,3,0.13,+,23.04,0.00041,0.0387
+defense response by callose deposition (GO:0052542),25,3,0.14,+,22.12,0.000457,0.0425
+regulation of phenylpropanoid metabolic process (GO:2000762),27,3,0.15,+,20.48,0.000562,0.0499
+response to chitin (GO:0010200),138,15,0.75,+,20.03,5.48E-15,3.26E-11
+plant-type hypersensitive response (GO:0009626),46,4,0.25,+,16.03,0.000155,0.0167
+programmed cell death induced by symbiont (GO:0034050),47,4,0.26,+,15.69,0.000167,0.0178
+biological process involved in interaction with symbiont (GO:0051702),48,4,0.26,+,15.36,0.00018,0.0185
+regulation of secondary metabolic process (GO:0043455),66,4,0.36,+,11.17,0.000566,0.0496
+response to organonitrogen compound (GO:0010243),250,15,1.36,+,11.06,1.69E-11,1.44E-08
+response to nitrogen compound (GO:1901698),309,15,1.68,+,8.95,2.83E-10,0.000000211
+cellular response to hypoxia (GO:0071456),234,10,1.27,+,7.88,0.000000901,0.000185
+cellular response to decreased oxygen levels (GO:0036294),236,10,1.28,+,7.81,0.00000097,0.000193
+response to hypoxia (GO:0001666),260,11,1.41,+,7.8,0.000000278,0.0000787
+cellular response to oxygen levels (GO:0071453),237,10,1.29,+,7.78,0.00000101,0.000187
+response to decreased oxygen levels (GO:0036293),264,11,1.43,+,7.68,0.000000321,0.0000831
+response to oxygen levels (GO:0070482),266,11,1.44,+,7.62,0.000000345,0.0000856
+negative regulation of response to stimulus (GO:0048585),226,9,1.23,+,7.34,0.00000558,0.000875
+innate immune response (GO:0045087),156,6,0.85,+,7.09,0.000256,0.0258
+regulation of immune response (GO:0050776),199,7,1.08,+,6.48,0.000133,0.015
+regulation of immune system process (GO:0002682),199,7,1.08,+,6.48,0.000133,0.0147
+response to fungus (GO:0009620),350,12,1.9,+,6.32,0.000000683,0.000156
+response to bacterium (GO:0009617),518,16,2.81,+,5.69,3.53E-08,0.0000117
+defense response to bacterium (GO:0042742),423,13,2.3,+,5.66,0.000000761,0.000168
+positive regulation of response to stimulus (GO:0048584),261,8,1.42,+,5.65,0.000111,0.0135
+regulation of defense response (GO:0031347),267,8,1.45,+,5.52,0.00013,0.0149
+translation (GO:0006412),513,15,2.78,+,5.39,0.000000192,0.00006
+peptide biosynthetic process (GO:0043043),518,15,2.81,+,5.34,0.000000216,0.0000643
+defense response to fungus (GO:0050832),254,7,1.38,+,5.08,0.000558,0.0504
+regulation of signal transduction (GO:0009966),331,9,1.8,+,5.01,0.000101,0.0128
+response to external biotic stimulus (GO:0043207),1105,30,6,+,5,4.22E-13,1.26E-09
+response to other organism (GO:0051707),1105,30,6,+,5,4.22E-13,8.37E-10
+response to biotic stimulus (GO:0009607),1107,30,6.01,+,4.99,4.41E-13,6.57E-10
+biological process involved in interspecies interaction between organisms (GO:0044419),1117,30,6.06,+,4.95,5.51E-13,6.56E-10
+regulation of signaling (GO:0023051),337,9,1.83,+,4.92,0.000115,0.0137
+regulation of cell communication (GO:0010646),340,9,1.84,+,4.88,0.000123,0.0143
+amide biosynthetic process (GO:0043604),576,15,3.13,+,4.8,0.000000795,0.000169
+defense response to other organism (GO:0098542),818,21,4.44,+,4.73,5.29E-09,0.00000263
+immune response (GO:0006955),824,21,4.47,+,4.7,5.99E-09,0.00000275
+immune system process (GO:0002376),836,21,4.54,+,4.63,7.66E-09,0.00000304
+regulation of response to stress (GO:0080134),399,10,2.16,+,4.62,0.00008,0.0104
+peptide metabolic process (GO:0006518),620,15,3.36,+,4.46,0.00000193,0.000348
+defense response (GO:0006952),961,22,5.21,+,4.22,1.66E-08,0.00000581
+regulation of response to stimulus (GO:0048583),755,17,4.1,+,4.15,0.00000101,0.000193
+response to external stimulus (GO:0009605),1528,33,8.29,+,3.98,1.04E-11,1.03E-08
+cellular amide metabolic process (GO:0043603),727,15,3.94,+,3.8,0.0000125,0.00191
+response to oxygen-containing compound (GO:1901700),1536,29,8.33,+,3.48,4.73E-09,0.00000256
+cellular response to chemical stimulus (GO:0070887),1092,20,5.92,+,3.38,0.00000242,0.000424
+cellular response to stress (GO:0033554),1129,20,6.13,+,3.26,0.00000396,0.000637
+response to organic substance (GO:0010033),1724,30,9.35,+,3.21,1.52E-08,0.00000566
+cellular nitrogen compound biosynthetic process (GO:0044271),1226,19,6.65,+,2.86,0.0000433,0.00586
+response to chemical (GO:0042221),2712,40,14.71,+,2.72,3.77E-09,0.00000249
+response to abiotic stimulus (GO:0009628),2150,31,11.67,+,2.66,0.000000532,0.000127
+response to stress (GO:0006950),3136,43,17.01,+,2.53,7.09E-09,0.00000302
+response to hormone (GO:0009725),1255,17,6.81,+,2.5,0.000526,0.0482
+gene expression (GO:0010467),1608,21,8.72,+,2.41,0.000297,0.0294
+cellular response to stimulus (GO:0051716),2514,31,13.64,+,2.27,0.0000216,0.00321
+cellular protein metabolic process (GO:0044267),3340,39,18.12,+,2.15,0.00000349,0.000577
+protein metabolic process (GO:0019538),3493,40,18.95,+,2.11,0.00000343,0.000583
+response to stimulus (GO:0050896),5591,62,30.33,+,2.04,4.48E-09,0.00000267
+organonitrogen compound metabolic process (GO:1901564),4569,45,24.79,+,1.82,0.0000382,0.00529
+regulation of cellular process (GO:0050794),4693,44,25.46,+,1.73,0.000179,0.0187
+regulation of biological process (GO:0050789),5336,50,28.95,+,1.73,0.0000449,0.00594
+cellular macromolecule metabolic process (GO:0044260),4377,41,23.75,+,1.73,0.000306,0.0298
+nitrogen compound metabolic process (GO:0006807),6114,54,33.17,+,1.63,0.000105,0.0131
+macromolecule metabolic process (GO:0043170),5445,48,29.54,+,1.62,0.000408,0.0392
+cellular process (GO:0009987),11936,96,64.76,+,1.48,0.000000317,0.0000857
+biological_process (GO:0008150),21178,135,114.91,+,1.17,0.0000315,0.00457

@@ -1,0 +1,19 @@
+GO biological process complete	Arabidopsis thaliana - REFLIST (27462)	upload_1 (100)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+response to oxygen-containing compound (GO:1901700)	1536	17	5.59	+	3.04	4.12E-05	2.23E-02
+response to organic substance (GO:0010033)	1724	19	6.28	+	3.03	1.44E-05	4.28E-02
+regulation of transcription, DNA-templated (GO:0006355)	2174	21	7.92	+	2.65	3.36E-05	3.33E-02
+regulation of nucleic acid-templated transcription (GO:1903506)	2174	21	7.92	+	2.65	3.36E-05	2.85E-02
+regulation of RNA biosynthetic process (GO:2001141)	2176	21	7.92	+	2.65	3.40E-05	2.25E-02
+regulation of cellular macromolecule biosynthetic process (GO:2000112)	2373	22	8.64	+	2.55	3.90E-05	2.32E-02
+regulation of macromolecule biosynthetic process (GO:0010556)	2386	22	8.69	+	2.53	4.23E-05	2.10E-02
+regulation of RNA metabolic process (GO:0051252)	2283	21	8.31	+	2.53	6.79E-05	2.89E-02
+regulation of biosynthetic process (GO:0009889)	2524	23	9.19	+	2.50	3.27E-05	3.89E-02
+regulation of nucleobase-containing compound metabolic process (GO:0019219)	2343	21	8.53	+	2.46	9.80E-05	3.43E-02
+regulation of cellular biosynthetic process (GO:0031326)	2487	22	9.06	+	2.43	7.83E-05	2.91E-02
+regulation of cellular metabolic process (GO:0031323)	2950	26	10.74	+	2.42	1.55E-05	3.08E-02
+regulation of gene expression (GO:0010468)	2612	23	9.51	+	2.42	5.55E-05	2.54E-02
+regulation of nitrogen compound metabolic process (GO:0051171)	2713	23	9.88	+	2.33	1.27E-04	4.20E-02
+regulation of metabolic process (GO:0019222)	3261	27	11.87	+	2.27	3.39E-05	2.53E-02
+regulation of cellular process (GO:0050794)	4693	36	17.09	+	2.11	6.23E-06	3.71E-02
+regulation of biological process (GO:0050789)	5336	38	19.43	+	1.96	1.92E-05	2.85E-02
+biological regulation (GO:0065007)	5895	39	21.47	+	1.82	7.29E-05	2.89E-02

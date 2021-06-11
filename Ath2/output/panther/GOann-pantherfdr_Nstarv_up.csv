@@ -1,0 +1,7 @@
+GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (36),expected,over/under,foldenrich,rawPvalue,FDR
+response to gibberellin (GO:0009739),108,4,0.14,+,28.25,0.0000139,0.0165
+response to auxin (GO:0009733),302,5,0.4,+,12.63,0.0000477,0.0473
+response to hormone (GO:0009725),1255,10,1.65,+,6.08,0.00000348,0.0104
+response to endogenous stimulus (GO:0009719),1286,10,1.69,+,5.93,0.00000432,0.00857
+response to organic substance (GO:0010033),1724,11,2.26,+,4.87,0.00000844,0.0126
+response to stimulus (GO:0050896),5591,21,7.33,+,2.87,0.000000688,0.0041

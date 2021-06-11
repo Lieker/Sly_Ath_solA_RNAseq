@@ -1,0 +1,87 @@
+GO biological process complete	Arabidopsis thaliana - REFLIST (27462)	upload_1 (243)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+regulation of phenylpropanoid metabolic process (GO:2000762)	27	4	.24	+	16.74	1.51E-04	1.20E-02
+response to chitin (GO:0010200)	138	15	1.22	+	12.28	6.88E-12	4.09E-08
+regulation of secondary metabolic process (GO:0043455)	66	6	.58	+	10.27	4.12E-05	4.16E-03
+response to organonitrogen compound (GO:0010243)	250	17	2.21	+	7.68	2.62E-10	7.79E-07
+regulation of small molecule metabolic process (GO:0062012)	126	7	1.11	+	6.28	1.78E-04	1.40E-02
+response to nitrogen compound (GO:1901698)	309	17	2.73	+	6.22	5.43E-09	8.08E-06
+negative regulation of response to stimulus (GO:0048585)	226	11	2.00	+	5.50	8.69E-06	1.33E-03
+cellular response to hypoxia (GO:0071456)	234	10	2.07	+	4.83	6.40E-05	6.04E-03
+cellular response to decreased oxygen levels (GO:0036294)	236	10	2.09	+	4.79	6.85E-05	6.37E-03
+response to hypoxia (GO:0001666)	260	11	2.30	+	4.78	3.02E-05	3.59E-03
+cellular response to oxygen levels (GO:0071453)	237	10	2.10	+	4.77	7.08E-05	6.39E-03
+response to decreased oxygen levels (GO:0036293)	264	11	2.34	+	4.71	3.45E-05	4.02E-03
+response to oxygen levels (GO:0070482)	266	11	2.35	+	4.67	3.68E-05	4.06E-03
+regulation of immune response (GO:0050776)	199	8	1.76	+	4.54	5.10E-04	3.66E-02
+regulation of immune system process (GO:0002682)	199	8	1.76	+	4.54	5.10E-04	3.61E-02
+positive regulation of response to stimulus (GO:0048584)	261	9	2.31	+	3.90	6.73E-04	4.66E-02
+response to fungus (GO:0009620)	350	12	3.10	+	3.87	9.35E-05	7.95E-03
+defense response to bacterium (GO:0042742)	423	14	3.74	+	3.74	3.56E-05	4.08E-03
+response to bacterium (GO:0009617)	518	17	4.58	+	3.71	5.77E-06	1.07E-03
+translation (GO:0006412)	513	16	4.54	+	3.52	1.99E-05	2.64E-03
+peptide biosynthetic process (GO:0043043)	518	16	4.58	+	3.49	2.24E-05	2.77E-03
+regulation of response to stress (GO:0080134)	399	12	3.53	+	3.40	3.01E-04	2.22E-02
+response to external biotic stimulus (GO:0043207)	1105	31	9.78	+	3.17	2.34E-08	2.78E-05
+response to other organism (GO:0051707)	1105	31	9.78	+	3.17	2.34E-08	2.32E-05
+response to biotic stimulus (GO:0009607)	1107	31	9.80	+	3.16	2.43E-08	2.07E-05
+negative regulation of nitrogen compound metabolic process (GO:0051172)	432	12	3.82	+	3.14	5.99E-04	4.19E-02
+amide biosynthetic process (GO:0043604)	576	16	5.10	+	3.14	7.60E-05	6.65E-03
+biological process involved in interspecies interaction between organisms (GO:0044419)	1117	31	9.88	+	3.14	2.97E-08	2.21E-05
+peptide metabolic process (GO:0006518)	620	17	5.49	+	3.10	5.30E-05	5.17E-03
+defense response to other organism (GO:0098542)	818	22	7.24	+	3.04	5.57E-06	1.07E-03
+immune response (GO:0006955)	824	22	7.29	+	3.02	6.23E-06	1.03E-03
+regulation of response to stimulus (GO:0048583)	755	20	6.68	+	2.99	1.86E-05	2.58E-03
+immune system process (GO:0002376)	836	22	7.40	+	2.97	7.77E-06	1.22E-03
+negative regulation of cellular process (GO:0048523)	751	19	6.65	+	2.86	5.51E-05	5.30E-03
+cellular response to stress (GO:0033554)	1129	28	9.99	+	2.80	1.30E-06	3.87E-04
+cellular amide metabolic process (GO:0043603)	727	18	6.43	+	2.80	1.13E-04	9.08E-03
+response to external stimulus (GO:0009605)	1528	37	13.52	+	2.74	3.83E-08	2.28E-05
+defense response (GO:0006952)	961	23	8.50	+	2.70	2.10E-05	2.66E-03
+negative regulation of biological process (GO:0048519)	1091	26	9.65	+	2.69	6.38E-06	1.03E-03
+cellular nitrogen compound biosynthetic process (GO:0044271)	1226	28	10.85	+	2.58	6.00E-06	1.02E-03
+response to oxygen-containing compound (GO:1901700)	1536	35	13.59	+	2.58	3.84E-07	1.34E-04
+response to organic substance (GO:0010033)	1724	38	15.25	+	2.49	3.65E-07	1.36E-04
+cellular response to chemical stimulus (GO:0070887)	1092	23	9.66	+	2.38	1.83E-04	1.42E-02
+positive regulation of cellular process (GO:0048522)	1073	22	9.49	+	2.32	3.33E-04	2.42E-02
+positive regulation of biological process (GO:0048518)	1330	27	11.77	+	2.29	7.05E-05	6.46E-03
+gene expression (GO:0010467)	1608	32	14.23	+	2.25	2.50E-05	3.03E-03
+response to abiotic stimulus (GO:0009628)	2150	42	19.02	+	2.21	1.73E-06	4.28E-04
+response to chemical (GO:0042221)	2712	52	24.00	+	2.17	1.19E-07	5.46E-05
+regulation of cellular biosynthetic process (GO:0031326)	2487	46	22.01	+	2.09	1.80E-06	4.28E-04
+regulation of biosynthetic process (GO:0009889)	2524	46	22.33	+	2.06	3.28E-06	6.98E-04
+response to stress (GO:0006950)	3136	57	27.75	+	2.05	1.46E-07	6.23E-05
+cellular protein metabolic process (GO:0044267)	3340	60	29.55	+	2.03	1.05E-07	5.20E-05
+regulation of transcription, DNA-templated (GO:0006355)	2174	39	19.24	+	2.03	3.78E-05	4.09E-03
+regulation of nucleic acid-templated transcription (GO:1903506)	2174	39	19.24	+	2.03	3.78E-05	4.02E-03
+regulation of RNA biosynthetic process (GO:2001141)	2176	39	19.25	+	2.03	3.80E-05	3.97E-03
+cellular response to stimulus (GO:0051716)	2514	45	22.25	+	2.02	5.96E-06	1.04E-03
+regulation of cellular macromolecule biosynthetic process (GO:2000112)	2373	42	21.00	+	2.00	1.74E-05	2.46E-03
+regulation of macromolecule biosynthetic process (GO:0010556)	2386	42	21.11	+	1.99	1.90E-05	2.57E-03
+regulation of RNA metabolic process (GO:0051252)	2283	40	20.20	+	1.98	3.60E-05	4.05E-03
+protein metabolic process (GO:0019538)	3493	61	30.91	+	1.97	1.94E-07	7.70E-05
+regulation of nitrogen compound metabolic process (GO:0051171)	2713	47	24.01	+	1.96	1.19E-05	1.73E-03
+regulation of cellular metabolic process (GO:0031323)	2950	51	26.10	+	1.95	3.50E-06	6.95E-04
+regulation of nucleobase-containing compound metabolic process (GO:0019219)	2343	40	20.73	+	1.93	7.14E-05	6.35E-03
+regulation of gene expression (GO:0010468)	2612	44	23.11	+	1.90	3.90E-05	4.01E-03
+protein modification process (GO:0036211)	2469	41	21.85	+	1.88	1.07E-04	8.86E-03
+cellular protein modification process (GO:0006464)	2469	41	21.85	+	1.88	1.07E-04	8.73E-03
+regulation of metabolic process (GO:0019222)	3261	54	28.86	+	1.87	5.90E-06	1.06E-03
+regulation of primary metabolic process (GO:0080090)	2796	46	24.74	+	1.86	4.30E-05	4.26E-03
+macromolecule modification (GO:0043412)	2792	45	24.71	+	1.82	1.05E-04	8.78E-03
+cellular nitrogen compound metabolic process (GO:0034641)	2878	46	25.47	+	1.81	8.63E-05	7.44E-03
+response to stimulus (GO:0050896)	5591	87	49.47	+	1.76	3.59E-08	2.37E-05
+organonitrogen compound metabolic process (GO:1901564)	4569	71	40.43	+	1.76	1.51E-06	4.10E-04
+regulation of macromolecule metabolic process (GO:0060255)	2990	46	26.46	+	1.74	2.60E-04	1.93E-02
+regulation of cellular process (GO:0050794)	4693	72	41.53	+	1.73	1.97E-06	4.52E-04
+cellular macromolecule metabolic process (GO:0044260)	4377	66	38.73	+	1.70	9.28E-06	1.38E-03
+regulation of biological process (GO:0050789)	5336	80	47.22	+	1.69	8.07E-07	2.53E-04
+nitrogen compound metabolic process (GO:0006807)	6114	91	54.10	+	1.68	1.04E-07	5.60E-05
+macromolecule metabolic process (GO:0043170)	5445	80	48.18	+	1.66	1.60E-06	4.13E-04
+biological regulation (GO:0065007)	5895	81	52.16	+	1.55	2.04E-05	2.64E-03
+primary metabolic process (GO:0044238)	7141	98	63.19	+	1.55	1.49E-06	4.22E-04
+organic substance metabolic process (GO:0071704)	7800	106	69.02	+	1.54	4.79E-07	1.59E-04
+cellular metabolic process (GO:0044237)	7604	102	67.28	+	1.52	2.41E-06	5.32E-04
+metabolic process (GO:0008152)	8384	109	74.19	+	1.47	3.35E-06	6.87E-04
+cellular process (GO:0009987)	11936	154	105.62	+	1.46	6.33E-10	1.26E-06
+biological_process (GO:0008150)	21178	211	187.40	+	1.13	2.08E-04	1.59E-02
+Unclassified (UNCLASSIFIED)	6284	32	55.60	-	.58	2.08E-04	1.57E-02

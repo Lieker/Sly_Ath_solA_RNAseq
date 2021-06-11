@@ -3,7 +3,8 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      trm = c("a","b","c","d","e","f","g"),
-                     pca_colour = "solA") {
+                     pca_colour = "solA",
+                     pca_shape = 1) {
   
   source("Ath2/scripts/produce_scaled_counts_matrix.R")
   source("Ath2/scripts/filter_counts_based_on_treatment.R")
@@ -60,8 +61,11 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
   pca_plot <- ggplot(data = score_df) +
     geom_point(aes_string(x = pc_x_axis, 
                           y = pc_y_axis, 
-                          col = pca_colour), 
-               size = 3) +
+                          col = pca_colour,
+                          shape = pca_shape, 
+                          size = 3)) +
+    theme_minimal() +
+    scale_color_manual(values=c('#0099FF','#E69F00', '#56B4E9')) +
     xlab(paste0(pc_x_axis," ", variance_pc_x, "%")) +
     ylab(paste0(pc_y_axis," ", variance_pc_y, "%"))
 

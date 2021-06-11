@@ -1,0 +1,135 @@
+GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (196),expected,over/under,foldenrich,rawPvalue,FDR
+negative regulation of cellular defense response (GO:0051245),3,2,0.02,+,93.41,0.000493,0.0251
+regulation of plant-type hypersensitive response (GO:0010363),20,4,0.14,+,28.02,0.0000233,0.00163
+regulation of biological process involved in symbiotic interaction (GO:0043903),22,4,0.16,+,25.47,0.0000324,0.00221
+"systemic acquired resistance, salicylic acid mediated signaling pathway (GO:0009862)",19,3,0.14,+,22.12,0.000489,0.0251
+salicylic acid mediated signaling pathway (GO:0009863),46,7,0.33,+,21.32,9.43E-08,0.000011
+plant-type hypersensitive response (GO:0009626),46,7,0.33,+,21.32,9.43E-08,0.0000108
+response to ozone (GO:0010193),33,5,0.24,+,21.23,0.00000705,0.00056
+pattern recognition receptor signaling pathway (GO:0002221),20,3,0.14,+,21.02,0.000559,0.0277
+programmed cell death induced by symbiont (GO:0034050),47,7,0.34,+,20.87,0.000000108,0.0000119
+biological process involved in interaction with symbiont (GO:0051702),48,7,0.34,+,20.43,0.000000123,0.000013
+cellular response to hypoxia (GO:0071456),234,34,1.67,+,20.36,1.44E-32,2.14E-29
+cellular response to decreased oxygen levels (GO:0036294),236,34,1.68,+,20.19,1.86E-32,1.84E-29
+cellular response to oxygen levels (GO:0071453),237,34,1.69,+,20.10,2.11E-32,1.8E-29
+response to hypoxia (GO:0001666),260,35,1.86,+,18.86,1.75E-32,2.09E-29
+response to decreased oxygen levels (GO:0036293),264,35,1.88,+,18.58,2.83E-32,2.11E-29
+response to oxygen levels (GO:0070482),266,35,1.9,+,18.44,3.58E-32,2.37E-29
+defense response to Gram-negative bacterium (GO:0050829),23,3,0.16,+,18.28,0.000808,0.0379
+response to chitin (GO:0010200),138,18,0.98,+,18.28,6.62E-17,1.58E-14
+cellular response to salicylic acid stimulus (GO:0071446),55,7,0.39,+,17.83,0.000000285,0.0000283
+induced systemic resistance (GO:0009682),32,4,0.23,+,17.51,0.000121,0.00748
+response to molecule of bacterial origin (GO:0002237),41,5,0.29,+,17.09,0.0000184,0.00132
+response to absence of light (GO:0009646),44,5,0.31,+,15.92,0.0000251,0.00174
+protein complex oligomerization (GO:0051259),54,6,0.39,+,15.57,0.00000427,0.000348
+negative regulation of cell death (GO:0060548),36,4,0.26,+,15.57,0.000183,0.0107
+response to reactive oxygen species (GO:0000302),158,17,1.13,+,15.08,9.12E-15,1.87E-12
+programmed cell death (GO:0012501),78,8,0.56,+,14.37,0.000000182,0.0000187
+biological process involved in symbiotic interaction (GO:0044403),70,7,0.5,+,14.01,0.00000127,0.00012
+regulation of jasmonic acid mediated signaling pathway (GO:2000022),41,4,0.29,+,13.67,0.00029,0.0159
+response to hydrogen peroxide (GO:0042542),72,7,0.51,+,13.62,0.00000152,0.000141
+response to salicylic acid (GO:0009751),155,15,1.11,+,13.56,1.48E-12,2.51E-10
+regulation of cell death (GO:0010941),89,8,0.64,+,12.59,0.000000465,0.0000454
+cell death (GO:0008219),101,9,0.72,+,12.49,0.000000094,0.0000112
+negative regulation of defense response (GO:0031348),69,6,0.49,+,12.18,0.0000157,0.00117
+regulation of innate immune response (GO:0045088),87,7,0.62,+,11.27,0.0000049,0.000394
+response to organonitrogen compound (GO:0010243),250,20,1.78,+,11.21,6.95E-15,1.48E-12
+systemic acquired resistance (GO:0009627),64,5,0.46,+,10.95,0.000132,0.00803
+defense response to symbiont (GO:0140546),52,4,0.37,+,10.78,0.000674,0.0326
+defense response to virus (GO:0051607),52,4,0.37,+,10.78,0.000674,0.0323
+innate immune response (GO:0045087),156,12,1.11,+,10.78,3.08E-09,0.000000426
+response to red light (GO:0010114),66,5,0.47,+,10.61,0.000151,0.0091
+positive regulation of innate immune response (GO:0045089),53,4,0.38,+,10.57,0.00072,0.0343
+defense response to fungus (GO:0050832),254,19,1.81,+,10.48,1.04E-13,1.94E-11
+jasmonic acid mediated signaling pathway (GO:0009867),71,5,0.51,+,9.87,0.000209,0.0121
+regulation of circadian rhythm (GO:0042752),57,4,0.41,+,9.83,0.000931,0.0426
+response to nitrogen compound (GO:1901698),309,21,2.21,+,9.52,2.9E-14,5.56E-12
+toxin metabolic process (GO:0009404),59,4,0.42,+,9.50,0.00105,0.0467
+defense response to oomycetes (GO:0002229),74,5,0.53,+,9.47,0.00025,0.0141
+response to virus (GO:0009615),90,6,0.64,+,9.34,0.000064,0.00419
+cellular response to jasmonic acid stimulus (GO:0071395),75,5,0.54,+,9.34,0.000265,0.0148
+cellular response to fatty acid (GO:0071398),79,5,0.56,+,8.87,0.000333,0.0177
+response to jasmonic acid (GO:0009753),175,11,1.25,+,8.81,9.93E-08,0.0000112
+response to oomycetes (GO:0002239),96,6,0.69,+,8.76,0.0000898,0.00563
+response to fatty acid (GO:0070542),179,11,1.28,+,8.61,0.000000123,0.0000129
+cellular response to organic cyclic compound (GO:0071407),132,8,0.94,+,8.49,0.00000741,0.000573
+response to fungus (GO:0009620),350,21,2.5,+,8.41,2.84E-13,5.12E-11
+response to oxidative stress (GO:0006979),456,27,3.25,+,8.30,1.21E-16,2.76E-14
+response to organic cyclic compound (GO:0014070),281,16,2.01,+,7.98,4.46E-10,6.47E-08
+regulation of cellular response to stress (GO:0080135),88,5,0.63,+,7.96,0.000533,0.0267
+defense response to bacterium (GO:0042742),423,24,3.02,+,7.95,1.63E-14,3.23E-12
+leaf senescence (GO:0010150),109,6,0.78,+,7.71,0.000174,0.0103
+regulation of response to biotic stimulus (GO:0002831),190,10,1.36,+,7.37,0.00000178,0.000158
+plant organ senescence (GO:0090693),115,6,0.82,+,7.31,0.000229,0.0131
+response to bacterium (GO:0009617),518,27,3.7,+,7.30,2.36E-15,5.21E-13
+aging (GO:0007568),135,7,0.96,+,7.27,0.0000715,0.00463
+regulation of response to external stimulus (GO:0032101),195,10,1.39,+,7.19,0.00000222,0.000194
+positive regulation of defense response (GO:0031349),98,5,0.7,+,7.15,0.000848,0.0394
+response to light intensity (GO:0009642),139,7,0.99,+,7.06,0.0000852,0.0054
+regulation of immune response (GO:0050776),199,10,1.42,+,7.04,0.00000264,0.000224
+regulation of immune system process (GO:0002682),199,10,1.42,+,7.04,0.00000264,0.000221
+defense response to other organism (GO:0098542),818,41,5.84,+,7.02,1.97E-22,5.58E-20
+immune response (GO:0006955),824,41,5.88,+,6.97,2.55E-22,6.9E-20
+abscisic acid-activated signaling pathway (GO:0009738),101,5,0.72,+,6.94,0.000965,0.0432
+cellular response to chemical stimulus (GO:0070887),1092,54,7.79,+,6.93,1.88E-29,1.12E-26
+immune system process (GO:0002376),836,41,5.97,+,6.87,4.25E-22,1.1E-19
+regulation of defense response (GO:0031347),267,13,1.91,+,6.82,0.000000115,0.0000125
+response to heat (GO:0009408),234,11,1.67,+,6.59,0.00000154,0.000139
+response to external biotic stimulus (GO:0043207),1105,50,7.89,+,6.34,1.59E-25,7.28E-23
+response to other organism (GO:0051707),1105,50,7.89,+,6.34,1.59E-25,6.76E-23
+response to biotic stimulus (GO:0009607),1107,50,7.9,+,6.33,1.72E-25,6.81E-23
+response to ethylene (GO:0009723),156,7,1.11,+,6.29,0.000169,0.0101
+biological process involved in interspecies interaction between organisms (GO:0044419),1117,50,7.97,+,6.27,2.52E-25,9.4E-23
+defense response (GO:0006952),961,43,6.86,+,6.27,1.03E-21,2.57E-19
+cellular response to stress (GO:0033554),1129,50,8.06,+,6.21,3.99E-25,1.4E-22
+regulation of response to stress (GO:0080134),399,17,2.85,+,5.97,8.19E-09,0.00000111
+response to abscisic acid (GO:0009737),506,21,3.61,+,5.81,2.07E-10,3.15E-08
+response to alcohol (GO:0097305),511,21,3.65,+,5.76,2.45E-10,3.65E-08
+response to oxygen-containing compound (GO:1901700),1536,61,10.96,+,5.56,1.74E-28,9.4E-26
+response to temperature stimulus (GO:0009266),630,25,4.5,+,5.56,8.7E-12,1.36E-09
+response to cold (GO:0009409),417,16,2.98,+,5.38,9.15E-08,0.0000111
+response to salt stress (GO:0009651),450,17,3.21,+,5.29,4.43E-08,0.00000573
+response to lipid (GO:0033993),820,30,5.85,+,5.13,4.33E-13,7.58E-11
+response to external stimulus (GO:0009605),1528,55,10.91,+,5.04,1.51E-23,4.74E-21
+negative regulation of response to stimulus (GO:0048585),226,8,1.61,+,4.96,0.000279,0.0154
+response to organic substance (GO:0010033),1724,61,12.3,+,4.96,6.67E-26,3.31E-23
+cellular response to oxygen-containing compound (GO:1901701),510,18,3.64,+,4.95,4.72E-08,0.00000598
+cellular response to lipid (GO:0071396),313,11,2.23,+,4.92,0.0000217,0.00154
+response to osmotic stress (GO:0006970),532,18,3.8,+,4.74,8.69E-08,0.0000108
+hormone-mediated signaling pathway (GO:0009755),426,14,3.04,+,4.60,0.00000345,0.000285
+regulation of response to stimulus (GO:0048583),755,24,5.39,+,4.45,1.75E-09,0.000000248
+response to chemical (GO:0042221),2712,86,19.36,+,4.44,1.4E-34,4.16E-31
+cellular response to organic substance (GO:0071310),672,21,4.8,+,4.38,2.59E-08,0.00000342
+response to stress (GO:0006950),3136,95,22.38,+,4.24,2.24E-37,1.33E-33
+response to abiotic stimulus (GO:0009628),2150,65,15.34,+,4.24,4.64E-24,1.54E-21
+"negative regulation of transcription, DNA-templated (GO:0045892)",272,8,1.94,+,4.12,0.000908,0.0419
+negative regulation of RNA biosynthetic process (GO:1902679),274,8,1.96,+,4.09,0.00095,0.0432
+negative regulation of nucleic acid-templated transcription (GO:1903507),274,8,1.96,+,4.09,0.00095,0.0429
+negative regulation of nucleobase-containing compound metabolic process (GO:0045934),312,9,2.23,+,4.04,0.000502,0.0253
+cellular response to endogenous stimulus (GO:0071495),526,15,3.75,+,4.00,0.00000807,0.000616
+cellular response to hormone stimulus (GO:0032870),493,14,3.52,+,3.98,0.000017,0.00125
+response to endogenous stimulus (GO:0009719),1286,36,9.18,+,3.92,3.18E-12,5.25E-10
+response to hormone (GO:0009725),1255,35,8.96,+,3.91,7.38E-12,1.19E-09
+negative regulation of cellular macromolecule biosynthetic process (GO:2000113),363,10,2.59,+,3.86,0.000351,0.0185
+cellular response to stimulus (GO:0051716),2514,69,17.94,+,3.85,2.44E-23,7.28E-21
+negative regulation of macromolecule biosynthetic process (GO:0010558),365,10,2.61,+,3.84,0.000366,0.0191
+negative regulation of cellular biosynthetic process (GO:0031327),386,10,2.75,+,3.63,0.00056,0.0275
+negative regulation of biosynthetic process (GO:0009890),392,10,2.8,+,3.57,0.000628,0.0307
+response to acid chemical (GO:0001101),405,10,2.89,+,3.46,0.000801,0.0378
+response to inorganic substance (GO:0010035),931,22,6.64,+,3.31,0.00000125,0.00012
+response to light stimulus (GO:0009416),714,15,5.1,+,2.94,0.000234,0.0132
+response to stimulus (GO:0050896),5591,117,39.9,+,2.93,6.94E-33,1.38E-29
+response to radiation (GO:0009314),738,15,5.27,+,2.85,0.000329,0.0178
+signal transduction (GO:0007165),1343,27,9.59,+,2.82,0.00000153,0.00014
+negative regulation of cellular process (GO:0048523),751,15,5.36,+,2.80,0.000394,0.0204
+cell communication (GO:0007154),1637,32,11.68,+,2.74,0.000000266,0.0000268
+signaling (GO:0023052),1382,27,9.86,+,2.74,0.00000259,0.000223
+negative regulation of biological process (GO:0048519),1091,21,7.79,+,2.70,0.0000452,0.00306
+regulation of cellular process (GO:0050794),4693,58,33.49,+,1.73,0.0000155,0.00117
+regulation of biological process (GO:0050789),5336,65,38.08,+,1.71,0.00000718,0.000562
+biological regulation (GO:0065007),5895,67,42.07,+,1.59,0.0000514,0.0034
+cellular process (GO:0009987),11936,114,85.19,+,1.34,0.0000463,0.00309
+nucleobase-containing compound metabolic process (GO:0006139),2084,3,14.87,-,.20,0.00033,0.0177
+nucleic acid metabolic process (GO:0090304),1708,1,12.19,-,.08,0.00008,0.00512
+RNA metabolic process (GO:0016070),1298,0,9.26,-, < 0.01,0.00013,0.00796
+gene expression (GO:0010467),1608,0,11.48,-, < 0.01,0.0000177,0.00128

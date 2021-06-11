@@ -41,7 +41,7 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
     res <- compare_wald_vs_LRT(trtm = trtm, ref_treatment = ref_treatment, treatment2 = treatment2)
   } else { 
     print("no valid method2; choose DEG or LRTcompare") }
-  
+  res$fullgene <- res$gene
   genes <- res$gene
   genes <- substr(genes, start = 1, stop = 9)
   res$gene <- genes
@@ -55,7 +55,7 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath1/input/counts.csv",
   res_annotated <- left_join(res, subset_annotated, by = "gene")
   uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
   res_annotated <- aggregate(res_annotated, by = list(res_annotated$gene), FUN = uniquepaste)
-  write_delim(res_annotated, name, delim = ";")
+  write_delim(res_annotated, path = name, delim = ",", col_names = TRUE)
   
   return(res_annotated)
 }

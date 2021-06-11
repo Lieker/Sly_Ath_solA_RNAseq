@@ -10,13 +10,13 @@ get_Athaliana_annotations <- function(organism = "Arabidopsis thaliana",
                                       "description",
                                       "external_gene_name",
                                       "external_gene_source"),
-                                      counts_csv_file = "Ath2/input/counts.csv"
+                                      counts_csv_file = "Ath1/input/counts.csv"
 ) {biomartr::organismBM(organism = organism)
   
   arabido_attributes = biomartr::organismAttributes(organism) %>% 
   filter(dataset == "athaliana_eg_gene")
   
-  all_arabidopsis_genes <- read.csv(counts_csv_file, header = TRUE, stringsAsFactors = FALSE)
+  all_arabidopsis_genes <- read.csv(counts_csv_file, header = TRUE, stringsAsFactors = FALSE, fileEncoding = "UTF-8-BOM")
   all_arabidopsis_genes <- all_arabidopsis_genes$Geneid
   all_arabidopsis_genes <- unique(substr(all_arabidopsis_genes, start = 1, stop = 9))
   all_arabidopsis_genes_annotated <- biomartr::biomart(genes = all_arabidopsis_genes,
@@ -27,7 +27,3 @@ get_Athaliana_annotations <- function(organism = "Arabidopsis thaliana",
   all_arabidopsis_genes_annotated$entrezgene_id = as.character(all_arabidopsis_genes_annotated$entrezgene_id) 
   return(all_arabidopsis_genes_annotated)
 }
-  
-
-
-
