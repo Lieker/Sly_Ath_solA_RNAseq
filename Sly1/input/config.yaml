@@ -1,7 +1,7 @@
 ---
 # directories
 result_dir:  results/ # should be kept
-working_dir: /scratch/mgallan1/temp/    # can be removed (temporary files)
+working_dir: temp/    # can be removed (temporary files)
 
 # samples to condition
 units: config/samples.tsv
@@ -9,7 +9,8 @@ units: config/samples.tsv
 # refs 
 refs:
   genome:  "config/refs/S_lycopersicum_chromosomes.4.00.fa" 
-  gtf:     "config/refs/ITAG4.0_gene_models.gtf"
+  gtf:     "config/refs/ITAG4.0_gene_models.gtf" 
+
 
 # read quality trimming
 fastp:
@@ -25,11 +26,11 @@ star_index:
   sjdbOverhang: 100                     # as recommended in STAR manual https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf
   limitGenomeGenerateRAM: 100000000000  # maximum available RAM (bytes) default is 31000000000 bytes = 31Gb
   genomeSAindexNbases: 13               # 13 is optimal for tomato genome (around 1Gb)
-
+                          
 # alignment step
 star:
   samtype:                'BAM SortedByCoordinate' # type of output
-  mismatches:             '2'                      # alignment will be output only if it has less mismatches than this number
+  mismatches:             '4'                      # alignment will be output only if it has less mismatches than this number
   unmapped:               'None'                   # 'None' or 'Fastx' (to output fastq files of unmapped reads)
   multimappers:           '10'                     # N number of loci the read is allowed to map to
   matchminoverlengthread: '0.66'                   # alignment will be output if percentage of read length is higher than this value (66% of 2x100bp = 132 nucleotides) 
@@ -42,4 +43,4 @@ star:
 # featureCounts
 ###############
 
-count_multimappers: FALSE                          # set to TRUE if you need to count multimapperstSeq 3’ mRNA-Seq Library Prep)
+count_multimappers: FALSE                          # set to TRUE if you need to count multimappers (e.g. you have used the QuantSeq 3’ mRNA-Seq Library Prep)

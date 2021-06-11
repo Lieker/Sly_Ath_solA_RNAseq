@@ -1,15 +1,15 @@
 STAR version=2.7.6a
 STAR compilation time,server,dir=Sat Sep 19 11:48:47 EDT 2020 vega:/home/dobin/data/STAR/STARcode/STAR.master/source
 ##### Command Line:
-STAR --genomeDir /scratch/mgallan1/temp/genome/ --readFilesIn /scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz --readFilesCommand zcat --outFilterMultimapNmax 10 --outFilterMismatchNmax 2 --alignMatesGapMax 20000 --alignIntronMax 25000 --outFilterMatchNminOverLread 0.66 --alignEndsType EndToEnd --runThreadN 10 --outReadsUnmapped None --outFileNamePrefix results/star/S10_ --outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI AS nM MD
+STAR --genomeDir temp/genome/ --readFilesIn temp/trimmed/S10_R1_trimmed.fq.gz --readFilesCommand zcat --outFilterMultimapNmax 10 --outFilterMismatchNmax 4 --alignMatesGapMax 20000 --alignIntronMax 25000 --outFilterMatchNminOverLread 0.66 --alignEndsType EndToEnd --runThreadN 10 --outReadsUnmapped None --outFileNamePrefix results/star/S10_ --outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI AS nM MD
 ##### Initial USER parameters from Command Line:
 outFileNamePrefix                 results/star/S10_
 ###### All USER parameters from Command Line:
-genomeDir                     /scratch/mgallan1/temp/genome/     ~RE-DEFINED
-readFilesIn                   /scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz        ~RE-DEFINED
+genomeDir                     temp/genome/     ~RE-DEFINED
+readFilesIn                   temp/trimmed/S10_R1_trimmed.fq.gz        ~RE-DEFINED
 readFilesCommand              zcat        ~RE-DEFINED
 outFilterMultimapNmax         10     ~RE-DEFINED
-outFilterMismatchNmax         2     ~RE-DEFINED
+outFilterMismatchNmax         4     ~RE-DEFINED
 alignMatesGapMax              20000     ~RE-DEFINED
 alignIntronMax                25000     ~RE-DEFINED
 outFilterMatchNminOverLread   0.66     ~RE-DEFINED
@@ -23,8 +23,8 @@ outSAMattributes              NH   HI   AS   nM   MD        ~RE-DEFINED
 
 ##### Final user re-defined parameters-----------------:
 runThreadN                        10
-genomeDir                         /scratch/mgallan1/temp/genome/
-readFilesIn                       /scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz   
+genomeDir                         temp/genome/
+readFilesIn                       temp/trimmed/S10_R1_trimmed.fq.gz   
 readFilesCommand                  zcat   
 outFileNamePrefix                 results/star/S10_
 outReadsUnmapped                  None
@@ -32,30 +32,30 @@ outSAMtype                        BAM   SortedByCoordinate
 outSAMattributes                  NH   HI   AS   nM   MD   
 outFilterMultimapNmax             10
 outFilterMatchNminOverLread       0.66
-outFilterMismatchNmax             2
+outFilterMismatchNmax             4
 alignIntronMax                    25000
 alignMatesGapMax                  20000
 alignEndsType                     EndToEnd
 
 -------------------------------
 ##### Final effective command line:
-STAR   --runThreadN 10   --genomeDir /scratch/mgallan1/temp/genome/   --readFilesIn /scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz      --readFilesCommand zcat      --outFileNamePrefix results/star/S10_   --outReadsUnmapped None   --outSAMtype BAM   SortedByCoordinate      --outSAMattributes NH   HI   AS   nM   MD      --outFilterMultimapNmax 10   --outFilterMatchNminOverLread 0.66   --outFilterMismatchNmax 2   --alignIntronMax 25000   --alignMatesGapMax 20000   --alignEndsType EndToEnd
+STAR   --runThreadN 10   --genomeDir temp/genome/   --readFilesIn temp/trimmed/S10_R1_trimmed.fq.gz      --readFilesCommand zcat      --outFileNamePrefix results/star/S10_   --outReadsUnmapped None   --outSAMtype BAM   SortedByCoordinate      --outSAMattributes NH   HI   AS   nM   MD      --outFilterMultimapNmax 10   --outFilterMatchNminOverLread 0.66   --outFilterMismatchNmax 4   --alignIntronMax 25000   --alignMatesGapMax 20000   --alignEndsType EndToEnd
 ----------------------------------------
 
 Number of fastq files for each mate = 1
 
    Input read files for mate 1 :
--rw-r--r--. 1 mgallan1 Domain Users 852598791 May 27 16:45 /scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz
+-rw-r-----. 1 lvlaar1 sils-omics-unix-fnwi 852589003 Jun  2 09:18 temp/trimmed/S10_R1_trimmed.fq.gz
 
    readsCommandsFile:
 exec > "results/star/S10__STARtmp/tmp.fifo.read1"
 echo FILE 0
-zcat      "/scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz"
+zcat      "temp/trimmed/S10_R1_trimmed.fq.gz"
 
 WARNING: --limitBAMsortRAM=0, will use genome size as RAM limit for BAM sorting
 Finished loading and checking parameters
 Reading genome generation parameters:
-### STAR   --runMode genomeGenerate   --runThreadN 10   --genomeDir /scratch/mgallan1/temp/genome/   --genomeFastaFiles config/refs/S_lycopersicum_chromosomes.4.00.fa      --genomeSAindexNbases 13   --limitGenomeGenerateRAM 100000000000   --sjdbGTFfile config/refs/ITAG4.0_gene_models.gtf   --sjdbOverhang 100
+### STAR   --runMode genomeGenerate   --runThreadN 10   --genomeDir temp/genome/   --genomeFastaFiles config/refs/S_lycopersicum_chromosomes.4.00.fa      --genomeSAindexNbases 13   --limitGenomeGenerateRAM 100000000000   --sjdbGTFfile config/refs/ITAG4.0_gene_models.gtf   --sjdbOverhang 100
 ### GstrandBit=32
 versionGenome                 2.7.4a     ~RE-DEFINED
 genomeType                    Full     ~RE-DEFINED
@@ -73,7 +73,7 @@ sjdbGTFfeatureExon            exon     ~RE-DEFINED
 sjdbGTFtagExonParentTranscripttranscript_id     ~RE-DEFINED
 sjdbGTFtagExonParentGene      gene_id     ~RE-DEFINED
 sjdbInsertSave                Basic     ~RE-DEFINED
-genomeFileSizes               809684325   6665664509        ~RE-DEFINED
+genomeFileSizes               810028437   6668490291        ~RE-DEFINED
 Genome version is compatible with current STAR
 Number of real (reference) chromosomes= 13
 1	SL4.0ch00	9643250	0
@@ -90,99 +90,99 @@ Number of real (reference) chromosomes= 13
 12	SL4.0ch11	54379777	662700032
 13	SL4.0ch12	66688036	717225984
 --sjdbOverhang = 100 taken from the generated genome
-Started loading the genome: Thu May 27 16:57:49 2021
+Started loading the genome: Wed Jun  2 09:51:00 2021
 
-Genome: size given as a parameter = 809684325
-SA: size given as a parameter = 6665664509
+Genome: size given as a parameter = 810028437
+SA: size given as a parameter = 6668490291
 SAindex: size given as a parameter = 1
 Read from SAindex: pGe.gSAindexNbases=13  nSAi=89478484
-nGenome=809684325;  nSAbyte=6665664509
-GstrandBit=32   SA number of indices=1615918668
+nGenome=810028437;  nSAbyte=6668490291
+GstrandBit=32   SA number of indices=1616603706
 Shared memory is not used for genomes. Allocated a private copy of the genome.
-Genome file size: 809684325 bytes; state: good=1 eof=0 fail=0 bad=0
-Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 809684325 bytes
-SA file size: 6665664509 bytes; state: good=1 eof=0 fail=0 bad=0
-Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 6665664509 bytes
+Genome file size: 810028437 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 810028437 bytes
+SA file size: 6668490291 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 6668490291 bytes
 Loading SAindex ... done: 391468491 bytes
-Finished loading the genome: Thu May 27 16:57:50 2021
+Finished loading the genome: Wed Jun  2 09:51:02 2021
 
-Processing splice junctions database sjdbN=127421,   pGe.sjdbOverhang=100 
+Processing splice junctions database sjdbN=129133,   pGe.sjdbOverhang=100 
 To accommodate alignIntronMax=25000 redefined winBinNbits=14
 To accommodate alignIntronMax=25000 and alignMatesGapMax=20000, redefined winFlankNbins=2 and winAnchorDistNbins=4
 Created thread # 1
 Created thread # 2
 Created thread # 3
+Starting to map file # 0
+mate 1:   temp/trimmed/S10_R1_trimmed.fq.gz
 Created thread # 4
 Created thread # 5
 Created thread # 6
 Created thread # 7
 Created thread # 8
 Created thread # 9
-Starting to map file # 0
-mate 1:   /scratch/mgallan1/temp/trimmed/S10_R1_trimmed.fq.gz
-BAM sorting: 264406 mapped reads
+BAM sorting: 263223 mapped reads
 BAM sorting bins genomic start loci:
-1	0	1406357
-2	0	1408817
-3	0	1438355
-4	0	1438650
-5	0	1458283
-6	0	1488262
-7	0	1506781
-8	0	1516599
-9	0	1560615
-10	0	1564268
-11	0	1584887
-12	0	2478681
-13	0	2480985
-14	0	2511831
-15	0	2536662
-16	0	3794449
-17	0	3794549
-18	0	3815449
-19	0	3850702
-20	0	5027751
-21	0	6884000
-22	0	6906987
-23	0	6907089
-24	0	7347549
-25	0	7347647
-26	0	7367657
-27	0	7922322
-28	1	74125829
-29	1	85896263
-30	2	33255030
-31	2	44768520
-32	2	46737242
-33	3	1978499
-34	3	57074932
-35	4	18180105
-36	5	2482994
-37	6	525362
-38	6	41252636
-39	7	4133406
-40	7	66957345
-41	8	50439915
-42	8	62828033
-43	9	32798442
-44	9	32799685
-45	9	64525706
-46	10	54653001
-47	11	1947754
-48	12	347187
-Thread #3 end of input stream, nextChar=-1
-Completed: thread #1
-Completed: thread #3
-Completed: thread #5
-Completed: thread #7
-Completed: thread #6
-Completed: thread #4
+1	0	1406522
+2	0	1408818
+3	0	1425287
+4	0	1438612
+5	0	1441599
+6	0	1473643
+7	0	1496602
+8	0	1516576
+9	0	1557219
+10	0	1564245
+11	0	1564337
+12	0	2478650
+13	0	2478763
+14	0	2502459
+15	0	2534961
+16	0	3778042
+17	0	3794500
+18	0	3796797
+19	0	3827752
+20	0	3852490
+21	0	6873063
+22	0	6904571
+23	0	6907038
+24	0	6944324
+25	0	7347556
+26	0	7347663
+27	0	7370650
+28	1	1480114
+29	1	79455593
+30	1	88119711
+31	2	38532101
+32	2	46722449
+33	2	49410493
+34	3	45372673
+35	3	65014044
+36	4	63071753
+37	5	62167849
+38	6	37320987
+39	6	47044709
+40	7	66236183
+41	8	25214251
+42	8	62126305
+43	9	32797195
+44	9	32799676
+45	9	61971771
+46	10	42882445
+47	11	865432
+48	11	53611550
+Thread #4 end of input stream, nextChar=-1
 Completed: thread #8
-Completed: thread #9
+Completed: thread #5
+Completed: thread #4
+Completed: thread #6
 Completed: thread #0
+Completed: thread #1
 Joined thread # 1
+Completed: thread #9
 Completed: thread #2
 Joined thread # 2
+Completed: thread #7
+Completed: thread #3
 Joined thread # 3
 Joined thread # 4
 Joined thread # 5
@@ -190,6 +190,6 @@ Joined thread # 6
 Joined thread # 7
 Joined thread # 8
 Joined thread # 9
-May 27 16:59:04 ..... started sorting BAM
-Max memory needed for sorting = 117202512
+Jun 02 09:52:20 ..... started sorting BAM
+Max memory needed for sorting = 143313029
 ALL DONE!
