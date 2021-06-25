@@ -3,7 +3,8 @@ plot_pca <- function(count_csv_file = "Ath1/input/counts.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      tp = c(2,6,24),
-                     pca_colour = "treatment") {
+                     pca_colour = "compartment",
+                     pca_shape = "treatment") {
   
   source("Ath1/scripts/produce_scaled_counts_matrix.R")
   source("Ath1/scripts/filter_counts_based_on_timepoint.R")
@@ -61,10 +62,12 @@ plot_pca <- function(count_csv_file = "Ath1/input/counts.csv",
   pca_plot <- ggplot(data = score_df) +
     geom_point(aes_string(x = pc_x_axis, 
                           y = pc_y_axis, 
-                          col = pca_colour), 
+                          col = pca_colour,
+                          shape = pca_shape), 
                size = 3) +
     xlab(paste0(pc_x_axis," ", variance_pc_x, "%")) +
-    ylab(paste0(pc_y_axis," ", variance_pc_y, "%"))
+    ylab(paste0(pc_y_axis," ", variance_pc_y, "%")) +
+    scale_color_manual(values=c('#0099FF','#E69F00', '#56B4E9'))
 
   return(pca_plot)
 }

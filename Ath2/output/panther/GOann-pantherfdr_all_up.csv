@@ -1,6 +1,6 @@
 GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (198),expected,over/under,foldenrich,rawPvalue,FDR
-negative regulation of anion channel activity by blue light (GO:0010362),2,2,0.01,+, > 100,0.000303,0.0261
-regulation of anion channel activity by blue light (GO:0010361),2,2,0.01,+, > 100,0.000303,0.0258
+negative regulation of anion channel activity by blue light (GO:0010362),2,2,0.01,+,100,0.000303,0.0261
+regulation of anion channel activity by blue light (GO:0010361),2,2,0.01,+,100,0.000303,0.0258
 negative regulation of ion transmembrane transport (GO:0034766),3,2,0.02,+,92.46,0.000503,0.0399
 negative regulation of transmembrane transport (GO:0034763),3,2,0.02,+,92.46,0.000503,0.0394
 negative regulation of ion transmembrane transporter activity (GO:0032413),3,2,0.02,+,92.46,0.000503,0.0389

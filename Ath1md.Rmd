@@ -429,6 +429,7 @@ Only 13 genes overlap between these timepoints. This means that a nanomolar sola
 ## Venn diagram
 
 ```{r message = FALSE, warning = FALSE}
+library(VennDiagram)
 x1 <- list(n2$gene,u2$gene,n6$gene,n24$gene,u24$gene)
 v <- venn.diagram(x1,
              category.names = c(paste0("nM, 2h (", nrow(n2), ")"),

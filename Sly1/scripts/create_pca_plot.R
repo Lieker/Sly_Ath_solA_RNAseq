@@ -3,7 +3,9 @@ plot_pca <- function(count_csv_file = "Sly1/input/counts.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      plantpart = "root",
-                     pca_colour = "treatment") {
+                     pca_colour = 'treatment',
+                     pca_shape = "1") 
+  {
   
   source("Sly1/scripts/produce_scaled_counts_matrix.R")
   source("Sly1/scripts/filter_counts_based_on_compartment.R")
@@ -61,10 +63,18 @@ plot_pca <- function(count_csv_file = "Sly1/input/counts.csv",
   pca_plot <- ggplot(data = score_df) +
     geom_point(aes_string(x = pc_x_axis, 
                           y = pc_y_axis, 
-                          col = pca_colour), 
-               size = 3) +
+                          col = pca_colour,
+                          shape = pca_shape, 
+                          size = 3)) +
+    theme_minimal() +
     xlab(paste0(pc_x_axis," ", variance_pc_x, "%")) +
-    ylab(paste0(pc_y_axis," ", variance_pc_y, "%"))
+    ylab(paste0(pc_y_axis," ", variance_pc_y, "%")) +
+    guides(size = FALSE) +
+    theme(axis.title = element_text(size = 15),
+          axis.text = element_text(size = 15),
+          legend.text = element_text(size = 15),
+          legend.title = element_text(size = 15))
+                
 
   return(pca_plot)
 }

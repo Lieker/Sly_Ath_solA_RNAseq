@@ -3,8 +3,8 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      trm = c("a","b","c","d","e","f","g"),
-                     pca_colour = "solA",
-                     pca_shape = 1) {
+                     pca_colour = "treatment",
+                     pca_shape = 'solA') {
   
   source("Ath2/scripts/produce_scaled_counts_matrix.R")
   source("Ath2/scripts/filter_counts_based_on_treatment.R")
@@ -57,7 +57,8 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
   variance_pc_x <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_x_axis))]
   variance_pc_y <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_y_axis))]
   
-  
+  score_df[,pca_shape] <- as.factor(score_df[,pca_shape])
+ 
   pca_plot <- ggplot(data = score_df) +
     geom_point(aes_string(x = pc_x_axis, 
                           y = pc_y_axis, 
@@ -65,9 +66,14 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
                           shape = pca_shape, 
                           size = 3)) +
     theme_minimal() +
-    scale_color_manual(values=c('#0099FF','#E69F00', '#56B4E9')) +
+    scale_color_manual(values=c('#0099FF','#E69F00', '#56B4E9',"#e98b56","#56e9d5","#566be9","#e956b4")) +
+    guides(size = FALSE) +
     xlab(paste0(pc_x_axis," ", variance_pc_x, "%")) +
-    ylab(paste0(pc_y_axis," ", variance_pc_y, "%"))
+    ylab(paste0(pc_y_axis," ", variance_pc_y, "%"))+
+    theme(axis.title = element_text(size = 15),
+          axis.text = element_text(size = 15),
+          legend.text = element_text(size = 15),
+          legend.title = element_text(size = 15))
 
   return(pca_plot)
 }

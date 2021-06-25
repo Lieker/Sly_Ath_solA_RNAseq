@@ -159,6 +159,12 @@ if ("GenomicFeatures" %in% installed.packages()){
   BiocManager::install("GenomicFeatures")
   library("GenomicFeatures")
 }
+if ("patchwork" %in% installed.packages()){
+  library("patchwork") 
+} else {
+  BiocManager::install("patchwork")
+  library("patchwork")
+}
 ```
 
 # Mapping results
@@ -167,7 +173,7 @@ Calculate the average unique mapping %:
 
 ```{r}
 ms <- read.csv("Sly1/input/mapping_summary.csv")
-ms <- ms[, -1] %>% column_to_rownames("attribute")
+ms <- ms[-c(37,38), -1] %>% column_to_rownames("attribute")
 ms[1:10,1:3]
 ```
 
@@ -182,7 +188,7 @@ uniquepercent <- mean(unique)
 uniquepercent
 ```
 
-The average unique mapping % is 45.51%. This is low, but explained by the type of library prep method that was used (Moll et al, 2014).
+The average unique mapping % is 54.0%. This is low, but explained by the type of library prep method that was used (Moll et al, 2014).
 
 
 
@@ -193,16 +199,15 @@ The average unique mapping % is 45.51%. This is low, but explained by the type o
 Plot PCA to see if samples with the same treatments cluster together.
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/create_pca_plot.R")
-p1 <- plot_pca(plantpart = c("root", "shoot"), pca_colour = "treatment")
-p2 <- plot_pca(plantpart = c("root", "shoot"), pca_colour = "compartment")
-p1 + p2
+p <- plot_pca(plantpart = c("root", "shoot"), pca_colour = "compartment", pca_shape = "treatment")
+p
 ```
 
 On PC1, the compartments cluster together. There is no clear clustering based on solA treatment. Let's check PC3 and PC4.
 ```{r message=FALSE, warning=FALSE}
-p1 <- plot_pca(plantpart = c("root", "shoot"), pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment")
-p2 <- plot_pca(plantpart = c("root", "shoot"), pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "compartment")
-p1 + p2
+p1 <- plot_pca(plantpart = c("root", "shoot"), pc_x_axis = "PC3", pc_y_axis = "PC4")
+
+p1 + scale_color_manual(values=c('#e956b4', '#56e98b'), name = "solanoeclepin A", labels = c("no", "yes")) + guides(shape = FALSE)
 ```
 
 Also no good separation. Let's plot the screeplot:
@@ -226,44 +231,24 @@ p1 + p2
 ```
 
 ```{r}
-plot_pca(plantpart = c("root"), pc_x_axis = "PC1", pc_y_axis = "PC5", pca_colour = "treatment") + ggtitle("root")
+p <- plot_pca(plantpart = "root", pc_x_axis = "PC5", pc_y_axis = "PC1", pca_shape = "treatment")
+p + scale_color_manual(values=c('#e956b4', '#56e98b'), name = "solanoeclepin A", labels = c("no", "yes")) + guides(shape = FALSE)
 ```
+
 In root, there seems to be solA separation in PC5, in shoot, clustering based on solA treatment is difficult to observe. But since the treatment is applied on the roots, this might not be so surprising.
+
+```{r}
+p <- plot_pca(plantpart = "shoot", pc_x_axis = "PC1", pc_y_axis = "PC2", pca_shape = "treatment")
+p + scale_color_manual(values=c('#566be9', '#d71c37'), name = "solanoeclepin A", labels = c("no", "yes")) + guides(shape = FALSE)
+```
+
+
 
 Check the screeplots for separate compartment PCA:
 ```{r message=FALSE, warning=FALSE}
 p1 <- plot_scree(comp = "shoot") + ggtitle("Shoot")
 p2 <- plot_scree(comp = "root") + ggtitle("Root")
 p1 + p2
-```
-## PLS-DA analysis
-
-We can try to see if supervised clustering analysis gives us better results. We will use PLS-DA and the package mixOmics.
-First find the optimal number of components with the performance check from mixOmics:
-
-```{r message=FALSE, warning=FALSE}
-source("Sly1/scripts/perf_plsda.R")
-do_plsda_perf(plantpart = c("root","shoot"), n = 99) #this takes some time
-```
-From this, we infer that the ideal number of components is x. We need this as input for plotting the PLS-DA.
-Now we can plot the PLS-DA plot:
-```{r message=FALSE, warning=FALSE}
-source("Sly1/scripts/plsda.R")
-do_plsda(plantpart = c("root","shoot"), nc = 2, ttl = "All tomato samples PLS-DA")
-```
-
-This separation is much better.
-
-But within compartments we might find more clear results.
-
-```{r message=FALSE, warning=FALSE}
-do_plsda_perf(plantpart = "shoot", n = 99)
-do_plsda(plantpart = "shoot", nc = 2, ttl = "Shoot samples PLS-DA")
-
-do_plsda_perf(plantpart = "root", n = 99)
-do_plsda(plantpart = "root", nc = 4, ttl = "Root samples PLS-DA")
-
-
 ```
 
 # DEG analysis
@@ -302,11 +287,9 @@ xr <- xr %>% rownames_to_column("genes")
 So in the shoot there are 43 DEGs and in the root 22 DEGs.
 
 ```{r message=FALSE, warning=FALSE}
-xrr <- xr %>% rownames_to_column("transcripts") 
-xrr <- xrr$transcripts
-xss <- xs %>% rownames_to_column("transcripts")
-xss <- xss$transcripts
-length(xss[xss %in% xss])
+xrr <- xr$genes 
+xss <- xs$genes
+length(xss[xss %in% xrr])
 ```
 
 None of the DEGs of root and shoot overlap; they are all different.
@@ -318,38 +301,116 @@ y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>%
 DEG_counts <- left_join(x, y, by="genes") 
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
-xp_design <- xp_design %>% column_to_rownames("sample")
+
+require(RColorBrewer)
+myCol <- colorRampPalette(c("red1", "black", "dodgerblue"))(100)
+myBreaks <- seq(-2, 2, length.out=100)
+
+clrs <- list(
+  solA = c(no = "gray", yes ="midnightblue"),
+  compartment = c(root = "darkorange4", shoot = "darkgreen"))
+
+solA <- rep(c("no", "yes"), c(10,10))
+compartment <- rep(c("root","shoot","root","shoot"), c(5,5,5,5))
+sample <- names(DEG_counts)
+sip <- data.frame(sample, solA, compartment)%>% column_to_rownames("sample")
 
 pheatmap(DEG_counts,
-         gaps_col = c(5,10,15),
+         gaps_col = c(10),
+         show_rownames = FALSE,
+         show_colnames = FALSE,
          cluster_rows = TRUE,                      
-         cluster_cols = TRUE, 
-         show_rownames = FALSE, 
-         show_colnames = TRUE,
+         cluster_cols = TRUE,
          scale = "row",
-         main = "All samples; clustered")
+         col = myCol,
+         treeheight_row = 0,
+         cutree_rows = 1,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         border_color = NA
+         )
 ```
 
-In this heatmap, samples from the same treatment cluster together, which is good. Also, samples from the same compartment cluster together. There is more differences visible between samples the shoot than between samples of root, which is expected since shoot resulted in more DEGs.
+In this heatmap, samples from the same treatment cluster together, which is good. Only S03 (root, no solA) clusters together with the yes solA. Also, samples from the same compartment cluster together. There is more differences visible between samples the shoot than between samples of root, which is expected since shoot resulted in more DEGs.
+Let's run the same script but without clustering, to see all samples in their sample group:
+
+```{r message=FALSE, warning=FALSE}
+pheatmap(DEG_counts,
+         gaps_col = c(5,10,15),
+         show_rownames = FALSE,
+         show_colnames = FALSE,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE,
+         scale = "row",
+         col = myCol,
+         treeheight_row = 0,
+         cutree_rows = 1,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         border_color = NA
+         )
+```
+
 Let's look more into the root samples and see whether they cluster together based on only their DEGs.
 ```{r message=FALSE, warning=FALSE}
 x <- get_list_of_DEGs(plantpart = "root", method = "treatment", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")
 
+source("Sly1/scripts/filter_counts_based_on_compartment.R")
 y <- filter_counts_based_on_compartment(comprtmt = "root") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
 DEG_counts <- left_join(x, y, by="genes") 
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
 
+clrs <- list(
+  solA = c(n= "gray", y ="midnightblue"))
+
+solA <- rep(c("n", "y"), c(5,5))
+sample <- names(DEG_counts)
+sip <- data.frame(sample, solA)%>% column_to_rownames("sample")
+
 pheatmap(DEG_counts,
-         gaps_col = 5,
+         gaps_col = c(5),
+         show_rownames = FALSE,
+         show_colnames = FALSE,
          cluster_rows = TRUE,                      
-         cluster_cols = TRUE, 
-         show_rownames = FALSE, 
-         show_colnames = TRUE,
+         cluster_cols = TRUE,
          scale = "row",
-         main = "Root samples; clustered")
+         col = myCol,
+         treeheight_row = 0,
+         cutree_rows = 1,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         border_color = NA,
+         main = "Root",
+         fontsize = 15
+         )
+
+x2 <- get_list_of_DEGs(plantpart = "shoot", method = "treatment", log2FC_threshold = 0) %>% rownames_to_column("genes")
+y2 <- filter_counts_based_on_compartment(comprtmt = "shoot") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+DEG_counts2 <- left_join(x2, y2, by = "genes")
+DEG_counts2 <- DEG_counts2[, -c(2,3,4,5,6,7)]
+DEG_counts2 <- DEG_counts2 %>% column_to_rownames("genes")
+
+sip2 <- data.frame(names(DEG_counts2), solA) %>% column_to_rownames("names.DEG_counts2.")
+
+pheatmap(DEG_counts2,
+         gaps_col = 5,
+         show_rownames = FALSE,
+         show_colnames = FALSE,
+         cluster_rows = TRUE,                      
+         cluster_cols = TRUE,
+         scale = "row",
+         col = myCol,
+         treeheight_row = 0,
+         cutree_rows = 1,
+         annotation_col = sip2,
+         annotation_colors = clrs,
+         border_color = NA,
+         main = "Shoot",
+         fontsize = 15
+         )
 
 ```
 
@@ -364,7 +425,7 @@ source("Sly1/scripts/compare_Wald_vs_LRT.R")
 compare_wald_vs_LRT(compartment = c("root","shoot"), method = "compartment+treatment")
 ```
 
-This is a confirmation that there are no overlapping DEGs betwen compartments induced by solA treatment.
+This is a confirmation that there are no overlapping DEGs between compartments induced by solA treatment.
 Check also the within compartment comparisons:
 ```{r message=FALSE, warning=FALSE}
 compare_wald_vs_LRT(compartment = "root", method = "treatment")
@@ -372,7 +433,7 @@ compare_wald_vs_LRT(compartment = "root", method = "treatment")
 compare_wald_vs_LRT(compartment = "shoot", method = "treatment")
 ```
 
-For the root, LRT gives less (15) DEGs than Wald (22), but all of the LRT genes overlap with Wald. For the shoot, LRT gives 23 DEGs and Wald 43, again all of the LRT DEGs overlap with Wald. This is a reasonable confirmation of our DEGs.
+For the root, LRT gives less (17) DEGs than Wald (22), but all of the LRT genes overlap with Wald. For the shoot, LRT gives 23 DEGs and Wald 46, again all of the LRT DEGs overlap with Wald. This is a reasonable confirmation of our DEGs.
 
 # Annotation of DEGs
 
@@ -380,15 +441,16 @@ To infer the function of solA on tomato, we have to infer the function of the DE
 Since looking at the complete dataset hardly gives us DEGs, we only look at yes/no solA within the compartments.
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/get_annotated_DEGs.R")
+DEGboth <- get_annotated_DEGs(plantpart = c("root", "shoot"), method = "compartment+treatment", name = "Sly1/output/annotated_DEGs_both.csv")
 DEGroot <- get_annotated_DEGs(plantpart = "root", method = "treatment", name = "Sly1/output/annotated_DEGs_root.csv")
 DEGshoot <- get_annotated_DEGs(plantpart = "shoot", method = "treatment", name = "Sly1/output/annotated_DEGs_shoot.csv")
+DEGboth$compartment <- rep("both", count(DEGboth))
 DEGroot$compartment <- rep("root", count(DEGroot))
 DEGshoot$compartment <- rep("shoot", count(DEGshoot))
-DEGSly <- rbind(DEGroot, DEGshoot)
+DEGSly <- rbind(DEGroot, DEGshoot, DEGboth)
 DEGSly$original_genename <- substr(DEGSly$original_genename, start = 6, stop = 23)
 uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
 DEGSly <- aggregate(DEGSly, by = list(DEGSly$original_genename, DEGSly$compartment), FUN = uniquepaste)
 write_delim(DEGSly, "Sly1/output/allDEGs.csv", delim = ";")
 ```
 
-Using AgriGO (bioinfo.cau.edu.cn/agriGO/analysis.php), no enriched GO terms are detected for any of the sets of DEGs, neither when taking the DEGs from root and shoot separately nor when combining them.

@@ -161,6 +161,12 @@ if ("pheatmap" %in% installed.packages()){
   BiocManager::install("pheatmap")
   library("pheatmap")
 }
+if ("purrr" %in% installed.packages()){
+  library("purrr") 
+} else {
+  BiocManager::install("purrr")
+  library("purrr")
+}
 ```
 
 
@@ -207,25 +213,36 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
                      pca_colour = "solA")
 ```
 
+Figure 2
 ```{r}
-plot_pca()
+p <- plot_pca(pca_colour = "N")
+p
+```
+
+Figure S2:
+```{r}
+p <- plot_pca(pca_colour = "P")
+p
 ```
 
 In order to make an overview of what determines the clustering, make the same plot with different colour guides and group them together with patchwork package
-```{r}
-p1 <- plot_pca(pca_colour = "treatment")
-p2 <- plot_pca()
-p3 <- plot_pca(pca_colour = "N")
-p4 <- plot_pca(pca_colour = "P")
 
-(p1 | p2) / (p3 | p4)
+Figure S2:
+```{r}
+p1 <- plot_pca(trm = c("a","b"), pca_colour = "solA", pc_x_axis = "PC2", pc_y_axis = "PC3")
+p2 <- plot_pca(trm = c("c","d"), pca_colour = "solA", pc_x_axis = "PC2", pc_y_axis = "PC3")
+p3 <- plot_pca(trm = c("e","f"), pca_colour = "solA", pc_x_axis = "PC1", pc_y_axis = "PC2")
+
+p1
+p2
+p3
 ```
 
 From this figure, it is clear that the most variation is explained by the N condition. This figure is saved as PCAplot_PC1PC2_allsamples.jpeg.
 
 There is no good separation based on treatment or solA supply. Therefore, check also PC3 and PC4
 ```{r}
-p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment")
+p1 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment", pca_shape = "solA")
 p2 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4")
 p3 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "N")
 p4 <- plot_pca(pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "P")
@@ -354,39 +371,51 @@ DEG_counts <- left_join(x, y, by="genes")
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
-pheatmap(DEG_counts, 
-         gaps_col = c(5,10,15,20,25,30),
-         cluster_rows = TRUE,                      
-         cluster_cols = FALSE, 
-         show_rownames = FALSE, 
-         show_colnames = TRUE,
-         scale = "row",
-         main = "All samples; unclustered")
-pheatmap(DEG_counts,
-         cluster_rows = TRUE,                      
-         cluster_cols = TRUE, 
-         show_rownames = FALSE, 
-         show_colnames = TRUE,
-         scale = "row",
-         main = "All samples; clustered")
-```
 
-We add the sample information to the heatmap:
-```{r}
+myCol <- colorRampPalette(c("red1", "black", "dodgerblue"))(100)
+myBreaks <- seq(-2, 2, length.out=100)
+
 P <- rep(c("yes","no","yes"), c(10,20,5)) 
 N <- rep(c("yes","no"), c(20,15))
 solA <- rep(c("no","yes","no","yes","no","yes","no"), c(5,5,5,5,5,5,5))
 samples <- names(DEG_counts)
 sip <- data.frame(samples, solA, N, P) %>% column_to_rownames("samples")
-#remove group g
-DEG_counts <- DEG_counts[, c(1:30)]
-sip <- sip[c(1:30),]
 
 clrs <- list(
   P = c(no = "deepskyblue", yes ="dodgerblue4"),
   N = c(no = "brown1", yes = "red4"),
   solA = c(no = "mediumspringgreen", yes ="seagreen4")
 )
+
+
+pheatmap(DEG_counts, 
+         gaps_col = c(5,10,15,20,25,30),
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         col = myCol,
+         scale = "row",
+         main = "All samples; unclustered",
+         annotation_col = sip,
+         annotation_colors = clrs)
+pheatmap(DEG_counts,
+         cluster_rows = TRUE,                      
+         cluster_cols = TRUE,
+         col = myCol, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         main = "All samples; clustered",
+         annotation_col = sip,
+         annotation_colors = clrs)
+```
+
+We add the sample information to the heatmap:
+```{r}
+#remove group g
+DEG_counts <- DEG_counts[, c(1:30)]
+sip <- sip[c(1:30),]
 
 pheatmap(DEG_counts,
          gaps_col = c(10,20),
@@ -399,7 +428,8 @@ pheatmap(DEG_counts,
          annotation_colors = clrs,
          legend = FALSE,
          treeheight_row = 0,
-         cutree_rows = 2)
+         cutree_rows = 2,
+         col = myCol)
 
 ```
 
@@ -416,17 +446,24 @@ y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>%
 DEG_counts <- left_join(x, y, by="genes") 
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
-xp_design <- xp_design %>% column_to_rownames("sample")
 
-pheatmap(DEG_counts, 
-         gaps_col = c(5),
+DEG_counts <- DEG_counts[, c(1:30)]
+sip <- sip[c(1:30),]
+
+pheatmap(DEG_counts,
+         gaps_col = c(10,20),
          cluster_rows = TRUE,                      
          cluster_cols = FALSE, 
          show_rownames = FALSE, 
-         show_colnames = TRUE,
+         show_colnames = FALSE,
          scale = "row",
-         border_color = NA)
-
+         annotation_col = sip,
+         annotation_colors = clrs,
+         legend = FALSE,
+         treeheight_row = 0,
+         cutree_rows = 2,
+         col = myCol,
+         border_col = NA)
 ```
 We see roughly the same pattern as in the previous heatmap (p1), but with less genes (since there were less DEGs with this model).
 
@@ -438,10 +475,19 @@ x <- get_list_of_DEGs(trtm = c("a","b"), ref_treatment = "b", treatment2 = "a", 
 x <- x %>% rownames_to_column("genes")
 source("Ath2/scripts/filter_counts_based_on_treatment.R")
 y <- filter_counts_based_on_treatment(tr = c("a","b")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
-
 DEG_counts <- left_join(x, y, by="genes") 
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+
+solA <- rep(c("no","yes"), c(5,5))
+samples <- names(DEG_counts)
+sip <- data.frame(samples, solA) %>% column_to_rownames("samples")
+
+clrs <- list(
+  solA = c(no = "mediumspringgreen", yes ="seagreen4")
+)
+
+
 p <- pheatmap(DEG_counts, 
          gaps_col = 5,
          cluster_rows = TRUE,                      
@@ -449,7 +495,14 @@ p <- pheatmap(DEG_counts,
          show_rownames = FALSE, 
          show_colnames = TRUE,
          scale = "row",
-         border_color = NA)
+         border_color = NA,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         cutree_rows = 2,
+         treeheight_col = 0,
+         col = myCol,
+         treeheight_row = 0,
+         main = "Replete conditions")
 p
 ```
 
@@ -464,6 +517,10 @@ y <- filter_counts_based_on_treatment(tr = c("c","d")) %>% t() %>% as.data.frame
 DEG_counts <- left_join(x, y, by="genes") 
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+
+samples <- names(DEG_counts)
+sip <- data.frame(samples, solA) %>% column_to_rownames("samples")
+
 p <- pheatmap(DEG_counts, 
          gaps_col = 5,
          cluster_rows = TRUE,                      
@@ -471,7 +528,14 @@ p <- pheatmap(DEG_counts,
          show_rownames = FALSE, 
          show_colnames = TRUE,
          scale = "row",
-         border_color = NA)
+         border_color = NA,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         cutree_rows = 2,
+         treeheight_col = 0,
+         col = myCol,
+         treeheight_row = 0,
+         main = "P starvation")
 p
 ```
 
@@ -487,6 +551,10 @@ y <- filter_counts_based_on_treatment(tr = c("e","f")) %>% t() %>% as.data.frame
 DEG_counts <- left_join(x, y, by="genes") 
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+
+samples <- names(DEG_counts)
+sip <- data.frame(samples, solA) %>% column_to_rownames("samples")
+
 p <- pheatmap(DEG_counts, 
          gaps_col = 5,
          cluster_rows = TRUE,                      
@@ -494,7 +562,14 @@ p <- pheatmap(DEG_counts,
          show_rownames = FALSE, 
          show_colnames = TRUE,
          scale = "row",
-         border_color = NA)
+         border_color = NA,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         cutree_rows = 2,
+         treeheight_col = 0,
+         col = myCol,
+         treeheight_row = 0,
+         main = "N+P starvation")
 p
 ```
 
@@ -569,7 +644,7 @@ ggplot(data = x,
 For the paper, We will focus on the ~N+P+solA design formula and the Wald test.
 
 ```{r message = FALSE, warning = FALSE}
-source("Ath2/scripts/get_annotated_DEGs")
+source("Ath2/scripts/get_annotated_DEGs.R")
 all <- get_annotated_DEGs(trtm = c("a","b","c","d","e","f"), 
                           method = "solA")
 replete <- get_annotated_DEGs()
@@ -597,31 +672,26 @@ ggplot(data = d,
 
 It is more clear, also to see overlap, to make a Venn diagram out of this information.
 ```{r message = FALSE, warning = FALSE}
-fonts <- list(
-  sans = "Helvetica",
-  mono = "Consolas",
-  serif = "Cambria"
-)
-
 library(VennDiagram)
 x <- list(all$Group.1, replete$Group.1, Pstarv$Group.1, NPstarv$Group.1)
 x1 <- list(replete$Group.1, Pstarv$Group.1, NPstarv$Group.1)
-v <- venn.diagram(x1,
-             category.names = c(paste0("Replete conditions (", nrow(replete), ")"),
-                                paste0("P starvation conditions (", nrow(Pstarv), ")"), 
-                                paste0("N and P starvation conditions (", nrow(NPstarv), ")")),
+v <- venn.diagram(x,
+             category.names = c(paste0("All (", nrow(all), ")"),
+                                paste0("Replete (", nrow(replete), ")"),
+                                paste0("P starv (", nrow(Pstarv), ")"), 
+                                paste0("N+P starv (", nrow(NPstarv), ")")),
              filename = "Ath2/output/Ath2_venn.png",
              output = TRUE,
-             col=c("#440154ff", '#21908dff', '#fde725ff'),
-             fill = c(alpha("#440154ff",0.3), alpha('#21908dff',0.3), alpha('#fde725ff',0.3)),
+             col=c("#440154ff", '#21908dff', '#fde725ff', "#c52828ff"),
+             fill = c(alpha("#440154ff",0.3),
+                      alpha('#21908dff',0.3), 
+                      alpha('#fde725ff',0.3), 
+                      alpha("#c52828ff", 0.3)),
              cex = 6,
-             cat.cex = 2,
+             cat.cex = 1.8,
              resolution = 300,
-          cat.pos = c(-10, 10, 152),
-          cat.dist = c(0.055, 0.055, 0.055),
-          cat.fontfamily = "sans",
-          rotation = 1,
-          cat.default.pos = "outer")
+             cat.fontfamily = "sans",
+             cat.default.pos = "outer")
 
 ```
 # Annotation of DEGs
@@ -648,18 +718,52 @@ NPstarv <- get_annotated_DEGs(trtm = c("e","f"), ref_treatment = "e", treatment2
 
 ## GO enrichment analysis
 
+These are the GO terms enriched under replete nutritional conditions (Pval < 0.001).
 
-```{r message = FALSE, warning = FALSE}
-source("Ath2/scripts/dotplot.R")
-plot_dot()
-
-```
 ```{r message = FALSE, warning = FALSE}
 source("Ath2/scripts/summ_dotplot.R")
-sumplotdot(updown = "up", sign = 0.001)
+p <- sumplotdot(sign = 0.05, nutrcond = "all", updown = "down", show = "all")
+p + ggtitle("GO terms enriched in downregulated DEGs")
+```
+
+Let's also look at the upregluated genes.
+
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p <- sumplotdot(sign = 0.05, nutrcond = "all", updown = "up", show = "all")
+p + ggtitle("GO terms enriched in upregulated DEGs")
+```
+
+Summarize these results in one dotplot.
+
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+library(patchwork)
+p1 <- sumplotdot(sign = 0.05, nutrcond = "all", updown = "up", show = 10, double = "revigo")
+p2 <- sumplotdot(sign = 0.05, nutrcond = "all", updown = "down", show = 10, double = "revigo")
+
+p1 / p2
+```
+
+We can also summarize more than one nutritional condition in one plot. For example, let's look at all upregulated GO terms in all nutritional conditions:
+
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p <- sumplotdot(updown = "down", sign = 0.05, nutrcond = c("Pstarv","NPstarv","replete"), double = "revigo")
 
 ```
 
+For the supplemental materials, a dot plot summarizing all enriched GO terms for the per nutritional condition comparisons is produced: 
 
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p <- sumplotdot(updown = c("down"), sign = 0.05, nutrcond = c("NPstarv","replete", "Pstarv"))
 
+```
 
+Visualize the GO terms enriched in upregulated DEGs (only for NPstarv)
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p <- sumplotdot(updown = c("up"), sign = 0.05, nutrcond = "NPstarv")
+
+```

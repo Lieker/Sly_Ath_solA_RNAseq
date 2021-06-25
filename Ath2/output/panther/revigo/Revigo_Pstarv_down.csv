@@ -1,0 +1,42 @@
+TermID, Name, Frequency, PlotX, PlotY, LogSize, Value, Uniqueness, Dispensability, Representative, Eliminated
+GO:0006355," ""regulation of transcription DNA-templated""",9.898,-3.974,5.013,6.355,6.32,0.489,0,-1,FALSE
+GO:0009889," ""regulation of biosynthetic process""",11.506,,,6.42,5.98,0.499,0.786,6355,TRUE
+GO:0019219," ""regulation of nucleobase-containing compound metabolic process""",10.21,,,6.368,6.45,0.504,0.795,6355,TRUE
+GO:0051171," ""regulation of nitrogen compound metabolic process""",12.433,,,6.454,5.57,0.492,0.828,6355,TRUE
+GO:0010468," ""regulation of gene expression""",11.879,,,6.434,5.26,0.494,0.835,6355,TRUE
+GO:0080090," ""regulation of primary metabolic process""",12.507,,,6.456,5.4,0.491,0.845,6355,TRUE
+GO:0031323," ""regulation of cellular metabolic process""",12.635,,,6.461,5.12,0.49,0.848,6355,TRUE
+GO:0060255," ""regulation of macromolecule metabolic process""",12.939,,,6.471,5.05,0.488,0.855,6355,TRUE
+GO:2000112," ""regulation of cellular macromolecule biosynthetic process""",11.418,,,6.417,6.36,0.485,0.857,6355,TRUE
+GO:0010556," ""regulation of macromolecule biosynthetic process""",11.432,,,6.417,6.33,0.486,0.882,6355,TRUE
+GO:0031326," ""regulation of cellular biosynthetic process""",11.487,,,6.419,6.07,0.485,0.883,6355,TRUE
+GO:0051252," ""regulation of RNA metabolic process""",10.078,,,6.362,6.01,0.494,0.889,6355,TRUE
+GO:2001141," ""regulation of RNA biosynthetic process""",9.906,,,6.355,6.31,0.489,0.892,6355,TRUE
+GO:1903506," ""regulation of nucleic acid-templated transcription""",9.898,,,6.355,6.32,0.489,0.901,6355,TRUE
+GO:0050896," ""response to stimulus""",12.913,-1.804,-4.264,6.47,3.68,1,0,-1,FALSE
+GO:0065007," ""biological regulation""",22.821,2.114,-6.124,6.717,2.8,1,0,-1,FALSE
+GO:0071456," ""cellular response to hypoxia""",0.017,4.642,1.583,3.594,52.81,0.49,0,-1,FALSE
+GO:0071453," ""cellular response to oxygen levels""",0.022,,,3.709,52.14,0.492,0.902,71456,TRUE
+GO:0001666," ""response to hypoxia""",0.039,,,3.948,47.53,0.517,0.947,71456,TRUE
+GO:0036294," ""cellular response to decreased oxygen levels""",0.019,,,3.631,52.36,0.493,0.974,71456,TRUE
+GO:0036293," ""response to decreased oxygen levels""",0.041,,,3.969,46.81,0.524,0.984,71456,TRUE
+GO:0006457," ""protein folding""",0.909,-4.135,-1.324,5.317,22.63,0.997,0.007,-1,FALSE
+GO:0009628," ""response to abiotic stimulus""",0.598,6.556,4.048,5.136,8.94,0.689,0.259,-1,FALSE
+GO:0010200," ""response to chitin""",0.004,4.583,5.281,2.935,49.75,0.703,0.348,-1,FALSE
+GO:0010243," ""response to organonitrogen compound""",0.224,,,4.709,32.95,0.621,0.734,10200,TRUE
+GO:1901698," ""response to nitrogen compound""",0.25,4.721,3.886,4.758,26.66,0.631,0.448,-1,FALSE
+GO:0033554," ""cellular response to stress""",3.091,5.757,2.064,5.849,14.59,0.587,0.487,-1,FALSE
+GO:0042221," ""response to chemical""",3.34,6.517,3.053,5.883,7.59,0.639,0.519,-1,FALSE
+GO:0006950," ""response to stress""",4.522,6.558,2.436,6.014,6.57,0.628,0.549,-1,FALSE
+GO:0019222," ""regulation of metabolic process""",13.185,-3.717,5.662,6.479,4.63,0.608,0.564,-1,FALSE
+GO:0070482," ""response to oxygen levels""",0.045,5.354,0.488,4.013,46.46,0.569,0.622,-1,FALSE
+GO:0009408," ""response to heat""",0.19,,,4.638,23.47,0.517,0.728,70482,TRUE
+GO:0006970," ""response to osmotic stress""",0.059,,,4.129,15.49,0.554,0.743,70482,TRUE
+GO:0009266," ""response to temperature stimulus""",0.236,,,4.732,15.26,0.524,0.826,70482,TRUE
+GO:0009409," ""response to cold""",0.04,,,3.96,13.17,0.559,0.856,70482,TRUE
+GO:0009651," ""response to salt stress""",0.03,5.951,0.536,3.84,18.31,0.571,0.644,-1,FALSE
+GO:0070887," ""cellular response to chemical stimulus""",1.821,5.046,3.294,5.619,13.83,0.569,0.657,-1,FALSE
+GO:1901700," ""response to oxygen-containing compound""",0.566,,,5.112,8.05,0.609,0.716,70887,TRUE
+GO:0010033," ""response to organic substance""",0.993,,,5.356,7.96,0.592,0.763,70887,TRUE
+GO:0050794," ""regulation of cellular process""",19.762,-3.475,6.156,6.655,3.22,0.575,0.671,-1,FALSE
+GO:0051716," ""cellular response to stimulus""",10.979,5.851,2.899,6.4,6.55,0.595,0.672,-1,FALSE

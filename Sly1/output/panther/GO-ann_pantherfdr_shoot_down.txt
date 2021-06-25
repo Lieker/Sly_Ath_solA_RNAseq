@@ -1,0 +1,11 @@
+GO biological process complete	Solanum lycopersicum - REFLIST (34647)	upload_1 (17)	upload_1 (expected)	upload_1 (over/under)	upload_1 (fold Enrichment)	upload_1 (raw P-value)	upload_1 (FDR)
+protein stabilization (GO:0050821)	17	3	.01	+	 > 100	1.11E-07	9.80E-05
+regulation of protein stability (GO:0031647)	22	3	.01	+	 > 100	2.24E-07	1.58E-04
+cellular response to heat (GO:0034605)	28	3	.01	+	 > 100	4.37E-07	2.57E-04
+response to heat (GO:0009408)	45	4	.02	+	 > 100	8.27E-09	2.92E-05
+response to temperature stimulus (GO:0009266)	57	4	.03	+	 > 100	2.03E-08	2.39E-05
+protein folding (GO:0006457)	165	5	.08	+	61.76	1.58E-08	2.78E-05
+response to abiotic stimulus (GO:0009628)	210	4	.10	+	38.82	3.16E-06	1.59E-03
+cellular response to stress (GO:0033554)	434	4	.21	+	18.78	5.25E-05	1.85E-02
+response to stress (GO:0006950)	667	5	.33	+	15.28	1.38E-05	6.07E-03
+response to stimulus (GO:0050896)	1272	6	.62	+	9.61	2.16E-05	8.49E-03

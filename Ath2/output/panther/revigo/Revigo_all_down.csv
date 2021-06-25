@@ -1,0 +1,134 @@
+TermID, Name, Frequency, PlotX, PlotY, LogSize, Value, Uniqueness, Dispensability, Representative, Eliminated
+GO:0002252," ""immune effector process""",0.068,7.309,-1.355,4.192,0.036,0.958,0,-1,FALSE
+GO:0002376," ""immune system process""",0.876,4.937,0.444,5.302,0,1,0,-1,FALSE
+GO:0007568," ""aging""",0.04,3.394,4.19,3.961,0,0.981,0,-1,FALSE
+GO:0008150," ""biological_process""",100,6.887,0.676,7.359,0.001,1,0,-1,FALSE
+GO:0009873," ""ethylene-activated signaling pathway""",0.013,0.504,-6.219,3.477,0,0.574,0,-1,FALSE
+GO:0010243," ""response to organonitrogen compound""",0.224,,,4.709,0,0.626,0.607,9873,TRUE
+GO:0009723," ""response to ethylene""",0.019,,,3.633,0,0.666,0.634,9873,TRUE
+GO:0014070," ""response to organic cyclic compound""",0.155,,,4.549,0,0.638,0.726,9873,TRUE
+GO:0010200," ""response to chitin""",0.004,,,2.935,0,0.694,0.734,9873,TRUE
+GO:0033993," ""response to lipid""",0.19,,,4.639,0,0.632,0.738,9873,TRUE
+GO:0009725," ""response to hormone""",0.379,,,4.938,0,0.599,0.782,9873,TRUE
+GO:0009737," ""response to abscisic acid""",0.056,,,4.11,0,0.626,0.796,9873,TRUE
+GO:0071310," ""cellular response to organic substance""",0.683,,,5.193,0.021,0.591,0.865,9873,TRUE
+GO:0009755," ""hormone-mediated signaling pathway""",0.204,,,4.669,0.026,0.499,0.883,9873,TRUE
+GO:0032870," ""cellular response to hormone stimulus""",0.267,,,4.785,0.026,0.599,0.917,9873,TRUE
+GO:0071495," ""cellular response to endogenous stimulus""",0.427,,,4.989,0.045,0.682,0.942,9873,TRUE
+GO:0071369," ""cellular response to ethylene stimulus""",0.013,,,3.486,0,0.663,0.961,9873,TRUE
+GO:0009987," ""cellular process""",79.11,5.571,2.743,7.257,0,1,0,-1,FALSE
+GO:0044282," ""small molecule catabolic process""",1.664,-3.198,4.578,5.58,0,0.885,0,-1,FALSE
+GO:0046395," ""carboxylic acid catabolic process""",1.074,,,5.39,0,0.848,0.617,44282,TRUE
+GO:1901565," ""organonitrogen compound catabolic process""",2.485,,,5.754,0.026,0.896,0.684,44282,TRUE
+GO:0006538," ""glutamate catabolic process""",0.022,,,3.707,0.013,0.878,0.69,44282,TRUE
+GO:0043649," ""dicarboxylic acid catabolic process""",0.04,,,3.964,0.021,0.88,0.723,44282,TRUE
+GO:0044248," ""cellular catabolic process""",4.061,,,5.968,0.036,0.902,0.772,44282,TRUE
+GO:0009065," ""glutamine family amino acid catabolic process""",0.13,,,4.474,0,0.861,0.799,44282,TRUE
+GO:0016054," ""organic acid catabolic process""",1.096,,,5.399,0,0.854,0.89,44282,TRUE
+GO:1901606," ""alpha-amino acid catabolic process""",0.569,,,5.115,0,0.846,0.92,44282,TRUE
+GO:0009063," ""cellular amino acid catabolic process""",0.722,,,5.218,0,0.846,0.943,44282,TRUE
+GO:0044419," ""biological process involved in interspecies interaction between organisms""",0.755,-7.036,1.451,5.237,0,1,0,-1,FALSE
+GO:0050896," ""response to stimulus""",12.913,-5.791,3.251,6.47,0,1,0,-1,FALSE
+GO:0065007," ""biological regulation""",22.821,-0.275,1.311,6.717,0,1,0,-1,FALSE
+GO:0051259," ""protein complex oligomerization""",0.174,-4.241,2.084,4.6,0.01,0.996,0.006,-1,FALSE
+GO:0120255," ""olefinic compound biosynthetic process""",0.009,2.474,1.173,3.312,0.026,0.989,0.026,-1,FALSE
+GO:0016567," ""protein ubiquitination""",0.833,-0.635,4.311,5.28,0.026,0.953,0.039,-1,FALSE
+GO:0032446," ""protein modification by small protein conjugation""",0.925,,,5.325,0.017,0.952,0.924,16567,TRUE
+GO:2000762," ""regulation of phenylpropanoid metabolic process""",0.006,-3.106,-7.916,3.127,0.009,0.875,0.139,-1,FALSE
+GO:0042430," ""indole-containing compound metabolic process""",0.323,0.071,5.327,4.868,0.029,0.967,0.145,-1,FALSE
+GO:0048583," ""regulation of response to stimulus""",1.204,-5.19,-5.38,5.44,0,0.831,0.183,-1,FALSE
+GO:0042752," ""regulation of circadian rhythm""",0.033,-3.515,-3.166,3.872,0.012,0.882,0.197,-1,FALSE
+GO:0031347," ""regulation of defense response""",0.134,-5.827,-3.406,4.485,0,0.806,0.222,-1,FALSE
+GO:0080037," ""negative regulation of cytokinin-activated signaling pathway""",0.003,,,2.795,0.002,0.828,0.51,31347,TRUE
+GO:0080036," ""regulation of cytokinin-activated signaling pathway""",0.003,,,2.86,0.025,0.839,0.514,31347,TRUE
+GO:0050776," ""regulation of immune response""",0.182,,,4.618,0.025,0.805,0.675,31347,TRUE
+GO:0002682," ""regulation of immune system process""",0.288,-4.843,-6.528,4.818,0.025,0.856,0.238,-1,FALSE
+GO:0023051," ""regulation of signaling""",0.987,-3.881,-6.235,5.353,0.015,0.835,0.271,-1,FALSE
+GO:0048523," ""negative regulation of cellular process""",2.15,-5.072,-4.327,5.691,0.001,0.767,0.296,-1,FALSE
+GO:0009968," ""negative regulation of signal transduction""",0.342,,,4.893,0.001,0.756,0.754,48523,TRUE
+GO:0080134," ""regulation of response to stress""",0.341,,,4.892,0.001,0.794,0.769,48523,TRUE
+GO:0048585," ""negative regulation of response to stimulus""",0.42,,,4.983,0,0.766,0.783,48523,TRUE
+GO:0023057," ""negative regulation of signaling""",0.355,,,4.909,0.001,0.791,0.808,48523,TRUE
+GO:0010648," ""negative regulation of cell communication""",0.356,,,4.91,0.001,0.788,0.809,48523,TRUE
+GO:0031348," ""negative regulation of defense response""",0.044,,,4.006,0.025,0.797,0.813,48523,TRUE
+GO:0009890," ""negative regulation of biosynthetic process""",0.914,,,5.32,0.041,0.758,0.84,48523,TRUE
+GO:0009966," ""regulation of signal transduction""",0.89,,,5.308,0.013,0.753,0.884,48523,TRUE
+GO:0006950," ""response to stress""",4.522,3.955,-6.072,6.014,0,0.676,0.296,-1,FALSE
+GO:0033554," ""cellular response to stress""",3.091,,,5.849,0,0.639,0.542,6950,TRUE
+GO:0042221," ""response to chemical""",3.34,,,5.883,0,0.685,0.549,6950,TRUE
+GO:0000160," ""phosphorelay signal transduction system""",2.749,,,5.798,0.001,0.528,0.556,6950,TRUE
+GO:0009611," ""response to wounding""",0.103,,,4.374,0,0.729,0.571,6950,TRUE
+GO:0000302," ""response to reactive oxygen species""",0.167,,,4.581,0,0.618,0.599,6950,TRUE
+GO:0009751," ""response to salicylic acid""",0.008,,,3.267,0,0.683,0.65,6950,TRUE
+GO:0070542," ""response to fatty acid""",0.012,,,3.422,0,0.673,0.665,6950,TRUE
+GO:0009753," ""response to jasmonic acid""",0.006,,,3.146,0,0.671,0.666,6950,TRUE
+GO:0051716," ""cellular response to stimulus""",10.979,,,6.4,0,0.643,0.672,6950,TRUE
+GO:0006979," ""response to oxidative stress""",0.59,,,5.13,0,0.692,0.687,6950,TRUE
+GO:0009414," ""response to water deprivation""",0.02,,,3.666,0.002,0.602,0.691,6950,TRUE
+GO:0042542," ""response to hydrogen peroxide""",0.024,,,3.74,0,0.66,0.699,6950,TRUE
+GO:0006952," ""defense response""",0.774,,,5.248,0,0.685,0.709,6950,TRUE
+GO:0097305," ""response to alcohol""",0.082,,,4.275,0,0.636,0.762,6950,TRUE
+GO:0009415," ""response to water""",0.025,,,3.748,0.002,0.612,0.908,6950,TRUE
+GO:0010646," ""regulation of cell communication""",0.982,-3.518,-5.341,5.351,0.016,0.831,0.307,-1,FALSE
+GO:0048519," ""negative regulation of biological process""",2.524,-4.355,-4.858,5.761,0,0.814,0.325,-1,FALSE
+GO:0070482," ""response to oxygen levels""",0.045,4.634,-4.877,4.013,0,0.688,0.33,-1,FALSE
+GO:0009642," ""response to light intensity""",0.01,,,3.351,0,0.711,0.601,70482,TRUE
+GO:0071456," ""cellular response to hypoxia""",0.017,,,3.594,0,0.608,0.622,70482,TRUE
+GO:0009646," ""response to absence of light""",0.002,,,2.732,0,0.733,0.632,70482,TRUE
+GO:0009651," ""response to salt stress""",0.03,,,3.84,0,0.676,0.644,70482,TRUE
+GO:0009409," ""response to cold""",0.04,,,3.96,0,0.669,0.655,70482,TRUE
+GO:0009266," ""response to temperature stimulus""",0.236,,,4.732,0,0.652,0.74,70482,TRUE
+GO:0006970," ""response to osmotic stress""",0.059,,,4.129,0,0.663,0.755,70482,TRUE
+GO:0009416," ""response to light stimulus""",0.185,,,4.627,0.035,0.654,0.825,70482,TRUE
+GO:0009314," ""response to radiation""",0.216,,,4.694,0.046,0.654,0.835,70482,TRUE
+GO:0009408," ""response to heat""",0.19,,,4.638,0,0.634,0.856,70482,TRUE
+GO:0071453," ""cellular response to oxygen levels""",0.022,,,3.709,0,0.617,0.902,70482,TRUE
+GO:0001666," ""response to hypoxia""",0.039,,,3.948,0,0.655,0.947,70482,TRUE
+GO:0036294," ""cellular response to decreased oxygen levels""",0.019,,,3.631,0,0.62,0.974,70482,TRUE
+GO:0036293," ""response to decreased oxygen levels""",0.041,,,3.969,0,0.673,0.984,70482,TRUE
+GO:0009617," ""response to bacterium""",0.169,4.757,-5.797,4.587,0,0.708,0.376,-1,FALSE
+GO:0050832," ""defense response to fungus""",0.034,,,3.895,0,0.697,0.709,9617,TRUE
+GO:0009620," ""response to fungus""",0.041,,,3.972,0,0.734,0.718,9617,TRUE
+GO:0042742," ""defense response to bacterium""",0.115,,,4.419,0,0.67,0.774,9617,TRUE
+GO:0098542," ""defense response to other organism""",0.515,,,5.071,0,0.635,0.874,9617,TRUE
+GO:0002237," ""response to molecule of bacterial origin""",0.042,,,3.984,0.003,0.625,0.877,9617,TRUE
+GO:0006955," ""immune response""",0.683,,,5.193,0,0.697,0.916,9617,TRUE
+GO:0043207," ""response to external biotic stimulus""",0.596,,,5.135,0,0.68,0.963,9617,TRUE
+GO:0051707," ""response to other organism""",0.596,,,5.134,0,0.679,0.98,9617,TRUE
+GO:1901605," ""alpha-amino acid metabolic process""",3.631,-2.114,4.705,5.919,0.017,0.875,0.417,-1,FALSE
+GO:0006082," ""organic acid metabolic process""",9.322,,,6.329,0.018,0.905,0.544,1901605,TRUE
+GO:0006536," ""glutamate metabolic process""",0.219,,,4.7,0.001,0.891,0.569,1901605,TRUE
+GO:0009064," ""glutamine family amino acid metabolic process""",1.332,,,5.484,0.001,0.882,0.704,1901605,TRUE
+GO:0043436," ""oxoacid metabolic process""",9.085,,,6.317,0.026,0.88,0.753,1901605,TRUE
+GO:0006520," ""cellular amino acid metabolic process""",5.778,,,6.121,0.026,0.878,0.82,1901605,TRUE
+GO:0090693," ""plant organ senescence""",0.006,3.033,4.401,3.117,0.001,0.97,0.421,-1,FALSE
+GO:0048366," ""leaf development""",0.017,,,3.602,0.045,0.968,0.793,90693,TRUE
+GO:0010150," ""leaf senescence""",0.006,,,3.108,0.001,0.968,0.898,90693,TRUE
+GO:0006355," ""regulation of transcription DNA-templated""",9.898,-4.25,-5.507,6.355,0,0.717,0.423,-1,FALSE
+GO:0019222," ""regulation of metabolic process""",13.185,,,6.479,0,0.762,0.564,6355,TRUE
+GO:0050794," ""regulation of cellular process""",19.762,,,6.655,0,0.744,0.671,6355,TRUE
+GO:0050789," ""regulation of biological process""",21.186,,,6.685,0,0.756,0.719,6355,TRUE
+GO:0019219," ""regulation of nucleobase-containing compound metabolic process""",10.21,,,6.368,0,0.723,0.795,6355,TRUE
+GO:0031323," ""regulation of cellular metabolic process""",12.635,,,6.461,0,0.715,0.809,6355,TRUE
+GO:0009889," ""regulation of biosynthetic process""",11.506,,,6.42,0,0.722,0.831,6355,TRUE
+GO:0010468," ""regulation of gene expression""",11.879,,,6.434,0,0.72,0.838,6355,TRUE
+GO:0051171," ""regulation of nitrogen compound metabolic process""",12.433,,,6.454,0,0.718,0.847,6355,TRUE
+GO:0080090," ""regulation of primary metabolic process""",12.507,,,6.456,0,0.718,0.848,6355,TRUE
+GO:0060255," ""regulation of macromolecule metabolic process""",12.939,,,6.471,0,0.716,0.855,6355,TRUE
+GO:2000112," ""regulation of cellular macromolecule biosynthetic process""",11.418,,,6.417,0,0.714,0.857,6355,TRUE
+GO:0010556," ""regulation of macromolecule biosynthetic process""",11.432,,,6.417,0,0.717,0.882,6355,TRUE
+GO:0031326," ""regulation of cellular biosynthetic process""",11.487,,,6.419,0,0.714,0.883,6355,TRUE
+GO:0051252," ""regulation of RNA metabolic process""",10.078,,,6.362,0,0.72,0.889,6355,TRUE
+GO:2001141," ""regulation of RNA biosynthetic process""",9.906,,,6.355,0,0.718,0.892,6355,TRUE
+GO:1903506," ""regulation of nucleic acid-templated transcription""",9.898,,,6.355,0,0.717,0.901,6355,TRUE
+GO:0009719," ""response to endogenous stimulus""",0.539,3.837,-5.455,5.091,0,0.731,0.429,-1,FALSE
+GO:0009628," ""response to abiotic stimulus""",0.598,4.21,-6.596,5.136,0,0.729,0.434,-1,FALSE
+GO:0009607," ""response to biotic stimulus""",0.65,3.658,-7.013,5.172,0,0.727,0.438,-1,FALSE
+GO:1901700," ""response to oxygen-containing compound""",0.566,3.105,-6.78,5.112,0,0.642,0.466,-1,FALSE
+GO:0001101," ""response to acid chemical""",0.048,,,4.04,0,0.698,0.513,1901700,TRUE
+GO:1901698," ""response to nitrogen compound""",0.25,,,4.758,0,0.662,0.589,1901700,TRUE
+GO:0010035," ""response to inorganic substance""",0.315,,,4.857,0,0.657,0.601,1901700,TRUE
+GO:0010033," ""response to organic substance""",0.993,,,5.356,0,0.626,0.671,1901700,TRUE
+GO:0070887," ""cellular response to chemical stimulus""",1.821,,,5.619,0,0.603,0.763,1901700,TRUE
+GO:0051245," ""negative regulation of cellular defense response""",0,-6.964,-1.715,0.477,0.035,0.874,0.495,-1,FALSE
+GO:0009605," ""response to external stimulus""",1.712,3.577,-6.205,5.593,0,0.704,0.498,-1,FALSE

@@ -1,0 +1,74 @@
+TermID, Name, Frequency, PlotX, PlotY, LogSize, Value, Uniqueness, Dispensability, Representative, Eliminated
+GO:0002376," ""immune system process""",0.876,4.537,-0.114,5.302,5.11,1,0,-1,FALSE
+GO:0009065," ""glutamine family amino acid catabolic process""",0.13,-0.374,-6.159,4.474,67.81,0.879,0,-1,FALSE
+GO:1901606," ""alpha-amino acid catabolic process""",0.569,-0.136,6.04,5.115,26.92,0.864,0.756,9065,TRUE
+GO:0016054," ""organic acid catabolic process""",1.096,,,5.399,15.26,0.86,0.832,9065,TRUE
+GO:0009063," ""cellular amino acid catabolic process""",0.722,,,5.218,20.57,0.861,0.884,9065,TRUE
+GO:0009987," ""cellular process""",79.11,4.712,1.788,7.257,1.64,1,0,-1,FALSE
+GO:0010200," ""response to chitin""",0.004,-5.96,4.358,2.935,35.38,0.739,0,-1,FALSE
+GO:0010243," ""response to organonitrogen compound""",0.224,-5.172,2.594,4.709,21.97,0.663,0.734,10200,TRUE
+GO:0009725," ""response to hormone""",0.379,,,4.938,4.86,0.65,0.782,10200,TRUE
+GO:0044419," ""biological process involved in interspecies interaction between organisms""",0.755,3.961,-1.925,5.237,5.46,1,0,-1,FALSE
+GO:0045892," ""negative regulation of transcription DNA-templated""",0.665,1.542,6.925,5.182,11.22,0.579,0,-1,FALSE
+GO:0009890," ""negative regulation of biosynthetic process""",0.914,,,5.32,7.78,0.595,0.819,45892,TRUE
+GO:0048523," ""negative regulation of cellular process""",2.15,,,5.691,5.69,0.623,0.84,45892,TRUE
+GO:0045934," ""negative regulation of nucleobase-containing compound metabolic process""",0.749,,,5.233,9.78,0.593,0.864,45892,TRUE
+GO:0031324," ""negative regulation of cellular metabolic process""",1.406,,,5.507,7.55,0.579,0.887,45892,TRUE
+GO:2000113," ""negative regulation of cellular macromolecule biosynthetic process""",0.88,,,5.304,8.41,0.577,0.962,45892,TRUE
+GO:0051253," ""negative regulation of RNA metabolic process""",0.694,,,5.201,10.74,0.587,0.973,45892,TRUE
+GO:0010558," ""negative regulation of macromolecule biosynthetic process""",0.882,,,5.305,8.36,0.58,0.983,45892,TRUE
+GO:1902679," ""negative regulation of RNA biosynthetic process""",0.665,,,5.182,11.14,0.579,0.984,45892,TRUE
+GO:0031327," ""negative regulation of cellular biosynthetic process""",0.908,,,5.317,7.91,0.577,0.986,45892,TRUE
+GO:1903507," ""negative regulation of nucleic acid-templated transcription""",0.665,,,5.182,11.14,0.579,0.993,45892,TRUE
+GO:0050896," ""response to stimulus""",12.913,2.999,-3.616,6.47,3.17,1,0,-1,FALSE
+GO:0009056," ""catabolic process""",5.897,4.544,3.786,6.13,5,0.989,0.037,-1,FALSE
+GO:0009607," ""response to biotic stimulus""",0.65,-7.135,2.169,5.172,5.51,0.72,0.234,-1,FALSE
+GO:0019222," ""regulation of metabolic process""",13.185,0.38,7.806,6.479,2.99,0.675,0.347,-1,FALSE
+GO:0009719," ""response to endogenous stimulus""",0.539,-4.487,1.207,5.091,4.75,0.724,0.348,-1,FALSE
+GO:0071456," ""cellular response to hypoxia""",0.017,-5.786,-0.003,3.594,33.9,0.61,0.348,-1,FALSE
+GO:0071453," ""cellular response to oxygen levels""",0.022,,,3.709,33.47,0.62,0.902,71456,TRUE
+GO:0001666," ""response to hypoxia""",0.039,,,3.948,30.51,0.639,0.947,71456,TRUE
+GO:0036294," ""cellular response to decreased oxygen levels""",0.019,,,3.631,33.62,0.622,0.974,71456,TRUE
+GO:0036293," ""response to decreased oxygen levels""",0.041,,,3.969,30.05,0.655,0.984,71456,TRUE
+GO:0009628," ""response to abiotic stimulus""",0.598,-6.784,2.752,5.136,5.11,0.722,0.351,-1,FALSE
+GO:0009611," ""response to wounding""",0.103,-7.364,0.634,4.374,12.82,0.736,0.38,-1,FALSE
+GO:0009605," ""response to external stimulus""",1.712,-6.264,2.135,5.593,4.39,0.695,0.392,-1,FALSE
+GO:1901698," ""response to nitrogen compound""",0.25,-5.655,3.09,4.758,19.75,0.681,0.448,-1,FALSE
+GO:0009873," ""ethylene-activated signaling pathway""",0.013,-3.804,4.071,3.477,33.29,0.578,0.477,-1,FALSE
+GO:0071369," ""cellular response to ethylene stimulus""",0.013,,,3.486,29.06,0.703,0.961,9873,TRUE
+GO:0006979," ""response to oxidative stress""",0.59,-6.862,1.147,5.13,10.71,0.698,0.492,-1,FALSE
+GO:0044282," ""small molecule catabolic process""",1.664,0.002,-5.961,5.58,12.93,0.879,0.496,-1,FALSE
+GO:0000160," ""phosphorelay signal transduction system""",2.749,-3.841,3.308,5.798,22.06,0.462,0.497,-1,FALSE
+GO:0042221," ""response to chemical""",3.34,-5.225,1.686,5.883,5.63,0.675,0.51,-1,FALSE
+GO:0009644," ""response to high light intensity""",0.005,-5.532,-1.357,3.023,30.51,0.716,0.546,-1,FALSE
+GO:0006950," ""response to stress""",4.522,-5.482,1.387,6.014,4.48,0.665,0.549,-1,FALSE
+GO:0098542," ""defense response to other organism""",0.515,-6.648,0.77,5.071,5.22,0.659,0.568,-1,FALSE
+GO:0006955," ""immune response""",0.683,,,5.193,5.18,0.705,0.916,98542,TRUE
+GO:0043207," ""response to external biotic stimulus""",0.596,,,5.135,5.52,0.693,0.963,98542,TRUE
+GO:0051707," ""response to other organism""",0.596,,,5.134,5.52,0.692,0.98,98542,TRUE
+GO:0006355," ""regulation of transcription DNA-templated""",9.898,0.743,7.494,6.355,3.65,0.565,0.569,-1,FALSE
+GO:0009889," ""regulation of biosynthetic process""",11.506,,,6.42,3.14,0.584,0.786,6355,TRUE
+GO:0019219," ""regulation of nucleobase-containing compound metabolic process""",10.21,,,6.368,3.39,0.584,0.795,6355,TRUE
+GO:0031323," ""regulation of cellular metabolic process""",12.635,,,6.461,3.1,0.576,0.831,6355,TRUE
+GO:0010468," ""regulation of gene expression""",11.879,,,6.434,3.04,0.579,0.838,6355,TRUE
+GO:0051171," ""regulation of nitrogen compound metabolic process""",12.433,,,6.454,2.92,0.578,0.847,6355,TRUE
+GO:0080090," ""regulation of primary metabolic process""",12.507,,,6.456,3.06,0.578,0.848,6355,TRUE
+GO:2000112," ""regulation of cellular macromolecule biosynthetic process""",11.418,,,6.417,3.34,0.566,0.857,6355,TRUE
+GO:0010556," ""regulation of macromolecule biosynthetic process""",11.432,,,6.417,3.33,0.57,0.882,6355,TRUE
+GO:0031326," ""regulation of cellular biosynthetic process""",11.487,,,6.419,3.19,0.567,0.883,6355,TRUE
+GO:0051252," ""regulation of RNA metabolic process""",10.078,,,6.362,3.48,0.572,0.889,6355,TRUE
+GO:2001141," ""regulation of RNA biosynthetic process""",9.906,,,6.355,3.65,0.566,0.892,6355,TRUE
+GO:1903506," ""regulation of nucleic acid-templated transcription""",9.898,,,6.355,3.65,0.566,0.901,6355,TRUE
+GO:0070482," ""response to oxygen levels""",0.045,-5.306,-0.585,4.013,29.83,0.682,0.622,-1,FALSE
+GO:0050789," ""regulation of biological process""",21.186,0.918,7.359,6.685,2.17,0.666,0.637,-1,FALSE
+GO:0009642," ""response to light intensity""",0.01,-5.917,-1.141,3.351,26.34,0.704,0.654,-1,FALSE
+GO:0009416," ""response to light stimulus""",0.185,,,4.627,5.98,0.646,0.789,9642,TRUE
+GO:0009314," ""response to radiation""",0.216,,,4.694,5.79,0.648,0.819,9642,TRUE
+GO:0070887," ""cellular response to chemical stimulus""",1.821,-5.496,2.426,5.619,8.94,0.622,0.657,-1,FALSE
+GO:1901700," ""response to oxygen-containing compound""",0.566,,,5.112,6.36,0.66,0.716,70887,TRUE
+GO:0010033," ""response to organic substance""",0.993,,,5.356,6.37,0.644,0.763,70887,TRUE
+GO:0051716," ""cellular response to stimulus""",10.979,-5.818,1.693,6.4,4.13,0.631,0.672,-1,FALSE
+GO:1901565," ""organonitrogen compound catabolic process""",2.485,-0.727,-6.319,5.754,7.33,0.872,0.684,-1,FALSE
+GO:0044248," ""cellular catabolic process""",4.061,,,5.968,5.51,0.864,0.772,1901565,TRUE
+GO:1901575," ""organic substance catabolic process""",5.44,,,6.095,5.47,0.863,0.871,1901565,TRUE
+GO:0033554," ""cellular response to stress""",3.091,-6.167,1.214,5.849,8.11,0.644,0.687,-1,FALSE
