@@ -58,7 +58,7 @@ plot_pca <- function(count_csv_file = "Sly1/input/counts.csv",
   # PCA plot
   variance_pc_x <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_x_axis))]
   variance_pc_y <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_y_axis))]
-  
+
   
   pca_plot <- ggplot(data = score_df) +
     geom_point(aes_string(x = pc_x_axis, 

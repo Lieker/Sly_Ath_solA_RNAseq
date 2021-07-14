@@ -216,13 +216,15 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
 Figure 2
 ```{r}
 p <- plot_pca(pca_colour = "N")
-p
+p + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) +
+  scale_color_manual(name = "N", labels = c("starvation", "replete"), values = c('#0099FF','#E69F00'))
 ```
 
 Figure S2:
 ```{r}
 p <- plot_pca(pca_colour = "P")
-p
+p + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) +
+  scale_color_manual(name = "P", labels = c("starvation", "replete"), values = c('#0099FF','#E69F00'))
 ```
 
 In order to make an overview of what determines the clustering, make the same plot with different colour guides and group them together with patchwork package
@@ -233,9 +235,9 @@ p1 <- plot_pca(trm = c("a","b"), pca_colour = "solA", pc_x_axis = "PC2", pc_y_ax
 p2 <- plot_pca(trm = c("c","d"), pca_colour = "solA", pc_x_axis = "PC2", pc_y_axis = "PC3")
 p3 <- plot_pca(trm = c("e","f"), pca_colour = "solA", pc_x_axis = "PC1", pc_y_axis = "PC2")
 
-p1
-p2
-p3
+p1 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00'))
+p2 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00'))
+p3 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00'))
 ```
 
 From this figure, it is clear that the most variation is explained by the N condition. This figure is saved as PCAplot_PC1PC2_allsamples.jpeg.
@@ -375,16 +377,16 @@ xp_design <- xp_design %>% column_to_rownames("sample")
 myCol <- colorRampPalette(c("red1", "black", "dodgerblue"))(100)
 myBreaks <- seq(-2, 2, length.out=100)
 
-P <- rep(c("yes","no","yes"), c(10,20,5)) 
-N <- rep(c("yes","no"), c(20,15))
-solA <- rep(c("no","yes","no","yes","no","yes","no"), c(5,5,5,5,5,5,5))
+P <- rep(c("replete","starvation","replete"), c(10,20,5)) 
+N <- rep(c("replete","starvation"), c(20,15))
+treatment <- rep(c("control","solA","control","solA","control","solA","control"), c(5,5,5,5,5,5,5))
 samples <- names(DEG_counts)
-sip <- data.frame(samples, solA, N, P) %>% column_to_rownames("samples")
+sip <- data.frame(samples, treatment, N, P) %>% column_to_rownames("samples")
 
 clrs <- list(
-  P = c(no = "deepskyblue", yes ="dodgerblue4"),
-  N = c(no = "brown1", yes = "red4"),
-  solA = c(no = "mediumspringgreen", yes ="seagreen4")
+  P = c(starvation = "darkcyan", replete ="midnightblue"),
+  N = c(starvation = "brown1", replete = "red4"),
+  treatment = c(control = "mediumspringgreen", solA ="seagreen4")
 )
 
 
@@ -412,6 +414,8 @@ pheatmap(DEG_counts,
 ```
 
 We add the sample information to the heatmap:
+
+Figure 2
 ```{r}
 #remove group g
 DEG_counts <- DEG_counts[, c(1:30)]
@@ -479,12 +483,12 @@ DEG_counts <- left_join(x, y, by="genes")
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 
-solA <- rep(c("no","yes"), c(5,5))
+treatment <- rep(c("control","solA"), c(5,5))
 samples <- names(DEG_counts)
-sip <- data.frame(samples, solA) %>% column_to_rownames("samples")
+sip <- data.frame(samples, treatment) %>% column_to_rownames("samples")
 
 clrs <- list(
-  solA = c(no = "mediumspringgreen", yes ="seagreen4")
+  treatment = c(control = "mediumspringgreen", solA ="seagreen4")
 )
 
 

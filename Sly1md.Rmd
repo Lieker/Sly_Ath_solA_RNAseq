@@ -197,10 +197,13 @@ The average unique mapping % is 54.0%. This is low, but explained by the type of
 # PCA analysis
 
 Plot PCA to see if samples with the same treatments cluster together.
+
+Figure S1A
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/create_pca_plot.R")
 p <- plot_pca(plantpart = c("root", "shoot"), pca_colour = "compartment", pca_shape = "treatment")
-p
+p + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) +
+  scale_color_manual(values=c('#0099FF','#E69F00'))
 ```
 
 On PC1, the compartments cluster together. There is no clear clustering based on solA treatment. Let's check PC3 and PC4.
@@ -230,16 +233,19 @@ p2 <- plot_pca(plantpart = c("root"), pc_x_axis = "PC5", pc_y_axis = "PC6", pca_
 p1 + p2
 ```
 
+Figure S1B
 ```{r}
-p <- plot_pca(plantpart = "root", pc_x_axis = "PC5", pc_y_axis = "PC1", pca_shape = "treatment")
-p + scale_color_manual(values=c('#e956b4', '#56e98b'), name = "solanoeclepin A", labels = c("no", "yes")) + guides(shape = FALSE)
+p <- plot_pca(plantpart = "root", pc_x_axis = "PC1", pc_y_axis = "PC5", pca_shape = "treatment")
+p + scale_color_manual(values=c('#e956b4', '#56e98b'), name = "treatment", labels = c("control", "solA")) + guides(shape = FALSE)
 ```
 
 In root, there seems to be solA separation in PC5, in shoot, clustering based on solA treatment is difficult to observe. But since the treatment is applied on the roots, this might not be so surprising.
 
+Fig S1C
+
 ```{r}
 p <- plot_pca(plantpart = "shoot", pc_x_axis = "PC1", pc_y_axis = "PC2", pca_shape = "treatment")
-p + scale_color_manual(values=c('#566be9', '#d71c37'), name = "solanoeclepin A", labels = c("no", "yes")) + guides(shape = FALSE)
+p + scale_color_manual(values=c('#566be9', '#d71c37'), name = "treatment", labels = c("control", "solA")) + guides(shape = FALSE)
 ```
 
 
@@ -307,13 +313,13 @@ myCol <- colorRampPalette(c("red1", "black", "dodgerblue"))(100)
 myBreaks <- seq(-2, 2, length.out=100)
 
 clrs <- list(
-  solA = c(no = "gray", yes ="midnightblue"),
+  treatment = c(control = "gray", solA ="midnightblue"),
   compartment = c(root = "darkorange4", shoot = "darkgreen"))
 
-solA <- rep(c("no", "yes"), c(10,10))
+treatment <- rep(c("control", "solA"), c(10,10))
 compartment <- rep(c("root","shoot","root","shoot"), c(5,5,5,5))
 sample <- names(DEG_counts)
-sip <- data.frame(sample, solA, compartment)%>% column_to_rownames("sample")
+sip <- data.frame(sample, treatment, compartment)%>% column_to_rownames("sample")
 
 pheatmap(DEG_counts,
          gaps_col = c(10),
@@ -352,6 +358,8 @@ pheatmap(DEG_counts,
 ```
 
 Let's look more into the root samples and see whether they cluster together based on only their DEGs.
+
+Figure 1:
 ```{r message=FALSE, warning=FALSE}
 x <- get_list_of_DEGs(plantpart = "root", method = "treatment", log2FC_threshold = 0)
 x <- x %>% rownames_to_column("genes")
@@ -364,11 +372,11 @@ DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
 
 clrs <- list(
-  solA = c(n= "gray", y ="midnightblue"))
+  treatment = c(control= "gray", solA ="midnightblue"))
 
-solA <- rep(c("n", "y"), c(5,5))
+treatment <- rep(c("control", "solA"), c(5,5))
 sample <- names(DEG_counts)
-sip <- data.frame(sample, solA)%>% column_to_rownames("sample")
+sip <- data.frame(sample, treatment)%>% column_to_rownames("sample")
 
 pheatmap(DEG_counts,
          gaps_col = c(5),
@@ -393,7 +401,7 @@ DEG_counts2 <- left_join(x2, y2, by = "genes")
 DEG_counts2 <- DEG_counts2[, -c(2,3,4,5,6,7)]
 DEG_counts2 <- DEG_counts2 %>% column_to_rownames("genes")
 
-sip2 <- data.frame(names(DEG_counts2), solA) %>% column_to_rownames("names.DEG_counts2.")
+sip2 <- data.frame(names(DEG_counts2), treatment) %>% column_to_rownames("names.DEG_counts2.")
 
 pheatmap(DEG_counts2,
          gaps_col = 5,
