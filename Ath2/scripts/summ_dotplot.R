@@ -1,7 +1,7 @@
 sumplotdot <- function(x = "Ath2/output/panther/",
                        revigopath = "Ath2/output/panther/revigo/",
-                       nutrcond = c("all","Pstarv","Nstarv","replete"),
-                       updown = c("all", "up","down"),
+                       nutrcond = c("Pstarv","Nstarv","replete"),
+                       updown = c("up","down"),
                        sign = 0.05,
                        double = "no",
                        show = "all")
@@ -40,6 +40,7 @@ sumplotdot <- function(x = "Ath2/output/panther/",
   revigo <- revigo[revigo$Eliminated == FALSE, ]
   revigo$id <- gsub("Selfcr_", "", revigo$id)
   revigo$id <- gsub(".csv", "", revigo$id)
+  revigo$id <- gsub("Revigo_","", revigo$id)
   revigo_out <- strsplit(as.character(revigo$id), "_")
   revigo_out <- sapply(revigo_out, '[', seq(max(sapply(revigo_out, length)))) %>% t() %>% as.data.frame()
   names(revigo_out) <- c("nutritioncondition", "whichgenes")
@@ -66,14 +67,15 @@ sumplotdot <- function(x = "Ath2/output/panther/",
   }
   
   eureka <- eureka[eureka$ref < 1000, ]
-
+  eureka <- eureka[order(as.numeric(as.character(-eureka$foldenrich))),]
   
   if(show == "all"){
     eureka <- eureka
   } else if(class(show) == "numeric" | class(show) == "integer") {
     l <- unique(eureka$group)
     if(length(l) == 1) {
-    eureka <- head(eureka, show)
+      
+      eureka <- head(eureka, show)
     } else if(length(l) == 2) {
       eureka1 <- eureka[eureka$group == l[1], ]
       eureka2 <- eureka[eureka$group == l[2], ]
@@ -86,8 +88,21 @@ sumplotdot <- function(x = "Ath2/output/panther/",
     }
   }
   
-  eureka$group <- factor(eureka$group, levels = c("replete_down", "Pstarv_down", "NPstarv_down"), ordered = TRUE)
+  eureka$group <- factor(eureka$group, levels = c("Pstarv.nosola_down",
+                                                  "Pstarv.nosola_up",
+                                                  "NPstarv.nosola_down",
+                                                  "NPstarv.nosola_up",
+                                                  "replete_down",
+                                                  "replete_up",
+                                                  "Pstarv_down",
+                                                  "Pstarv_up",
+                                                  "NPstarv_down",
+                                                  "NPstarv_up",
+                                                  "NPstarv.yessola_down",
+                                                  "NPstarv.yessola_up"), ordered = TRUE)
   eureka <- eureka[order(eureka$group), ]
+  
+  
 
   p <- ggplot(eureka, 
               aes(x=foldenrich, 

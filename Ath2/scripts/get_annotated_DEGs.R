@@ -8,11 +8,8 @@ source("Ath2/scripts/compare_Wald_vs_LRT.R")
 source("Ath2/scripts/get_filtered_list_of_DEGs.R")
 source("Ath2/scripts/get_Athaliana_annotations.R")
 
-get_annotated_DEGs <- function(counts_csv_file = "Ath2/input/counts.csv",
-                               xp_design_csv_file = "Ath2/input/xp_design.csv",
-                               trtm = c("a","b"),
-                               ref_treatment = "a",
-                               treatment2 = "b",
+get_annotated_DEGs <- function(d=dds,
+                               r=res,
                                method = "treatment", #this parameter chooses which formula design will be chosen: ~treatment or ~solA
                                log2FC_threshold = 0,
                                padj_threshold = 0.05,
@@ -27,11 +24,7 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath2/input/counts.csv",
                                method2 = "DEG" #this parameter chooses if DEGs acc. to Wald will be analysed or a comparison with LRT will be made
                                ) {
   if (method2 == "DEG") {
-    res <- get_list_of_DEGs(counts_csv_file, 
-                            xp_design_csv_file, 
-                            trtm, 
-                            ref_treatment, 
-                            treatment2,
+    res <- get_list_of_DEGs(d,r,
                             method,
                             log2FC_threshold, 
                             padj_threshold) %>% rownames_to_column("gene")
@@ -54,7 +47,7 @@ get_annotated_DEGs <- function(counts_csv_file = "Ath2/input/counts.csv",
   
   res_annotated <- left_join(res, subset_annotated, by = "gene")
   uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
-  res_annotated <- aggregate(res_annotated, by = list(res_annotated$gene), FUN = uniquepaste)
+  res_annotated <- aggregate(res_annotated, by = list(res_annotated$gene, res_annotated$baseMean, res_annotated$log2FoldChange), FUN = uniquepaste)
   write_delim(res_annotated, path = name, delim = ",", col_names = TRUE)
   
   return(res_annotated)

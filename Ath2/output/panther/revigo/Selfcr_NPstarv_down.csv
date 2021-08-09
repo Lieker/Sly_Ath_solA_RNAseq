@@ -40,8 +40,7 @@ GO:0009682," ""induced systemic resistance""",0.002,6.184,-0.211,2.632,17.51,0.6
 GO:0009719," ""response to endogenous stimulus""",0.539,7.138,-2.925,5.091,3.92,0.671,0.344,-1,TRUE
 GO:0009723," ""response to ethylene""",0.019,5.829,-5.361,3.633,6.29,0.594,0.668,-1,FALSE
 GO:0009725," ""response to hormone""",0.379,,,4.938,3.91,0.516,0.942,9738,FALSE
-GO:0009737," ""response to abscisic acid""",0.056,,,4.11,5.81,0.539,0.913,9738,TRUE
-GO:0009738," ""abscisic acid-activated signaling pathway""",0.032,3.485,-5.19,3.859,6.94,0.482,0.15,-1,FALSE
+GO:0009737," ""response to abscisic acid""",0.056,,,4.11,5.81,0.539,0.913,9738,FALSE
 GO:0009751," ""response to salicylic acid""",0.008,5.421,-5.516,3.267,13.56,0.601,0.655,-1,TRUE
 GO:0009753," ""response to jasmonic acid""",0.006,,,3.146,8.81,0.583,0.948,9738,TRUE
 GO:0009755," ""hormone-mediated signaling pathway""",0.204,,,4.669,4.6,0.449,0.83,9738,TRUE
@@ -55,8 +54,6 @@ GO:0010035," ""response to inorganic substance""",0.315,6.054,-4.402,4.857,3.31,
 GO:0010114," ""response to red light""",0.003,3.876,-1.485,2.844,10.61,0.689,0.597,-1,TRUE
 GO:0010150," ""leaf senescence""",0.006,-1.72,4.4,3.108,7.71,0.982,0.42,-1,TRUE
 GO:0010193," ""response to ozone""",0.002,5.233,-5.143,2.543,21.23,0.627,0.537,-1,TRUE
-GO:0010200," ""response to chitin""",0.004,5.536,-5.789,2.935,18.28,0.622,0.564,-1,FALSE
-GO:0010243," ""response to organonitrogen compound""",0.224,,,4.709,11.21,0.545,0.734,10200,FALSE
 GO:0010363," ""regulation of plant-type hypersensitive response""",0.001,4.168,5.03,2.272,28.02,0.831,0.775,45089,TRUE
 GO:0010467," ""gene expression""",11.566,3.231,5.683,6.422,0.01,0.988,0.14,-1,TRUE
 GO:0010558," ""negative regulation of macromolecule biosynthetic process""",0.882,,,5.305,3.84,0.782,0.983,45892,TRUE
@@ -87,8 +84,7 @@ GO:0044419," ""biological process involved in interspecies interaction between o
 GO:0045087," ""innate immune response""",0.135,6.354,-1.505,4.49,10.78,0.548,0.799,44403,TRUE
 GO:0045088," ""regulation of innate immune response""",0.044,,,4.002,11.27,0.8,0.889,45089,TRUE
 GO:0045089," ""positive regulation of innate immune response""",0.027,-3.757,-5.387,3.785,10.57,0.806,0,-1,TRUE
-GO:0045892," ""negative regulation of transcription DNA-templated""",0.665,-2.669,-6.655,5.182,4.12,0.782,0.664,-1,FALSE
-GO:0045934," ""negative regulation of nucleobase-containing compound metabolic process""",0.749,,,5.233,4.04,0.788,0.864,45892,TRUE
+GO:0045934," ""negative regulation of nucleobase-containing compound metabolic process""",0.749,,,5.233,4.04,0.788,0.864,45892,FALSE
 GO:0048519," ""negative regulation of biological process""",2.524,-2.029,-7.239,5.761,2.7,0.861,0.302,-1,TRUE
 GO:0048523," ""negative regulation of cellular process""",2.15,,,5.691,2.8,0.78,0.84,45892,TRUE
 GO:0048583," ""regulation of response to stimulus""",1.204,-2.102,-7.62,5.44,4.45,0.871,0.243,-1,TRUE
@@ -97,7 +93,7 @@ GO:0050776," ""regulation of immune response""",0.182,,,4.618,7.04,0.802,0.802,4
 GO:0050789," ""regulation of biological process""",21.186,,,6.685,1.71,0.833,0.719,50794,TRUE
 GO:0050794," ""regulation of cellular process""",19.762,-2.174,-6.911,6.655,1.73,0.824,0.461,-1,TRUE
 GO:0050829," ""defense response to Gram-negative bacterium""",0.015,6.071,-0.784,3.549,18.28,0.597,0.559,-1,FALSE
-GO:0050832," ""defense response to fungus""",0.034,6.3,-1.158,3.895,10.48,0.583,0.659,-1,TRUE
+GO:0050832," ""defense response to fungus""",0.034,6.3,-1.158,3.895,10.48,0.583,0.659,-1,FALSE
 GO:0050896," ""response to stimulus""",12.913,-4.06,-0.107,6.47,2.93,1,0,-1,TRUE
 GO:0051245," ""negative regulation of cellular defense response""",0,-4.679,-4.611,0.477,93.41,0.842,0.54,-1,TRUE
 GO:0051259," ""protein complex oligomerization""",0.174,-3.094,1.248,4.6,15.57,0.996,0,-1,TRUE
@@ -131,3 +127,4 @@ GO:1902679," ""negative regulation of RNA biosynthetic process""",0.665,,,5.182,
 GO:1903507," ""negative regulation of nucleic acid-templated transcription""",0.665,,,5.182,4.09,0.782,0.993,45892,TRUE
 GO:2000022," ""regulation of jasmonic acid mediated signaling pathway""",0.007,-3.862,-5.135,3.193,13.67,0.844,0.49,-1,FALSE
 GO:2000113," ""negative regulation of cellular macromolecule biosynthetic process""",0.88,,,5.304,3.86,0.779,0.962,45892,TRUE
+GO:0052317,"""camalexin metabolic process""",0.007,-3.862,-5.135,3.193,13.67,0.844,0.49,-1,FALSE

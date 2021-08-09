@@ -30,9 +30,11 @@ get_annotated_DEGs <- function(counts_csv_file = "Sly1/input/counts.csv",
      
   annotations <- get_Slycopersicum_annotations(attr = attr)
   res_annotated <- left_join(res, annotations, by = "gene")
-  write_delim(x = res_annotated,
-              file = name,
-              delim = ";")
+  return(res_annotated)
+  
+  uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
+  res_annotated <- aggregate(res_annotated, by = list(res_annotated$gene), FUN = uniquepaste)
+  write_delim(res_annotated, file = name, delim = ",", col_names = TRUE)
   
   return(res_annotated)
 }

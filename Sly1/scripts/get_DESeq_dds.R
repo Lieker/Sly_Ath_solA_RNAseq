@@ -1,6 +1,3 @@
-library(DESeq2)
-library(tidyr)
-library(tibble)
 source("Sly1/scripts/get_xp_design.R")
 
 get_DESeq_dds <- function(counts_csv_file = "Sly1/input/counts.csv",
@@ -31,7 +28,8 @@ get_DESeq_dds <- function(counts_csv_file = "Sly1/input/counts.csv",
                                   colData = xp_design,
                                   design = ~ compartment + treatment)
   }
-  
+  keep <- rowSums(counts(dds)) >= 10
+  dds <- dds[keep,]
   dds <- DESeq(dds)
   
   return(dds)

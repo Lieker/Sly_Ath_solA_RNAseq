@@ -5,9 +5,9 @@ suppressPackageStartupMessages(library(tidyverse))
 # samples in rows
 # genes in columns
 # row names = samples
-produce_scaled_counts_matrix <- function(count_csv_file = "Ath2/input/counts.csv", 
+produce_scaled_counts_matrix <- function(counts_csv_file = "Ath2/input/counts.csv", 
                                          xp_design_csv_file = "Ath2/input/xp_design.csv") {
-  counts <- read.csv(file = count_csv_file, 
+  counts <- read.csv(file = counts_csv_file, 
                      header = TRUE, 
                      stringsAsFactors = FALSE) %>% column_to_rownames("Geneid")
   

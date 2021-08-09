@@ -2,7 +2,6 @@ library(apeglm)
 library(EnhancedVolcano)
 source("Sly1/scripts/get_unfiltered_res_dds.R")
 source("Sly1/scripts/get_DESeq_dds.R")
-source("Sly1/scripts/coefficient_for_volcanoplot.R")
 
 make_volcanoplot <- function(counts_csv_file = "Sly1/input/counts.csv",
                              xp_design_csv_file = "Sly1/input/xp_design.csv",
@@ -27,25 +26,24 @@ make_volcanoplot <- function(counts_csv_file = "Sly1/input/counts.csv",
                                 ref_treatment,
                                 treatment2,
                                 method)
-  coef <- coefficient(counts_csv_file,
-                      xp_design_csv_file,
-                      plantpart,
-                      ref_treatment,
-                      treatment2,
-                      method)
+  
   
   shrunk <- lfcShrink(dds = dds,
                       res = res,
                       type = "apeglm",
-                      coef = coef)
+                      coef = resultsNames(dds)[2])
   v <- EnhancedVolcano(toptable = shrunk,
                        x = "log2FoldChange",
                        y = "padj",
                        pCutoff = padj_threshold,
                        FCcutoff = FCcutoff_volcano,
                        lab = rownames(shrunk),
+                       selectLab = "",
                        title = ttl,
-                       subtitle = "")
+                       subtitle = "",
+                       xlim = c(-7, 7),
+                       ylim = c(0, -log10(10e-4)),
+                       colGradient = c("red3", "royalblue"))
   return(v)
 }
 

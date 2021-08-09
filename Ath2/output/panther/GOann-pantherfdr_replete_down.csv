@@ -1,74 +1,54 @@
-GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (45),expected,over/under,foldenrich,rawPvalue,FDR
-glutamine family amino acid catabolic process (GO:0009065),18,2,0.03,+,67.81,0.000488,0.0398
-response to chitin (GO:0010200),138,8,0.23,+,35.38,9.48E-11,0.000000047
-cellular response to hypoxia (GO:0071456),234,13,0.38,+,33.9,1.02E-16,6.05E-13
-cellular response to decreased oxygen levels (GO:0036294),236,13,0.39,+,33.62,1.13E-16,3.36E-13
-cellular response to oxygen levels (GO:0071453),237,13,0.39,+,33.47,1.19E-16,2.36E-13
-ethylene-activated signaling pathway (GO:0009873),55,3,0.09,+,33.29,0.000119,0.0147
-response to hypoxia (GO:0001666),260,13,0.43,+,30.51,3.74E-16,5.57E-13
-response to high light intensity (GO:0009644),60,3,0.1,+,30.51,0.000152,0.017
-response to decreased oxygen levels (GO:0036293),264,13,0.43,+,30.05,4.52E-16,5.39E-13
-response to oxygen levels (GO:0070482),266,13,0.44,+,29.83,4.97E-16,4.93E-13
-cellular response to ethylene stimulus (GO:0071369),63,3,0.1,+,29.06,0.000174,0.0185
-alpha-amino acid catabolic process (GO:1901606),68,3,0.11,+,26.92,0.000216,0.0215
-response to light intensity (GO:0009642),139,6,0.23,+,26.34,0.000000133,0.000044
-phosphorelay signal transduction system (GO:0000160),83,3,0.14,+,22.06,0.000381,0.0338
-response to organonitrogen compound (GO:0010243),250,9,0.41,+,21.97,3.34E-10,0.000000132
-cellular amino acid catabolic process (GO:0009063),89,3,0.15,+,20.57,0.000464,0.0389
-response to nitrogen compound (GO:1901698),309,10,0.51,+,19.75,8.51E-11,4.61E-08
-organic acid catabolic process (GO:0016054),160,4,0.26,+,15.26,0.00015,0.0172
-small molecule catabolic process (GO:0044282),236,5,0.39,+,12.93,0.0000455,0.00732
-response to wounding (GO:0009611),238,5,0.39,+,12.82,0.0000473,0.00741
-"negative regulation of transcription, DNA-templated (GO:0045892)",272,5,0.45,+,11.22,0.0000878,0.0122
-negative regulation of RNA biosynthetic process (GO:1902679),274,5,0.45,+,11.14,0.0000908,0.0123
-negative regulation of nucleic acid-templated transcription (GO:1903507),274,5,0.45,+,11.14,0.0000908,0.012
-negative regulation of RNA metabolic process (GO:0051253),284,5,0.47,+,10.74,0.000107,0.0136
-response to oxidative stress (GO:0006979),456,8,0.75,+,10.71,0.00000077,0.000229
-negative regulation of nucleobase-containing compound metabolic process (GO:0045934),312,5,0.51,+,9.78,0.000165,0.0179
-cellular response to chemical stimulus (GO:0070887),1092,16,1.79,+,8.94,9.28E-12,6.91E-09
-negative regulation of cellular macromolecule biosynthetic process (GO:2000113),363,5,0.59,+,8.41,0.000328,0.031
-negative regulation of macromolecule biosynthetic process (GO:0010558),365,5,0.6,+,8.36,0.000337,0.0313
-cellular response to stress (GO:0033554),1129,15,1.85,+,8.11,1.88E-10,7.98E-08
-negative regulation of cellular biosynthetic process (GO:0031327),386,5,0.63,+,7.91,0.000433,0.0374
-negative regulation of biosynthetic process (GO:0009890),392,5,0.64,+,7.78,0.000464,0.0384
-negative regulation of cellular metabolic process (GO:0031324),485,6,0.79,+,7.55,0.000142,0.0169
-organonitrogen compound catabolic process (GO:1901565),832,10,1.36,+,7.33,0.000000827,0.000234
-response to organic substance (GO:0010033),1724,18,2.82,+,6.37,8.14E-11,4.85E-08
-response to oxygen-containing compound (GO:1901700),1536,16,2.52,+,6.36,1.33E-09,0.000000494
-response to light stimulus (GO:0009416),714,7,1.17,+,5.98,0.000157,0.0174
-response to radiation (GO:0009314),738,7,1.21,+,5.79,0.000193,0.0201
-negative regulation of cellular process (GO:0048523),751,7,1.23,+,5.69,0.000214,0.0216
-response to chemical (GO:0042221),2712,25,4.44,+,5.63,3.46E-14,2.94E-11
-response to external biotic stimulus (GO:0043207),1105,10,1.81,+,5.52,0.0000101,0.0024
-response to other organism (GO:0051707),1105,10,1.81,+,5.52,0.0000101,0.0023
-response to biotic stimulus (GO:0009607),1107,10,1.81,+,5.51,0.0000102,0.00225
-cellular catabolic process (GO:0044248),1218,11,2,+,5.51,0.00000339,0.00084
-organic substance catabolic process (GO:1901575),1338,12,2.19,+,5.47,0.00000118,0.00032
-biological process involved in interspecies interaction between organisms (GO:0044419),1117,10,1.83,+,5.46,0.000011,0.00235
-defense response to other organism (GO:0098542),818,7,1.34,+,5.22,0.000358,0.0328
-immune response (GO:0006955),824,7,1.35,+,5.18,0.000374,0.0337
-immune system process (GO:0002376),836,7,1.37,+,5.11,0.000407,0.0356
-response to abiotic stimulus (GO:0009628),2150,18,3.52,+,5.11,2.79E-09,0.000000976
-catabolic process (GO:0009056),1466,12,2.4,+,5,0.00000304,0.000788
-response to hormone (GO:0009725),1255,10,2.06,+,4.86,0.0000299,0.00593
-response to endogenous stimulus (GO:0009719),1286,10,2.11,+,4.75,0.0000367,0.00625
-response to stress (GO:0006950),3136,23,5.14,+,4.48,7.28E-11,4.82E-08
-response to external stimulus (GO:0009605),1528,11,2.5,+,4.39,0.0000282,0.00579
-cellular response to stimulus (GO:0051716),2514,17,4.12,+,4.13,0.000000205,0.0000644
-"regulation of transcription, DNA-templated (GO:0006355)",2174,13,3.56,+,3.65,0.0000317,0.0061
-regulation of nucleic acid-templated transcription (GO:1903506),2174,13,3.56,+,3.65,0.0000317,0.00591
-regulation of RNA biosynthetic process (GO:2001141),2176,13,3.57,+,3.65,0.000032,0.00578
-regulation of RNA metabolic process (GO:0051252),2283,13,3.74,+,3.48,0.0000528,0.00806
-regulation of nucleobase-containing compound metabolic process (GO:0019219),2343,13,3.84,+,3.39,0.0000689,0.0103
-regulation of cellular macromolecule biosynthetic process (GO:2000112),2373,13,3.89,+,3.34,0.0000785,0.0114
-regulation of macromolecule biosynthetic process (GO:0010556),2386,13,3.91,+,3.33,0.000083,0.0118
-regulation of cellular biosynthetic process (GO:0031326),2487,13,4.08,+,3.19,0.000126,0.0154
-response to stimulus (GO:0050896),5591,29,9.16,+,3.17,1.84E-10,8.44E-08
-regulation of biosynthetic process (GO:0009889),2524,13,4.14,+,3.14,0.000147,0.0171
-regulation of cellular metabolic process (GO:0031323),2950,15,4.83,+,3.1,0.0000437,0.00723
-regulation of primary metabolic process (GO:0080090),2796,14,4.58,+,3.06,0.000102,0.0132
-regulation of gene expression (GO:0010468),2612,13,4.28,+,3.04,0.000207,0.0212
-regulation of metabolic process (GO:0019222),3261,16,5.34,+,2.99,0.0000341,0.00597
-regulation of nitrogen compound metabolic process (GO:0051171),2713,13,4.45,+,2.92,0.0003,0.0288
-regulation of biological process (GO:0050789),5336,19,8.74,+,2.17,0.000448,0.0381
-cellular process (GO:0009987),11936,32,19.56,+,1.64,0.000229,0.0224
+﻿GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (42),upload_1 (expected),upload_1 (over/under),upload_1 (fold Enrichment),upload_1 (raw P-value),upload_1 (FDR)
+response to chitin (GO:0010200),32,3,0.05,+,61.3,0.0000209,0.00431
+cellular response to hypoxia (GO:0071456),237,13,0.36,+,35.87,4.27E-17,2.54E-13
+cellular response to decreased oxygen levels (GO:0036294),239,13,0.37,+,35.57,4.74E-17,1.41E-13
+cellular response to oxygen levels (GO:0071453),240,13,0.37,+,35.42,4.99E-17,9.91E-14
+ethylene-activated signaling pathway (GO:0009873),58,3,0.09,+,33.82,0.000112,0.0159
+response to hypoxia (GO:0001666),263,13,0.4,+,32.32,1.55E-16,2.31E-13
+response to decreased oxygen levels (GO:0036293),267,13,0.41,+,31.84,1.87E-16,2.23E-13
+response to high light intensity (GO:0009644),62,3,0.09,+,31.64,0.000135,0.0179
+response to oxygen levels (GO:0070482),269,13,0.41,+,31.6,2.05E-16,2.04E-13
+cellular response to ethylene stimulus (GO:0071369),66,3,0.1,+,29.72,0.000162,0.021
+phosphorelay signal transduction system (GO:0000160),86,3,0.13,+,22.81,0.000343,0.0394
+response to light intensity (GO:0009642),143,4,0.22,+,18.29,0.0000749,0.0114
+response to organonitrogen compound (GO:0010243),153,4,0.23,+,17.09,0.0000966,0.0144
+response to nitrogen compound (GO:1901698),212,5,0.32,+,15.42,0.0000196,0.00417
+response to fungus (GO:0009620),356,6,0.54,+,11.02,0.0000175,0.00387
+cellular response to chemical stimulus (GO:0070887),1117,16,1.71,+,9.37,3.76E-12,3.2E-09
+cellular response to stress (GO:0033554),1141,14,1.75,+,8.02,8.62E-10,0.000000571
+response to external biotic stimulus (GO:0043207),1102,11,1.69,+,6.53,0.000000612,0.000261
+response to other organism (GO:0051707),1102,11,1.69,+,6.53,0.000000612,0.000243
+response to biotic stimulus (GO:0009607),1104,11,1.69,+,6.51,0.000000623,0.000232
+biological process involved in interspecies interaction between organisms (GO:0044419),1114,11,1.7,+,6.46,0.00000068,0.000225
+negative regulation of cellular process (GO:0048523),778,7,1.19,+,5.88,0.00017,0.0215
+defense response to other organism (GO:0098542),795,7,1.22,+,5.76,0.000193,0.024
+immune response (GO:0006955),801,7,1.23,+,5.71,0.000202,0.0246
+immune system process (GO:0002376),813,7,1.24,+,5.63,0.000222,0.0264
+response to chemical (GO:0042221),2535,21,3.88,+,5.42,1.55E-11,1.16E-08
+organonitrogen compound catabolic process (GO:1901565),853,7,1.3,+,5.37,0.000296,0.0346
+response to organic substance (GO:0010033),1639,13,2.51,+,5.19,0.000000624,0.000219
+response to abiotic stimulus (GO:0009628),2061,16,3.15,+,5.08,2.65E-08,0.0000132
+response to external stimulus (GO:0009605),1527,11,2.34,+,4.71,0.0000138,0.00375
+response to oxygen-containing compound (GO:1901700),1431,10,2.19,+,4.57,0.0000477,0.0079
+cellular response to stimulus (GO:0051716),2564,17,3.92,+,4.34,8.28E-08,0.000038
+response to stress (GO:0006950),3186,21,4.87,+,4.31,1.1E-09,0.000000654
+"regulation of transcription, DNA-templated (GO:0006355)",2187,13,3.34,+,3.89,0.0000148,0.00385
+regulation of nucleic acid-templated transcription (GO:1903506),2187,13,3.34,+,3.89,0.0000148,0.00369
+regulation of RNA biosynthetic process (GO:2001141),2189,13,3.35,+,3.88,0.000015,0.00357
+regulation of RNA metabolic process (GO:0051252),2296,13,3.51,+,3.7,0.0000249,0.00478
+regulation of nucleobase-containing compound metabolic process (GO:0019219),2354,13,3.6,+,3.61,0.0000323,0.00603
+regulation of cellular macromolecule biosynthetic process (GO:2000112),2377,13,3.64,+,3.58,0.0000358,0.00647
+regulation of macromolecule biosynthetic process (GO:0010556),2390,13,3.66,+,3.56,0.0000379,0.00665
+regulation of cellular biosynthetic process (GO:0031326),2491,13,3.81,+,3.41,0.0000583,0.0094
+regulation of biosynthetic process (GO:0009889),2528,13,3.87,+,3.36,0.0000679,0.0107
+regulation of cellular metabolic process (GO:0031323),2946,15,4.51,+,3.33,0.0000169,0.00387
+regulation of primary metabolic process (GO:0080090),2788,14,4.26,+,3.28,0.0000419,0.00714
+regulation of gene expression (GO:0010468),2625,13,4.01,+,3.24,0.0000998,0.0145
+regulation of metabolic process (GO:0019222),3266,16,4.99,+,3.2,0.0000127,0.00361
+regulation of nitrogen compound metabolic process (GO:0051171),2705,13,4.14,+,3.14,0.000135,0.0184
+response to stimulus (GO:0050896),5464,26,8.36,+,3.11,3.41E-09,0.00000185
+regulation of macromolecule metabolic process (GO:0060255),2990,13,4.57,+,2.84,0.000367,0.0413
+regulation of cellular process (GO:0050794),4724,19,7.22,+,2.63,0.0000231,0.0046
+regulation of biological process (GO:0050789),5383,21,8.23,+,2.55,0.00001,0.00298
+biological regulation (GO:0065007),5936,23,9.08,+,2.53,0.00000284,0.000893
+cellular process (GO:0009987),12009,31,18.37,+,1.69,0.000122,0.0169

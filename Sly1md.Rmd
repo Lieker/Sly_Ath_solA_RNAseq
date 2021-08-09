@@ -191,9 +191,6 @@ uniquepercent
 The average unique mapping % is 54.0%. This is low, but explained by the type of library prep method that was used (Moll et al, 2014).
 
 
-
-
-
 # PCA analysis
 
 Plot PCA to see if samples with the same treatments cluster together.
@@ -208,7 +205,7 @@ p + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) +
 
 On PC1, the compartments cluster together. There is no clear clustering based on solA treatment. Let's check PC3 and PC4.
 ```{r message=FALSE, warning=FALSE}
-p1 <- plot_pca(plantpart = c("root", "shoot"), pc_x_axis = "PC3", pc_y_axis = "PC4")
+p1 <- plot_pca(plantpart = c("root", "shoot"), pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "compartment", pca_shape = "treatment")
 
 p1 + scale_color_manual(values=c('#e956b4', '#56e98b'), name = "solanoeclepin A", labels = c("no", "yes")) + guides(shape = FALSE)
 ```
@@ -220,18 +217,6 @@ plot_scree(comp = c("root","shoot"))
 ```
 
 It would be more informative to look at the compartments individually.
-```{r message=FALSE, warning=FALSE}
-p1 <- plot_pca(plantpart = c("shoot"), pc_x_axis = "PC1", pc_y_axis = "PC2", pca_colour = "treatment") + ggtitle("shoot")
-p2 <- plot_pca(plantpart = c("root"), pc_x_axis = "PC1", pc_y_axis = "PC2", pca_colour = "treatment") + ggtitle("root")
-p3 <- plot_pca(plantpart = c("shoot"), pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment") +ggtitle("shoot")
-p4 <- plot_pca(plantpart = c("root"), pc_x_axis = "PC3", pc_y_axis = "PC4", pca_colour = "treatment") + ggtitle("root")
-(p1 + p2) / (p3 + p4)
-```
-```{r message=FALSE, warning=FALSE}
-p1 <- plot_pca(plantpart = c("shoot"), pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "treatment") + ggtitle("shoot")
-p2 <- plot_pca(plantpart = c("root"), pc_x_axis = "PC5", pc_y_axis = "PC6", pca_colour = "treatment") + ggtitle("root")
-p1 + p2
-```
 
 Figure S1B
 ```{r}
@@ -261,23 +246,143 @@ p1 + p2
 
 ## Wald test
 
-Use design formula ~ compartment + treatment
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/volcanoplot.R")
 ```
-```{r, warning = FALSE, message = FALSE}
-make_volcanoplot(plantpart = c("root","shoot"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "All treatments, solA treatment, Wald", method = "compartment+treatment")
-```
 
-There is only 1 DEG.
 
 Again, it makes more sense to look within compartments.
-```{r, warning = FALSE, message = FALSE}
-make_volcanoplot(plantpart = c("shoot"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "Shoot, solA treatment, Wald", method = "treatment")
-make_volcanoplot(plantpart = c("root"), log2FC_threshold = 0, FCcutoff_volcano = 1, padj_threshold = 0.05, ttl = "Root, solA treatment, Wald", method = "treatment")
+```{r, fig.height=12, fig.width=10, warning = FALSE, message = FALSE}
+p1 <- make_volcanoplot(plantpart = c("shoot"), log2FC_threshold = 0, FCcutoff_volcano = 0, padj_threshold = 0.05, ttl = "Shoot, solA treatment, Wald", method = "treatment")
+p2 <- make_volcanoplot(plantpart = c("root"), log2FC_threshold = 0, FCcutoff_volcano = 0, padj_threshold = 0.05, ttl = "Root, solA treatment, Wald", method = "treatment")
+p1 / p2
 ```
 
-Indeed, there are several DEGs in both compartments.
+Check the root volcano plot; it looks strange.
+
+```{r check_root_volcano, message = FALSE, warning = FALSE}
+ddsr <- get_DESeq_dds(plantpart = "root", method = "treatment")
+resr <- get_unfiltered_res_dds(plantpart = "root", method = "treatment")
+resrd <- as.data.frame(resr)
+shrunk <- lfcShrink(dds = dds,
+                    res = resr,
+                    type = "apeglm",
+                    coef = resultsNames(dds)[2])
+shrunk <- as.data.frame(shrunk)
+ggplot(data=shrunk, aes(x=log2FoldChange, y=-log10(padj))) + geom_point() + xlim(c(-10,10)) + theme_classic() +
+    geom_hline(yintercept=-log10(0.05), col="red")
+```
+
+The strange shape of the volcano plot is due to the shrinkage of the numerous genes, that had a adjusted p-value of nearly 1. 
+
+Check if anything improves when we use adjusted filtering with IHW.
+
+```{r IHW, message = FALSE, warning = FALSE}
+resrIHW <- results(dds, filterFun = ihw)
+summary(resrIHW)
+sum(resrIHW$padj < 0.1, na.rm=TRUE)
+metadata(resrIHW)$ihwResult
+sum(resrIHW$padj < 0.05, na.rm=TRUE)
+```
+
+```{r check_root_volcano, message = FALSE, warning = FALSE}
+ddss <- get_DESeq_dds(plantpart = "root", method = "treatment")
+ress <- get_unfiltered_res_dds(plantpart = "root", method = "treatment")
+ressd <- as.data.frame(ress)
+ggplot(data=ressd, aes(x=log2FoldChange, y=-log10(padj))) + geom_point() + xlim(c(-10,10)) + theme_classic() +
+    geom_hline(yintercept=-log10(0.05), col="red")
+```
+
+Check this with a scatterplot of pvalues
+
+```{r scatterplot_pvalues, message = FALSE, warning = FALSE}
+plot(resr$baseMean+1, -log10(resr$pvalue),
+     log="x", xlab="mean of normalized counts",
+     ylab=expression(-log[10](pvalue)),
+     ylim=c(0,30),
+     cex=.4, col=rgb(0,0,0,.3))
+
+plot(resrIHW$baseMean+1, -log10(resrIHW$pvalue),
+     log="x", xlab="mean of normalized counts",
+     ylab=expression(-log[10](pvalue)),
+     ylim=c(0,30),
+     cex=.4, col=rgb(0,0,0,.3))
+```
+
+There are no differences at all between resrIHW and resr.
+
+Plot the pvalues in a histogram to see their distribution.
+
+```{r pvalue_hist, message = FALSE, warning = FALSE}
+use <- resr$baseMean > metadata(resr)$filterThreshold
+h1 <- hist(resr$pvalue[!use], breaks=0:50/50, plot=FALSE)
+h2 <- hist(resr$pvalue[use], breaks=0:50/50, plot=FALSE)
+colori <- c(`do not pass`="khaki", `pass`="powderblue")
+barplot(height = rbind(h1$counts, h2$counts), beside = FALSE,
+        col = colori, space = 0, main = "", ylab="frequency")
+text(x = c(0, length(h1$counts)), y = 0, label = paste(c(0,1)),
+     adj = c(0.5,1.7), xpd=NA)
+legend("topright", fill=rev(colori), legend=rev(names(colori)))
+
+```
+
+Check if there is a big difference if extracting results with contrast() except for filtering dataset before inputting in dds.
+
+```{r using_contrast, message = FALSE, warning = FALSE}
+counts3 <- read.csv(file = "Sly1/input/counts.csv", 
+                     header = TRUE, 
+                     stringsAsFactors = FALSE,
+                     fileEncoding = "UTF-8-BOM") %>% column_to_rownames("Geneid")
+
+  
+xp_design3 <- read.csv(file = "Sly1/input/xp_design.csv", 
+                       header = TRUE, 
+                       stringsAsFactors = FALSE,
+                       fileEncoding = "UTF-8-BOM") %>% column_to_rownames("sample")
+
+xp_design3$group <- factor(paste0(xp_design3$compartment, "_", xp_design3$treatment))
+
+dds3 <- DESeqDataSetFromMatrix(countData = counts3,
+                                  colData = xp_design3,
+                                  design = ~ group)
+keep <- rowSums(counts(dds3)) >= 10
+dds3 <- dds3[keep,]
+dds3 <- DESeq(dds3)
+resr3 <- results(dds3, contrast = c("group", "root_yes_solA","root_no_solA")) 
+summary(resr3)
+use <- resr3$baseMean > metadata(resr3)$filterThreshold
+h1 <- hist(resr3$pvalue[!use], breaks=0:50/50, plot=FALSE)
+h2 <- hist(resr3$pvalue[use], breaks=0:50/50, plot=FALSE)
+colori <- c(`do not pass`="khaki", `pass`="powderblue")
+barplot(height = rbind(h1$counts, h2$counts), beside = FALSE,
+        col = colori, space = 0, main = "", ylab="frequency")
+text(x = c(0, length(h1$counts)), y = 0, label = paste(c(0,1)),
+     adj = c(0.5,1.7), xpd=NA)
+legend("topright", fill=rev(colori), legend=rev(names(colori)))
+resultsNames(dds3)
+shrunk <- lfcShrink(dds = dds3,
+                    res = resr3,
+                    type = "apeglm",
+                    coef = resultsNames(dds3)[2])
+shrunk <- as.data.frame(shrunk)
+ggplot(data=shrunk, aes(x=log2FoldChange, y=-log10(padj))) + geom_point() + xlim(c(-10,10)) + theme_classic() +
+    geom_hline(yintercept=-log10(0.05), col="red")
+write.csv(shrunk, "Sly1/output/test_contrast_res_shrunk.csv", row.names = TRUE)
+#get the shrunk list annotated
+
+res3 <- shrunk %>% rownames_to_column("original_genename")
+genes <- res3$original_genename
+genes <- substr(genes, start = 6, stop = 21)
+res3$gene <- genes
+     
+annotations <- get_Slycopersicum_annotations()
+res3_annotated <- left_join(res3, annotations, by = "gene")
+  
+uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
+res3_annotated <- aggregate(res3_annotated, by = list(res3_annotated$gene), FUN = uniquepaste)
+res3_annotated <- res3_annotated[res3_annotated$padj < 0.05, ]
+write.csv(res3_annotated, "Sly1/output/test_contrast_res_shrunk_ann.csv", row.names = TRUE)
+```
 
 ## Heatmaps
 
@@ -290,7 +395,7 @@ xs <- xs %>% rownames_to_column("genes")
 xr <- get_list_of_DEGs(plantpart = "root", method = "treatment", log2FC_threshold = 0)
 xr <- xr %>% rownames_to_column("genes")
 ```
-So in the shoot there are 43 DEGs and in the root 22 DEGs.
+So in the shoot there are 36 DEGs and in the root 22 DEGs.
 
 ```{r message=FALSE, warning=FALSE}
 xrr <- xr$genes 
@@ -305,7 +410,7 @@ x <- rbind(xs, xr)
 source("Sly1/scripts/produce_scaled_counts_matrix.R")
 y <- produce_scaled_counts_matrix() %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
 DEG_counts <- left_join(x, y, by="genes") 
-DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 
 require(RColorBrewer)
@@ -367,7 +472,7 @@ x <- x %>% rownames_to_column("genes")
 source("Sly1/scripts/filter_counts_based_on_compartment.R")
 y <- filter_counts_based_on_compartment(comprtmt = "root") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
 DEG_counts <- left_join(x, y, by="genes") 
-DEG_counts <- DEG_counts[, -c(2,3,4,5,6,7)]
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 xp_design <- xp_design %>% column_to_rownames("sample")
 
@@ -398,7 +503,7 @@ pheatmap(DEG_counts,
 x2 <- get_list_of_DEGs(plantpart = "shoot", method = "treatment", log2FC_threshold = 0) %>% rownames_to_column("genes")
 y2 <- filter_counts_based_on_compartment(comprtmt = "shoot") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
 DEG_counts2 <- left_join(x2, y2, by = "genes")
-DEG_counts2 <- DEG_counts2[, -c(2,3,4,5,6,7)]
+DEG_counts2 <- DEG_counts2[, -c(2,3,4,5,6)]
 DEG_counts2 <- DEG_counts2 %>% column_to_rownames("genes")
 
 sip2 <- data.frame(names(DEG_counts2), treatment) %>% column_to_rownames("names.DEG_counts2.")
@@ -462,3 +567,72 @@ DEGSly <- aggregate(DEGSly, by = list(DEGSly$original_genename, DEGSly$compartme
 write_delim(DEGSly, "Sly1/output/allDEGs.csv", delim = ";")
 ```
 
+# Individual gene plots
+
+Make individual plots of interesting genes:
+
+```{r geneplots, fig.height = 3, fig.width = 8, message = FALSE, warning = FALSE}
+source("Sly1/scripts/plotcounts.R")
+
+p1 <- plotcounts(gene = "mRNA:Solyc04g079450.4.1",dds3, "serpin 3")
+p2 <- plotcounts(gene = "mRNA:Solyc01g102895.1.1",dds3, "GLP4a", "r")
+p3 <- plotcounts(gene = "mRNA:Solyc01g102890.4.1",dds3, "GLP4b", "r")
+p4 <- plotcounts(gene = "mRNA:Solyc07g055740.1.1",dds3, "STR-2", "r")
+p5 <- plotcounts(gene = "mRNA:Solyc10g085870.1.1",dds3, "UGT", "r")
+p7 <- plotcounts(gene = "mRNA:Solyc12g088170.2.1",dds3, "acyl transferase", "r")
+p6 <- plotcounts(gene = "mRNA:Solyc09g091510.3.1",dds3, "CHS1", "r")
+p23 <- p2 + p3
+pA <- p1 + p23 + guide_area() + plot_layout(guides = "collect", ncol = 3) + plot_annotation(title = "Immunity-related expression in tomato")
+p45 <- p4 + p5
+p67 <- p6 + p7
+pB <- p45 - p67 + guide_area() + plot_layout(guides = "collect", ncol = 3) + plot_annotation(title = "Biosynthesis of secondary metabolites-related expression in tomato")
+
+p8 <- plotcounts(gene = "mRNA:Solyc07g049530.3.1",dds3, "ACO1", "s")
+p9 <- plotcounts(gene = "mRNA:Solyc02g081190.5.1",dds3, "ACO4", "s")
+p10 <- plotcounts(gene = "mRNA:Solyc08g007820.1.1",dds3, "ERF10-2", "s")
+p11 <- plotcounts(gene = "mRNA:Solyc09g015020.1.1",dds3, "HSP17.7B", "s")
+p12 <- plotcounts(gene = "mRNA:Solyc04g011440.4.1",dds3, "ERHSPC70", "s")
+
+pC <- p8 + p9 + p10 + p11 + p12 + plot_layout(guides = "collect", ncol = 5) + plot_annotation(title = "Ethylene biosynthesis and signalling-related expression in tomato")
+
+p13 <- plotcounts(gene = "mRNA:Solyc09g011080.3.1",dds3, "activase", "r")
+p14 <- plotcounts(gene = "mRNA:Solyc10g018300.3.1",dds3, "TKL1", "r")
+p15 <- plotcounts(gene = "mRNA:Solyc03g034220.3.1",dds3, "RuBP ss", "r")
+p16 <- plotcounts(gene = "mRNA:Solyc03g062720.3.1",dds3, "photosynth. NDH subcom. B2", "s")
+
+p1314 <- p13 + p14
+p1516 <- p15 + p16
+
+pD <- p1314 - p1516 + guide_area() + plot_layout(guides = "collect", ncol = 3) + plot_annotation(title = "Photosynthesis-related expression in tomato")
+
+p17 <- plotcounts(gene = "mRNA:Solyc09g097770.3.1",dds3, "CWP", "r")
+p18 <- plotcounts(gene = "mRNA:Solyc02g091920.3.1",dds3, "XTH7", "r")
+
+pE <- (p17 + p18) - plot_spacer() + plot_spacer() + plot_layout(guides = "collect", ncol = 3) + plot_annotation(title = "Cell wall expansion-related expression in tomato")
+
+pA
+pB
+pC
+pD
+pE
+
+```
+
+
+Plots of overlapping genes with Arabidopsis
+
+```{r overlap_AthSly, warning = FALSE, message = FALSE}
+p19 <- plotcounts(gene = "mRNA:Solyc09g015020.1.1",dds3,"SlyHSP17.4A/\nHSP18.1","s")
+p20 <- plotcounts(gene = "mRNA:Solyc01g102890.4.1",dds3,"SlyGLP1M7","r")
+p21 <- plotcounts(gene = "mRNA:Solyc10g085870.1.1",dds3,"SlyUGT73","r")
+p22 <- plotcounts(gene = "mRNA:Solyc10g078590.2.1",dds3,"SlyJRL3","s")
+
+p19 + p20 + p21 + p22 + plot_layout(guides = "collect", ncol = 4)
+```
+
+Plots of genes NOT DEG in Sly, but in all three treatments of Arabidopsis
+```{r overlap_AthSly, warning = FALSE, message = FALSE}
+p100 <- plotcounts(gene = "mRNA:Solyc05g052570.3.1",dds3, "SlySZF2")
+p101 <- plotcounts(gene = "mRNA:Solyc01g095100.4.1",dds3, "WRKY22") + plotcounts(gene = "mRNA:Solyc10g011910.5.1",dds3, "WRKY22")
+p102 <- plotcounts(gene = "mRNA:Solyc07g054080.3.1",dds3, "RMA1") + plotcounts(gene = "mRNA:Solyc10g008400.1.1",dds3, "RMA1") + plotcounts(gene = "mRNA:Solyc10g008410.1.1",dds3, "RMA1") + plotcounts(gene = "mRNA:Solyc12g010670.1.1",dds3, "RMA1")
+```

@@ -23,9 +23,11 @@ get_DESeq_dds <- function(counts_csv_file = "Ath2/input/counts.csv",
       filter(treatment == ref_treatment | treatment == treatment2)
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
     dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ treatment)
+    dds$treatment <- relevel(dds$treatment, ref = ref_treatment)
   } else if (method == "solA"){
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
     dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + solA)
+    dds$solA <- relevel(dds$solA, ref = "no")
   } else if (method == "N:solA+solA"){
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
     dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ N + P + N:solA + solA)
@@ -36,6 +38,9 @@ get_DESeq_dds <- function(counts_csv_file = "Ath2/input/counts.csv",
     counts <- counts %>% filter(sample %in% xp_design$sample) %>% column_to_rownames("sample") %>% t()
     dds <- DESeqDataSetFromMatrix(countData = counts, colData = xp_design, design = ~ experiment + treatment)
   } else{print("no valid method selected")}
+  
+  keep <- rowSums(counts(dds)) >= 10
+  dds <- dds[keep,]
 
   dds <- DESeq(dds)
   return(dds)

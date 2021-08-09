@@ -1,7 +1,28 @@
-GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (36),expected,over/under,foldenrich,rawPvalue,FDR
-response to gibberellin (GO:0009739),108,4,0.14,+,28.25,0.0000139,0.0165
-response to auxin (GO:0009733),302,5,0.4,+,12.63,0.0000477,0.0473
-response to hormone (GO:0009725),1255,10,1.65,+,6.08,0.00000348,0.0104
-response to endogenous stimulus (GO:0009719),1286,10,1.69,+,5.93,0.00000432,0.00857
-response to organic substance (GO:0010033),1724,11,2.26,+,4.87,0.00000844,0.0126
-response to stimulus (GO:0050896),5591,21,7.33,+,2.87,0.000000688,0.0041
+﻿GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (71),upload_1 (expected),upload_1 (over/under),upload_1 (fold Enrichment),upload_1 (raw P-value),upload_1 (FDR)
+hydrogen peroxide transmembrane transport (GO:0080170),6,2,0.02,+,100,0.000182,0.0417
+reductive pentose-phosphate cycle (GO:0019253),14,4,0.04,+,100,0.000000121,0.00036
+"photosynthesis, dark reaction (GO:0019685)",15,4,0.04,+,100,0.000000153,0.000304
+carbon fixation (GO:0015977),16,4,0.04,+,96.70,0.000000191,0.000284
+glucose metabolic process (GO:0006006),42,4,0.11,+,36.84,0.0000061,0.00404
+hexose metabolic process (GO:0019318),87,4,0.22,+,17.78,0.0000916,0.0238
+monosaccharide metabolic process (GO:0005996),128,5,0.33,+,15.11,0.0000246,0.00863
+photosynthesis (GO:0015979),188,7,0.49,+,14.40,0.000000728,0.000868
+response to gibberellin (GO:0009739),109,4,0.28,+,14.19,0.000211,0.0467
+carbohydrate biosynthetic process (GO:0016051),308,7,0.8,+,8.79,0.0000171,0.00782
+plant-type cell wall organization or biogenesis (GO:0071669),269,6,0.7,+,8.63,0.0000782,0.0212
+response to auxin (GO:0009733),320,7,0.83,+,8.46,0.0000217,0.00808
+response to cold (GO:0009409),392,7,1.01,+,6.91,0.0000763,0.0217
+cell wall organization or biogenesis (GO:0071554),515,8,1.33,+,6.01,0.0000598,0.0178
+response to temperature stimulus (GO:0009266),614,9,1.59,+,5.67,0.0000313,0.0104
+response to light stimulus (GO:0009416),722,9,1.87,+,4.82,0.000107,0.0266
+response to radiation (GO:0009314),746,9,1.93,+,4.67,0.000136,0.0325
+carbohydrate metabolic process (GO:0005975),945,11,2.44,+,4.50,0.0000318,0.00999
+response to hormone (GO:0009725),1234,13,3.19,+,4.07,0.0000159,0.00863
+response to endogenous stimulus (GO:0009719),1264,13,3.27,+,3.98,0.0000204,0.0087
+response to oxygen-containing compound (GO:1901700),1431,14,3.7,+,3.78,0.0000163,0.0081
+response to organic substance (GO:0010033),1639,16,4.24,+,3.78,0.0000037,0.00276
+response to abiotic stimulus (GO:0009628),2061,19,5.33,+,3.57,0.000000854,0.000849
+response to chemical (GO:0042221),2535,21,6.55,+,3.20,0.00000109,0.000931
+response to stress (GO:0006950),3186,22,8.24,+,2.67,0.0000111,0.00661
+response to stimulus (GO:0050896),5464,35,14.13,+,2.48,3.01E-08,0.000179
+cellular process (GO:0009987),12009,49,31.05,+,1.58,0.0000205,0.00816

@@ -1,10 +1,10 @@
-plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
+plot_pca <- function(counts_csv_file = "Ath2/input/counts.csv",
                      xp_design_csv_file = "Ath2/input/xp_design.csv",
                      pc_x_axis = "PC1", 
                      pc_y_axis = "PC2",
                      trm = c("a","b","c","d","e","f","g"),
                      pca_colour = "treatment",
-                     pca_shape = 'solA') {
+                     pca_shape = 'N') {
   
   source("Ath2/scripts/produce_scaled_counts_matrix.R")
   source("Ath2/scripts/filter_counts_based_on_treatment.R")
@@ -37,7 +37,7 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
   
   
   # scale raw counts the DESeq2 way
-  scaled_counts = produce_scaled_counts_matrix(count_csv_file = count_csv_file,
+  scaled_counts = produce_scaled_counts_matrix(counts_csv_file = counts_csv_file,
                                                xp_design_csv_file = xp_design_csv_file)
   
   # based on a timepoint, filter the corresponding scaled_counts matrix
@@ -58,7 +58,8 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
   variance_pc_y <- explained_variance_per_component[as.integer(gsub(pattern = "PC",replacement = "", x = pc_y_axis))]
   
   score_df[,pca_shape] <- as.factor(score_df[,pca_shape])
- 
+  score_df <- score_df %>% rownames_to_column("sample")
+
   pca_plot <- ggplot(data = score_df) +
     geom_point(aes_string(x = pc_x_axis, 
                           y = pc_y_axis, 
@@ -73,7 +74,7 @@ plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
     theme(axis.title = element_text(size = 15),
           axis.text = element_text(size = 15),
           legend.text = element_text(size = 15),
-          legend.title = element_text(size = 15))
+          legend.title = element_text(size = 15)) 
 
   return(pca_plot)
 }
