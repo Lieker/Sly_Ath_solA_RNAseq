@@ -90,6 +90,8 @@ sumplotdot <- function(x = "Ath2/output/panther/",
   
   eureka$group <- factor(eureka$group, levels = c("Pstarv.nosola_down",
                                                   "Pstarv.nosola_up",
+                                                  "Nstarv.nosola_down",
+                                                  "Nstarv.nosola_up",
                                                   "NPstarv.nosola_down",
                                                   "NPstarv.nosola_up",
                                                   "replete_down",

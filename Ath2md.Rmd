@@ -301,22 +301,44 @@ p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
 
 Compare group a and e with each other, and a and c, to see the effect of P and N+P starvation without solA.
 
-```{r pca_nutr, fig.width = 10, message = FALSE, warning = FALSE}
+```{r pca_nutr, fig.width = 10, fig.height = 12, message = FALSE, warning = FALSE}
 p1 <- plot_pca(trm = c("a","e"), pca_colour = "treatment") + ggtitle("N+P starvation") 
-p1 + scale_shape_discrete(guide = "none")
 p2 <- plot_pca(trm = c("a", "c"), pca_colour = "treatment") + ggtitle("P starvation")
-(p1 + scale_shape_discrete(guide = "none")) + (p2 + scale_shape_discrete(guide = "none"))
+p3 <- plot_pca(trm = c("a","g"), pca_colour = "treatment") + ggtitle("N starvation")
+p4 <- plot_pca(trm = c("a","e","g"), pca_colour = "treatment") + ggtitle("N, N+P starvation and replete")
+p5 <- plot_pca(trm = c("a", "c", "e", "g"), pca_colour = "treatment") + ggtitle("replete, P, N+P, N starvation")
+p6 <- plot_pca(trm = c("a", "c", "e", "g"), pca_colour = "treatment", pc_x_axis = "PC3", pc_y_axis = "PC4") + ggtitle("replete, P, N+P, N starvation")
+p7 <- plot_pca(trm = c("e","g"), pca_colour = "treatment") + ggtitle("N+P and N starvation")
+p8 <- plot_pca(trm = c("c","e","g"), pca_colour = "treatment") + ggtitle("P, N+P and N starvation")
+
+library(patchwork)
+(p1 + scale_shape_discrete(guide = "none")) + (p2 + scale_shape_discrete(guide = "none")) +
+(p3 + scale_shape_discrete(guide = "none")) + (p4 + scale_shape_discrete(guide = "none")) + p5 + p6 + p7 + p8 + plot_layout(ncol = 2, guides = "collect")
+```
+
+P5 is most interesting for the manuscript.
+
+```{r}
+p5 + guides(shape = guide_legend(override.aes = list(size = 3)),
+            colour = guide_legend(override.aes = list(size = 3))) +
+  scale_colour_manual(name = "treatment", 
+                      labels = c("replete", "P starvation", "N+P starvation", "N starvation"), 
+                      values =c("navyblue","goldenrod4","darkred","limegreen")) +
+  scale_shape_manual(name = "N", labels = c("starvation", "replete"),values = c(16,18)) +
+  ggtitle("PCA analysis starvation conditions")
+
 ```
 
 # DEG analysis
 
 ## Effect of nutritional starvation compared with replete conditions
 
-```{r nutrstarv_DEGs, fig.width = 8.5, fig.height = 6, message = FALSE, warning = FALSE}
+```{r nutrstarv_DEGs, fig.width = 11, fig.height = 6, message = FALSE, warning = FALSE}
 source("Ath2/scripts/volcanoplot.R")
 v1 <- make_volcanoplot(trtm = c("a", "e"), ref_treatment = "a", treatment2 = "e", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "N+P starvation", xsize = 10, maxy = 120)
-v2 <- make_volcanoplot(trtm = c("a", "c"), ref_treatment = "a", treatment2 = "c", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "P starvation", xsize = 6, maxy = 15)
-v1 + v2 + plot_layout(guides = "collect")
+v2 <- make_volcanoplot(trtm = c("a", "c"), ref_treatment = "a", treatment2 = "c", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "P starvation")
+v3 <- make_volcanoplot(trtm = c("a", "g"), ref_treatment = "a", treatment2 = "g", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "N starvation")
+v2 + v3 + v1 + plot_layout(guides = "collect")
 
 ```
 
@@ -563,10 +585,15 @@ dds_ac <- get_DESeq_dds(trtm = c("a","c"), ref_treatment = "a", treatment2 = "c"
 res_ac <- get_unfiltered_res_dds(trtm = c("a","c"), ref_treatment = "a", treatment2 = "c", method = "treatment")
 dds_ae <- get_DESeq_dds(trtm = c("a","e"), ref_treatment = "a", treatment2 = "e", method = "treatment")
 res_ae <- get_unfiltered_res_dds(trtm = c("a","e"), ref_treatment = "a", treatment2 = "e", method = "treatment")
+dds_ag <- get_DESeq_dds(trtm = c("a", "g"), ref_treatment = "a", treatment2 = "g", method = "treatment")
+res_ag <- get_unfiltered_res_dds(trtm = c("a", "g"), ref_treatment = "a", treatment2 = "g", method = "treatment")
 Pstarv_nosolA <- get_annotated_DEGs(d = dds_ac, r = res_ac, name = "Ath2/output/annotated_DEGslist_ac.csv")
 NPstarv_nosolA <- get_annotated_DEGs(d = dds_ae, r = res_ae, name = "Ath2/output/annotated_DEGslist_ae.csv")
+Nstarv_nosolA <- get_annotated_DEGs(d = dds_ag, r = res_ag, name = "Ath2/output/annotated_DEGslist_ag.csv")
 nrow(Pstarv_nosolA)
 nrow(NPstarv_nosolA)
+nrow(Nstarv_nosolA)
+sum(Nstarv_nosolA$Group.1 %in% NPstarv_nosolA$Group.1)
 ```
 
 Find the 'extra' effect that solA gives to the N+P starvation by comparing group a with f.
@@ -645,10 +672,10 @@ in_cdef <- Pstarv[Pstarv$transcript %in% NPstarv$transcript,4]
 Let's make a dotplot for the effect of N+P starvation (without solA) up and down both.
 
 Figure 3:
-```{r, dotplot_NPstarvnosolA, fig.height = 6, fig.width = 10, message = FALSE, warning = FALSE}
+```{r, dotplot_NPstarvnosolA, fig.height = 5, fig.width = 9, message = FALSE, warning = FALSE}
 source("Ath2/scripts/summ_dotplot.R")
-p1 <- sumplotdot(updown = c("up"), sign = 0.05, nutrcond = "NPstarv.nosola", double = "revigo", show = 15)
-p2 <- sumplotdot(updown = c("down"), sign = 0.05, nutrcond = "NPstarv.nosola", double = "revigo", show = 15)
+p1 <- sumplotdot(updown = c("up"), sign = 0.05, nutrcond = c("Nstarv.nosola","NPstarv.nosola"), double = "revigo", show = 10)
+p2 <- sumplotdot(updown = c("down"), sign = 0.05, nutrcond = c("Nstarv.nosola","NPstarv.nosola"), double = "revigo", show = 10)
 
 p1
 p2

@@ -1,0 +1,168 @@
+﻿GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (1180),upload_1 (expected),upload_1 (over/under),upload_1 (fold Enrichment),upload_1 (raw P-value),upload_1 (FDR)
+regulation of steroid metabolic process (GO:0019218),6,4,0.26,+,15.52,0.000493,0.021
+cell-cell junction assembly (GO:0007043),6,4,0.26,+,15.52,0.000493,0.0209
+hydrogen peroxide transmembrane transport (GO:0080170),6,4,0.26,+,15.52,0.000493,0.0207
+cell junction assembly (GO:0034329),7,4,0.3,+,13.3,0.00075,0.0292
+indole glucosinolate metabolic process (GO:0042343),18,7,0.77,+,9.05,0.0000495,0.00356
+syncytium formation (GO:0006949),16,6,0.69,+,8.73,0.000204,0.0106
+suberin biosynthetic process (GO:0010345),22,8,0.95,+,8.46,0.0000211,0.00161
+leucine biosynthetic process (GO:0009098),14,5,0.6,+,8.31,0.000844,0.0321
+xylan catabolic process (GO:0045493),16,5,0.69,+,7.27,0.00138,0.0492
+oligopeptide transport (GO:0006857),26,8,1.12,+,7.16,0.0000565,0.00397
+peptide transport (GO:0015833),26,8,1.12,+,7.16,0.0000565,0.00392
+cellular polysaccharide catabolic process (GO:0044247),20,6,0.86,+,6.98,0.000547,0.0222
+xyloglucan metabolic process (GO:0010411),59,17,2.54,+,6.71,9.72E-09,0.00000207
+S-glycoside biosynthetic process (GO:0016144),41,11,1.76,+,6.24,0.00000707,0.000692
+glucosinolate biosynthetic process (GO:0019761),41,11,1.76,+,6.24,0.00000707,0.00068
+glycosinolate biosynthetic process (GO:0019758),41,11,1.76,+,6.24,0.00000707,0.00067
+"photosynthesis, light harvesting in photosystem I (GO:0009768)",24,6,1.03,+,5.82,0.00122,0.0443
+hemicellulose metabolic process (GO:0010410),113,26,4.86,+,5.35,9.11E-11,6.04E-08
+amide transport (GO:0042886),44,10,1.89,+,5.29,0.0000621,0.00426
+phenylpropanoid metabolic process (GO:0009698),110,25,4.73,+,5.29,2.61E-10,0.00000012
+lignin metabolic process (GO:0009808),53,12,2.28,+,5.27,0.0000121,0.00111
+glycosyl compound biosynthetic process (GO:1901659),50,11,2.15,+,5.12,0.0000349,0.00254
+phenylpropanoid biosynthetic process (GO:0009699),88,19,3.78,+,5.02,7.26E-08,0.000012
+fatty acid derivative metabolic process (GO:1901568),38,8,1.63,+,4.9,0.000524,0.0217
+plant-type secondary cell wall biogenesis (GO:0009834),63,13,2.71,+,4.8,0.0000126,0.00112
+secondary metabolite biosynthetic process (GO:0044550),146,30,6.27,+,4.78,3.81E-11,2.84E-08
+response to red light (GO:0010114),66,13,2.84,+,4.58,0.0000194,0.00152
+S-glycoside metabolic process (GO:0016143),114,22,4.9,+,4.49,4.02E-08,0.00000799
+glucosinolate metabolic process (GO:0019760),114,22,4.9,+,4.49,4.02E-08,0.00000773
+glycosinolate metabolic process (GO:0019757),114,22,4.9,+,4.49,4.02E-08,0.00000749
+polysaccharide catabolic process (GO:0000272),143,27,6.14,+,4.39,1.81E-09,0.000000569
+auxin polar transport (GO:0009926),69,13,2.96,+,4.38,0.0000293,0.00221
+cell wall polysaccharide metabolic process (GO:0010383),147,27,6.32,+,4.27,3.06E-09,0.000000829
+xylan metabolic process (GO:0045491),61,11,2.62,+,4.2,0.000167,0.00905
+secondary metabolic process (GO:0019748),306,52,13.15,+,3.95,2.76E-15,5.49E-12
+regulation of meristem growth (GO:0010075),65,11,2.79,+,3.94,0.000272,0.0133
+auxin transport (GO:0060918),95,16,4.08,+,3.92,0.0000128,0.00112
+cellular glucan metabolic process (GO:0006073),196,33,8.42,+,3.92,4.08E-10,0.000000162
+response to gibberellin (GO:0009739),109,18,4.68,+,3.84,0.00000478,0.000501
+pectin catabolic process (GO:0045490),98,16,4.21,+,3.8,0.000018,0.00147
+hormone transport (GO:0009914),98,16,4.21,+,3.8,0.000018,0.00145
+glucan metabolic process (GO:0044042),204,33,8.77,+,3.76,1.01E-09,0.000000375
+cell wall macromolecule metabolic process (GO:0044036),174,27,7.48,+,3.61,6.99E-08,0.0000123
+cellular polysaccharide metabolic process (GO:0044264),274,42,11.77,+,3.57,2.49E-11,2.12E-08
+cell wall modification (GO:0042545),174,26,7.48,+,3.48,0.000000235,0.000035
+carbohydrate catabolic process (GO:0016052),233,34,10.01,+,3.4,5.89E-09,0.00000135
+cell wall biogenesis (GO:0042546),242,35,10.4,+,3.37,4.34E-09,0.00000108
+polysaccharide metabolic process (GO:0005976),422,61,18.13,+,3.36,8.2E-15,9.78E-12
+cell wall organization or biogenesis (GO:0071554),515,73,22.13,+,3.3,4.47E-17,1.33E-13
+response to gravity (GO:0009629),101,14,4.34,+,3.23,0.000277,0.0133
+glycosyl compound metabolic process (GO:1901657),171,23,7.35,+,3.13,0.0000056,0.000557
+post-embryonic root development (GO:0048528),132,17,5.67,+,3,0.000145,0.00814
+inorganic anion transport (GO:0015698),110,14,4.73,+,2.96,0.000602,0.0241
+regulation of hormone levels (GO:0010817),264,33,11.34,+,2.91,0.000000262,0.0000372
+cell wall organization (GO:0071555),280,35,12.03,+,2.91,0.000000115,0.000018
+lateral root development (GO:0048527),121,15,5.2,+,2.89,0.000501,0.0209
+tropism (GO:0009606),122,15,5.24,+,2.86,0.000542,0.0221
+cellular carbohydrate metabolic process (GO:0044262),389,47,16.71,+,2.81,2.18E-09,0.000000649
+plant-type cell wall biogenesis (GO:0009832),160,19,6.87,+,2.76,0.000159,0.00885
+fatty acid biosynthetic process (GO:0006633),118,14,5.07,+,2.76,0.00112,0.0412
+"photosynthesis, light reaction (GO:0019684)",127,15,5.46,+,2.75,0.000789,0.0304
+plant-type cell wall organization or biogenesis (GO:0071669),269,31,11.56,+,2.68,0.00000281,0.000329
+response to red or far red light (GO:0009639),205,23,8.81,+,2.61,0.0000752,0.00493
+pectin metabolic process (GO:0045488),161,18,6.92,+,2.6,0.000453,0.0203
+photosynthesis (GO:0015979),188,21,8.08,+,2.6,0.00016,0.00885
+external encapsulating structure organization (GO:0045229),333,37,14.31,+,2.59,0.000000868,0.000118
+galacturonan metabolic process (GO:0010393),162,18,6.96,+,2.59,0.000484,0.0211
+sulfur compound biosynthetic process (GO:0044272),146,16,6.27,+,2.55,0.00111,0.0414
+anion transport (GO:0006820),230,25,9.88,+,2.53,0.0000806,0.00523
+monocarboxylic acid biosynthetic process (GO:0072330),195,21,8.38,+,2.51,0.000362,0.0169
+cellular carbohydrate biosynthetic process (GO:0034637),218,23,9.37,+,2.46,0.000211,0.0107
+regulation of growth (GO:0040008),249,26,10.7,+,2.43,0.0000877,0.00556
+cellular polysaccharide biosynthetic process (GO:0033692),182,19,7.82,+,2.43,0.000894,0.0337
+cell growth (GO:0016049),386,40,16.59,+,2.41,0.00000157,0.000199
+cellular response to environmental stimulus (GO:0104004),189,19,8.12,+,2.34,0.00119,0.0436
+cellular response to abiotic stimulus (GO:0071214),189,19,8.12,+,2.34,0.00119,0.0433
+polysaccharide biosynthetic process (GO:0000271),219,22,9.41,+,2.34,0.000477,0.0211
+response to auxin (GO:0009733),320,32,13.75,+,2.33,0.0000328,0.00242
+fatty acid metabolic process (GO:0006631),211,21,9.07,+,2.32,0.00071,0.0282
+response to oxidative stress (GO:0006979),441,43,18.95,+,2.27,0.00000253,0.000302
+carbohydrate biosynthetic process (GO:0016051),308,30,13.23,+,2.27,0.000084,0.00539
+response to light stimulus (GO:0009416),722,70,31.02,+,2.26,2.98E-09,0.000000847
+growth (GO:0040007),444,43,19.08,+,2.25,0.00000289,0.000331
+sulfur compound metabolic process (GO:0006790),398,38,17.1,+,2.22,0.0000151,0.00128
+root development (GO:0048364),538,51,23.12,+,2.21,0.000000857,0.000119
+root system development (GO:0022622),540,51,23.2,+,2.2,0.000000898,0.000119
+response to radiation (GO:0009314),746,70,32.05,+,2.18,9.28E-09,0.00000205
+carbohydrate metabolic process (GO:0005975),945,87,40.61,+,2.14,2.55E-10,0.000000127
+regulation of signal transduction (GO:0009966),330,30,14.18,+,2.12,0.00026,0.0129
+developmental growth involved in morphogenesis (GO:0060560),334,30,14.35,+,2.09,0.000435,0.0198
+monocarboxylic acid metabolic process (GO:0032787),425,38,18.26,+,2.08,0.0000742,0.00492
+response to cold (GO:0009409),392,35,16.84,+,2.08,0.000116,0.00684
+regulation of signaling (GO:0023051),336,30,14.44,+,2.08,0.000451,0.0204
+cell morphogenesis (GO:0000902),372,33,15.98,+,2.06,0.00021,0.0108
+regulation of cell communication (GO:0010646),339,30,14.57,+,2.06,0.00048,0.021
+carboxylic acid biosynthetic process (GO:0046394),427,37,18.35,+,2.02,0.000135,0.00768
+developmental growth (GO:0048589),385,33,16.54,+,1.99,0.00042,0.0193
+organic acid biosynthetic process (GO:0016053),456,38,19.59,+,1.94,0.000227,0.0114
+plant organ development (GO:0099402),1054,87,45.29,+,1.92,3.22E-08,0.00000662
+response to hormone (GO:0009725),1234,101,53.02,+,1.9,4.79E-09,0.00000114
+response to endogenous stimulus (GO:0009719),1264,103,54.31,+,1.9,3.16E-09,0.00000082
+response to lipid (GO:0033993),781,62,33.56,+,1.85,0.0000131,0.00113
+small molecule biosynthetic process (GO:0044283),604,47,25.95,+,1.81,0.000201,0.0107
+response to chemical (GO:0042221),2535,197,108.93,+,1.81,3.52E-15,5.25E-12
+oxoacid metabolic process (GO:0043436),966,75,41.51,+,1.81,0.00000324,0.000358
+response to abiotic stimulus (GO:0009628),2061,160,88.56,+,1.81,3.27E-12,3.25E-09
+anatomical structure morphogenesis (GO:0009653),931,72,40,+,1.8,0.00000498,0.000504
+response to organic substance (GO:0010033),1639,126,70.43,+,1.79,1.43E-09,0.000000473
+organic acid metabolic process (GO:0006082),999,76,42.93,+,1.77,0.00000481,0.000495
+tissue development (GO:0009888),646,49,27.76,+,1.77,0.000306,0.0144
+response to inorganic substance (GO:0010035),727,55,31.24,+,1.76,0.000116,0.0069
+regulation of biological quality (GO:0065008),913,69,39.23,+,1.76,0.0000181,0.00144
+response to oxygen-containing compound (GO:1901700),1431,108,61.49,+,1.76,7.08E-08,0.0000121
+cell differentiation (GO:0030154),623,46,26.77,+,1.72,0.000746,0.0293
+carbohydrate derivative metabolic process (GO:1901135),742,54,31.88,+,1.69,0.000378,0.0175
+response to external stimulus (GO:0009605),1527,111,65.61,+,1.69,0.000000247,0.0000359
+aromatic compound biosynthetic process (GO:0019438),772,54,33.17,+,1.63,0.000936,0.0351
+system development (GO:0048731),1919,134,82.46,+,1.63,0.000000098,0.0000158
+small molecule metabolic process (GO:0044281),1506,105,64.71,+,1.62,0.00000303,0.000341
+carboxylic acid metabolic process (GO:0019752),864,60,37.12,+,1.62,0.000527,0.0217
+biological process involved in interspecies interaction between organisms (GO:0044419),1114,77,47.87,+,1.61,0.0000986,0.00613
+response to stimulus (GO:0050896),5464,377,234.78,+,1.61,1.62E-21,9.65E-18
+response to external biotic stimulus (GO:0043207),1102,76,47.35,+,1.61,0.000123,0.00717
+response to other organism (GO:0051707),1102,76,47.35,+,1.61,0.000123,0.0071
+response to biotic stimulus (GO:0009607),1104,76,47.44,+,1.6,0.000125,0.00717
+developmental process (GO:0032502),3038,207,130.54,+,1.59,1.02E-10,6.09E-08
+anatomical structure development (GO:0048856),2895,197,124.39,+,1.58,3.74E-10,0.000000159
+organic cyclic compound biosynthetic process (GO:1901362),860,58,36.95,+,1.57,0.00128,0.046
+response to stress (GO:0006950),3186,214,136.9,+,1.56,1.76E-10,9.55E-08
+post-embryonic development (GO:0009791),1500,100,64.45,+,1.55,0.0000318,0.00237
+multicellular organism development (GO:0007275),2502,166,107.51,+,1.54,6.72E-08,0.0000121
+multicellular organismal process (GO:0032501),2795,179,120.1,+,1.49,0.000000211,0.0000323
+regulation of RNA biosynthetic process (GO:2001141),2189,132,94.06,+,1.4,0.000163,0.00891
+"regulation of transcription, DNA-templated (GO:0006355)",2187,131,93.97,+,1.39,0.000203,0.0107
+regulation of nucleic acid-templated transcription (GO:1903506),2187,131,93.97,+,1.39,0.000203,0.0106
+phosphorus metabolic process (GO:0006793),1806,108,77.6,+,1.39,0.000839,0.0321
+phosphate-containing compound metabolic process (GO:0006796),1760,105,75.62,+,1.39,0.00111,0.0412
+regulation of cellular biosynthetic process (GO:0031326),2491,148,107.03,+,1.38,0.000111,0.00668
+regulation of biosynthetic process (GO:0009889),2528,150,108.62,+,1.38,0.0001,0.00617
+regulation of RNA metabolic process (GO:0051252),2296,136,98.66,+,1.38,0.000276,0.0134
+regulation of macromolecule biosynthetic process (GO:0010556),2390,141,102.69,+,1.37,0.000237,0.0119
+regulation of cellular macromolecule biosynthetic process (GO:2000112),2377,140,102.14,+,1.37,0.00028,0.0134
+regulation of cellular metabolic process (GO:0031323),2946,172,126.59,+,1.36,0.0000713,0.00478
+regulation of nucleobase-containing compound metabolic process (GO:0019219),2354,136,101.15,+,1.34,0.000712,0.0281
+biosynthetic process (GO:0009058),2812,161,120.83,+,1.33,0.000301,0.0142
+regulation of cellular process (GO:0050794),4724,262,202.98,+,1.29,0.0000157,0.00132
+regulation of metabolic process (GO:0019222),3266,181,140.34,+,1.29,0.000597,0.0241
+biological regulation (GO:0065007),5936,326,255.06,+,1.28,0.00000197,0.000244
+regulation of biological process (GO:0050789),5383,293,231.3,+,1.27,0.0000174,0.00144
+metabolic process (GO:0008152),8468,440,363.86,+,1.21,0.00000424,0.00046
+cellular process (GO:0009987),12009,623,516.01,+,1.21,1.11E-09,0.000000391
+organic substance metabolic process (GO:0071704),7877,403,338.46,+,1.19,0.0000624,0.00423
+cellular metabolic process (GO:0044237),7679,392,329.95,+,1.19,0.000109,0.00663
+nucleobase-containing compound metabolic process (GO:0006139),2104,56,90.41,-,0.62,0.0000986,0.00619
+cellular localization (GO:0051641),958,21,41.16,-,0.51,0.000764,0.0296
+gene expression (GO:0010467),1626,34,69.87,-,0.49,0.00000224,0.000272
+nucleic acid metabolic process (GO:0090304),1727,36,74.21,-,0.49,0.0000012,0.000155
+RNA metabolic process (GO:0016070),1314,26,56.46,-,0.46,0.00000822,0.000766
+protein localization (GO:0008104),692,12,29.73,-,0.4,0.000487,0.0211
+cellular protein localization (GO:0034613),615,10,26.43,-,0.38,0.000492,0.0211
+RNA processing (GO:0006396),805,13,34.59,-,0.38,0.0000512,0.00363
+protein transport (GO:0015031),564,8,24.23,-,0.33,0.000267,0.0132
+establishment of protein localization (GO:0045184),576,8,24.75,-,0.32,0.000199,0.0107
+intracellular protein transport (GO:0006886),507,7,21.79,-,0.32,0.000465,0.0207
+intracellular transport (GO:0046907),730,10,31.37,-,0.32,0.0000201,0.00155
+establishment of localization in cell (GO:0051649),778,10,33.43,-,0.3,0.00000433,0.000461
+vesicle-mediated transport (GO:0016192),500,4,21.48,-,0.19,0.0000122,0.00111

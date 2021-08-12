@@ -13,10 +13,7 @@ make_volcanoplot <- function(counts_csv_file = "Ath2/input/counts.csv",
                              log2FC_threshold = 0,
                              FCcutoff_volcano = 0,
                              padj_threshold = 0,
-                             xsize = 8,
-                             ttl = "",
-                             maxy = -log10(10e-15)
-) {
+                             ttl = "") {
   dds <- get_DESeq_dds(counts_csv_file,
                        xp_design_csv_file,
                        trtm,
@@ -35,7 +32,6 @@ make_volcanoplot <- function(counts_csv_file = "Ath2/input/counts.csv",
                        ref_treatment,
                        treatment2,
                        method)
-  
   shrunk <- lfcShrink(dds = dds,
                       res = res,
                       type = "apeglm",
@@ -49,8 +45,6 @@ make_volcanoplot <- function(counts_csv_file = "Ath2/input/counts.csv",
                        pCutoff = padj_threshold,
                        FCcutoff = FCcutoff_volcano,
                        lab = rownames(shrunk),
-                       xlim = c(-(xsize), xsize),
-                       ylim = c(0, -log10(10e-(maxy))),
                        colGradient = c("red3", "royalblue"),
                        caption = NULL)
   return(v)

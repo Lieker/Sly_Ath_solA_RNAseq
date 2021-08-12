@@ -1,0 +1,306 @@
+﻿GO biological process complete,Arabidopsis thaliana - REFLIST (27462),upload_1 (1068),upload_1 (expected),upload_1 (over/under),upload_1 (fold Enrichment),upload_1 (raw P-value),upload_1 (FDR)
+sulfate reduction (GO:0019419),4,4,0.16,+,25.71,0.000121,0.00395
+tyrosine catabolic process (GO:0006572),5,4,0.19,+,20.57,0.000212,0.00647
+cellular response to sucrose starvation (GO:0043617),4,3,0.16,+,19.29,0.00163,0.0358
+leucine catabolic process (GO:0006552),7,5,0.27,+,18.37,0.0000463,0.00174
+branched-chain amino acid catabolic process (GO:0009083),7,5,0.27,+,18.37,0.0000463,0.00173
+ammonia assimilation cycle (GO:0019676),6,4,0.23,+,17.14,0.000342,0.00986
+nitrogen utilization (GO:0019740),7,4,0.27,+,14.69,0.000522,0.0141
+cellular response to sulfur starvation (GO:0010438),7,4,0.27,+,14.69,0.000522,0.014
+PSII associated light-harvesting complex II catabolic process (GO:0010304),8,4,0.31,+,12.86,0.00076,0.0189
+glutamate metabolic process (GO:0006536),27,11,1.05,+,10.48,9.13E-08,0.00000605
+riboflavin metabolic process (GO:0006771),11,4,0.43,+,9.35,0.00191,0.0402
+riboflavin biosynthetic process (GO:0009231),11,4,0.43,+,9.35,0.00191,0.0401
+nitrate assimilation (GO:0042128),11,4,0.43,+,9.35,0.00191,0.0399
+nitrate metabolic process (GO:0042126),11,4,0.43,+,9.35,0.00191,0.0398
+phosphate ion homeostasis (GO:0055062),17,6,0.66,+,9.08,0.000158,0.00508
+trivalent inorganic anion homeostasis (GO:0072506),17,6,0.66,+,9.08,0.000158,0.00505
+protoporphyrinogen IX biosynthetic process (GO:0006782),15,5,0.58,+,8.57,0.000706,0.0178
+flavin-containing compound biosynthetic process (GO:0042727),12,4,0.47,+,8.57,0.00248,0.0494
+tyrosine metabolic process (GO:0006570),12,4,0.47,+,8.57,0.00248,0.0493
+L-phenylalanine catabolic process (GO:0006559),12,4,0.47,+,8.57,0.00248,0.0491
+secondary alcohol metabolic process (GO:1902652),12,4,0.47,+,8.57,0.00248,0.0489
+isocitrate metabolic process (GO:0006102),12,4,0.47,+,8.57,0.00248,0.0488
+protoporphyrinogen IX metabolic process (GO:0046501),15,5,0.58,+,8.57,0.000706,0.0178
+erythrose 4-phosphate/phosphoenolpyruvate family amino acid catabolic process (GO:1902222),12,4,0.47,+,8.57,0.00248,0.0486
+glutamine family amino acid catabolic process (GO:0009065),18,6,0.7,+,8.57,0.000205,0.00629
+fatty acid beta-oxidation (GO:0006635),37,12,1.44,+,8.34,0.000000183,0.0000115
+fatty acid catabolic process (GO:0009062),44,14,1.71,+,8.18,2.12E-08,0.00000153
+fatty acid oxidation (GO:0019395),41,13,1.59,+,8.15,7.02E-08,0.00000475
+glutamine metabolic process (GO:0006541),16,5,0.62,+,8.04,0.000898,0.0215
+anion homeostasis (GO:0055081),26,8,1.01,+,7.91,0.0000286,0.00113
+cellular amino acid catabolic process (GO:0009063),95,29,3.69,+,7.85,1.59E-15,2.11E-13
+branched-chain amino acid metabolic process (GO:0009081),20,6,0.78,+,7.71,0.000328,0.00959
+carboxylic acid catabolic process (GO:0046395),154,46,5.99,+,7.68,1.7E-23,6.78E-21
+monocarboxylic acid catabolic process (GO:0072329),61,18,2.37,+,7.59,5.75E-10,5.44E-08
+organic acid catabolic process (GO:0016054),163,47,6.34,+,7.41,1.95E-23,7.29E-21
+aromatic amino acid family catabolic process (GO:0009074),21,6,0.82,+,7.35,0.000409,0.0114
+malate metabolic process (GO:0006108),18,5,0.7,+,7.14,0.0014,0.0314
+lipid oxidation (GO:0034440),51,14,1.98,+,7.06,0.0000001,0.00000656
+heme biosynthetic process (GO:0006783),22,6,0.86,+,7.01,0.000504,0.0137
+sulfate assimilation (GO:0000103),22,6,0.86,+,7.01,0.000504,0.0137
+response to nitrate (GO:0010167),33,9,1.28,+,7.01,0.0000204,0.00084
+toxin metabolic process (GO:0009404),60,16,2.33,+,6.86,1.74E-08,0.00000128
+alpha-amino acid catabolic process (GO:1901606),68,18,2.64,+,6.81,2.49E-09,0.000000215
+negative regulation of phosphorelay signal transduction system (GO:0070298),19,5,0.74,+,6.77,0.00171,0.0371
+negative regulation of ethylene-activated signaling pathway (GO:0010105),19,5,0.74,+,6.77,0.00171,0.0369
+toxin catabolic process (GO:0009407),46,12,1.79,+,6.71,0.00000129,0.0000695
+leucine metabolic process (GO:0006551),23,6,0.89,+,6.71,0.000615,0.016
+aerobic electron transport chain (GO:0019646),44,11,1.71,+,6.43,0.00000507,0.000246
+response to molecule of fungal origin (GO:0002238),20,5,0.78,+,6.43,0.00207,0.0424
+translational elongation (GO:0006414),36,9,1.4,+,6.43,0.0000367,0.00141
+cellular oxidant detoxification (GO:0098869),28,7,1.09,+,6.43,0.000271,0.00808
+response to absence of light (GO:0009646),45,11,1.75,+,6.29,0.0000061,0.000286
+jasmonic acid biosynthetic process (GO:0009695),25,6,0.97,+,6.17,0.000895,0.0215
+tricarboxylic acid cycle (GO:0006099),46,11,1.79,+,6.15,0.0000073,0.000338
+glutathione metabolic process (GO:0006749),77,18,2.99,+,6.01,1.32E-08,0.00000101
+mitochondrial ATP synthesis coupled electron transport (GO:0042775),44,10,1.71,+,5.84,0.0000277,0.0011
+small molecule catabolic process (GO:0044282),239,54,9.29,+,5.81,1.85E-22,6.49E-20
+hydrogen peroxide catabolic process (GO:0042744),31,7,1.21,+,5.81,0.000461,0.0127
+oxidative phosphorylation (GO:0006119),62,14,2.41,+,5.81,0.000000769,0.0000425
+calcium ion transmembrane transport (GO:0070588),40,9,1.56,+,5.79,0.0000744,0.00258
+heme metabolic process (GO:0042168),27,6,1.05,+,5.71,0.00126,0.0289
+vitamin biosynthetic process (GO:0009110),59,13,2.29,+,5.67,0.00000241,0.000125
+glutamine family amino acid metabolic process (GO:0009064),59,13,2.29,+,5.67,0.00000241,0.000124
+dicarboxylic acid metabolic process (GO:0043648),89,19,3.46,+,5.49,1.88E-08,0.00000136
+xenobiotic transport (GO:0042908),52,11,2.02,+,5.44,0.0000199,0.000834
+ATP synthesis coupled electron transport (GO:0042773),52,11,2.02,+,5.44,0.0000199,0.000828
+vitamin metabolic process (GO:0006766),76,16,2.96,+,5.41,0.00000029,0.0000173
+cellular response to toxic substance (GO:0097237),43,9,1.67,+,5.38,0.00012,0.00397
+detoxification (GO:0098754),153,32,5.95,+,5.38,4.54E-13,5.21E-11
+regulation of phosphorelay signal transduction system (GO:0070297),29,6,1.13,+,5.32,0.00174,0.0374
+regulation of ethylene-activated signaling pathway (GO:0010104),29,6,1.13,+,5.32,0.00174,0.0373
+water-soluble vitamin biosynthetic process (GO:0042364),49,10,1.91,+,5.25,0.0000614,0.00219
+respiratory electron transport chain (GO:0022904),59,12,2.29,+,5.23,0.0000119,0.000513
+cellular response to hypoxia (GO:0071456),237,48,9.22,+,5.21,2E-18,4.41E-16
+cellular response to decreased oxygen levels (GO:0036294),239,48,9.29,+,5.16,2.68E-18,5.72E-16
+cellular response to oxygen levels (GO:0071453),240,48,9.33,+,5.14,3.11E-18,6.18E-16
+innate immune response-activating signal transduction (GO:0002758),30,6,1.17,+,5.14,0.00202,0.0417
+hydrogen peroxide metabolic process (GO:0042743),40,8,1.56,+,5.14,0.000374,0.0105
+xenobiotic detoxification by transmembrane export across the plasma membrane (GO:1990961),50,10,1.94,+,5.14,0.0000712,0.00251
+response to toxic substance (GO:0009636),176,35,6.84,+,5.11,1.33E-13,1.56E-11
+water-soluble vitamin metabolic process (GO:0006767),66,13,2.57,+,5.06,0.00000703,0.000328
+aerobic respiration (GO:0009060),122,24,4.74,+,5.06,1.1E-09,0.000000099
+cellular response to nitrogen starvation (GO:0006995),36,7,1.4,+,5,0.001,0.0236
+response to hypoxia (GO:0001666),263,51,10.23,+,4.99,8.57E-19,2.13E-16
+immune response-activating signal transduction (GO:0002757),31,6,1.21,+,4.98,0.00233,0.0467
+response to decreased oxygen levels (GO:0036293),267,51,10.38,+,4.91,1.5E-18,3.58E-16
+cellular detoxification (GO:1990748),42,8,1.63,+,4.9,0.000499,0.0136
+benzene-containing compound metabolic process (GO:0042537),58,11,2.26,+,4.88,0.0000479,0.00176
+cold acclimation (GO:0009631),58,11,2.26,+,4.88,0.0000479,0.00175
+response to oxygen levels (GO:0070482),269,51,10.46,+,4.88,1.98E-18,4.54E-16
+chlorophyll metabolic process (GO:0015994),61,11,2.37,+,4.64,0.0000717,0.00252
+regulation of intracellular signal transduction (GO:1902531),50,9,1.94,+,4.63,0.000326,0.00957
+lipid modification (GO:0030258),89,16,3.46,+,4.62,0.00000183,0.0000955
+peroxisome organization (GO:0007031),39,7,1.52,+,4.62,0.00151,0.0335
+reactive oxygen species metabolic process (GO:0072593),68,12,2.64,+,4.54,0.000041,0.00155
+response to hydrogen peroxide (GO:0042542),74,13,2.88,+,4.52,0.0000207,0.000845
+response to light intensity (GO:0009642),143,25,5.56,+,4.5,4.16E-09,0.00000035
+tetrapyrrole metabolic process (GO:0033013),76,13,2.96,+,4.4,0.0000265,0.00106
+programmed cell death induced by symbiont (GO:0034050),47,8,1.83,+,4.38,0.000959,0.0227
+cellular respiration (GO:0045333),147,25,5.72,+,4.37,6.81E-09,0.000000556
+biological process involved in interaction with symbiont (GO:0051702),48,8,1.87,+,4.29,0.00108,0.0252
+photorespiration (GO:0009853),42,7,1.63,+,4.29,0.0022,0.0443
+cellular modified amino acid metabolic process (GO:0006575),128,21,4.98,+,4.22,0.000000184,0.0000114
+jasmonic acid metabolic process (GO:0009694),49,8,1.91,+,4.2,0.00122,0.028
+porphyrin-containing compound metabolic process (GO:0006778),74,12,2.88,+,4.17,0.0000848,0.00291
+cellular lipid catabolic process (GO:0044242),105,17,4.08,+,4.16,0.00000312,0.000156
+mitochondrial transmembrane transport (GO:1990542),68,11,2.64,+,4.16,0.000169,0.00536
+response to high light intensity (GO:0009644),62,10,2.41,+,4.15,0.000338,0.00979
+response to cadmium ion (GO:0046686),75,12,2.92,+,4.11,0.0000951,0.00324
+cellular amino acid metabolic process (GO:0006520),388,61,15.09,+,4.04,2.94E-18,6.05E-16
+response to reactive oxygen species (GO:0000302),160,25,6.22,+,4.02,3.03E-08,0.00000215
+alpha-amino acid metabolic process (GO:1901605),237,37,9.22,+,4.01,1.61E-11,1.62E-09
+aromatic amino acid family metabolic process (GO:0009072),77,12,2.99,+,4.01,0.000119,0.00394
+aging (GO:0007568),136,21,5.29,+,3.97,0.00000045,0.0000261
+energy derivation by oxidation of organic compounds (GO:0015980),162,25,6.3,+,3.97,3.76E-08,0.00000261
+response to disaccharide (GO:0034285),72,11,2.8,+,3.93,0.000264,0.0079
+calcium ion transport (GO:0006816),66,10,2.57,+,3.9,0.000526,0.0141
+export across plasma membrane (GO:0140115),66,10,2.57,+,3.9,0.000526,0.014
+lipid catabolic process (GO:0016042),114,17,4.43,+,3.83,0.0000083,0.000378
+negative regulation of abscisic acid-activated signaling pathway (GO:0009788),54,8,2.1,+,3.81,0.00212,0.0431
+negative regulation of cellular response to alcohol (GO:1905958),54,8,2.1,+,3.81,0.00212,0.0429
+negative regulation of response to alcohol (GO:1901420),54,8,2.1,+,3.81,0.00212,0.0428
+electron transport chain (GO:0022900),115,17,4.47,+,3.8,0.0000092,0.000412
+leaf senescence (GO:0010150),110,16,4.28,+,3.74,0.00002,0.000828
+disaccharide metabolic process (GO:0005984),70,10,2.72,+,3.67,0.000793,0.0194
+aspartate family amino acid metabolic process (GO:0009066),63,9,2.45,+,3.67,0.00143,0.0319
+response to sucrose (GO:0009744),70,10,2.72,+,3.67,0.000793,0.0193
+carboxylic acid metabolic process (GO:0019752),864,122,33.6,+,3.63,1.02E-31,6.1E-29
+sulfur compound metabolic process (GO:0006790),398,56,15.48,+,3.62,5.32E-15,6.75E-13
+pyruvate metabolic process (GO:0006090),79,11,3.07,+,3.58,0.000536,0.0142
+cellular response to starvation (GO:0009267),166,23,6.46,+,3.56,0.000000718,0.00004
+cellular response to heat (GO:0034605),65,9,2.53,+,3.56,0.00174,0.0371
+plant organ senescence (GO:0090693),116,16,4.51,+,3.55,0.0000358,0.00139
+oxoacid metabolic process (GO:0043436),966,133,37.57,+,3.54,1.4E-33,1.4E-30
+oligosaccharide metabolic process (GO:0009311),80,11,3.11,+,3.54,0.00059,0.0155
+sulfur compound biosynthetic process (GO:0044272),146,20,5.68,+,3.52,0.00000436,0.000213
+response to UV-B (GO:0010224),73,10,2.84,+,3.52,0.00106,0.0248
+organic acid metabolic process (GO:0006082),999,135,38.85,+,3.47,2.45E-33,2.08E-30
+ATP metabolic process (GO:0046034),149,20,5.79,+,3.45,0.00000574,0.000272
+response to starvation (GO:0042594),202,27,7.86,+,3.44,0.000000154,0.00000976
+indole-containing compound metabolic process (GO:0042430),76,10,2.96,+,3.38,0.0014,0.0315
+response to nutrient levels (GO:0031667),231,30,8.98,+,3.34,5.68E-08,0.00000389
+response to wounding (GO:0009611),239,31,9.29,+,3.34,3.52E-08,0.00000247
+negative regulation of signal transduction (GO:0009968),108,14,4.2,+,3.33,0.000195,0.00604
+response to oxidative stress (GO:0006979),441,57,17.15,+,3.32,7.79E-14,9.29E-12
+response to extracellular stimulus (GO:0009991),271,35,10.54,+,3.32,5.18E-09,0.000000429
+endocytosis (GO:0006897),86,11,3.34,+,3.29,0.00101,0.0238
+cellular response to extracellular stimulus (GO:0031668),221,28,8.59,+,3.26,0.000000246,0.0000151
+cellular response to nutrient levels (GO:0031669),182,23,7.08,+,3.25,0.00000296,0.000149
+response to metal ion (GO:0010038),206,26,8.01,+,3.25,0.000000699,0.0000393
+negative regulation of cell communication (GO:0010648),112,14,4.36,+,3.21,0.000273,0.00811
+negative regulation of signaling (GO:0023057),112,14,4.36,+,3.21,0.000273,0.00807
+monocarboxylic acid metabolic process (GO:0032787),425,53,16.53,+,3.21,2.06E-12,2.19E-10
+response to carbohydrate (GO:0009743),153,19,5.95,+,3.19,0.0000261,0.00105
+intracellular protein transmembrane transport (GO:0065002),89,11,3.46,+,3.18,0.0013,0.0296
+cellular response to external stimulus (GO:0071496),227,28,8.83,+,3.17,0.000000403,0.0000238
+response to cold (GO:0009409),392,48,15.24,+,3.15,4.04E-11,4.01E-09
+regulation of seedling development (GO:1900140),90,11,3.5,+,3.14,0.00141,0.0317
+protein transmembrane transport (GO:0071806),91,11,3.54,+,3.11,0.00153,0.0338
+response to UV (GO:0009411),125,15,4.86,+,3.09,0.000251,0.00759
+peptide metabolic process (GO:0006518),626,75,24.35,+,3.08,3.33E-16,4.85E-14
+response to fatty acid (GO:0070542),179,21,6.96,+,3.02,0.0000217,0.000882
+cellular amide metabolic process (GO:0043603),734,85,28.55,+,2.98,2.04E-17,3.81E-15
+response to temperature stimulus (GO:0009266),614,71,23.88,+,2.97,1.06E-14,1.3E-12
+cellular response to light stimulus (GO:0071482),104,12,4.04,+,2.97,0.00137,0.0311
+response to oomycetes (GO:0002239),96,11,3.73,+,2.95,0.00225,0.0452
+response to jasmonic acid (GO:0009753),175,20,6.81,+,2.94,0.0000473,0.00175
+regulation of abscisic acid-activated signaling pathway (GO:0009787),123,14,4.78,+,2.93,0.000643,0.0166
+regulation of cellular response to alcohol (GO:1905957),123,14,4.78,+,2.93,0.000643,0.0165
+regulation of response to alcohol (GO:1901419),123,14,4.78,+,2.93,0.000643,0.0165
+fatty acid metabolic process (GO:0006631),211,24,8.21,+,2.92,0.00000929,0.000414
+response to fungus (GO:0009620),356,40,13.84,+,2.89,1.53E-08,0.00000116
+amide biosynthetic process (GO:0043604),579,65,22.52,+,2.89,4.96E-13,5.58E-11
+negative regulation of response to stimulus (GO:0048585),232,26,9.02,+,2.88,0.00000511,0.000246
+alpha-amino acid biosynthetic process (GO:1901607),161,18,6.26,+,2.87,0.000143,0.0046
+response to heat (GO:0009408),242,27,9.41,+,2.87,0.00000366,0.00018
+response to inorganic substance (GO:0010035),727,81,28.27,+,2.86,8.75E-16,1.21E-13
+peptide biosynthetic process (GO:0043043),521,58,20.26,+,2.86,1.24E-11,1.3E-09
+regulation of response to external stimulus (GO:0032101),199,22,7.74,+,2.84,0.000032,0.00126
+generation of precursor metabolites and energy (GO:0006091),381,42,14.82,+,2.83,1.11E-08,0.000000868
+cellular response to radiation (GO:0071478),110,12,4.28,+,2.81,0.00211,0.0432
+pigment metabolic process (GO:0042440),138,15,5.37,+,2.79,0.000649,0.0165
+translation (GO:0006412),516,56,20.07,+,2.79,6.85E-11,6.69E-09
+small molecule metabolic process (GO:0044281),1506,162,58.57,+,2.77,1.65E-29,8.92E-27
+cellular homeostasis (GO:0019725),242,26,9.41,+,2.76,0.0000101,0.000441
+cellular amino acid biosynthetic process (GO:0008652),188,20,7.31,+,2.74,0.000116,0.00387
+secondary metabolic process (GO:0019748),306,32,11.9,+,2.69,0.00000171,0.0000902
+cellular response to stress (GO:0033554),1141,119,44.37,+,2.68,1.17E-20,3.31E-18
+cellular catabolic process (GO:0044248),1257,130,48.88,+,2.66,4.48E-22,1.41E-19
+regulation of defense response (GO:0031347),271,28,10.54,+,2.66,0.00000915,0.000414
+regulation of response to biotic stimulus (GO:0002831),194,20,7.54,+,2.65,0.000171,0.0054
+monosaccharide metabolic process (GO:0005996),128,13,4.98,+,2.61,0.00251,0.0491
+protein import (GO:0017038),139,14,5.41,+,2.59,0.00188,0.0396
+response to abiotic stimulus (GO:0009628),2061,205,80.15,+,2.56,2.64E-33,1.97E-30
+small molecule biosynthetic process (GO:0044283),604,60,23.49,+,2.55,5.53E-10,5.31E-08
+response to nitrogen compound (GO:1901698),212,21,8.24,+,2.55,0.000197,0.00609
+response to oxygen-containing compound (GO:1901700),1431,141,55.65,+,2.53,3.26E-22,1.08E-19
+plastid organization (GO:0009657),315,31,12.25,+,2.53,0.00000934,0.000413
+response to external stimulus (GO:0009605),1527,150,59.39,+,2.53,1.37E-23,5.84E-21
+response to external biotic stimulus (GO:0043207),1102,108,42.86,+,2.52,5.08E-17,8.65E-15
+response to other organism (GO:0051707),1102,108,42.86,+,2.52,5.08E-17,8.41E-15
+response to chemical (GO:0042221),2535,248,98.59,+,2.52,8.59E-40,1.71E-36
+response to biotic stimulus (GO:0009607),1104,108,42.93,+,2.52,5.62E-17,9.06E-15
+inorganic cation transmembrane transport (GO:0098662),226,22,8.79,+,2.5,0.000251,0.00756
+regulation of immune response (GO:0050776),216,21,8.4,+,2.5,0.000363,0.0103
+regulation of immune system process (GO:0002682),216,21,8.4,+,2.5,0.000363,0.0103
+biological process involved in interspecies interaction between organisms (GO:0044419),1114,108,43.32,+,2.49,1.36E-16,2.09E-14
+response to bacterium (GO:0009617),486,47,18.9,+,2.49,8.76E-08,0.00000587
+defense response to fungus (GO:0050832),260,25,10.11,+,2.47,0.000097,0.00329
+response to salicylic acid (GO:0009751),156,15,6.07,+,2.47,0.002,0.0414
+organonitrogen compound catabolic process (GO:1901565),853,82,33.17,+,2.47,1.02E-12,1.12E-10
+carboxylic acid biosynthetic process (GO:0046394),427,41,16.61,+,2.47,0.000000794,0.0000434
+organic hydroxy compound metabolic process (GO:1901615),293,28,11.39,+,2.46,0.000038,0.00145
+cellular response to environmental stimulus (GO:0104004),189,18,7.35,+,2.45,0.00119,0.0276
+cellular response to abiotic stimulus (GO:0071214),189,18,7.35,+,2.45,0.00119,0.0275
+catabolic process (GO:0009056),1505,143,58.53,+,2.44,3.64E-21,1.09E-18
+organic acid biosynthetic process (GO:0016053),456,43,17.73,+,2.42,0.000000508,0.0000288
+defense response to bacterium (GO:0042742),372,35,14.47,+,2.42,0.0000078,0.000358
+cellular response to chemical stimulus (GO:0070887),1117,105,43.44,+,2.42,2.27E-15,2.94E-13
+cation transmembrane transport (GO:0098655),235,22,9.14,+,2.41,0.000344,0.00987
+organonitrogen compound biosynthetic process (GO:1901566),1345,124,52.31,+,2.37,2.19E-17,3.95E-15
+ion transmembrane transport (GO:0034220),315,29,12.25,+,2.37,0.0000723,0.00252
+response to organic cyclic compound (GO:0014070),283,26,11.01,+,2.36,0.000121,0.00396
+chloroplast organization (GO:0009658),240,22,9.33,+,2.36,0.000424,0.0118
+regulation of response to stress (GO:0080134),404,37,15.71,+,2.35,0.00000563,0.000269
+response to salt stress (GO:0009651),453,41,17.62,+,2.33,0.00000315,0.000157
+response to light stimulus (GO:0009416),722,65,28.08,+,2.31,2.87E-09,0.000000244
+cellular chemical homeostasis (GO:0055082),200,18,7.78,+,2.31,0.00174,0.0372
+defense response to other organism (GO:0098542),795,71,30.92,+,2.3,8.06E-10,7.51E-08
+positive regulation of response to stimulus (GO:0048584),258,23,10.03,+,2.29,0.00066,0.0167
+inorganic ion transmembrane transport (GO:0098660),248,22,9.64,+,2.28,0.000944,0.0224
+immune response (GO:0006955),801,71,31.15,+,2.28,9.87E-10,9.06E-08
+response to osmotic stress (GO:0006970),535,47,20.81,+,2.26,0.0000012,0.0000652
+response to water (GO:0009415),376,33,14.62,+,2.26,0.0000559,0.00201
+immune system process (GO:0002376),813,71,31.62,+,2.25,2.2E-09,0.000000196
+cation transport (GO:0006812),355,31,13.81,+,2.25,0.0000691,0.00245
+response to water deprivation (GO:0009414),367,32,14.27,+,2.24,0.0000806,0.00278
+response to radiation (GO:0009314),746,65,29.01,+,2.24,9.38E-09,0.000000746
+inorganic ion homeostasis (GO:0098771),265,23,10.31,+,2.23,0.000771,0.0191
+regulation of response to stimulus (GO:0048583),775,67,30.14,+,2.22,9.25E-09,0.000000745
+homeostatic process (GO:0042592),475,41,18.47,+,2.22,0.00000966,0.000424
+response to stress (GO:0006950),3186,275,123.9,+,2.22,2.45E-35,3.66E-32
+organic substance catabolic process (GO:1901575),1370,118,53.28,+,2.21,1.06E-14,1.31E-12
+cellular nitrogen compound biosynthetic process (GO:0044271),1219,103,47.41,+,2.17,1.98E-12,2.14E-10
+transmembrane transport (GO:0055085),825,69,32.08,+,2.15,1.59E-08,0.00000119
+response to acid chemical (GO:0001101),408,34,15.87,+,2.14,0.000111,0.00374
+ion homeostasis (GO:0050801),289,24,11.24,+,2.14,0.000866,0.021
+regulation of signal transduction (GO:0009966),330,27,12.83,+,2.1,0.000599,0.0157
+defense response (GO:0006952),1005,82,39.08,+,2.1,2.37E-09,0.000000208
+regulation of signaling (GO:0023051),336,27,13.07,+,2.07,0.000713,0.0178
+regulation of cell communication (GO:0010646),339,27,13.18,+,2.05,0.000785,0.0193
+response to alcohol (GO:0097305),466,37,18.12,+,2.04,0.000114,0.00383
+response to lipid (GO:0033993),781,62,30.37,+,2.04,0.000000462,0.0000265
+response to abscisic acid (GO:0009737),461,36,17.93,+,2.01,0.000178,0.00555
+ion transport (GO:0006811),568,44,22.09,+,1.99,0.0000524,0.00191
+response to stimulus (GO:0050896),5464,422,212.5,+,1.99,6.71E-47,2E-43
+chemical homeostasis (GO:0048878),428,33,16.64,+,1.98,0.000436,0.0121
+response to organic substance (GO:0010033),1639,124,63.74,+,1.95,1.35E-11,1.39E-09
+regulation of post-embryonic development (GO:0048580),357,27,13.88,+,1.94,0.00168,0.0365
+cellular response to stimulus (GO:0051716),2564,191,99.71,+,1.92,2.79E-17,4.89E-15
+biosynthetic process (GO:0009058),2812,207,109.36,+,1.89,3.73E-18,7.17E-16
+regulation of biological quality (GO:0065008),913,67,35.51,+,1.89,0.00000286,0.000146
+organic substance biosynthetic process (GO:1901576),2674,195,103.99,+,1.88,1.04E-16,1.64E-14
+cellular biosynthetic process (GO:0044249),2582,188,100.41,+,1.87,5.1E-16,7.24E-14
+regulation of multicellular organismal process (GO:0051239),461,33,17.93,+,1.84,0.00164,0.0358
+organic cyclic compound biosynthetic process (GO:1901362),860,60,33.45,+,1.79,0.0000408,0.00155
+organonitrogen compound metabolic process (GO:1901564),4614,320,179.44,+,1.78,3.73E-25,1.85E-22
+heterocycle biosynthetic process (GO:0018130),687,47,26.72,+,1.76,0.000357,0.0102
+protein catabolic process (GO:0030163),629,43,24.46,+,1.76,0.00064,0.0166
+cellular protein catabolic process (GO:0044257),611,41,23.76,+,1.73,0.00157,0.0346
+lipid metabolic process (GO:0006629),866,58,33.68,+,1.72,0.000135,0.00436
+response to hormone (GO:0009725),1234,81,47.99,+,1.69,0.0000137,0.000589
+negative regulation of cellular process (GO:0048523),778,51,30.26,+,1.69,0.000545,0.0144
+response to endogenous stimulus (GO:0009719),1264,82,49.16,+,1.67,0.0000172,0.000727
+cellular metabolic process (GO:0044237),7679,489,298.64,+,1.64,8.17E-34,9.74E-31
+aromatic compound biosynthetic process (GO:0019438),772,49,30.02,+,1.63,0.00142,0.0316
+positive regulation of biological process (GO:0048518),1309,83,50.91,+,1.63,0.0000326,0.00127
+transport (GO:0006810),2194,137,85.32,+,1.61,0.000000135,0.00000875
+macromolecule biosynthetic process (GO:0009059),1336,83,51.96,+,1.6,0.000055,0.00199
+establishment of localization (GO:0051234),2243,139,87.23,+,1.59,0.000000136,0.00000869
+metabolic process (GO:0008152),8468,521,329.32,+,1.58,5.88E-33,3.9E-30
+cellular process (GO:0009987),12009,737,467.03,+,1.58,6.75E-60,4.03E-56
+cellular macromolecule biosynthetic process (GO:0034645),1280,78,49.78,+,1.57,0.000176,0.00552
+cellular nitrogen compound metabolic process (GO:0034641),2908,176,113.09,+,1.56,1.14E-08,0.000000883
+localization (GO:0051179),2413,146,93.84,+,1.56,0.000000252,0.0000153
+organic substance transport (GO:0071702),1021,61,39.71,+,1.54,0.00181,0.0383
+organic substance metabolic process (GO:0071704),7877,467,306.34,+,1.52,1.39E-24,6.39E-22
+nitrogen compound metabolic process (GO:0006807),6178,360,240.26,+,1.5,2.86E-16,4.26E-14
+gene expression (GO:0010467),1626,94,63.24,+,1.49,0.000231,0.00703
+cell communication (GO:0007154),1673,95,65.06,+,1.46,0.000453,0.0125
+primary metabolic process (GO:0044238),7234,404,281.33,+,1.44,9.09E-16,1.23E-13
+protein metabolic process (GO:0019538),3534,197,137.44,+,1.43,0.000000419,0.0000245
+cellular protein metabolic process (GO:0044267),3380,187,131.45,+,1.42,0.00000141,0.0000749
+cellular component organization (GO:0016043),2447,128,95.16,+,1.35,0.000884,0.0214
+multicellular organism development (GO:0007275),2502,130,97.3,+,1.34,0.00119,0.0276
+cellular component organization or biogenesis (GO:0071840),2859,147,111.19,+,1.32,0.000779,0.0192
+biological regulation (GO:0065007),5936,304,230.85,+,1.32,0.000000269,0.0000162
+organic cyclic compound metabolic process (GO:1901360),2606,133,101.35,+,1.31,0.00176,0.0374
+developmental process (GO:0032502),3038,154,118.15,+,1.3,0.000906,0.0216
+multicellular organismal process (GO:0032501),2795,141,108.7,+,1.3,0.00204,0.0419
+regulation of biological process (GO:0050789),5383,268,209.35,+,1.28,0.0000163,0.000696
+regulation of cellular process (GO:0050794),4724,230,183.72,+,1.25,0.000337,0.00981
+cellular macromolecule metabolic process (GO:0044260),4426,215,172.13,+,1.25,0.000711,0.0178
+biological_process (GO:0008150),21185,941,823.89,+,1.14,3.04E-19,7.87E-17
+Unclassified (UNCLASSIFIED),6277,127,244.11,-,0.52,3.04E-19,8.23E-17
