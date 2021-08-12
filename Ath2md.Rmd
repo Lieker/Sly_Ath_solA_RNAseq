@@ -665,6 +665,15 @@ in_cdef <- Pstarv[Pstarv$transcript %in% NPstarv$transcript,4]
 
 ```
 
+Check how many tomato and Arabidopsis genes overlap. First, get the Sly list of annotated genes in the Sly md file.
+
+```{r overlap3, message = FALSE, warning = FALSE}
+tomatoDEGs <- DEGSly$athaliana_eg_homolog_ensembl_gene
+araDEGs <- rbind(replete, Pstarv, NPstarv)
+overlapta <- araDEGs[araDEGs$Group.1 %in% tomatoDEGs, ]
+write.csv(overlapta, "Ath2/output/overlap_ta.csv", row.names = FALSE)
+```
+
 
 
 ## GO enrichment analysis
@@ -747,38 +756,60 @@ sumplotdot(updown= c("down"), sign = 0.05, nutrcond = c("replete", "Pstarv", "NP
 
 # Upset plot
 
-```{r message = FALSE, warning = FALSE}
-u <- read.csv("Ath2/input/upset_Ath2.csv", 
-                         header = TRUE, 
-                         stringsAsFactors = FALSE, 
-                         check.names = FALSE, 
-                         fileEncoding = "UTF-8-BOM"
-         ) %>% as.tibble()
+First for the samples including solA
 
-groups <- colnames(u)
-groups <- groups[1:3]
-indvs <- uncount(u)
+```{r message = FALSE, warning = FALSE}
+all_Ath_genes <- unique(unlist(list(NPstarv$Group.1, Pstarv$Group.1, replete$Group.1, tomatoDEGs)))
+all_Ath_genes <- str_subset(all_Ath_genes, "AT*")
+repl <- all_Ath_genes %in% replete$Group.1
+Pst <- all_Ath_genes %in% Pstarv$Group.1
+NPst <- all_Ath_genes %in% NPstarv$Group.1
+Sly_root <- all_Ath_genes %in% DEGroot$athaliana_eg_homolog_ensembl_gene
+Sly_shoot <- all_Ath_genes %in% DEGshoot$athaliana_eg_homolog_ensembl_gene
+b <- data.frame(all_Ath_genes, repl, Pst, NPst, Sly_root, Sly_shoot) 
+b <- b %>% column_to_rownames(., var = "all_Ath_genes")
+colnames(b) <- c("Ath_Pstarv+solA","Ath_NPstarv+solA","Ath_replete+solA","Sly_root+solA","Sly_shoot+solA")
+
+
+groups <- colnames(b)
+
 library(ComplexUpset)
 
-up <- upset(indvs, intersect = groups)
-
+up <- upset(b, 
+            intersect = groups,
+            set_sizes=(upset_set_size() + 
+                        geom_text(aes(label=..count..),
+                                    hjust=1.1, 
+                                    stat='count') +
+                        ylim(480,0)),
+             width_ratio=0.3, 
+             sort_sets=FALSE)
+up
 
 ```
 
-# Check overlap with Sly
+Make upset plot for the samples only focused on nutritional starvation:
 
-```{r}
-SlyAT <- DEGSly$athaliana_eg_homolog_ensembl_gene
-SlyAT <- lapply(SlyAT, function(z){strsplit(SlyAT, ",")})
-SlyAT <- unlist(SlyAT, recursive = FALSE)
-SlyAT <- unlist(SlyAT, recursive = FALSE)
-SlyAT <- lapply(SlyAT, function(z){z[!is.na(z) & z != ""]})
-SlyAT
-overlap_replete_Sly <- SlyAT[SlyAT %in% replete$Group.1]
-overlap_Pstarv_Sly <- SlyAT[SlyAT %in% Pstarv$Group.1]
-overlap_NPstarv_Sly <- SlyAT[SlyAT %in% NPstarv$Group.1]
-overlap_NPstarv_Sly <- unique(overlap_NPstarv_Sly)
-overlap_Pstarv_Sly <- unique(overlap_Pstarv_Sly)
+```{r, fig.height = 3, fig.width = 5, warning = FALSE, message = FALSE}
+all_Ath_genes <- unique(unlist(list(Pstarv_nosolA$Group.1, NPstarv_nosolA$Group.1, Nstarv_nosolA$Group.1)))
+all_Ath_genes <- str_subset(all_Ath_genes, "AT*")
+Pns <- all_Ath_genes %in% Pstarv_nosolA$Group.1
+NPns <- all_Ath_genes %in% NPstarv_nosolA$Group.1
+Nns <- all_Ath_genes %in% Nstarv_nosolA$Group.1
+d <- data.frame(all_Ath_genes, Pns, NPns, Nns) %>% column_to_rownames("all_Ath_genes")
+colnames(d) <- c("Pstarv","NPstarv","Nstarv")
+groups <- colnames(d)
+up2 <- upset(d, 
+             groups,
+             set_sizes=(upset_set_size() + 
+                        geom_text(aes(label=..count..),
+                                    hjust=1.1, 
+                                    stat='count') +
+                        ylim(5500,0) +
+                        theme(axis.text.x=element_text(angle=90))),
+             width_ratio=0.3, 
+             sort_sets='ascending')
+up2
 ```
 
 

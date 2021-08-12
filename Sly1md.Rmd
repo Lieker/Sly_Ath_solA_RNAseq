@@ -252,7 +252,7 @@ source("Sly1/scripts/volcanoplot.R")
 
 
 Again, it makes more sense to look within compartments.
-```{r, fig.height=12, fig.width=10, warning = FALSE, message = FALSE}
+```{r, fig.height=12, fig.width=5, warning = FALSE, message = FALSE}
 p1 <- make_volcanoplot(plantpart = c("shoot"), log2FC_threshold = 0, FCcutoff_volcano = 0, padj_threshold = 0.05, ttl = "Shoot, solA treatment, Wald", method = "treatment")
 p2 <- make_volcanoplot(plantpart = c("root"), log2FC_threshold = 0, FCcutoff_volcano = 0, padj_threshold = 0.05, ttl = "Root, solA treatment, Wald", method = "treatment")
 p1 / p2
@@ -274,42 +274,6 @@ ggplot(data=shrunk, aes(x=log2FoldChange, y=-log10(padj))) + geom_point() + xlim
 ```
 
 The strange shape of the volcano plot is due to the shrinkage of the numerous genes, that had a adjusted p-value of nearly 1. 
-
-Check if anything improves when we use adjusted filtering with IHW.
-
-```{r IHW, message = FALSE, warning = FALSE}
-resrIHW <- results(dds, filterFun = ihw)
-summary(resrIHW)
-sum(resrIHW$padj < 0.1, na.rm=TRUE)
-metadata(resrIHW)$ihwResult
-sum(resrIHW$padj < 0.05, na.rm=TRUE)
-```
-
-```{r check_root_volcano, message = FALSE, warning = FALSE}
-ddss <- get_DESeq_dds(plantpart = "root", method = "treatment")
-ress <- get_unfiltered_res_dds(plantpart = "root", method = "treatment")
-ressd <- as.data.frame(ress)
-ggplot(data=ressd, aes(x=log2FoldChange, y=-log10(padj))) + geom_point() + xlim(c(-10,10)) + theme_classic() +
-    geom_hline(yintercept=-log10(0.05), col="red")
-```
-
-Check this with a scatterplot of pvalues
-
-```{r scatterplot_pvalues, message = FALSE, warning = FALSE}
-plot(resr$baseMean+1, -log10(resr$pvalue),
-     log="x", xlab="mean of normalized counts",
-     ylab=expression(-log[10](pvalue)),
-     ylim=c(0,30),
-     cex=.4, col=rgb(0,0,0,.3))
-
-plot(resrIHW$baseMean+1, -log10(resrIHW$pvalue),
-     log="x", xlab="mean of normalized counts",
-     ylab=expression(-log[10](pvalue)),
-     ylim=c(0,30),
-     cex=.4, col=rgb(0,0,0,.3))
-```
-
-There are no differences at all between resrIHW and resr.
 
 Plot the pvalues in a histogram to see their distribution.
 
@@ -554,7 +518,7 @@ To infer the function of solA on tomato, we have to infer the function of the DE
 Since looking at the complete dataset hardly gives us DEGs, we only look at yes/no solA within the compartments.
 ```{r message=FALSE, warning=FALSE}
 source("Sly1/scripts/get_annotated_DEGs.R")
-DEGboth <- get_annotated_DEGs(plantpart = c("root", "shoot"), method = "compartment+treatment", name = "Sly1/output/annotated_DEGs_both.csv")
+DEGsboth <- get_annotated_DEGs(plantpart = c("root", "shoot"), method = "compartment+treatment", name = "Sly1/output/annotated_DEGs_both.csv")
 DEGroot <- get_annotated_DEGs(plantpart = "root", method = "treatment", name = "Sly1/output/annotated_DEGs_root.csv")
 DEGshoot <- get_annotated_DEGs(plantpart = "shoot", method = "treatment", name = "Sly1/output/annotated_DEGs_shoot.csv")
 DEGboth$compartment <- rep("both", count(DEGboth))
