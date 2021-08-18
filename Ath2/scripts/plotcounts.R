@@ -4,7 +4,7 @@ plotcounts <- function(gene, d = dds, xpd = xp_design, trtm = c("replete","Pstar
                      intgroup = "solA", 
                      returnData = TRUE) %>% rownames_to_column("sample") 
   data <- left_join(data, xpd, by = c("sample", "solA"))
-  tt <- c(rep("replete",10), rep("Pstarv",10), rep("NPstarv",10),rep("Nstarv",5))
+  tt <- c(rep("replete",10), rep("Pstarv",10), rep("NPstarv",9),rep("Nstarv",5))
   
   data$treatment <- tt
   data$treatment <- factor(data$treatment, levels = c("replete","Pstarv","NPstarv","Nstarv"))

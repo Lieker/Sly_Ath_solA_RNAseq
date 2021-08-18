@@ -768,7 +768,8 @@ Sly_root <- all_Ath_genes %in% DEGroot$athaliana_eg_homolog_ensembl_gene
 Sly_shoot <- all_Ath_genes %in% DEGshoot$athaliana_eg_homolog_ensembl_gene
 b <- data.frame(all_Ath_genes, repl, Pst, NPst, Sly_root, Sly_shoot) 
 b <- b %>% column_to_rownames(., var = "all_Ath_genes")
-colnames(b) <- c("Ath_Pstarv+solA","Ath_NPstarv+solA","Ath_replete+solA","Sly_root+solA","Sly_shoot+solA")
+
+colnames(b) <- c("Ath_replete+solA","Ath_Pstarv+solA","Ath_NPstarv+solA","Sly_root+solA","Sly_shoot+solA")
 
 
 groups <- colnames(b)
@@ -791,11 +792,11 @@ up
 Make upset plot for the samples only focused on nutritional starvation:
 
 ```{r, fig.height = 3, fig.width = 5, warning = FALSE, message = FALSE}
-all_Ath_genes <- unique(unlist(list(Pstarv_nosolA$Group.1, NPstarv_nosolA$Group.1, Nstarv_nosolA$Group.1)))
+all_Ath_genes <- unique(unlist(list(Pstarv_nosolA$transcript, NPstarv_nosolA$transcript, Nstarv_nosolA$transcript)))
 all_Ath_genes <- str_subset(all_Ath_genes, "AT*")
-Pns <- all_Ath_genes %in% Pstarv_nosolA$Group.1
-NPns <- all_Ath_genes %in% NPstarv_nosolA$Group.1
-Nns <- all_Ath_genes %in% Nstarv_nosolA$Group.1
+Pns <- all_Ath_genes %in% Pstarv_nosolA$transcript
+NPns <- all_Ath_genes %in% NPstarv_nosolA$transcript
+Nns <- all_Ath_genes %in% Nstarv_nosolA$transcript
 d <- data.frame(all_Ath_genes, Pns, NPns, Nns) %>% column_to_rownames("all_Ath_genes")
 colnames(d) <- c("Pstarv","NPstarv","Nstarv")
 groups <- colnames(d)
@@ -805,13 +806,27 @@ up2 <- upset(d,
                         geom_text(aes(label=..count..),
                                     hjust=1.1, 
                                     stat='count') +
-                        ylim(5500,0) +
+                        ylim(7500,0) +
                         theme(axis.text.x=element_text(angle=90))),
              width_ratio=0.3, 
              sort_sets='ascending')
 up2
 ```
 
+Find the genes that are present in all 3 treatments.
+
+```{r}
+N_P <- Pstarv_nosolA[Pstarv_nosolA$transcript %in% Nstarv_nosolA$transcript,]
+N_P_NP <- NPstarv_nosolA[NPstarv_nosolA$transcript %in% N_P$transcript,]
+write.csv(N_P_NP, "Ath2/output/nutrition_overlap.csv", row.names = FALSE)
+```
+
+Check which genes are present in both Pstarv_nosola vs. replete and in Pstarv vs Pstarv_nosola.
+
+```{r}
+Psol <- Pstarv[Pstarv$transcript %in% Pstarv_nosolA$transcript,]
+
+```
 
 # Individual gene plots
 
@@ -862,4 +877,149 @@ p27 <- plotcounts(gene = "AT5G18130.1", d = dds_all, name = "AtJRL3")
 (p21 + p26 + plot_spacer() + plot_layout(widths = c(1,3,3))) /
 (p22 + p27 + plot_spacer() + plot_layout(widths = c(1,3,3))) + plot_layout(guides = "collect") 
 ```
+Try to get plotcounts3
 
+```{r, warning = FALSE, message = F}
+source("Ath2/scripts/get_GOs.R")
+source("Ath2/scripts/produce_GOdf.R")
+source("Ath2/scripts/plot_pathwayplot.R")
+x <- get_GOs(d = dds_all, rlist = list(res_ab,res_cd,res_ef))
+x1 <- x[str_detect(x$name_1006, c("defense",
+                                  "immun",
+                                  "symbiont",
+                                  "virus",
+                                  "viral",
+                                  "bacterium",
+                                  "bacterial",
+                                  "fungus",
+                                  "fungal",
+                                  "chitin",
+                                  "insect",
+                                  "nematode",
+                                  "systemic resistance",
+                                  "hypersensitive",
+                                  "other organism")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in defense, immunity and symbiont relationships")
+```
+
+Do the same for genes involved in photosynthesis and carbon fixation.
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("photosyn",
+                                  "carbon fixation",
+                                  "chloroplast",
+                                  "light",
+                                  "pentose-phosphate")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in photosynthesis and carbon fixation")
+```
+
+Do the same for ethylene, auxin, gibberellin
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("ethylene")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in ethylene biosynthesis and signalling")
+```
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("auxin")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in auxin biosynthesis and signalling")
+```
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("gibberellin")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in gibberellin biosynthesis and signalling")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("abscisic acid")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in abscisic\nacid signalling")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("hypoxia","low oxygen")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in response to hypoxia")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("cell wall")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in cell wall biogenesis")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("growth","development")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in growth and development")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("lateral root","root hair","root development")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in root development")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("glutamine",
+                                  "camalexin",
+                                  "phenylpropanoid",
+                                  "tryptophan",
+                                  "glucosinolate",
+                                  "galacturonate",
+                                  "proline",
+                                  "raffinose",
+                                  "glutamate",
+                                  "glycerophospholipid",
+                                  "brassinosteroid metabolic",
+                                  "glucose metabolic",
+                                  "glucosinolate biosynthetic",
+                                  "terpenoid",
+                                  "glutathione",
+                                  "gibberellin catabolic",
+                                  "homogalacturonan",
+                                  "spermidine",
+                                  "arginine",
+                                  "polyamine",
+                                  "putrescine",
+                                  "oxylipin",
+                                  "flavonol",
+                                  "amino acid biosynthetic",
+                                  "leucine",
+                                  "ethylene biosynthetic",
+                                  "jasmonic acid biosynthetic",
+                                  "tetrapyrrole",
+                                  "sucrose",
+                                  "ascorbic acid",
+                                  "sterol metabolic",
+                                  "galactolipid biosynthetic",
+                                  "benzoate metabolic",
+                                  "anthocyanin",
+                                  "flavonoid")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in secondary metabolism")
+```

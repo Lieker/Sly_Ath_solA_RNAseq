@@ -1,0 +1,55 @@
+
+ARATH|TAIR=locus=2195808|UniProtKB=F4I7I0	AT1G17290	Alanine aminotransferase 1, mitochondrial;ALAAT1;ortholog
+ARATH|TAIR=locus=2122980|UniProtKB=F4JT82	AT4G19520	Probable disease resistance protein At4g19520;TAIR:locus:2122980;ortholog
+ARATH|TAIR=locus=2121154|UniProtKB=F4JTP5	AT4G38470	Serine/threonine-protein kinase STY46;STY46;ortholog
+ARATH|TAIR=locus=2148548|UniProtKB=F4K2R6	AT5G26920	Calmodulin-binding protein 60 G;CBP60G;ortholog
+ARATH|TAIR=locus=2036004|UniProtKB=O04023	AT1G09070	Protein SRC2 homolog;SRC2;ortholog
+ARATH|TAIR=locus=2061221|UniProtKB=O04203	AT2G40000	Nematode resistance protein-like HSPRO2;HSPRO2;ortholog
+ARATH|TAIR=locus=2061956|UniProtKB=O22259	AT2G47520	Ethylene-responsive transcription factor ERF071;ERF071;ortholog
+ARATH|TAIR=locus=2179964|UniProtKB=O22533	AT5G04340	Zinc finger protein ZAT6;ZAT6;ortholog
+ARATH|TAIR=locus=2134996|UniProtKB=O22975	AT4G24160	1-acylglycerol-3-phosphate O-acyltransferase;TAIR:locus:2134996;ortholog
+ARATH|TAIR=locus=2131759|UniProtKB=O81831	AT4G27280	Calcium-binding protein KRP1;KRP1;ortholog
+ARATH|TAIR=locus=2134188|UniProtKB=O81873	AT4G33560	At4g33560;TAIR:locus:2134188;ortholog
+ARATH|TAIR=locus=2153504|UniProtKB=O82132	AT5G05410	Dehydration-responsive element-binding protein 2A;DREB2A;ortholog
+ARATH|TAIR=locus=2063230|UniProtKB=P25071	AT2G41100	Calmodulin-like protein 12;CML12;ortholog
+ARATH|TAIR=locus=2019667|UniProtKB=P42730	AT1G74310	Chaperone protein ClpB1;CLPB1;ortholog
+ARATH|TAIR=locus=2089706|UniProtKB=P92983	AT3G30775	Proline dehydrogenase 1, mitochondrial;POX1;ortholog
+ARATH|TAIR=locus=2149249|UniProtKB=Q07488	AT5G20230	Blue copper protein;BCB;ortholog
+ARATH|TAIR=locus=2174497|UniProtKB=Q38857	AT5G57560	Xyloglucan endotransglucosylase/hydrolase protein 22;XTH22;ortholog
+ARATH|TAIR=locus=2198225|UniProtKB=Q39013	AT1G01720	NAC domain-containing protein 2;NAC002;ortholog
+ARATH|TAIR=locus=2168073|UniProtKB=Q42410	AT5G59820	Zinc finger protein ZAT12;ZAT12;ortholog
+ARATH|TAIR=locus=2197061|UniProtKB=Q43867	AT1G53840	Pectinesterase 1;PME1;ortholog
+ARATH|TAIR=locus=2146965|UniProtKB=Q501E6	AT5G25250	Flotillin-like protein 1;FLOT1;ortholog
+ARATH|TAIR=locus=2182142|UniProtKB=Q8GUL8	AT5G19230	Uncharacterized GPI-anchored protein At5g19230;TAIR:locus:2182142;ortholog
+ARATH|TAIR=locus=2197659|UniProtKB=Q8GX77	AT1G61340	F-box protein At1g61340;TAIR:locus:2197659;ortholog
+ARATH|TAIR=locus=2160634|UniProtKB=Q8H115	AT5G63790	NAC domain-containing protein 102;NAC102;ortholog
+ARATH|EnsemblGenome=AT1G76680|UniProtKB=Q8LAH7	AT1G76680	12-oxophytodienoate reductase 1;OPR1;ortholog
+ARATH|TAIR=locus=2089678|UniProtKB=Q8LPQ5	AT3G18290	Zinc finger protein BRUTUS;BTS;ortholog
+ARATH|EnsemblGenome=AT5G20250|UniProtKB=Q8RX87	AT5G20250	Probable galactinol--sucrose galactosyltransferase 6;RFS6;ortholog
+ARATH|TAIR=locus=2012125|UniProtKB=Q8VYB2	AT1G55810	Uridine kinase-like protein 3;UKL3;ortholog
+ARATH|TAIR=locus=2831352|UniProtKB=Q8W491	AT4G34131	UDP-glycosyltransferase 73B3;UGT73B3;ortholog
+ARATH|Gene_OrderedLocusName=At5g13190|UniProtKB=Q94CD4	AT5G13190	GSH-induced LITAF domain protein;GILP;ortholog
+ARATH|TAIR=locus=2043298|UniProtKB=Q96266	AT2G47730	Glutathione S-transferase F8, chloroplastic;GSTF8;ortholog
+ARATH|TAIR=locus=2199246|UniProtKB=Q96289	AT1G27730	Zinc finger protein ZAT10;ZAT10;ortholog
+ARATH|TAIR=locus=2203314|UniProtKB=Q9C6E4	AT1G35140	Protein EXORDIUM-like 1;EXL1;ortholog
+ARATH|TAIR=locus=2015238|UniProtKB=Q9CAN4	AT1G63090	F-box protein PP2-A11;PP2A11;ortholog
+ARATH|TAIR=locus=2173428|UniProtKB=Q9FE06	AT5G64260	Protein EXORDIUM-like 2;EXL2;ortholog
+ARATH|TAIR=locus=2160170|UniProtKB=Q9FFT4	AT5G54960	Pyruvate decarboxylase 2;PDC2;ortholog
+ARATH|TAIR=locus=2154084|UniProtKB=Q9FJJ3	AT5G62520	Probable inactive poly [ADP-ribose] polymerase SRO5;SRO5;ortholog
+ARATH|TAIR=locus=2153924|UniProtKB=Q9FLV0	AT5G24530	Protein DOWNY MILDEW RESISTANCE 6;DMR6;ortholog
+ARATH|TAIR=locus=2206885|UniProtKB=Q9FX43	AT1G73500	Mitogen-activated protein kinase kinase 9;MKK9;ortholog
+ARATH|TAIR=locus=2205339|UniProtKB=Q9FX67	AT1G13300	Transcription factor HRS1;HRS1;ortholog
+ARATH|TAIR=locus=2173629|UniProtKB=Q9LVR5	AT5G66650	Calcium uniporter protein 3, mitochondrial;TAIR:locus:2173629;ortholog
+ARATH|TAIR=locus=2075276|UniProtKB=Q9LX85	AT3G46080	Zinc finger protein ZAT8;ZAT8;ortholog
+ARATH|TAIR=locus=2118746|UniProtKB=Q9M0D2	AT4G30280	Probable xyloglucan endotransglucosylase/hydrolase protein 18;XTH18;ortholog
+ARATH|TAIR=locus=2097345|UniProtKB=Q9M2Y0	AT3G49780	Phytosulfokines 3;PSK3;ortholog
+ARATH|TAIR=locus=2030141|UniProtKB=Q9SRE6	AT1G76650	Calcium-binding protein CML38;CML38;ortholog
+ARATH|EnsemblGenome=AT4G24230|UniProtKB=Q9STX1	AT4G24230	Acyl-CoA-binding domain-containing protein 3;ACBP3;ortholog
+ARATH|EnsemblGenome=AT4G12720|UniProtKB=Q9SU14	AT4G12720	Nudix hydrolase 7;NUDT7;ortholog
+ARATH|TAIR=locus=2133044|UniProtKB=Q9SUC6	AT4G20860	Berberine bridge enzyme-like 22;FAD-OXR;ortholog
+ARATH|TAIR=locus=2128404|UniProtKB=Q9SUR9	AT4G23570	Protein SGT1 homolog A;SGT1A;ortholog
+ARATH|TAIR=locus=2012833|UniProtKB=Q9SY56	AT1G10140	At1g10140;TAIR:locus:2012833;ortholog
+ARATH|TAIR=locus=2065058|UniProtKB=Q9XEE6	AT2G40140	Zinc finger CCCH domain-containing protein 29;TAIR:locus:2065058;ortholog
+ARATH|TAIR=locus=2039064|UniProtKB=Q9ZPY9	AT2G46500	Phosphatidylinositol 4-kinase gamma 4;PI4KG4;ortholog
+ARATH|TAIR=locus=2040570|UniProtKB=Q9ZQ94	AT2G36800	UDP-glycosyltransferase 73C5;UGT73C5;ortholog
+ARATH|TAIR=locus=2034893|UniProtKB=Q9ZUC4	AT1G23710	At1g23710;TAIR:locus:2034893;ortholog
