@@ -13,7 +13,7 @@ sumplotdot <- function(x = "Ath2/output/panther/",
   ans <- map2(files, sites, ~read_csv(.x) %>% mutate(id = .y))
   colunames <- c("GOterm","ref","ngenes","expected","over/under","foldenrich","rawPvalue","fdr","group")
   ans <- lapply(ans, setNames, colunames)
-  setwd("~/github/Ath_RNAseq")
+  setwd("~/github/Sly_Ath_solA_RNAseq")
   
   eureka <- do.call(rbind, ans)
   eureka$group <- gsub("GOann-pantherfdr_","", eureka$group)
@@ -35,7 +35,7 @@ sumplotdot <- function(x = "Ath2/output/panther/",
   sites <- files
   setwd(revigopath)
   ans <- map2(files, sites, ~read_csv(.x) %>% mutate(id = .y))
-  setwd("~/github/Ath_RNAseq")
+  setwd("~/github/Sly_Ath_solA_RNAseq")
   revigo <- do.call(rbind, ans)
   revigo <- revigo[revigo$Eliminated == FALSE, ]
   revigo$id <- gsub("Selfcr_", "", revigo$id)
