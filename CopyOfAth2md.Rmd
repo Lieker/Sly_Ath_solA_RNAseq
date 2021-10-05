@@ -1,0 +1,1025 @@
+---
+title: "Ath2"
+output: html_document
+date: "April 20th 2021"
+author: "Lieke Vlaar"
+---
+
+# Introduction
+In this file the complete analysis workflow of count data of the Arabidopsis RNAseq experiment is shown.
+
+## Goal
+
+The goal of this experiment is to unravel the effect of solanoeclepin A on the plant. Solanoeclepin A is applied on Arabidopsis seedlings under various nutritional conditions. The set up of this experiment is summarized in this figure:
+```{r include = FALSE}
+if ("knitr" %in% installed.packages()){
+  library("knitr")
+} else {
+  install.packages("knitr")
+  library("knitr")
+}
+```
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+```
+
+```{r figurename, echo=FALSE, out.width = '90%'}
+knitr::include_graphics("Ath2/image.png")
+```
+
+## Setup
+
+Packages necessary:
+
+* Checkpoint
+* DESeq2
+* dplyr
+* tidyr
+* tidyverse
+* Biostrings
+* biomaRt
+* biomartr
+* clusterProfiler
+* org.At.tair.db
+* tibble
+* mixOmics
+* vegan
+* apeglm
+* EnhancedVolcano
+* patchwork
+
+```{r include=FALSE}
+#########
+# Library
+#########
+if ("checkpoint" %in% installed.packages()){
+  library("checkpoint") # https://cran.r-project.org/web/packages/checkpoint/index.html
+} else {
+  install.packages("checkpoint")
+  suppressPackageStartupMessages(library("checkpoint"))
+  suppressPackageStartupMessages(checkpoint("2021-04-20"))  # all packages in your project will be taken from that date.
+}
+if ("DESeq2" %in% installed.packages()){
+  library("DESeq2")
+} else {
+  BiocManager::install("DESeq2")
+  library("DESeq2")
+}
+if ("dplyr" %in% installed.packages()){
+  library("dplyr")
+} else {
+  install.packages("dplyr")
+  library("dplyr")
+}
+if ("tidyr" %in% installed.packages()){
+  library("tidyr")
+} else {
+  install.packages("tidyr")
+  library("tidyr")
+}
+if ("tidyverse" %in% installed.packages()){
+  library("tidyverse")
+} else {
+  install.packages("tidyverse")
+  library("tidyverse")
+}
+if ("Biostrings" %in% installed.packages()){
+  library("Biostrings") 
+} else {
+  BiocManager::install("Biostrings")
+  library("Biostrings")
+}
+if ("biomaRt" %in% installed.packages()){
+  library("biomaRt") 
+} else {
+  BiocManager::install("biomaRt")
+  library("biomaRt")
+}
+if ("biomartr" %in% installed.packages()){
+  library("biomartr")
+} else {
+  install.packages("biomartr", dependencies = TRUE)
+  library("biomartr")
+}
+if ("clusterProfiler" %in% installed.packages()){
+  library("clusterProfiler") 
+} else {
+  BiocManager::install("clusterProfiler")
+  library("clusterProfiler")
+}
+if ("org.At.tair.db" %in% installed.packages()){
+  library("org.At.tair.db") 
+} else {
+  BiocManager::install("org.At.tair.db")
+  library("org.At.tair.db")
+}
+if ("tibble" %in% installed.packages()){
+  library("tibble") 
+} else {
+  install.packages("tibble")
+  library("tibble")
+}
+if ("mixOmics" %in% installed.packages()){
+  library("mixOmics") 
+} else {
+  BiocManager::install("mixOmics")
+  library("mixOmics")
+}
+if ("vegan" %in% installed.packages()){
+  library("vegan") 
+} else {
+  install.packages("vegan")
+  library("vegan")
+}
+if ("apeglm" %in% installed.packages()){
+  library("apeglm") 
+} else {
+  BiocManager::install("apeglm")
+  library("apeglm")
+}
+if ("EnhancedVolcano" %in% installed.packages()){
+  library("EnhancedVolcano") 
+} else {
+  BiocManager::install("EnhancedVolcano")
+  library("EnhancedVolcano")
+}
+if ("patchwork" %in% installed.packages()){
+  library("patchwork") 
+} else {
+  BiocManager::install("patchwork")
+  library("patchwork")
+}
+if ("reshape" %in% installed.packages()){
+  library("reshape") 
+} else {
+  install.packages("reshape")
+  library("reshape")
+}
+if ("pheatmap" %in% installed.packages()){
+  library("pheatmap") 
+} else {
+  BiocManager::install("pheatmap")
+  library("pheatmap")
+}
+if ("purrr" %in% installed.packages()){
+  library("purrr") 
+} else {
+  BiocManager::install("purrr")
+  library("purrr")
+}
+```
+
+
+
+# Mapping results
+
+Calculate the average unique mapping %:
+
+```{r}
+ms <- read.csv("Ath2/input/mapping_summary.csv")
+ms <- ms[, -1] %>% column_to_rownames("attribute")
+ms[1:10,1:3]
+```
+
+```{r include = FALSE}
+unique <- ms[9,]
+unique <- as.list(unique)
+unique <- gsub("%", "", unique)
+unique <- as.numeric(unique)
+uniquepercent <- mean(unique)
+```
+```{r}
+uniquepercent
+```
+
+The average unique mapping % is 62.67%. This is low, but explained by the type of library prep method that was used (Moll et al, 2014).
+
+
+
+# PCA analysis
+
+Load the function:
+```{r}
+source("Ath2/scripts/create_pca_plot.R")
+```
+
+Run the function with default settings, which is
+```{r, eval = FALSE}
+plot_pca <- function(count_csv_file = "Ath2/input/counts.csv",
+                     xp_design_csv_file = "~Ath2/input/xp_design.csv",
+                     pc_x_axis = "PC1", 
+                     pc_y_axis = "PC2",
+                     trm = c("a","b","c","d","e","f","g"),
+                     pca_colour = "solA")
+```
+
+Figure S2A
+```{r}
+p <- plot_pca(pca_colour = "treatment")
+p + scale_shape_discrete(name = "N", labels = c("starvation", "replete")) + scale_color_manual(name = "treatment", labels = c("1", "2", "3","4","5","6","7"), values = c("#0099ff",'#006729',"#ff0099","#ff6600","#0019ff","#ff6700",'#00ff66'))
+```
+
+There is an outlier in the group of N starvation towards the bottom. This is sample S46 and should be removed.
+
+Figure S2C:
+
+```{r}
+p1 <- plot_pca(pca_colour = "N", counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                     xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv")
+p1 + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) + scale_color_manual(name = "N", labels = c("starvation", "replete"), values = c('#0099FF','#E69F00'))
+p2 <- plot_pca(pca_colour = "P", counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                     xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv")
+p2 + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) + scale_color_manual(name = "P", labels = c("starvation", "replete"), values = c('#0099FF','#E69F00'))
+p3 <- plot_pca(pca_colour = "solA", counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                     xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv")
+p3 + scale_shape_discrete(name = "treatment", labels = c("control", "solA")) + scale_color_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00'))
+p4 <- plot_pca(pca_colour = "treatment", counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                     xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv")
+p4 + scale_shape_discrete(name = "N", labels = c("starvation", "replete")) + scale_color_manual(name = "treatment", labels = c("1", "2", "3","4","5","6","7"), values = c("#0099ff",'#006729',"#ff0099","#ff6600","#0019ff","#ff6700",'#00ff66'))
+```
+
+
+
+In order to make an overview of what determines the clustering, make the same plot with different colour guides and group them together with patchwork package
+
+Figure 2 and 4:
+```{r, fig.width = 2, fig height = 3}
+p1 <- plot_pca(trm = c("a","b"), pca_colour = "solA", pc_x_axis = "PC2", pc_y_axis = "PC3")
+p2 <- plot_pca(trm = c("c","d"), pca_colour = "solA", pc_x_axis = "PC2", pc_y_axis = "PC3")
+p3 <- plot_pca(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv", 
+               trm = c("e","f"), pca_colour = "solA", pc_x_axis = "PC1", pc_y_axis = "PC2")
+
+p1 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00')) + guides(shape = "none")
+p2 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00')) + guides(shape = "none")
+p3 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c('#0099FF','#E69F00')) + guides(shape = "none")
+```
+
+Figure S2B:
+```{r}
+p4 <- plot_pca(trm = c("e","f"), pca_colour = "solA", pc_x_axis = "PC1", pc_y_axis = "PC2")
+p4 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c("#0019ff","#ff6700")) + guides(shape = "none")
+```
+
+Figure 3
+
+```{r}
+p5 <- plot_pca(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv", 
+               trm = c("a","c"), pca_colour = "P", pc_x_axis = "PC1", pc_y_axis = "PC2")
+p5 + scale_colour_manual(name = "P", labels = c("replete", "starvation"), values = c('#0099FF','#E69F00')) + guides(shape = "none")
+p6 <- plot_pca(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv", 
+               trm = c("a","e"), pca_colour = "N", pc_x_axis = "PC1", pc_y_axis = "PC2")
+p6 + scale_colour_manual(name = "N", labels = c("replete", "starvation"), values = c('#0099FF','#E69F00')) + guides(shape = "none")
+
+```
+
+
+# Scree plots
+
+Check scree plot of all nutritional conditions.
+```{r}
+p1 <- plot_scree(trm = c("a","b")) + ggtitle("No starvation")
+p2 <- plot_scree(trm = c("c","d")) + ggtitle("Only P starvation")
+p3 <- plot_scree(trm = c("e","f")) + ggtitle("N+P starvation")
+
+p1 + p2 + p3 + plot_layout(ncol = 2)
+```
+
+Check the effect of just nutritional stress (without solA)
+```{r}
+p1 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", trm = c("a","c")) + ggtitle("P starvation")
+p2 <- plot_pca(pc_x_axis = "PC1", pc_y_axis = "PC2", trm = c("a","e")) + ggtitle("N+P starvation")
+p3 <- plot_pca(trm = c("a","f")) + ggtitle("N+P starvation + solA")
+p4 <- plot_pca(trm = c("e","f")) + ggtitle("Within N+P starvation + solA")
+
+p1 + p2 + p3 + p4 + plot_layout(ncol = 2)
+```
+
+# PCA analysis of nutritional conditions
+
+Compare group a and e with each other, and a and c, to see the effect of P and N+P starvation without solA.
+
+```{r pca_nutr, fig.width = 10, fig.height = 12, message = FALSE, warning = FALSE}
+p1 <- plot_pca(trm = c("a","e"), pca_colour = "treatment") + ggtitle("N+P starvation") 
+p2 <- plot_pca(trm = c("a", "c"), pca_colour = "treatment") + ggtitle("P starvation")
+p3 <- plot_pca(trm = c("a","g"), pca_colour = "treatment") + ggtitle("N starvation")
+p4 <- plot_pca(trm = c("a","e","g"), pca_colour = "treatment") + ggtitle("N, N+P starvation and replete")
+p5 <- plot_pca(trm = c("a", "c", "e", "g"), pca_colour = "treatment") + ggtitle("replete, P, N+P, N starvation")
+p6 <- plot_pca(trm = c("a", "c", "e", "g"), pca_colour = "treatment", pc_x_axis = "PC3", pc_y_axis = "PC4") + ggtitle("replete, P, N+P, N starvation")
+p7 <- plot_pca(trm = c("e","g"), pca_colour = "treatment") + ggtitle("N+P and N starvation")
+p8 <- plot_pca(trm = c("c","e","g"), pca_colour = "treatment") + ggtitle("P, N+P and N starvation")
+
+library(patchwork)
+(p1 + scale_shape_discrete(guide = "none")) + (p2 + scale_shape_discrete(guide = "none")) +
+(p3 + scale_shape_discrete(guide = "none")) + (p4 + scale_shape_discrete(guide = "none")) + p5 + p6 + p7 + p8 + plot_layout(ncol = 2, guides = "collect")
+```
+
+P5 is most interesting for the manuscript.
+
+```{r}
+p5 + guides(shape = guide_legend(override.aes = list(size = 3)),
+            colour = guide_legend(override.aes = list(size = 3))) +
+  scale_colour_manual(name = "treatment", 
+                      labels = c("replete", "P starvation", "N+P starvation", "N starvation"), 
+                      values =c("navyblue","goldenrod4","darkred","limegreen")) +
+  scale_shape_manual(name = "N", labels = c("starvation", "replete"),values = c(16,18)) +
+  ggtitle("PCA analysis starvation conditions")
+
+```
+
+# DEG analysis
+
+## Effect of nutritional starvation compared with replete conditions
+
+```{r nutrstarv_DEGs, fig.width = 11, fig.height = 6, message = FALSE, warning = FALSE}
+source("Ath2/scripts/volcanoplot.R")
+v1 <- make_volcanoplot(trtm = c("a", "e"), ref_treatment = "a", treatment2 = "e", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "N+P starvation", xsize = 10, maxy = 120)
+v2 <- make_volcanoplot(trtm = c("a", "c"), ref_treatment = "a", treatment2 = "c", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "P starvation")
+v3 <- make_volcanoplot(trtm = c("a", "g"), ref_treatment = "a", treatment2 = "g", log2FC_threshold = 0, padj_threshold = 0.05, ttl = "N starvation")
+v2 + v3 + v1 + plot_layout(guides = "collect")
+
+```
+
+
+
+## Effect of solA
+
+Do this analysis for the within nutritional condition comparison. In this case, the design formula is set to ~ treatment (N and P are not relevant anymore - will even give an error - because you compare samples that have the same N and P).
+```{r, fig.height = 6, fig.width = 12, warning = FALSE, message = FALSE}
+v1 <- make_volcanoplot(log2FC_threshold = 0, padj_threshold = 0.05, xsize = 1.5, ttl = "SolA within \nreplete conditions", maxy = 12)
+v2 <- make_volcanoplot(trtm = c("c", "d"), ref_treatment = "d", treatment2 = "c", log2FC_threshold = 0, padj_threshold = 0.05, xsize = 3, ttl = "SolA within \nP starvation", maxy = 12)
+v3 <- make_volcanoplot(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv",
+               trtm = c("e", "f"), ref_treatment = "e", treatment2 = "f", 
+               log2FC_threshold = 0, padj_threshold = 0.05, 
+               xsize = 5.5, ttl = "SolA within \nN+P starvation", maxy = 12)
+v1 + v2 + v3 + plot_layout(guides = "collect")
+```
+
+There are most DEGs under N+P starvation, followed by No starvation, and then only P starvation.
+
+
+
+## Heatmaps
+
+Another way of visualising clustering is with a heatmap.
+First, we have to extract the list of DEGs, filtered for Padj<0.05. Then we take those vst_transformed counts and plot the heatmap with pheatmap. 
+```{r message=FALSE, warning=FALSE}
+source("Ath2/scripts/get_filtered_list_of_DEGs.R")
+source("Ath2/scripts/get_DESeq_dds.R")
+dds_all <- get_DESeq_dds(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                         xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv",
+                         method = "solA", ref_treatment = "no", treatment2 = "yes")
+res_all <- get_unfiltered_res_dds(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                                  xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv",
+                                  trtm = c("a","b","c","d","e","f","g"), method = "solA",
+                                  ref_treatment = "no_solA",
+                                  treatment2 = "yes_solA")
+x <- get_list_of_DEGs(d = dds_all, r = res_all, method = "solA", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/produce_scaled_counts_matrix.R")
+y <- produce_scaled_counts_matrix(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+                         xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv") %>% column_to_rownames("sample") %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+xp_design <- xp_design %>% column_to_rownames("sample")
+
+myCol <- colorRampPalette(c("red1", "black", "dodgerblue"))(100)
+myBreaks <- seq(-2, 2, length.out=100)
+
+P <- rep(c("replete","starvation","replete"), c(10,19,5)) 
+N <- rep(c("replete","starvation"), c(20,14))
+treatment <- rep(c("control","solA","control","solA","control","solA","control"), c(5,5,5,5,5,4,5))
+samples <- names(DEG_counts)
+sip <- data.frame(samples, treatment, N, P) %>% column_to_rownames("samples")
+
+clrs <- list(
+  P = c(starvation = "lightblue3", replete ="midnightblue"),
+  N = c(starvation = "brown1", replete = "red4"),
+  treatment = c(control = "mediumspringgreen", solA ="seagreen4")
+)
+
+
+pheatmap(DEG_counts, 
+         gaps_col = c(5,10,15,20,25,29),
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         col = myCol,
+         scale = "row",
+         main = "All samples; unclustered",
+         annotation_col = sip,
+         annotation_colors = clrs)
+pheatmap(DEG_counts,
+         cluster_rows = TRUE,                      
+         cluster_cols = TRUE,
+         col = myCol, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         main = "All samples; clustered",
+         annotation_col = sip,
+         annotation_colors = clrs)
+```
+
+We add the sample information to the heatmap:
+
+
+```{r}
+#remove group g
+DEG_counts <- DEG_counts[, c(1:29)]
+sip <- sip[c(1:29),]
+
+pheatmap(DEG_counts,
+         gaps_col = c(10,20),
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = FALSE,
+         scale = "row",
+         annotation_col = sip,
+         annotation_colors = clrs,
+         legend = FALSE,
+         treeheight_row = 0,
+         cutree_rows = 2,
+         col = myCol)
+
+```
+
+In the unclustered heatmap, samples are clustered according to sample group (treatment). The treatments with solA are showing an overlapping pattern versus the treatments without solA.
+In the clustered heatmap, samples are clustered according to similarity in gene expression. In this heatmap it is clear that samples from group f (S46, 47, 48, 49, 50), which is N+P starvation + solA, cluster far away from the rest, including the same nutritional conditions without solA (S41 - S45). Hence, solA treatment mostly affects N+P starved plants.
+
+
+We can also draw the heatmaps for within nutritional conditions.
+First for the 'No starvation' condition.
+```{r message=FALSE, warning=FALSE}
+dds_ab <- get_DESeq_dds()
+res_ab <- get_unfiltered_res_dds()
+x <- get_list_of_DEGs(d = dds_ab, r = res_ab, method = "treatment", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/filter_counts_based_on_treatment.R")
+y <- filter_counts_based_on_treatment(tr = c("a","b")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+
+treatment <- rep(c("control","solA"), c(5,5))
+samples <- names(DEG_counts)
+sip <- data.frame(samples, treatment) %>% column_to_rownames("samples")
+
+clrs <- list(
+  treatment = c(control = "mediumspringgreen", solA ="seagreen4")
+)
+
+
+p <- pheatmap(DEG_counts, 
+         gaps_col = 5,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         cutree_rows = 2,
+         treeheight_col = 0,
+         col = myCol,
+         treeheight_row = 0,
+         main = "Replete conditions, 82 DEGs, 13 up and 69 down")
+p
+```
+
+Then for the 'Only P starvation' condition:
+```{r message=FALSE, warning=FALSE}
+dds_cd <- get_DESeq_dds(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d")
+res_cd <- get_unfiltered_res_dds(trtm = c("c","d"), ref_treatment = "c", treatment2 = "d")
+x <- get_list_of_DEGs(d = dds_cd, r = res_cd, method = "treatment", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/filter_counts_based_on_treatment.R")
+y <- filter_counts_based_on_treatment(tr = c("c","d")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+
+samples <- names(DEG_counts)
+sip <- data.frame(samples, treatment) %>% column_to_rownames("samples")
+
+p <- pheatmap(DEG_counts, 
+         gaps_col = 5,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         cutree_rows = 2,
+         treeheight_col = 0,
+         col = myCol,
+         treeheight_row = 0,
+         main = "P starvation, 37 DEGs, 9 up and 29 down")
+p
+```
+
+And lastly, for the "N+P starvation" treatment:
+
+```{r message=FALSE, warning=FALSE}
+dds_ef <- get_DESeq_dds(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv",
+               trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment")
+res_ef <- get_unfiltered_res_dds(counts_csv_file = "Ath2/input/counts_outlierremoved.csv",
+               xp_design_csv_file = "Ath2/input/xp_design_outlierremoved.csv",
+               trtm = c("e","f"), ref_treatment = "e", treatment2 = "f", method = "treatment")
+x <- get_list_of_DEGs(d = dds_ef, r = res_ef, method = "treatment", log2FC_threshold = 0)
+x <- x %>% rownames_to_column("genes")
+source("Ath2/scripts/filter_counts_based_on_treatment.R")
+y <- filter_counts_based_on_treatment(tr = c("e","f")) %>% t() %>% as.data.frame() %>% rownames_to_column("genes")
+
+DEG_counts <- left_join(x, y, by="genes") 
+DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
+DEG_counts <- DEG_counts %>% column_to_rownames("genes")
+
+samples <- names(DEG_counts)
+sip <- data.frame(samples, treatment) %>% column_to_rownames("samples")
+
+p <- pheatmap(DEG_counts, 
+         gaps_col = 5,
+         cluster_rows = TRUE,                      
+         cluster_cols = FALSE, 
+         show_rownames = FALSE, 
+         show_colnames = TRUE,
+         scale = "row",
+         border_color = NA,
+         annotation_col = sip,
+         annotation_colors = clrs,
+         cutree_rows = 2,
+         treeheight_col = 0,
+         col = myCol,
+         treeheight_row = 0,
+         main = "N+P starvation, 312 DEGs, 45 up and 267 down")
+p
+```
+
+From these heatmaps it is inferred that the treatment with solA leads mostly to down regulation of genes, in all nutritional conditions.
+
+
+# Annotation of DEGs
+
+Start with annotating the list of DEGs of each subset.
+```{r}
+source("Ath2/scripts/get_annotated_DEGs.R")
+```
+
+First get the lists of the nutritional conditions compared to replete (no solA):
+
+```{r DEGslist_nutr, message = FALSE, warning = FALSE}
+source("Ath2/scripts/get_annotated_DEGs.R")
+dds_ac <- get_DESeq_dds(trtm = c("a","c"), ref_treatment = "a", treatment2 = "c", method = "treatment")
+res_ac <- get_unfiltered_res_dds(trtm = c("a","c"), ref_treatment = "a", treatment2 = "c", method = "treatment")
+dds_ae <- get_DESeq_dds(trtm = c("a","e"), ref_treatment = "a", treatment2 = "e", method = "treatment")
+res_ae <- get_unfiltered_res_dds(trtm = c("a","e"), ref_treatment = "a", treatment2 = "e", method = "treatment")
+dds_ag <- get_DESeq_dds(trtm = c("a", "g"), ref_treatment = "a", treatment2 = "g", method = "treatment")
+res_ag <- get_unfiltered_res_dds(trtm = c("a", "g"), ref_treatment = "a", treatment2 = "g", method = "treatment")
+Pstarv_nosolA <- get_annotated_DEGs(d = dds_ac, r = res_ac, name = "Ath2/output/annotated_DEGslist_ac.csv")
+NPstarv_nosolA <- get_annotated_DEGs(d = dds_ae, r = res_ae, name = "Ath2/output/annotated_DEGslist_ae.csv")
+Nstarv_nosolA <- get_annotated_DEGs(d = dds_ag, r = res_ag, name = "Ath2/output/annotated_DEGslist_ag.csv")
+nrow(Pstarv_nosolA)
+nrow(NPstarv_nosolA)
+nrow(Nstarv_nosolA)
+sum(Nstarv_nosolA$Group.1 %in% NPstarv_nosolA$Group.1)
+```
+
+Find the 'extra' effect that solA gives to the N+P starvation by comparing group a with f.
+
+```{r DEGslist_nutr_and_solA, message = FALSE, warning = FALSE}
+source("Ath2/scripts/get_annotated_DEGs.R")
+dds_af <- get_DESeq_dds(trtm = c("a","f"), ref_treatment = "a", treatment2 = "f", method = "treatment")
+res_af <- get_unfiltered_res_dds(trtm = c("a","f"), ref_treatment = "a", treatment2 = "f", method = "treatment")
+NPstarv_and_solA <- get_annotated_DEGs(d = dds_af, r = res_af, name = "Ath2/output/annotated_DEGslist_af.csv")
+nrow(NPstarv_and_solA)
+```
+
+What is the overlap between just NP starvation versus NP starvation + solA treatment?
+
+```{r diff_nutr_solA, message = FALSE, warning = FALSE}
+solA_effect_within_NPstarv <- NPstarv_nosolA[NPstarv_nosolA$transcript %in% NPstarv_and_solA$transcript,2]
+length(solA_effect_within_NPstarv)
+```
+
+2041 genes are just caused by NP starvation, whereas the others have been changed by solA.
+Create a list of all the genes that do not overlap between NPstarv_nosolA and NPstarv_and_solA. These are the genes that are affected by solA.
+
+```{r solA_list, message = FALSE, warning = FALSE}
+a <- rbind(NPstarv_nosolA[!NPstarv_nosolA$transcript %in% NPstarv_and_solA$transcript, ], NPstarv_and_solA[!NPstarv_and_solA$transcript %in% NPstarv_nosolA$transcript, ])
+#Check if these genes are indeed not in the only NP starvation response gene list
+sum(a$transcript %in% solA_effect_within_NPstarv) 
+```
+
+You want to add to the list, the genes that appear in both lists, but have a very different log2 fold change, or that went from + to - and vice versa.
+
+```{r solA_list2, message = FALSE, warning = FALSE}
+
+b <- NPstarv_and_solA[NPstarv_and_solA$transcript %in% NPstarv_nosolA$transcript, ]
+b <- left_join(b, NPstarv_nosolA, by = "transcript", suffix = c(".and", ".no"))
+b$delta_l2fc <-  abs(as.numeric(as.character(b$log2FoldChange.and)) - as.numeric(as.character(b$log2FoldChange.no)))
+c <- b[b$delta_l2fc > 1, "transcript"]
+d <- rbind(a, NPstarv_nosolA[NPstarv_nosolA$transcript %in% c, ], NPstarv_and_solA[NPstarv_and_solA$transcript %in% c, ])
+```
+
+
+## SolA-induced intra nutritional condition DEGs
+
+Get annotated DEGs for all the intra nutritional condition comparisons:
+
+```{r message = FALSE, warning = FALSE}
+replete <- get_annotated_DEGs(d=dds_ab, r=res_ab,name = "Ath2/output/annotated_DEGslist_ab.csv")
+Pstarv <- get_annotated_DEGs(d=dds_cd,r=res_cd, name = "Ath2/output/annotated_DEGslist_cd.csv")
+NPstarv <- get_annotated_DEGs(d=dds_ef,r=res_ef, name = "Ath2/output/annotated_DEGslist_ef.csv")
+```
+
+Check the overlap with the old lists:
+
+```{r check_overlap, message = FALSE, warning = FALSE}
+repleteo <- read.csv("Ath2/output/ab_old.csv")
+Pstarvo <- read.csv("Ath2/output/cd_old.csv")
+NPstarvo <- read.csv("Ath2/output/ef_old.csv")
+repleted <- replete[!replete$transcript %in% repleteo$transcript, ]
+Pstarvd <- Pstarvo[!Pstarvo$transcript %in% Pstarv$transcript, ]
+NPstarvd <- NPstarv[!NPstarv$transcript %in% NPstarvo$transcript, ]
+
+```
+
+Also find all overlapping genes in the 'new' datasets
+```{r overlap2, message = FALSE, warning = FALSE}
+inall3 <- NPstarv[NPstarv$transcript %in% Pstarv$transcript & NPstarv$transcript %in% replete$transcript, 4]
+in_abcd <- replete[replete$transcript %in% Pstarv$transcript,4]
+in_abef <- replete[replete$transcript %in% NPstarv$transcript,4]
+in_cdef <- Pstarv[Pstarv$transcript %in% NPstarv$transcript,4]
+
+```
+
+Check how many tomato and Arabidopsis genes overlap. First, get the Sly list of annotated genes in the Sly md file.
+
+```{r overlap3, message = FALSE, warning = FALSE}
+tomatoDEGs <- DEGSly$athaliana_eg_homolog_ensembl_gene
+araDEGs <- rbind(replete, Pstarv, NPstarv)
+overlapta <- araDEGs[araDEGs$Group.1 %in% tomatoDEGs, ]
+write.csv(overlapta, "Ath2/output/overlap_ta.csv", row.names = FALSE)
+```
+
+
+
+## GO enrichment analysis
+
+Let's make a dotplot for the effect of N+P starvation (without solA) up and down both.
+
+Figure 3:
+```{r, dotplot_NPstarvnosolA, fig.height = 5, fig.width = 9, message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p1 <- sumplotdot(updown = c("up"), sign = 0.05, nutrcond = c("Nstarv.nosola","NPstarv.nosola"), double = "revigo", show = 10)
+p2 <- sumplotdot(updown = c("down"), sign = 0.05, nutrcond = c("Nstarv.nosola","NPstarv.nosola"), double = "revigo", show = 10)
+
+p1
+p2
+```
+
+Let's also make a plot of NPstarv.nosola and NPstarv(+solA) next to each other to see where is the overlap and where the difference.
+
+```{r, dotplot_NPstarvnosolA, fig.height = 15, fig.width = 11, message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p1 <- sumplotdot(updown = c("down"), sign = 0.05, nutrcond = c("NPstarv.nosola","NPstarv.yessola"), double = "revigo")
+p2 <- sumplotdot(updown = c("up"), sign = 0.05, nutrcond = c("NPstarv.nosola","NPstarv.yessola"), double = "revigo")
+p1
+p2
+```
+
+
+
+
+Figure 2:
+
+```{r, fig.width = 8, fig.height=4, message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p <- sumplotdot(updown = c("down","up"), sign = 0.05, nutrcond = "replete", double = "revigo")
+p
+```
+
+
+We can summarize more than one nutritional condition in one plot. For example, let's look at all downregulated GO terms in all nutritional conditions:
+
+Figure S4
+```{r, fig.width = 9, fig.height=4.5, message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p1 <- sumplotdot(updown = "down", sign = 0.05, nutrcond = c("Pstarv","NPstarv","replete"), double = "no")
+p2 <- sumplotdot(updown = "up", sign = 0.05, nutrcond = c("Pstarv","NPstarv","replete"), double = "no")
+p1 
+p2
+```
+
+Figure 4:
+
+```{r, fig.width = 10, fig.height = 11, message = FALSE, warning = FALSE}
+p3 <- sumplotdot(updown = "down", sign = 0.05, nutrcond = c("Pstarv", "NPstarv"), double = "revigo", show = 15)
+p4 <- sumplotdot(updown = "up", sign = 0.05, nutrcond = c("Pstarv", "NPstarv"), double = "revigo", show = 10)
+
+p3
+p4
+```
+
+
+Visualize the GO terms enriched in upregulated DEGs (only for NPstarv)
+```{r message = FALSE, warning = FALSE}
+source("Ath2/scripts/summ_dotplot.R")
+p2 <- sumplotdot(updown = c("up"), sign = 0.05, nutrcond = "NPstarv")
+p2
+```
+
+Generate figure with only the GO terms of replete Arabidopsis
+
+```{r repleteonly, fig.height = 10, message = FALSE, warning = FALSE}
+sumplotdot(updown = "down", sign = 0.05, nutrcond = "replete")
+```
+Generate Figure 3 (manually curated version of all downregulated DEG GO terms for all treatments)
+
+Figure 3:
+```{r figure3,fig.widh = 15, message = FALSE, warning = FALSE}
+sumplotdot(updown= c("down"), sign = 0.05, nutrcond = c("replete", "Pstarv", "NPstarv"), double = "revigo")
+```
+
+
+# Upset plot
+
+First for the samples including solA
+
+```{r message = FALSE, warning = FALSE}
+all_Ath_genes <- unique(unlist(list(NPstarv$Group.1, Pstarv$Group.1, replete$Group.1, tomatoDEGs)))
+all_Ath_genes <- str_subset(all_Ath_genes, "AT*")
+repl <- all_Ath_genes %in% replete$Group.1
+Pst <- all_Ath_genes %in% Pstarv$Group.1
+NPst <- all_Ath_genes %in% NPstarv$Group.1
+Sly_root <- all_Ath_genes %in% DEGroot$athaliana_eg_homolog_ensembl_gene
+Sly_shoot <- all_Ath_genes %in% DEGshoot$athaliana_eg_homolog_ensembl_gene
+b <- data.frame(all_Ath_genes, repl, Pst, NPst, Sly_root, Sly_shoot) 
+b <- b %>% column_to_rownames(., var = "all_Ath_genes")
+
+colnames(b) <- c("Ath_replete+solA","Ath_Pstarv+solA","Ath_NPstarv+solA","Sly_root+solA","Sly_shoot+solA")
+
+
+groups <- colnames(b)
+
+library(ComplexUpset)
+
+up <- upset(b, 
+            intersect = groups,
+            set_sizes=(upset_set_size() + 
+                        geom_text(aes(label=..count..),
+                                    hjust=1.1, 
+                                    stat='count') +
+                        ylim(480,0)),
+             width_ratio=0.3, 
+             sort_sets=FALSE)
+up
+
+```
+
+Make upset plot for the samples only focused on nutritional starvation:
+
+```{r, fig.height = 3, fig.width = 5, warning = FALSE, message = FALSE}
+all_Ath_genes <- unique(unlist(list(Pstarv_nosolA$transcript, NPstarv_nosolA$transcript, Nstarv_nosolA$transcript)))
+all_Ath_genes <- str_subset(all_Ath_genes, "AT*")
+Pns <- all_Ath_genes %in% Pstarv_nosolA$transcript
+NPns <- all_Ath_genes %in% NPstarv_nosolA$transcript
+Nns <- all_Ath_genes %in% Nstarv_nosolA$transcript
+d <- data.frame(all_Ath_genes, Pns, NPns, Nns) %>% column_to_rownames("all_Ath_genes")
+colnames(d) <- c("Pstarv","NPstarv","Nstarv")
+groups <- colnames(d)
+up2 <- upset(d, 
+             groups,
+             set_sizes=(upset_set_size() + 
+                        geom_text(aes(label=..count..),
+                                    hjust=1.1, 
+                                    stat='count') +
+                        ylim(7500,0) +
+                        theme(axis.text.x=element_text(angle=90))),
+             width_ratio=0.3, 
+             sort_sets='ascending')
+up2
+```
+
+Find the genes that are present in all 3 treatments.
+
+```{r}
+N_P <- Pstarv_nosolA[Pstarv_nosolA$transcript %in% Nstarv_nosolA$transcript,]
+N_P_NP <- NPstarv_nosolA[NPstarv_nosolA$transcript %in% N_P$transcript,]
+write.csv(N_P_NP, "Ath2/output/nutrition_overlap.csv", row.names = FALSE)
+```
+
+Check which genes are present in both Pstarv_nosola vs. replete and in Pstarv vs Pstarv_nosola.
+
+```{r}
+Psol <- Pstarv[Pstarv$transcript %in% Pstarv_nosolA$transcript,]
+
+```
+
+# Individual gene plots
+
+Plot the individual counts of the 6 overlapping genes in all datasets
+
+```{r plotcounts, fig.height=6 , fig.width = 8, message = FALSE, warning = FALSE}
+source("Ath2/scripts/plotcounts.R")
+p1 <- plotcounts(gene = inall3[1], d = dds_all)
+p2 <- plotcounts(gene = inall3[2], d = dds_all)
+p3 <- plotcounts(gene = substring(inall3[3], 1, 11), d = dds_all)
+p4 <- plotcounts(gene = substring(inall3[4], 1, 11), d = dds_all)
+p5 <- plotcounts(gene = inall3[5], d = dds_all)
+p6 <- plotcounts(gene = substring(inall3[6], 1, 11), d = dds_all)
+(p1 + p2 + p3) / (p4 + p5 + p6) + plot_layout(guides = "collect")
+```
+
+Camalexin:
+
+```{r, camalexin_indivplots, fig.width = 6, message = FALSE, warning = FALSE}
+p10 <- plotcounts(gene = "AT2G30770.1", d = dds_all, trtm = "NPstarv")
+p11 <- plotcounts(gene = "AT3G56400.1", d = dds_all, trtm = "NPstarv")
+p12 <- plotcounts(gene = "AT2G38470.1", d = dds_all, trtm = "NPstarv")
+p10 + p11 + p12 + plot_layout(guides = "collect")
+```
+
+Response to jasmonic acid:
+```{r, JA_indivplots, fig.heigth = 8,fig.width = 6,  message = FALSE, warning = FALSE}
+p1 <- plotcounts(gene = "AT3G15500.1", d = dds_all, trtm = "NPstarv")
+p2 <- plotcounts(gene = "AT3G56400.1", d = dds_all, trtm = "NPstarv")
+p3 <- plotcounts(gene = "AT4G20860.1", d = dds_all, trtm = "NPstarv")
+p4 <- plotcounts(gene = "AT2G24850.1", d = dds_all, trtm = "NPstarv")
+p5 <- plotcounts(gene = "AT3G52400.1", d = dds_all, trtm = "NPstarv")
+p6 <- plotcounts(gene = "AT4G11280.1", d = dds_all, trtm = "NPstarv")
+p1 + p2 + p3 + p4 + p5 + p6 + plot_layout(guides = "collect")
+```
+
+Plot the genes that overlap with tomato, next to tomato. To this end, first run the snippet "overlap_AthSly" of Sly1.rmd to get p19, p20, p21 and p22.
+
+```{r overlap_SlyAth, fig.width = 8, fig.height= 10, message = FALSE, warning = FALSE}
+p23 <- plotcounts(gene = "AT3G46230.1", d = dds_all, name = "AtHSP17.4")
+p24 <- plotcounts(gene = "AT5G59720.1", d = dds_all, name = "AtHSP18.1")
+p25 <- plotcounts(gene = "AT3G05950.1", d = dds_all, name = "AtGLP1M7")
+p26 <- plotcounts(gene = "AT2G36790.1", d = dds_all, name = "AtUGT72C6")
+p27 <- plotcounts(gene = "AT5G18130.1", d = dds_all, name = "AtJRL3")
+
+(p19 + (p23 + p24) + plot_layout(widths = c(1,6))) /
+(p20 + p25 + plot_spacer() + plot_layout(widths = c(1,3,3))) /
+(p21 + p26 + plot_spacer() + plot_layout(widths = c(1,3,3))) /
+(p22 + p27 + plot_spacer() + plot_layout(widths = c(1,3,3))) + plot_layout(guides = "collect") 
+```
+Try to get plotcounts3
+
+```{r, warning = FALSE, message = F}
+source("Ath2/scripts/get_GOs.R")
+source("Ath2/scripts/produce_GOdf.R")
+source("Ath2/scripts/plot_pathwayplot.R")
+x <- get_GOs(d = dds_all, rlist = list(res_ab,res_cd,res_ef))
+x1 <- x[str_detect(x$name_1006, c("defense",
+                                  "immun",
+                                  "symbiont",
+                                  "virus",
+                                  "viral",
+                                  "bacterium",
+                                  "bacterial",
+                                  "fungus",
+                                  "fungal",
+                                  "chitin",
+                                  "insect",
+                                  "nematode",
+                                  "systemic resistance",
+                                  "hypersensitive",
+                                  "other organism")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in defense, immunity and symbiont relationships")
+```
+
+Do the same for genes involved in photosynthesis and carbon fixation.
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("photosyn",
+                                  "carbon fixation",
+                                  "chloroplast",
+                                  "light",
+                                  "pentose-phosphate")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in photosynthesis and carbon fixation")
+```
+
+Do the same for ethylene, auxin, gibberellin
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("ethylene")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in ethylene biosynthesis and signalling")
+```
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("auxin")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in auxin biosynthesis and signalling")
+```
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("gibberellin")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in gibberellin biosynthesis and signalling")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("abscisic acid")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in abscisic\nacid signalling")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("hypoxia","low oxygen")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in response to hypoxia")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("cell wall")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in cell wall biogenesis")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("growth","development")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in growth and development")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("lateral root","root hair","root development")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in root development")
+```
+
+```{r, message = FALSE, warning = FALSE}
+x1 <- x[str_detect(x$name_1006, c("glutamine",
+                                  "camalexin",
+                                  "phenylpropanoid",
+                                  "tryptophan",
+                                  "glucosinolate",
+                                  "galacturonate",
+                                  "proline",
+                                  "raffinose",
+                                  "glutamate",
+                                  "glycerophospholipid",
+                                  "brassinosteroid metabolic",
+                                  "glucose metabolic",
+                                  "glucosinolate biosynthetic",
+                                  "terpenoid",
+                                  "glutathione",
+                                  "gibberellin catabolic",
+                                  "homogalacturonan",
+                                  "spermidine",
+                                  "arginine",
+                                  "polyamine",
+                                  "putrescine",
+                                  "oxylipin",
+                                  "flavonol",
+                                  "amino acid biosynthetic",
+                                  "leucine",
+                                  "ethylene biosynthetic",
+                                  "jasmonic acid biosynthetic",
+                                  "tetrapyrrole",
+                                  "sucrose",
+                                  "ascorbic acid",
+                                  "sterol metabolic",
+                                  "galactolipid biosynthetic",
+                                  "benzoate metabolic",
+                                  "anthocyanin",
+                                  "flavonoid")),]
+GOs <- unique(x1$go_id)
+t <- produce_GOdf(r = x, d = dds_all, GOid = GOs)
+pp <- plot_pathwayplot(t)
+pp + plot_annotation(title = "Genes involved in secondary metabolism")
+```
