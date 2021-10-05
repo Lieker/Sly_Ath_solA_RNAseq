@@ -34,17 +34,12 @@ Packages necessary:
 * dplyr
 * tidyr
 * tidyverse
-* Biostrings
-* biomaRt
-* biomartr
-* clusterProfiler
 * tibble
-* mixOmics
-* vegan
 * apeglm
 * EnhancedVolcano
 * patchwork
-* GenomicFeatures
+* reshape
+* pheatmap
 
 ```{r include=FALSE}
 #########
@@ -81,47 +76,11 @@ if ("tidyverse" %in% installed.packages()){
   install.packages("tidyverse")
   library("tidyverse")
 }
-if ("Biostrings" %in% installed.packages()){
-  library("Biostrings") 
-} else {
-  BiocManager::install("Biostrings")
-  library("Biostrings")
-}
-if ("biomaRt" %in% installed.packages()){
-  library("biomaRt") 
-} else {
-  BiocManager::install("biomaRt")
-  library("biomaRt")
-}
-if ("biomartr" %in% installed.packages()){
-  library("biomartr")
-} else {
-  install.packages("biomartr", dependencies = TRUE)
-  library("biomartr")
-}
-if ("clusterProfiler" %in% installed.packages()){
-  library("clusterProfiler") 
-} else {
-  BiocManager::install("clusterProfiler")
-  library("clusterProfiler")
-}
 if ("tibble" %in% installed.packages()){
   library("tibble") 
 } else {
   install.packages("tibble")
   library("tibble")
-}
-if ("mixOmics" %in% installed.packages()){
-  library("mixOmics") 
-} else {
-  BiocManager::install("mixOmics")
-  library("mixOmics")
-}
-if ("vegan" %in% installed.packages()){
-  library("vegan") 
-} else {
-  install.packages("vegan")
-  library("vegan")
 }
 if ("apeglm" %in% installed.packages()){
   library("apeglm") 
@@ -153,18 +112,19 @@ if ("pheatmap" %in% installed.packages()){
   BiocManager::install("pheatmap")
   library("pheatmap")
 }
-if ("GenomicFeatures" %in% installed.packages()){
-  library("GenomicFeatures") 
-} else {
-  BiocManager::install("GenomicFeatures")
-  library("GenomicFeatures")
-}
 if ("patchwork" %in% installed.packages()){
   library("patchwork") 
 } else {
-  BiocManager::install("patchwork")
+  install.packages("patchwork")
   library("patchwork")
 }
+if ("RColorBrewer" %in% installed.packages()){
+  library("RColorBrewer") 
+} else {
+  install.packages("RColorBrewer")
+  library("RColorBrewer")
+}
+
 ```
 
 # Mapping results
@@ -290,64 +250,6 @@ legend("topright", fill=rev(colori), legend=rev(names(colori)))
 
 ```
 
-Check if there is a big difference if extracting results with contrast() except for filtering dataset before inputting in dds.
-
-```{r using_contrast, message = FALSE, warning = FALSE}
-counts3 <- read.csv(file = "Sly1/input/counts.csv", 
-                     header = TRUE, 
-                     stringsAsFactors = FALSE,
-                     fileEncoding = "UTF-8-BOM") %>% column_to_rownames("Geneid")
-
-  
-xp_design3 <- read.csv(file = "Sly1/input/xp_design.csv", 
-                       header = TRUE, 
-                       stringsAsFactors = FALSE,
-                       fileEncoding = "UTF-8-BOM") %>% column_to_rownames("sample")
-
-xp_design3$group <- factor(paste0(xp_design3$compartment, "_", xp_design3$treatment))
-
-dds3 <- DESeqDataSetFromMatrix(countData = counts3,
-                                  colData = xp_design3,
-                                  design = ~ group)
-keep <- rowSums(counts(dds3)) >= 10
-dds3 <- dds3[keep,]
-dds3 <- DESeq(dds3)
-resr3 <- results(dds3, contrast = c("group", "root_yes_solA","root_no_solA")) 
-summary(resr3)
-use <- resr3$baseMean > metadata(resr3)$filterThreshold
-h1 <- hist(resr3$pvalue[!use], breaks=0:50/50, plot=FALSE)
-h2 <- hist(resr3$pvalue[use], breaks=0:50/50, plot=FALSE)
-colori <- c(`do not pass`="khaki", `pass`="powderblue")
-barplot(height = rbind(h1$counts, h2$counts), beside = FALSE,
-        col = colori, space = 0, main = "", ylab="frequency")
-text(x = c(0, length(h1$counts)), y = 0, label = paste(c(0,1)),
-     adj = c(0.5,1.7), xpd=NA)
-legend("topright", fill=rev(colori), legend=rev(names(colori)))
-resultsNames(dds3)
-shrunk <- lfcShrink(dds = dds3,
-                    res = resr3,
-                    type = "apeglm",
-                    coef = resultsNames(dds3)[2])
-shrunk <- as.data.frame(shrunk)
-ggplot(data=shrunk, aes(x=log2FoldChange, y=-log10(padj))) + geom_point() + xlim(c(-10,10)) + theme_classic() +
-    geom_hline(yintercept=-log10(0.05), col="red")
-write.csv(shrunk, "Sly1/output/test_contrast_res_shrunk.csv", row.names = TRUE)
-#get the shrunk list annotated
-
-res3 <- shrunk %>% rownames_to_column("original_genename")
-genes <- res3$original_genename
-genes <- substr(genes, start = 6, stop = 21)
-res3$gene <- genes
-     
-annotations <- get_Slycopersicum_annotations()
-res3_annotated <- left_join(res3, annotations, by = "gene")
-  
-uniquepaste <- function(x) { paste(unique(x), sep = ',', collapse = ",") }
-res3_annotated <- aggregate(res3_annotated, by = list(res3_annotated$gene), FUN = uniquepaste)
-res3_annotated <- res3_annotated[res3_annotated$padj < 0.05, ]
-write.csv(res3_annotated, "Sly1/output/test_contrast_res_shrunk_ann.csv", row.names = TRUE)
-```
-
 ## Heatmaps
 
 Since there is only 1 DEG if we take into account all samples at the same time, it is not possible to make a heatmap in that way. Therefore, we only use within compartment DEGs, add those together, and produce a heatmap.
@@ -377,7 +279,6 @@ DEG_counts <- left_join(x, y, by="genes")
 DEG_counts <- DEG_counts[, -c(2,3,4,5,6)]
 DEG_counts <- DEG_counts %>% column_to_rownames("genes")
 
-require(RColorBrewer)
 myCol <- colorRampPalette(c("red1", "black", "dodgerblue"))(100)
 myBreaks <- seq(-2, 2, length.out=100)
 
@@ -492,25 +393,6 @@ pheatmap(DEG_counts2,
 ```
 
 Indeed the samples from the same treatment cluster together.
-
-## LRT
-
-Compare Wald test with LRT test, which checks the null-model with the full model.
-First for the complete tomato dataset.
-```{r message=FALSE, warning=FALSE}
-source("Sly1/scripts/compare_Wald_vs_LRT.R")
-compare_wald_vs_LRT(compartment = c("root","shoot"), method = "compartment+treatment")
-```
-
-This is a confirmation that there are no overlapping DEGs between compartments induced by solA treatment.
-Check also the within compartment comparisons:
-```{r message=FALSE, warning=FALSE}
-compare_wald_vs_LRT(compartment = "root", method = "treatment")
-
-compare_wald_vs_LRT(compartment = "shoot", method = "treatment")
-```
-
-For the root, LRT gives less (17) DEGs than Wald (22), but all of the LRT genes overlap with Wald. For the shoot, LRT gives 23 DEGs and Wald 46, again all of the LRT DEGs overlap with Wald. This is a reasonable confirmation of our DEGs.
 
 # Annotation of DEGs
 
