@@ -208,8 +208,6 @@ p <- plot_pca(pca_colour = "treatment")
 p + scale_shape_discrete(name = "N", labels = c("starvation", "replete")) + scale_color_manual(name = "treatment", labels = c("1", "2", "3","4","5","6","7"), values = c("#0099ff",'#006729',"#ff0099","#ff6600","#0019ff","#ff6700",'#00ff66'))
 ```
 
-There is an outlier in the group of N starvation towards the bottom. This is sample S46 and should be removed.
-
 Figure S2C:
 
 ```{r}
@@ -249,6 +247,16 @@ Figure S2B:
 p4 <- plot_pca(trm = c("e","f"), pca_colour = "solA", pc_x_axis = "PC1", pc_y_axis = "PC2")
 p4 + scale_colour_manual(name = "treatment", labels = c("control", "solA"), values = c("#0019ff","#ff6700")) + guides(shape = "none")
 ```
+There is an outlier in the group of solA on the right. This is sample S46. Let's check if it is really an outlier.
+```{r outlier}
+PCAdata <- read.csv("Ath2/input/dataFigureS2B.csv") %>% column_to_rownames("X")
+
+(PCAdata[6,1] - mean(PCAdata[7:10,1])) / sd(PCAdata[7:10,1])
+
+```
+The outlier is more than 6x the sd distance from the other data points in the group, so should be removed.
+
+
 
 Figure 3
 
@@ -591,9 +599,9 @@ sum(Nstarv_nosolA$Group.1 %in% NPstarv_nosolA$Group.1)
 Get annotated DEGs for all the intra nutritional condition comparisons:
 
 ```{r message = FALSE, warning = FALSE}
-replete <- get_annotated_DEGs(d=dds_ab, r=res_ab,name = "Ath2/output/annotated_DEGslist_ab.csv")
-Pstarv <- get_annotated_DEGs(d=dds_cd,r=res_cd, name = "Ath2/output/annotated_DEGslist_cd.csv")
-NPstarv <- get_annotated_DEGs(d=dds_ef,r=res_ef, name = "Ath2/output/annotated_DEGslist_ef.csv")
+replete <- get_annotated_DEGs(d=dds_ab, r=res_ab)
+Pstarv <- get_annotated_DEGs(d=dds_cd,r=res_cd)
+NPstarv <- get_annotated_DEGs(d=dds_ef,r=res_ef)
 ```
 
 

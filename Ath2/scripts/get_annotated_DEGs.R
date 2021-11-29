@@ -1,6 +1,4 @@
-source("Ath2/scripts/compare_Wald_vs_LRT.R")
 source("Ath2/scripts/get_filtered_list_of_DEGs.R")
-source("Ath2/scripts/get_Athaliana_annotations.R")
 
 get_annotated_DEGs <- function(d=dds,
                                r=res,
